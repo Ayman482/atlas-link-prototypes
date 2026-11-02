@@ -15,11 +15,16 @@ jobs:
       - run: npm ci || npm install --no-audit --no-fund
       - run: npm test
       - run: npm run preview:foundation
+      - name: Build Option A (static export)
+        working-directory: apps/option-a
+        env: { BASE_PATH: /atlas-link-prototypes/option-a }
+        run: npx next build
       - name: Assemble site
         run: |
           mkdir -p site/foundation
           cp apps/foundation-console/dist/standalone.html site/foundation/index.html
-          cp apps/foundation-console/dist/standalone.html site/index.html
+          cp site-src/index.html site/index.html
+          cp -r apps/option-a/out site/option-a
           touch site/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
