@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "lib": [
+      "ES2022",
+      "DOM"
+    ],
+    "types": [
+      "node"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@medlog/core": [
+        "packages/core/src/index.ts"
+      ],
+      "@medlog/i18n": [
+        "packages/i18n/src/index.ts"
+      ],
+      "@medlog/client": [
+        "packages/client/src/index.ts"
+      ]
+    }
+  },
+  "include": [
+    "packages/*/src/**/*.ts",
+    "tests/**/*.ts"
+  ]
+}

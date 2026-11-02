@@ -1,0 +1,115 @@
+// خريطة مسارات REST المسمّاة في وثيقة API V1.0 إلى أوامر/استعلامات المحرك
+type P = Record<string, string>;
+export interface RouteDef { method: string; path: string; kind: 'command' | 'query'; target: string; summary: string; status?: number; input: (params: P, body: any, query: P) => unknown }
+
+const r = (method: string, path: string, kind: RouteDef['kind'], target: string, summary: string, input: RouteDef['input'] = (_p, b) => b, status?: number): RouteDef => ({ method, path, kind, target, summary, input, status });
+const list = (collection: string) => (_p: P, _b: unknown, q: P) => ({ collection, q: q.q, sort: q.sort, dir: q.dir, page: Number(q.page ?? 1), pageSize: Number(q.limit ?? 25), filter: q.filter ? JSON.parse(q.filter) : undefined });
+
+export const ROUTES: RouteDef[] = [
+  r('GET', '/me', 'query', 'me', 'Identity and effective scope', () => ({})),
+  // §3.1 المؤسسات
+  r('GET', '/organizations', 'query', 'list', 'Organizations (scoped)', list('organizations')),
+  r('POST', '/organizations', 'command', 'org.create', 'Create organization', undefined, 201),
+  r('GET', '/organizations/:id/branches', 'query', 'list', 'Branches', (p, _b, q) => ({ ...list('branches')(p, _b, q), filter: { organizationId: p.id } })),
+  r('POST', '/organizations/:id/branches', 'command', 'branch.create', 'Create branch', (p, b) => ({ ...b, organizationId: p.id }), 201),
+  r('GET', '/organizations/:id/memberships', 'query', 'list', 'Memberships', (p, _b, q) => ({ ...list('memberships')(p, _b, q), filter: { organizationId: p.id } })),
+  r('POST', '/organizations/:id/memberships', 'command', 'user.invite', 'Invite scoped user', (p, b) => ({ ...b, organizationId: p.id }), 201),
+  r('DELETE', '/organizations/:id/memberships/:mid', 'command', 'membership.revoke', 'Revoke membership', (p) => ({ membershipId: p.mid })),
+  r('GET', '/organizations/:id/addresses', 'query', 'list', 'Addresses', (p, _b, q) => ({ ...list('addresses')(p, _b, q), filter: { organizationId: p.id } })),
+  r('POST', '/organizations/:id/addresses', 'command', 'address.create', 'Create address', (p, b) => ({ ...b, organizationId: p.id }), 201),
+  // §3.2 الشحنات
+  r('POST', '/shipments/quotes', 'command', 'shipment.quote', 'Price estimate (no booking)'),
+  r('GET', '/shipments', 'query', 'list', 'List shipments (scoped)', list('shipments')),
+  r('POST', '/shipments', 'command', 'shipment.create', 'Create shipment', undefined, 201),
+  r('GET', '/shipments/:id', 'query', 'shipment.detail', 'Shipment detail (role-filtered)', (p) => ({ id: p.id })),
+  r('PATCH', '/shipments/:id', 'command', 'shipment.updateDraft', 'Edit draft', (p, b) => ({ id: p.id, patch: b })),
+  r('POST', '/shipments/:id/submit', 'command', 'shipment.submit', 'Submit', (p) => ({ id: p.id })),
+  r('POST', '/shipments/:id/cancel', 'command', 'shipment.cancel', 'Cancel', (p, b) => ({ ...b, id: p.id })),
+  r('POST', '/shipments/:id/reschedule', 'command', 'shipment.reschedule', 'Reschedule', (p, b) => ({ ...b, id: p.id })),
+  r('GET', '/shipments/:id/timeline', 'query', 'shipment.detail', 'Sourced timeline', (p) => ({ id: p.id })),
+  r('GET', '/shipments/:id/tracking', 'query', 'shipment.detail', 'Tracking (last confirmed position)', (p) => ({ id: p.id })),
+  r('GET', '/shipments/:id/temperature-report', 'query', 'shipment.temperatureReport', 'Temperature evidence', (p) => ({ id: p.id })),
+  r('POST', '/shipments/:id/delivery-attempts', 'command', 'courier.failAttempt', 'Record failed attempt', (p, b) => ({ ...b, shipment: p.id })),
+  r('POST', '/shipments/:id/handover', 'command', 'custody.handover', 'Atomic custody transfer', (p, b) => ({ ...b, shipment: p.id })),
+  r('POST', '/shipments/:id/deliver', 'command', 'courier.deliver', 'Deliver with POD', (p, b) => ({ ...b, shipment: p.id })),
+  r('POST', '/shipments/:id/returns', 'command', 'returns.request', 'Request return', (p, b) => ({ ...b, shipment: p.id })),
+  r('POST', '/shipments/:id/returns/:rid/authorize', 'command', 'returns.authorize', 'Authorize return', (p, b) => ({ ...b, returnId: p.rid })),
+  r('POST', '/shipments/:id/returns/:rid/complete', 'command', 'returns.complete', 'Complete return', (p, b) => ({ ...b, returnId: p.rid })),
+  r('POST', '/shipments/:id/disposition', 'command', 'disposition.record', 'Receiving institution disposition', (p, b) => ({ ...b, shipment: p.id })),
+  // §3.3 الصناديق والأجهزة
+  r('GET', '/boxes', 'query', 'list', 'Boxes', list('boxes')),
+  r('POST', '/boxes', 'command', 'box.register', 'Register box', undefined, 201),
+  r('GET', '/boxes/:id', 'query', 'box.detail', 'Box detail', (p) => ({ id: p.id })),
+  r('POST', '/boxes/:id/readiness-checks', 'command', 'box.readinessCheck', 'Readiness check', (p, b) => ({ ...b, box: p.id })),
+  r('POST', '/boxes/:id/return-to-warehouse', 'command', 'box.receiveReturn', 'Return to warehouse', (p, b) => ({ ...b, box: p.id })),
+  r('GET', '/devices', 'query', 'list', 'Devices', list('devices')),
+  r('POST', '/devices', 'command', 'device.register', 'Register IMEI', undefined, 201),
+  r('GET', '/devices/:id/health', 'query', 'device.detail', 'Device health', (p) => ({ id: p.id })),
+  r('POST', '/devices/:id/pairings', 'command', 'device.pair', 'Pair', (p, b) => ({ ...b, device: p.id })),
+  r('GET', '/devices/:id/telemetry', 'query', 'device.detail', 'Telemetry (staff)', (p) => ({ id: p.id })),
+  r('POST', '/temperature-excursions/:id/acknowledge', 'command', 'excursion.acknowledge', 'Acknowledge', (p, b) => ({ ...b, id: p.id })),
+  r('POST', '/temperature-excursions/:id/quality-review', 'command', 'excursion.qualityReview', 'Quality review', (p, b) => ({ ...b, id: p.id })),
+  // §3.4 النقل
+  r('GET', '/couriers', 'query', 'list', 'Couriers', list('couriers')),
+  r('GET', '/routes', 'query', 'list', 'Routes', list('routes')),
+  r('POST', '/routes/:id/dispatch', 'command', 'route.dispatch', 'Dispatch route', (p) => ({ routeId: p.id })),
+  r('GET', '/transport-legs', 'query', 'list', 'Legs', list('legs')),
+  r('POST', '/transport-legs/:id/assign-partner', 'command', 'leg.assignPartner', 'Assign partner', (p, b) => ({ ...b, legId: p.id })),
+  r('POST', '/transport-legs/:id/carrier-events', 'command', 'carrier.event', 'Carrier event (simulated)', (p, b) => ({ ...b, legId: p.id })),
+  r('GET', '/courier/tasks', 'query', 'courier.tasks', 'Courier tasks', () => ({})),
+  r('POST', '/courier/tasks/:id/scan', 'command', 'courier.scanPack', 'QR scan + pack', (p, b) => ({ ...b, shipment: p.id })),
+  r('POST', '/courier/tasks/:id/complete', 'command', 'courier.deliver', 'Complete with proof', (p, b) => ({ ...b, shipment: p.id })),
+  r('POST', '/courier/sync', 'command', 'courier.sync', 'Offline sync with conflict report'),
+  // §3.5 المالية
+  r('GET', '/contracts', 'query', 'list', 'Contracts', list('contracts')),
+  r('POST', '/contracts', 'command', 'contract.create', 'Create contract', undefined, 201),
+  r('POST', '/pricing/simulations', 'command', 'simulation.run', 'Side-effect-free simulation'),
+  r('POST', '/pricing/rules/:id/publish', 'command', 'ratePlan.publish', 'Publish', (p) => ({ id: p.id })),
+  r('GET', '/invoices', 'query', 'list', 'Invoices (scoped)', list('invoices')),
+  r('POST', '/invoices', 'command', 'invoice.generate', 'Draft invoice', undefined, 201),
+  r('POST', '/invoices/:id/issue', 'command', 'invoice.issue', 'Issue invoice', (p) => ({ id: p.id })),
+  r('POST', '/invoices/:id/credit-notes', 'command', 'creditNote.request', 'Credit note', (p, b) => ({ ...b, invoiceId: p.id })),
+  r('POST', '/invoices/:id/pay', 'command', 'customer.payInvoice', 'Pay (simulated provider)', (p, b) => ({ ...b, invoiceId: p.id })),
+  r('GET', '/payments', 'query', 'list', 'Payments', list('payments')),
+  r('POST', '/payments', 'command', 'payment.record', 'Record payment', undefined, 201),
+  r('GET', '/ledger/accounts', 'query', 'ledger.trialBalance', 'Chart of accounts + balances', () => ({})),
+  r('GET', '/ledger/journal-entries', 'query', 'list', 'Journals', list('journals')),
+  r('POST', '/ledger/journal-entries', 'command', 'journal.createDraft', 'Draft journal', undefined, 201),
+  r('POST', '/ledger/journal-entries/:id/post', 'command', 'journal.post', 'Post', (p) => ({ id: p.id })),
+  r('POST', '/ledger/journal-entries/:id/reverse', 'command', 'journal.reverse', 'Reverse', (p, b) => ({ ...b, id: p.id })),
+  r('POST', '/costs/allocations/run', 'command', 'cost.runAllocation', 'Run allocation', () => ({})),
+  r('POST', '/partners/:id/settlements', 'command', 'settlement.generate', 'Generate settlement', (p, b) => ({ ...b, partnerId: p.id }), 201),
+  r('POST', '/partner-settlements/:id/reconcile', 'command', 'settlement.reconcile', 'Reconcile', (p, b) => ({ ...b, id: p.id })),
+  r('POST', '/partner-settlements/:id/record-payment', 'command', 'settlement.recordPayment', 'Record payment', (p, b) => ({ ...b, id: p.id })),
+  // §3.6 الجودة والامتثال
+  r('GET', '/quality/incidents', 'query', 'list', 'Incidents', list('incidents')),
+  r('POST', '/quality/incidents', 'command', 'incident.open', 'Open incident', undefined, 201),
+  r('GET', '/claims', 'query', 'list', 'Claims', list('claims')),
+  r('POST', '/claims', 'command', 'claim.submit', 'Submit claim', undefined, 201),
+  r('POST', '/claims/:id/assess-liability', 'command', 'claim.assess', 'Assess', (p, b) => ({ ...b, id: p.id })),
+  r('GET', '/capa', 'query', 'list', 'CAPA', list('capas')),
+  r('POST', '/capa', 'command', 'capa.create', 'Create CAPA', undefined, 201),
+  r('GET', '/compliance/licenses', 'query', 'list', 'Licenses', list('licenses')),
+  r('POST', '/compliance/licenses', 'command', 'license.add', 'Add license', undefined, 201),
+  r('POST', '/compliance/licenses/:id/verify', 'command', 'license.verify', 'Verify', (p) => ({ id: p.id })),
+  r('GET', '/legal-holds', 'query', 'list', 'Legal holds', list('legalHolds')),
+  r('POST', '/legal-holds', 'command', 'legalHold.apply', 'Apply legal hold', undefined, 201),
+  // §3.7 العمليات والتقارير والإدارة
+  r('GET', '/control-tower/summary', 'query', 'controlTower.summary', 'Control tower', (_p, _b, q) => q),
+  r('POST', '/alerts/:id/acknowledge', 'command', 'excursion.acknowledge', 'Acknowledge alert', (p, b) => ({ ...b, id: p.id })),
+  r('GET', '/reports/shipments', 'query', 'reports.operations', 'Operations report', (_p, _b, q) => ({ days: Number(q.days ?? 14), city: q.city })),
+  r('GET', '/reports/customer-dashboard', 'query', 'customer.dashboard', 'Customer KPIs (no internal cost)', (_p, _b, q) => q),
+  r('GET', '/notifications', 'query', 'list', 'Notifications', list('notifications')),
+  r('PATCH', '/notifications/:id/read', 'command', 'notification.markRead', 'Mark read', (p) => ({ id: p.id })),
+  r('GET', '/webhooks/subscriptions', 'query', 'list', 'Webhooks', list('webhooks')),
+  r('POST', '/webhooks/subscriptions', 'command', 'webhook.create', 'Create webhook', undefined, 201),
+  r('POST', '/admin/configuration', 'command', 'config.propose', 'Propose config'),
+  r('POST', '/admin/configuration/:id/approve', 'command', 'approval.decide', 'Approve', (p, b) => ({ ...b, id: p.id })),
+  r('GET', '/audit/events', 'query', 'list', 'Audit (privileged)', list('audit')),
+];
+
+const compiled = ROUTES.map((def) => ({ def, re: new RegExp('^/api/v1' + def.path.replace(/:(\w+)/g, '(?<$1>[^/]+)') + '$') }));
+export function matchRoute(method: string, path: string) {
+  for (const c of compiled) if (c.def.method === method) { const m = c.re.exec(path); if (m) return { def: c.def, params: (m.groups ?? {}) as P }; }
+  return null;
+}

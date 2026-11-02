@@ -1,0 +1,25 @@
+{
+  "name": "medlog-prototypes",
+  "private": true,
+  "version": "0.1.0",
+  "description": "منصة اللوجستيات الطبية وسلسلة التبريد — نماذج أولية تفاعلية (ثلاثة خيارات تصميم)",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "api": "tsx packages/mock-api/src/server.ts",
+    "api:reset": "tsx packages/mock-api/src/server.ts --reset",
+    "test": "tsx --test tests/*.test.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "preview:foundation": "cd apps/foundation-console && node build.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "22.9.0",
+    "esbuild": "0.24.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tsx": "4.19.2",
+    "typescript": "5.6.3"
+  }
+}
