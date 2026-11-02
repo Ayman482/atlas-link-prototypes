@@ -10,7 +10,7 @@ import { ThemeBtn } from '@/lib/theme';
 /** احتفال قصير بعد إتمام تسليم أو طلب (يُتجاهل مع تقليل الحركة) */
 export function celebrate() {
   if (typeof window === 'undefined' || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
-  const c = document.createElement('div'); c.className = 'confetti'; const cols = ['#0f6b66', '#2f8f83', '#a6dccd', '#d9785c', '#b8914a', '#f0b49a'];
+  const c = document.createElement('div'); c.className = 'confetti'; const cols = ['#087F70', '#0B9A87', '#D9EEE8', '#E6A65D', '#C98A3E', '#F2C994'];
   for (let i = 0; i < 70; i++) { const p = document.createElement('i'); p.style.left = Math.random() * 100 + '%'; p.style.background = cols[i % cols.length]; p.style.animationDelay = Math.random() * .5 + 's'; p.style.animationDuration = 1.2 + Math.random() * 1.2 + 's'; c.appendChild(p); }
   document.body.appendChild(c); setTimeout(() => c.remove(), 3000);
 }

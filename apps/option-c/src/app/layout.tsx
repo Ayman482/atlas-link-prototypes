@@ -1,3 +1,4 @@
+import '@medlog/tokens/tokens.css';
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
 

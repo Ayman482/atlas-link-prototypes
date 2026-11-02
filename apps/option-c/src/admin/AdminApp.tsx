@@ -21,16 +21,16 @@ function Gate() {
 }
 
 const GROUP_STYLE: Record<string, { hue: string; icon: string }> = {
-  ops: { hue: '#0f6b66', icon: 'M3 12h4l3-8 4 16 3-8h4' },
-  assets: { hue: '#2f8f9d', icon: 'M3 7l9-4 9 4v10l-9 4-9-4zM3 7l9 4 9-4M12 11v10' },
-  quality: { hue: '#d0647a', icon: 'M12 2v10M12 22a4 4 0 0 0 4-4c0-2-2-3-2-5V4a2 2 0 0 0-4 0v9c0 2-2 3-2 5a4 4 0 0 0 4 4z' },
-  warehouse: { hue: '#c48a2c', icon: 'M3 21V9l9-6 9 6v12M7 21v-8h10v8M7 17h10' },
-  commercial: { hue: '#3f8f6b', icon: 'M20 12V7H4v5M4 12v7h16v-7M4 12h16M9 7V4h6v3' },
-  finance: { hue: '#8a74c4', icon: 'M12 2v20M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6' },
-  compliance: { hue: '#d9785c', icon: 'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6zM9 12l2 2 4-4' },
-  reports: { hue: '#4a78b8', icon: 'M4 19V5M4 19h16M8 15v-4M12 15V8M16 15v-6' },
-  system: { hue: '#66767a', icon: 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z' },
-  partner: { hue: '#2f8f83', icon: 'M2 17h20M6 17l2-10h8l2 10M9 7V4h6v3' },
+  ops: { hue: 'var(--c-indigo)', icon: 'M3 12h4l3-8 4 16 3-8h4' },
+  assets: { hue: 'var(--c-cyan)', icon: 'M3 7l9-4 9 4v10l-9 4-9-4zM3 7l9 4 9-4M12 11v10' },
+  quality: { hue: 'var(--c-pink)', icon: 'M12 2v10M12 22a4 4 0 0 0 4-4c0-2-2-3-2-5V4a2 2 0 0 0-4 0v9c0 2-2 3-2 5a4 4 0 0 0 4 4z' },
+  warehouse: { hue: 'var(--c-amber)', icon: 'M3 21V9l9-6 9 6v12M7 21v-8h10v8M7 17h10' },
+  commercial: { hue: 'var(--c-green)', icon: 'M20 12V7H4v5M4 12v7h16v-7M4 12h16M9 7V4h6v3' },
+  finance: { hue: 'var(--c-violet)', icon: 'M12 2v20M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6' },
+  compliance: { hue: 'var(--c-orange)', icon: 'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6zM9 12l2 2 4-4' },
+  reports: { hue: 'var(--c-blue)', icon: 'M4 19V5M4 19h16M8 15v-4M12 15V8M16 15v-6' },
+  system: { hue: 'var(--muted)', icon: 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z' },
+  partner: { hue: 'var(--c-indigo)', icon: 'M2 17h20M6 17l2-10h8l2 10M9 7V4h6v3' },
 };
 const Ico = ({ d, size = 22 }: { d: string; size?: number }) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={d} /></svg>;
 function Greeting() {

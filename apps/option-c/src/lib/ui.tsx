@@ -96,7 +96,7 @@ export const Kpis = ({ items }: { items: { label: string; value: React.ReactNode
 );
 export const DL = ({ items }: { items: [React.ReactNode, React.ReactNode][] }) => <dl className="dl">{items.map(([k, v], i) => <div key={i}><dt>{k}</dt><dd>{v ?? '—'}</dd></div>)}</dl>;
 export function Loading() { const { t } = useApp(); return <div className="state" role="status"><span className="spinner" aria-hidden="true" /><span>{t('common.loading')}</span><div className="skel" aria-hidden="true" style={{ maxWidth: 420 }}><i /><i /><i /></div></div>; }
-export function Empty({ text, action }: { text?: string; action?: React.ReactNode }) { const { t } = useApp(); return <div className="state empty"><svg className="empty-ill" viewBox="0 0 96 96" aria-hidden="true"><defs><linearGradient id="eg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#0f6b66" /><stop offset=".5" stopColor="#2f8f83" /><stop offset="1" stopColor="#a6dccd" /></linearGradient></defs><rect x="18" y="30" width="60" height="44" rx="8" fill="none" stroke="url(#eg)" strokeWidth="3" /><path d="M18 42h60M40 30l8-12 8 12" fill="none" stroke="url(#eg)" strokeWidth="3" strokeLinejoin="round" /><circle cx="48" cy="58" r="5" fill="url(#eg)"><animate attributeName="r" values="4;6;4" dur="2s" repeatCount="indefinite" /></circle></svg><p>{text ?? t('common.empty')}</p>{action}</div>; }
+export function Empty({ text, action }: { text?: string; action?: React.ReactNode }) { const { t } = useApp(); return <div className="state empty"><svg className="empty-ill" viewBox="0 0 96 96" aria-hidden="true"><defs><linearGradient id="eg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#087F70" /><stop offset=".5" stopColor="#0B9A87" /><stop offset="1" stopColor="#D9EEE8" /></linearGradient></defs><rect x="18" y="30" width="60" height="44" rx="8" fill="none" stroke="url(#eg)" strokeWidth="3" /><path d="M18 42h60M40 30l8-12 8 12" fill="none" stroke="url(#eg)" strokeWidth="3" strokeLinejoin="round" /><circle cx="48" cy="58" r="5" fill="url(#eg)"><animate attributeName="r" values="4;6;4" dur="2s" repeatCount="indefinite" /></circle></svg><p>{text ?? t('common.empty')}</p>{action}</div>; }
 export function ErrorBox({ error }: { error: any }) { const { lang, t } = useApp(); return <div className="state err" role="alert"><b>{t('common.error')}</b><p>{error?.message?.[lang] ?? String(error)}</p></div>; }
 export function Tabs({ tabs, value, onChange }: { tabs: { id: string; label: React.ReactNode; count?: number }[]; value: string; onChange(id: string): void }) {
   return <div className="tabs" role="tablist">{tabs.map((t) => <button key={t.id} role="tab" aria-selected={value === t.id} className={value === t.id ? 'on' : ''} onClick={() => onChange(t.id)}>{t.label}{t.count != null && <span className="count">{t.count}</span>}</button>)}</div>;
@@ -274,7 +274,7 @@ export function TempChart({ report, height = 220 }: { report: any; height?: numb
         {report.gaps.map((g: any, i: number) => <rect key={i} x={X(Date.parse(g.from))} y={pt} width={Math.max(2, X(Date.parse(g.to)) - X(Date.parse(g.from)))} height={H - pt - pb} fill="url(#hatch)" />)}
         {report.excursions.map((e: any, i: number) => <rect key={i} x={X(Date.parse(e.startedAt))} y={pt} width={Math.max(3, X(Date.parse(e.endedAt ?? new Date(t1).toISOString())) - X(Date.parse(e.startedAt)))} height={H - pt - pb} fill="var(--crit)" opacity="0.12" />)}
         <defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="var(--muted)" strokeWidth="1" opacity="0.35" /></pattern></defs>
-        <defs><linearGradient id="tline" x1="0" x2="1"><stop offset="0" stopColor="#0f6b66" /><stop offset=".5" stopColor="#2f8f83" /><stop offset="1" stopColor="#d9785c" /></linearGradient><linearGradient id="tarea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#2f8f83" stopOpacity=".35" /><stop offset="1" stopColor="#a6dccd" stopOpacity="0" /></linearGradient></defs>
+        <defs><linearGradient id="tline" x1="0" x2="1"><stop offset="0" stopColor="#087F70" /><stop offset=".5" stopColor="#0B9A87" /><stop offset="1" stopColor="#E6A65D" /></linearGradient><linearGradient id="tarea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#0B9A87" stopOpacity=".35" /><stop offset="1" stopColor="#D9EEE8" stopOpacity="0" /></linearGradient></defs>
         {segs.map((d, i) => { const xs = d.match(/[ML]([\d.]+),/g)!.map((m) => m.slice(1, -1)); return <path key={'a' + i} className="area" d={`${d}L${xs[xs.length - 1]},${H - pb}L${xs[0]},${H - pb}Z`} fill="url(#tarea)" />; })}
         {segs.map((d, i) => <path key={i} className="line" d={d} fill="none" stroke="url(#tline)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />)}
         {pts.filter((p: any) => p.c > report.profile.maxC || p.c < report.profile.minC).map((p: any, i: number) => <circle key={i} cx={X(Date.parse(p.t))} cy={Y(p.c)} r="2.6" fill="var(--crit)" />)}
@@ -300,7 +300,7 @@ export function KsaMap({ points, cities, onPick, height = 380 }: { points: { id:
   return (
     <figure className="map" style={{ maxHeight: height }}>
       <svg viewBox="0 0 680 620" role="img" aria-label={lang === 'ar' ? 'خريطة الشحنات' : 'Shipment map'}>
-        <defs><linearGradient id="flowg" x1="0" x2="1"><stop offset="0" stopColor="#2f8f83" /><stop offset="1" stopColor="#a6dccd" /></linearGradient></defs>
+        <defs><linearGradient id="flowg" x1="0" x2="1"><stop offset="0" stopColor="#0B9A87" /><stop offset="1" stopColor="#D9EEE8" /></linearGradient></defs>
         {Array.from({ length: 9 }, (_, i) => <line key={'h' + i} className="gridl" x1="0" x2="680" y1={i * 75 + 10} y2={i * 75 + 10} />)}
         {Array.from({ length: 10 }, (_, i) => <line key={'v' + i} className="gridl" y1="0" y2="620" x1={i * 75 + 5} x2={i * 75 + 5} />)}
         <path className="land" d={KSA} />
@@ -321,7 +321,7 @@ export function Bars({ data, height = 180, valueLabel }: { data: { label: string
   const max = Math.max(1, ...data.flatMap((d) => [d.a, d.b ?? 0]));
   const W = 760, H = height, pb = 26, pt = 10, bw = (W - 20) / data.length;
   return <figure className="chart"><svg viewBox={`0 0 ${W} ${H}`} role="img">
-    <defs><linearGradient id="bga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#2f8f83" /><stop offset="1" stopColor="#0f6b66" /></linearGradient><linearGradient id="bgb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#f0b49a" /><stop offset="1" stopColor="#d9785c" /></linearGradient></defs>
+    <defs><linearGradient id="bga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#0B9A87" /><stop offset="1" stopColor="#087F70" /></linearGradient><linearGradient id="bgb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#F2C994" /><stop offset="1" stopColor="#E6A65D" /></linearGradient></defs>
     {[0, 0.5, 1].map((r) => <line key={r} x1={10} x2={W - 10} y1={pt + (H - pt - pb) * (1 - r)} y2={pt + (H - pt - pb) * (1 - r)} stroke="var(--line)" />)}
     {data.map((d, i) => { const h1 = ((H - pt - pb) * d.a) / max, h2 = ((H - pt - pb) * (d.b ?? 0)) / max; const x = 10 + i * bw; return <g key={i}>
       <rect className="bar" style={{ animationDelay: `${i * 40}ms` }} x={x + bw * 0.15} y={H - pb - h1} width={bw * (d.b != null ? 0.33 : 0.7)} height={h1} fill="url(#bga)" rx="5"><title>{`${d.label}: ${d.a}`}</title></rect>
@@ -329,5 +329,5 @@ export function Bars({ data, height = 180, valueLabel }: { data: { label: string
       {(data.length <= 16 || i % 2 === 0) && <text x={x + bw / 2} y={H - 8} textAnchor="middle" fontSize="11" fill="var(--muted)">{d.label}</text>}
     </g>; })}
     <text x={12} y={pt + 10} fontSize="11" fill="var(--muted)">{max}</text>
-  </svg>{valueLabel && <figcaption className="legend"><span><i className="sw" style={{ background: 'linear-gradient(#2f8f83,#0f6b66)' }} />{valueLabel[0]}</span>{valueLabel[1] && <span><i className="sw" style={{ background: 'linear-gradient(#f0b49a,#d9785c)' }} />{valueLabel[1]}</span>}</figcaption>}</figure>;
+  </svg>{valueLabel && <figcaption className="legend"><span><i className="sw" style={{ background: 'linear-gradient(#0B9A87,#087F70)' }} />{valueLabel[0]}</span>{valueLabel[1] && <span><i className="sw" style={{ background: 'linear-gradient(#F2C994,#E6A65D)' }} />{valueLabel[1]}</span>}</figcaption>}</figure>;
 }
