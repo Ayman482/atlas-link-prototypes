@@ -12,7 +12,18 @@ import { ROUTES, matchRoute } from './routes';
 const PORT = Number(process.env.PORT ?? 4000);
 const DATA_DIR = path.resolve(process.env.MEDLOG_DATA_DIR ?? path.join(process.cwd(), 'data'));
 const DB_FILE = path.join(DATA_DIR, 'demo-db.json');
-const SECRET = process.env.MEDLOG_SECRET ?? 'medlog-demo-secret-not-for-production';
+// المفتاح السري لتوقيع الرموز: إن لم يُضبط يُولَّد عشوائياً لكل تشغيل (لا مفتاح افتراضي معروف يسمح بتزوير الرموز)
+const SECRET = process.env.MEDLOG_SECRET || crypto.randomBytes(32).toString('hex');
+if (!process.env.MEDLOG_SECRET) console.warn('⚠ MEDLOG_SECRET غير مضبوط — استُخدم مفتاح عشوائي؛ ستنتهي الجلسات عند إعادة التشغيل');
+// اختصار الدخول السريع لحسابات العرض: معطّل افتراضياً ويتطلب تفعيلاً صريحاً، ولا يشمل الحسابات المحمية بالتحقق بخطوتين
+const DEMO_LOGIN = process.env.MEDLOG_ENABLE_DEMO_LOGIN === '1';
+// مدة الجلسة: خمول 12 ساعة، وحد أقصى مطلق 7 أيام (قابلة للضبط للاختبار)
+const IDLE_MS = Number(process.env.MEDLOG_SESSION_IDLE_MIN ?? 720) * 60_000;
+const ABS_MS = Number(process.env.MEDLOG_SESSION_MAX_MIN ?? 7 * 24 * 60) * 60_000;
+const MFA_MAX_ATTEMPTS = 5;
+// CORS: قائمة سماح صريحة (CORS_ORIGIN مفصولة بفواصل)؛ الافتراضي أصول التطوير المحلية فقط — لا "*"
+const CORS_ALLOW = (process.env.CORS_ORIGIN ?? '').split(',').map((x) => x.trim()).filter(Boolean);
+const LOCAL_ORIGIN = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/;
 const RESET = process.argv.includes('--reset');
 
 fs.mkdirSync(DATA_DIR, { recursive: true });
@@ -36,14 +47,21 @@ if (RESET || !fs.existsSync(DB_FILE)) persist(engine.db);
 
 // ---------- الرموز (Tokens) — HMAC بلا حالة فوق سجل الجلسات ----------
 const sign = (sessionId: string) => `${sessionId}.${crypto.createHmac('sha256', SECRET).update(sessionId).digest('base64url').slice(0, 32)}`;
-function verifyToken(tok: string | undefined) {
-  if (!tok) return null;
+function verifyToken(tok: string | undefined): { session: (typeof engine.db.sessions)[number] | null; expired: boolean } {
+  if (!tok) return { session: null, expired: false };
   const [sid, sig] = tok.split('.');
-  if (!sid || sign(sid) !== `${sid}.${sig}`) return null;
+  if (!sid || !sig) return { session: null, expired: false };
+  const want = Buffer.from(sign(sid)), got = Buffer.from(`${sid}.${sig}`);
+  if (want.length !== got.length || !crypto.timingSafeEqual(want, got)) return { session: null, expired: false };
   const s = engine.db.sessions.find((x) => x.id === sid && !x.revokedAt);
-  if (!s) return null;
-  s.lastSeenAt = new Date().toISOString();
-  return s;
+  if (!s) return { session: null, expired: false };
+  const now = Date.now();
+  if (now - Date.parse(s.lastSeenAt) > IDLE_MS || now - Date.parse(s.createdAt) > ABS_MS) {
+    s.revokedAt = new Date(now).toISOString(); persist(engine.db);
+    return { session: null, expired: true };
+  }
+  s.lastSeenAt = new Date(now).toISOString();
+  return { session: s, expired: false };
 }
 function newSession(userId: string, ua: string, ip: string) {
   const n = (engine.db.meta.counters['id:ses'] = (engine.db.meta.counters['id:ses'] ?? 0) + 1);
@@ -53,7 +71,7 @@ function newSession(userId: string, ua: string, ip: string) {
   persist(engine.db);
   return sign(s.id);
 }
-const challenges = new Map<string, { userId: string; exp: number }>();
+const challenges = new Map<string, { userId: string; exp: number; attempts: number }>();
 
 // ---------- SSE ----------
 const clients = new Set<{ res: http.ServerResponse; userId: string }>();
@@ -71,11 +89,19 @@ engine.subscribe(({ command, events, at }) => {
 setInterval(() => clients.forEach((c) => c.res.write(`: ping\n\n`)), 25_000);
 
 // ---------- أدوات HTTP ----------
+function corsFor(origin: string | undefined): Record<string, string> {
+  const base = { Vary: 'Origin', 'X-Medlog-Environment': 'simulated-demo' };
+  if (!origin || !(CORS_ALLOW.includes(origin) || (!CORS_ALLOW.length && LOCAL_ORIGIN.test(origin)))) return base;
+  return { ...base, 'Access-Control-Allow-Origin': origin, 'Access-Control-Allow-Headers': 'Authorization, Content-Type, Idempotency-Key, If-Match, Accept-Language, X-Request-ID', 'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS' };
+}
 function send(res: http.ServerResponse, status: number, body: unknown, headers: Record<string, string> = {}) {
-  res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', ...cors, ...headers });
+  res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', ...corsFor(res.req?.headers.origin), ...headers });
   res.end(body === undefined ? '' : JSON.stringify(body));
 }
-const cors = { 'Access-Control-Allow-Origin': process.env.CORS_ORIGIN ?? '*', 'Access-Control-Allow-Headers': 'Authorization, Content-Type, Idempotency-Key, If-Match, Accept-Language, X-Request-ID', 'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS' };
+/** JSON من معامل الرابط: الخطأ 400 لا 500 */
+function jsonParam(raw: string, name: string) {
+  try { return JSON.parse(raw); } catch { throw new DomainError('MALFORMED_JSON', 400, { ar: `قيمة JSON غير صالحة في المعامل ${name}`, en: `Malformed JSON in parameter ${name}` }); }
+}
 function errorBody(e: unknown, lang: 'ar' | 'en', requestId: string) {
   if (e instanceof DomainError) return { status: e.status, body: { error: { code: e.code, message: e.detail[lang], message_ar: e.detail.ar, message_en: e.detail.en, details: e.field ? [{ field: e.field, reason: e.code }] : [], request_id: requestId, retryable: e.status >= 500 } } };
   console.error(e);
@@ -90,6 +116,8 @@ async function readBody(req: http.IncomingMessage): Promise<any> {
 }
 const rate = new Map<string, { n: number; t: number }>();
 function limited(key: string, max: number) { const now = Date.now(); const r = rate.get(key); if (!r || now - r.t > 60_000) { rate.set(key, { n: 1, t: now }); return false; } r.n++; return r.n > max; }
+// تنظيف دوري لعدادات المعدل والتحديات المنتهية (لا نمو غير محدود للذاكرة)
+setInterval(() => { const now = Date.now(); for (const [k, r] of rate) if (now - r.t > 60_000) rate.delete(k); for (const [k, c] of challenges) if (c.exp < now) challenges.delete(k); }, 60_000).unref();
 
 // ---------- الخادم ----------
 const server = http.createServer(async (req, res) => {
@@ -99,7 +127,7 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'OPTIONS') return send(res, 204, undefined);
   const p = url.pathname.replace(/\/+$/, '');
   try {
-    if (p === '' || p === '/api/v1') return send(res, 200, { name: 'MedLog demo API', version: 'v1', simulated: true, docs: '/api/v1/openapi.json', note: 'بيانات عرض فقط — لا تكاملات حقيقية' });
+    if (p === '' || p === '/api/v1') return send(res, 200, { name: 'MedLog demo API', version: 'v1', simulated: true, productionReady: false, demoLogin: DEMO_LOGIN, docs: '/api/v1/openapi.json', note: 'خادم محاكاة للنماذج فقط — ليس تكاملاً إنتاجياً؛ القراءات والمواقع والدفع والرسائل محاكاة' });
     if (p === '/api/v1/health') return send(res, 200, { ok: true, seededAt: engine.db.meta.seededAt, shipments: engine.db.shipments.length });
     if (p === '/api/v1/openapi.json') return send(res, 200, openapi());
     if (p === '/api/v1/meta/commands') return send(res, 200, { commands: listCommands(), queries: listQueries() });
@@ -110,7 +138,7 @@ const server = http.createServer(async (req, res) => {
       const { email, password } = await readBody(req);
       const u = engine.db.users.find((x) => x.email === String(email ?? '').toLowerCase().trim() && x.status !== 'disabled');
       if (!u || password !== DEMO_PASSWORD) throw new DomainError('INVALID_CREDENTIALS', 401, { ar: 'البريد أو كلمة المرور غير صحيحة', en: 'Incorrect email or password' });
-      if (u.mfaEnabled) { const cid = crypto.randomUUID(); challenges.set(cid, { userId: u.id, exp: Date.now() + 5 * 60_000 }); return send(res, 200, { mfaRequired: true, challengeId: cid, hint: `رمز العرض ${DEMO_MFA}` }); }
+      if (u.mfaEnabled) { const cid = crypto.randomUUID(); challenges.set(cid, { userId: u.id, exp: Date.now() + 5 * 60_000, attempts: 0 }); return send(res, 200, { mfaRequired: true, challengeId: cid, hint: `رمز العرض ${DEMO_MFA}` }); }
       if (u.status === 'invited') u.status = 'active';
       return send(res, 200, { token: newSession(u.id, String(req.headers['user-agent'] ?? ''), String(req.socket.remoteAddress ?? '')), userId: u.id });
     }
@@ -118,27 +146,36 @@ const server = http.createServer(async (req, res) => {
       const { challengeId, code } = await readBody(req);
       const c = challenges.get(challengeId);
       if (!c || c.exp < Date.now()) throw new DomainError('MFA_EXPIRED', 401, { ar: 'انتهت صلاحية التحقق؛ سجّل الدخول مجدداً', en: 'Challenge expired; sign in again' });
-      if (code !== DEMO_MFA) throw new DomainError('MFA_INVALID', 401, { ar: 'رمز التحقق غير صحيح', en: 'Incorrect verification code' });
+      if (code !== DEMO_MFA) {
+        // حد المحاولات: بعد 5 محاولات خاطئة يُلغى التحدي ويجب تسجيل الدخول من جديد
+        if (++c.attempts >= MFA_MAX_ATTEMPTS) { challenges.delete(challengeId); throw new DomainError('MFA_LOCKED', 401, { ar: 'محاولات تحقق كثيرة؛ سجّل الدخول مجدداً', en: 'Too many verification attempts; sign in again' }); }
+        throw new DomainError('MFA_INVALID', 401, { ar: 'رمز التحقق غير صحيح', en: 'Incorrect verification code' });
+      }
       challenges.delete(challengeId);
       return send(res, 200, { token: newSession(c.userId, String(req.headers['user-agent'] ?? ''), String(req.socket.remoteAddress ?? '')), userId: c.userId });
     }
-    // دخول سريع لحسابات العرض (مُعلَّم كميزة عرض فقط، يمكن تعطيله)
+    // دخول سريع لحسابات العرض — اختصار عرض فقط: غير موجود ما لم يُفعَّل صراحةً (MEDLOG_ENABLE_DEMO_LOGIN=1)،
+    // ولا يتجاوز كلمة المرور أو التحقق بخطوتين لأي حساب محمي (المدير، العمليات، المالية…)
     if (p === '/api/v1/auth/demo-login' && req.method === 'POST') {
-      if (process.env.MEDLOG_DISABLE_DEMO_LOGIN) throw new DomainError('FORBIDDEN', 403, { ar: 'معطّل', en: 'Disabled' });
+      if (!DEMO_LOGIN) throw new DomainError('NOT_FOUND', 404, { ar: 'المسار غير موجود', en: 'Route not found' });
       const { email } = await readBody(req);
       const u = engine.db.users.find((x) => x.email === email);
       if (!u || !u.email.endsWith('@medlog.demo')) throw new DomainError('NOT_FOUND', 404, { ar: 'حساب عرض غير معروف', en: 'Unknown demo account' });
+      if (u.mfaEnabled) throw new DomainError('MFA_REQUIRED', 403, { ar: 'هذا الحساب يتطلب كلمة المرور والتحقق بخطوتين', en: 'This account requires password and two-step verification' });
       return send(res, 200, { token: newSession(u.id, 'demo-login', String(req.socket.remoteAddress ?? '')), userId: u.id, demo: true });
     }
 
     const auth = String(req.headers.authorization ?? '').replace(/^Bearer\s+/i, '');
-    const session = verifyToken(auth || url.searchParams.get('access_token') || undefined);
+    // الرمز في الرابط مقبول لقناة SSE فقط (EventSource لا يرسل ترويسات) — لا يُقبل لبقية الواجهات حتى لا يتسرّب في السجلات
+    const v = verifyToken(auth || (p === '/api/v1/events' ? url.searchParams.get('access_token') : null) || undefined);
+    if (v.expired) throw new DomainError('SESSION_EXPIRED', 401, { ar: 'انتهت الجلسة؛ سجّل الدخول مجدداً', en: 'Session expired; sign in again' });
+    const session = v.session;
     if (!session) throw new DomainError('UNAUTHENTICATED', 401, { ar: 'سجّل الدخول أولاً', en: 'Sign in first' });
     const userId = session.userId;
 
     if (p === '/api/v1/auth/logout' && req.method === 'POST') { session.revokedAt = new Date().toISOString(); persist(engine.db); return send(res, 204, undefined); }
     if (p === '/api/v1/events') {
-      res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache', Connection: 'keep-alive', ...cors });
+      res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache', Connection: 'keep-alive', ...corsFor(req.headers.origin) });
       res.write(`event: hello\ndata: {"ok":true}\n\n`);
       const c = { res, userId }; clients.add(c); req.on('close', () => clients.delete(c)); return;
     }
@@ -155,12 +192,12 @@ const server = http.createServer(async (req, res) => {
       return send(res, 200, { data: out, request_id: requestId });
     }
     if ((m = /^\/api\/v1\/queries\/([\w.]+)$/.exec(p)) && req.method === 'GET') {
-      const params = url.searchParams.get('p') ? JSON.parse(url.searchParams.get('p')!) : Object.fromEntries(url.searchParams);
+      const params = url.searchParams.get('p') ? jsonParam(url.searchParams.get('p')!, 'p') : Object.fromEntries(url.searchParams);
       return send(res, 200, { data: engine.query(m[1], userId, params) });
     }
     if ((m = /^\/api\/v1\/collections\/(\w+)$/.exec(p)) && req.method === 'GET') {
       const q = Object.fromEntries(url.searchParams);
-      return send(res, 200, { data: engine.query('list', userId, { collection: m[1], q: q.q, sort: q.sort, dir: q.dir, page: Number(q.page ?? 1), pageSize: Number(q.limit ?? q.pageSize ?? 25), filter: q.filter ? JSON.parse(q.filter) : undefined }) });
+      return send(res, 200, { data: engine.query('list', userId, { collection: m[1], q: q.q, sort: q.sort, dir: q.dir, page: Number(q.page ?? 1), pageSize: Number(q.limit ?? q.pageSize ?? 25), filter: q.filter ? jsonParam(q.filter, 'filter') : undefined }) });
     }
     // مسارات REST المسمّاة كما في كتالوج API
     const route = matchRoute(req.method ?? 'GET', p);

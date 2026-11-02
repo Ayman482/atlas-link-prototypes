@@ -16,6 +16,8 @@ export function scoped(db: T.Db, a: Actor, col: T.Collection): unknown[] {
   if (isStaff(a)) {
     if (FINANCE_COLLECTIONS.has(col) && !canSeeInternalFinance(a) && !has(a, 'super_admin')) return col === 'ratePlans' ? all : [];
     if (col === 'audit' && !has(a, 'super_admin', 'compliance', 'executive')) return (all as T.AuditEvent[]).filter((x) => x.actorId === a.user.id);
+    // الجلسات: كل موظف يرى جلساته فقط؛ مدير المنصة ومسؤول الامتثال يرون الكل (معرّفات الجلسات حساسة)
+    if (col === 'sessions' && !has(a, 'super_admin', 'compliance')) return (all as T.Session[]).filter((x) => x.userId === a.user.id);
     return all;
   }
   const orgs = new Set(customerOrgIds(a));
@@ -67,7 +69,8 @@ const textOf = (o: any): string => JSON.stringify(o).toLowerCase();
 defineQuery<{ collection: T.Collection; filter?: Record<string, unknown>; q?: string; sort?: string; dir?: 'asc' | 'desc'; page?: number; pageSize?: number }, { items: unknown[]; total: number; page: number; pageSize: number }>({
   name: 'list', guard: 'any',
   run(db, a, p) {
-    if (!(p.collection in db) || p.collection === ('meta' as never)) throw nf();
+    // Object.hasOwn: لا تُقبل أسماء موروثة مثل constructor أو __proto__ (كانت تعيد 500)
+    if (typeof p.collection !== 'string' || !Object.hasOwn(db, p.collection) || p.collection === ('meta' as never) || !Array.isArray(db[p.collection])) throw nf();
     let items = scoped(db, a, p.collection);
     for (const [k, v] of Object.entries(p.filter ?? {})) {
       if (v === undefined || v === '' || v === null) continue;
@@ -83,7 +86,7 @@ defineQuery<{ collection: T.Collection; filter?: Record<string, unknown>; q?: st
 
 defineQuery<{ id: string; collection: T.Collection }, unknown>({
   name: 'get', guard: 'any',
-  run(db, a, { id, collection }) { const x = (scoped(db, a, collection) as { id?: string }[]).find((r) => r.id === id); if (!x) throw nf(); return x; },
+  run(db, a, { id, collection }) { if (typeof collection !== 'string' || !Object.hasOwn(db, collection) || !Array.isArray(db[collection])) throw nf(); const x = (scoped(db, a, collection) as { id?: string }[]).find((r) => r.id === id); if (!x) throw nf(); return x; },
 });
 
 defineQuery<Record<string, never>, unknown>({
