@@ -1,0 +1,40 @@
+# تطبيقا Flutter — أطلس لينك (الخيار C · Emerald Health)
+
+| المجلد | المحتوى |
+|---|---|
+| `atlas_shared/` | مكتبة مشتركة: رموز التصميم المولّدة (`lib/src/theme/tokens.dart`)، السمة الفاتحة والداكنة، عميل خادم المحاكاة، التوطين العربي/الإنجليزي المولّد من نفس مصدر الويب، الحركة (مع احترام «إزالة الحركة»)، ومكوّنات: شارة الحالة، هيكل التحميل، علامة النجاح، منحنى الحرارة التفاعلي، الخط الزمني القابل للتوسيع، لوحة التوقيع، لوحة المسح بحالاتها، شاشة الدخول والتحقق بخطوتين. الخطوط Alexandria وNoto Sans Arabic مضمّنة (رخصة OFL 1.1). |
+| `customer_app/` | تطبيق العميل CM01–CM12 |
+| `courier_app/` | تطبيق المندوب K01–K14 مع طابور العمل دون اتصال والمزامنة |
+| `tool/gen_labels.ts` | يولّد `labels.g.dart` من القاموس المشترك وطبقة توطين الخيار C |
+
+## التشغيل
+
+```bash
+# 1) خادم المحاكاة (من جذر المستودع)
+npm install && npm run api            # http://localhost:4000/api/v1
+
+# 2) التطبيق — اختر عنوان الخادم حسب الجهاز
+cd mobile/customer_app                # أو mobile/courier_app
+flutter pub get
+flutter run --dart-define=API_BASE=http://10.0.2.2:4000/api/v1    # محاكي Android
+flutter run --dart-define=API_BASE=http://localhost:4000/api/v1    # محاكي iOS أو الويب (-d chrome)
+flutter run --dart-define=API_BASE=http://<IP-الحاسوب>:4000/api/v1 # جهاز فعلي على نفس الشبكة
+```
+
+ملاحظة Android: الاتصال بخادم HTTP محلي يتطلب السماح بحركة غير مشفرة في بناء التطوير (`android:usesCleartextTraffic="true"` في `AndroidManifest.xml` للتصحيح فقط)، أو تشغيل الخادم خلف HTTPS.
+
+## الاختبار
+
+```bash
+cd mobile/atlas_shared && flutter test     # 7 اختبارات: التنسيق، التوطين، عقد عميل API والأخطاء
+cd mobile/customer_app && flutter test     # الدخول بحساب عرض ← الرئيسية بالعربية RTL، تبديل LTR، تقليل الحركة
+cd mobile/courier_app && flutter test      # المهام ← مسح رمز خاطئ (فشل + إعادة محاولة)، الطابور دون اتصال والمزامنة
+# اختبار عقد حي لرحلة مندوب كاملة مقابل الخادم الحقيقي:
+npm run api:reset && cd mobile/courier_app && LIVE_API=http://localhost:4000/api/v1 flutter test test/live_api_test.dart
+```
+
+## ما تم التحقق منه وما لم يُتحقق منه
+
+- تم: `flutter analyze` بلا ملاحظات للمشاريع الثلاثة، كل الاختبارات أعلاه ناجحة، بناء الويب `flutter build web --release` للتطبيقين، وتشغيله مقابل خادم المحاكاة مع لقطات شاشة (الدخول، الرئيسية، التتبع، المهام، تفاصيل المهمة).
+- لم يتم في بيئة التسليم: بناء ملفات APK/AAB (لا توجد أدوات Android SDK) أو IPA (يتطلب macOS وXcode). المشروعان يحتويان مجلدي `android/` و`ios/` القياسيين من `flutter create` ولا يستخدمان أي إضافات أصلية غير `shared_preferences`، لذا يُتوقع أن يُبنيا مباشرة على جهاز مطوّر مثبّت عليه الأدوات.
+- الكاميرا لمسح QR محاكاة (اختيار رمز أو إدخال يدوي). لتفعيل كاميرا حقيقية تُضاف حزمة مسح (مثل `mobile_scanner`) مع أذونات الكاميرا في `AndroidManifest.xml` و`Info.plist`، وتبقى حالات النجاح/الفشل/إعادة المحاولة في `ScanPanel` كما هي.

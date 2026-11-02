@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm }
       - run: npm ci || npm install --no-audit --no-fund
@@ -27,6 +28,11 @@ jobs:
         working-directory: apps/option-c
         env: { BASE_PATH: /atlas-link-prototypes/option-c }
         run: npx next build
+      - name: Build Option C v1 baseline (for before/after)
+        run: |
+          mkdir -p baseline && git archive option-c-v1-baseline apps/option-c | tar -x -C baseline
+          mv baseline/apps/option-c apps/option-c-v1 && sed -i 's/"@medlog\/option-c"/"@medlog\/option-c-v1"/' apps/option-c-v1/package.json
+          cd apps/option-c-v1 && BASE_PATH=/atlas-link-prototypes/option-c-v1 npx next build
       - name: Assemble site
         run: |
           mkdir -p site/foundation
@@ -35,6 +41,7 @@ jobs:
           cp -r apps/option-a/out site/option-a
           cp -r apps/option-b/out site/option-b
           cp -r apps/option-c/out site/option-c
+          cp -r apps/option-c-v1/out site/option-c-v1
           touch site/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

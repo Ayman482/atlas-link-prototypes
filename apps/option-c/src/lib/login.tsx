@@ -66,7 +66,7 @@ export function Login({ title, subtitle, accounts, allowed }: { title: string; s
   );
 }
 
-const AH = ['linear-gradient(135deg,#0f6b66,#2f8f83)', 'linear-gradient(135deg,#d9785c,#e9a87c)', 'linear-gradient(135deg,#8a74c4,#b3a2e6)', 'linear-gradient(135deg,#b8914a,#d8b46c)', 'linear-gradient(135deg,#3a6aa6,#86aee6)', 'linear-gradient(135deg,#3f8f6b,#77c79c)'];
+const AH = ['linear-gradient(135deg,#087F70,#0B9A87)', 'linear-gradient(135deg,#E6A65D,#F2C994)', 'linear-gradient(135deg,#173B4D,#3D6B80)', 'linear-gradient(135deg,#C98A3E,#E6A65D)', 'linear-gradient(135deg,#1F5F99,#5E8FC0)', 'linear-gradient(135deg,#1C7A43,#4FA874)'];
 /** لوحة هادئة: نبض قلب يُرسم ببطء، صندوق تبريد يتنفّس، دوائر ناعمة تطفو */
 function Hero() {
   const { lang } = useApp();
@@ -74,7 +74,7 @@ function Hero() {
     <svg viewBox="0 0 600 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       {[[480, 40, 90], [90, 210, 70], [300, -20, 60]].map(([x, y, r], i) => <circle key={i} cx={x} cy={y} r={r} fill="#fff" opacity=".08"><animate attributeName="r" values={`${r};${r + 14};${r}`} dur={`${7 + i * 2}s`} repeatCount="indefinite" /></circle>)}
       <polyline points="0,120 150,120 180,120 200,80 225,165 250,95 270,120 600,120" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" opacity=".9" strokeDasharray="900" strokeDashoffset="900"><animate attributeName="stroke-dashoffset" values="900;0;0" keyTimes="0;.6;1" dur="5s" repeatCount="indefinite" /></polyline>
-      <g transform="translate(430 70)"><rect width="110" height="78" rx="14" fill="#fff" opacity=".95"><animate attributeName="opacity" values=".95;.8;.95" dur="4s" repeatCount="indefinite" /></rect><rect y="18" width="110" height="3" fill="#0f6b66" opacity=".25" /><rect x="40" y="34" width="30" height="26" rx="6" fill="#0f6b66" opacity=".12" /><path d="M55 38v14" stroke="#0f6b66" strokeWidth="3" strokeLinecap="round" /><circle cx="55" cy="54" r="5" fill="#d9785c" /><text x="55" y="-8" textAnchor="middle" fontSize="13" fill="#fff" fontFamily="IBM Plex Mono">4.6°C</text></g>
+      <g transform="translate(430 70)"><rect width="110" height="78" rx="14" fill="#fff" opacity=".95"><animate attributeName="opacity" values=".95;.8;.95" dur="4s" repeatCount="indefinite" /></rect><rect y="18" width="110" height="3" fill="#087F70" opacity=".25" /><rect x="40" y="34" width="30" height="26" rx="6" fill="#087F70" opacity=".12" /><path d="M55 38v14" stroke="#087F70" strokeWidth="3" strokeLinecap="round" /><circle cx="55" cy="54" r="5" fill="#E6A65D" /><text x="55" y="-8" textAnchor="middle" fontSize="13" fill="#fff" fontFamily="IBM Plex Mono">4.6°C</text></g>
     </svg>
     <div><b>{lang === 'ar' ? 'عناية بكل عينة كما لو كانت الوحيدة' : 'Care for every sample as if it were the only one'}</b><p style={{ opacity: .9 }}>{lang === 'ar' ? 'سلسلة تبريد موثّقة · حيازة لا تنقطع · شفافية للمختبر والعميل' : 'Documented cold chain · unbroken custody · transparency for lab and customer'}</p></div>
   </div>;

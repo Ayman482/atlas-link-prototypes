@@ -2,8 +2,9 @@
 // العمليات: برج التحكم، الخريطة، الشحنات، الإنشاء، التفاصيل، التوزيع، المسارات، الأرجل، المندوبون، المركبات، الشركاء (A02–A12)
 import React, { useEffect, useMemo, useState } from 'react';
 import { useApp, useQ, useList, go, transport } from '@/lib/store';
-import { Btn, ConfirmBtn, DataTable, DL, Empty, ErrorBox, FormFields, Kpis, KsaMap, Loading, Mono, Page, Pill, Section, Sim, Tabs, TempChart, Timeline, label, useFmt, validate, type FieldDef } from '@/lib/ui';
+import { Btn, ConfirmBtn, cx, DataTable, DL, Empty, ErrorBox, FormFields, Kpis, KsaMap, Loading, Mono, Page, Pill, Section, Sim, Tabs, TempChart, Timeline, label, useFmt, validate, type FieldDef } from '@/lib/ui';
 import { ActionForm, ShipLink, localNow, opts, useLookups } from './common';
+import { motion } from '@/lib/motion';
 
 const STATUSES = ['draft', 'confirmed', 'pickup_scheduled', 'collected', 'in_transit', 'at_handover', 'delivered', 'failed', 'return_pending', 'returned', 'cancelled', 'exception'];
 const THERMAL = ['chilled', 'frozen', 'ambient'];
@@ -48,7 +49,7 @@ export function ControlTower() {
       ]} />
       <div className="grid wide-narrow">
         <Section title={t('nav.map')} actions={<a href="#/map" className="btn ghost">{t('common.view')}</a>}>
-          <KsaMap height={420} cities={q.data.cities} points={q.data.map.map((m: any) => ({ id: m.id, lat: m.lat, lng: m.lng, kind: m.dataKind, alert: m.hasAlert, label: `${m.trackingNo} · ${label(lang, m.status)} · ${label(lang, m.dataKind)}` }))} onPick={(id) => go('/shipments/' + id)} />
+          <KsaMap height={420} cities={q.data.cities} points={q.data.map.map((m: any) => ({ id: m.id, lat: m.lat, lng: m.lng, kind: m.dataKind, alert: m.hasAlert, label: `${m.trackingNo} · ${label(lang, m.status)} · ${label(lang, m.dataKind)}`, meta: { trackingNo: m.trackingNo, status: m.status, at: m.at, origin: m.origin, dest: m.dest, source: m.source, thermalClass: m.thermalClass } }))} onPick={(id) => go('/shipments/' + id)} />
         </Section>
         <Section title={<>{lang === 'ar' ? 'التنبيهات' : 'Alerts'} <span className="count">{q.data.alerts.length}</span></>} actions={<Btn kind="ghost" onClick={() => run('delay.runRules', {}, { success: lang === 'ar' ? 'تم تشغيل قواعد التأخير' : 'Delay rules ran' })}>{lang === 'ar' ? 'تشغيل قواعد التأخير' : 'Run delay rules'}</Btn>}>
           {q.data.alerts.length === 0 ? <Empty text={lang === 'ar' ? 'لا تنبيهات مفتوحة' : 'No open alerts'} /> : <ul className="alerts" style={{ maxHeight: 440, overflow: 'auto' }}>
@@ -84,7 +85,7 @@ export function MapScreen() {
     <Page title={t('nav.map')} sub={lang === 'ar' ? 'آخر موقع مؤكد لكل شحنة مع تمييز حداثة البيانات (OPS-004). لا يُعرض موقع حي أثناء الرحلات الجوية.' : 'Last confirmed position per shipment, marked by data freshness (OPS-004). No live position is shown during flights.'}
       actions={<select aria-label="freshness" value={kind} onChange={(e) => setKind(e.target.value)}><option value="">{t('common.all')}</option>{['live', 'delayed', 'stale', 'inferred', 'planned'].map((k) => <option key={k} value={k}>{label(lang, k)}</option>)}</select>}>
       <div className="grid wide-narrow">
-        <Section><KsaMap height={620} cities={q.data.cities} points={pts.map((m: any) => ({ id: m.id, lat: m.lat, lng: m.lng, kind: m.dataKind, alert: m.hasAlert, label: m.trackingNo }))} onPick={(id) => go('/shipments/' + id)} /></Section>
+        <Section><KsaMap height={620} cities={q.data.cities} points={pts.map((m: any) => ({ id: m.id, lat: m.lat, lng: m.lng, kind: m.dataKind, alert: m.hasAlert, label: `${m.trackingNo} · ${label(lang, m.dataKind)}`, meta: { trackingNo: m.trackingNo, status: m.status, at: m.at, origin: m.origin, dest: m.dest, source: m.source, thermalClass: m.thermalClass } }))} onPick={(id) => go('/shipments/' + id)} /></Section>
         <Section title={`${pts.length} ${lang === 'ar' ? 'شحنة' : 'shipments'}`} flush>
           <DataTable rows={pts} pageSize={14} onRow={(r: any) => go('/shipments/' + r.id)} search={(r: any) => r.trackingNo} cols={[
             { key: 'trackingNo', label: t('ship.tracking'), mono: true },
@@ -106,7 +107,18 @@ export function ShipmentsList() {
   return (
     <Page title={t('nav.shipments')} sub={initialStatus ? <>{t('common.filter')}: <Pill v={initialStatus} /> <a href="#/shipments">{t('common.clear')}</a></> : undefined} actions={<a className="btn primary" href="#/shipments/new">{t('nav.newShipment')}</a>}>
       <Section flush>
-        <DataTable rows={list.data ? rows : null} csvName="shipments" onRow={(s: any) => go('/shipments/' + s.id)} search={(s: any) => `${s.trackingNo} ${L.org(s.organizationId)} ${s.originCity} ${s.destCity}`}
+        <DataTable rows={list.data ? rows : null} csvName="shipments" onRow={(s: any) => go('/shipments/' + s.id)}
+          bulk={[{ label: lang === 'ar' ? 'نسخ أرقام التتبع' : 'Copy tracking numbers', run: async (sel: any[]) => { try { await navigator.clipboard.writeText(sel.map((r) => r.trackingNo).join('\n')); } catch { /* المتصفح قد يمنع الحافظة */ } } }]}
+          expand={(s: any) => <dl className="tldetail">
+            <div><dt>{lang === 'ar' ? 'المسار' : 'Route'}</dt><dd>{L.city(s.originCity)} {lang === 'ar' ? '←' : '→'} {L.city(s.destCity)} · {label(lang, s.mode)}</dd></div>
+            <div><dt>{lang === 'ar' ? 'نافذة الاستلام' : 'Pickup window'}</dt><dd>{f.dt(s.pickupWindowStart)} – {f.dt(s.pickupWindowEnd)}</dd></div>
+            <div><dt>{lang === 'ar' ? 'التسليم قبل' : 'Deliver by'}</dt><dd>{f.dt(s.deliverBy)}</dd></div>
+            <div><dt>{lang === 'ar' ? 'الوصول المتوقع' : 'ETA'}</dt><dd>{s.eta?.at ? <>{f.dt(s.eta.at)} <Pill v={s.eta.confidence} /></> : '—'}</dd></div>
+            <div><dt>{lang === 'ar' ? 'آخر موقع مؤكد' : 'Last confirmed fix'}</dt><dd>{s.lastPosition ? <>{f.dt(s.lastPosition.at)} · {label(lang, s.lastPosition.source)}</> : (lang === 'ar' ? 'لا يوجد بعد' : 'None yet')}</dd></div>
+            <div><dt>{lang === 'ar' ? 'السعر' : 'Price'}</dt><dd>{f.sar(s.priceTotal)}</dd></div>
+            <div><a className="btn" href={'#/shipments/' + s.id}>{lang === 'ar' ? 'فتح الشحنة' : 'Open shipment'}</a></div>
+          </dl>}
+          search={(s: any) => `${s.trackingNo} ${L.org(s.organizationId)} ${s.originCity} ${s.destCity}`}
           filters={[
             { key: 'status', label: t('common.status'), options: STATUSES.map((s) => ({ value: s, label: label(lang, s) })), get: (s: any) => s.status },
             { key: 'thermal', label: t('ship.thermalClass'), options: THERMAL.map((s) => ({ value: s, label: label(lang, s) })), get: (s: any) => s.thermalClass },
@@ -169,6 +181,8 @@ export function ShipmentCreate({ portal }: { params?: any; portal?: { orgId: str
     if (step === 2 && Date.parse(v.pickupWindowStart) < Date.now() - 15 * 60_000) errs.pickupWindowStart = lang === 'ar' ? 'لا يمكن الجدولة في الماضي' : 'Cannot schedule in the past';
     setE(errs); return !Object.keys(errs).length;
   };
+  // تحقق مباشر: بعد أول محاولة يُعاد التحقق عند كل تعديل فتختفي الأخطاء فور تصحيحها
+  useEffect(() => { if (Object.keys(e).length) check(); }, [v]); // eslint-disable-line
   useEffect(() => {
     if (step !== 3) return; setQuote(null); setQErr(null);
     transport().exec('shipment.quote', { organizationId: v.organizationId, thermalClass: v.thermalClass, serviceLevel: v.serviceLevel, senderAddressId: v.senderAddressId, receiverAddressId: v.receiverAddressId, weightKg: weight, dedicatedBox: v.dedicatedBox }).then(setQuote).catch((err: any) => setQErr(err.message?.[lang] ?? String(err)));
@@ -180,7 +194,7 @@ export function ShipmentCreate({ portal }: { params?: any; portal?: { orgId: str
   const ITEMS = [['BLOOD_TUBES', 'أنابيب دم', 'Blood tubes'], ['TISSUE_BIOPSY', 'خزعة نسيجية', 'Tissue biopsy'], ['SWAB_PCR', 'مسحة PCR', 'PCR swab'], ['URINE_CULTURE', 'مزرعة بول', 'Urine culture'], ['CSF_SAMPLE', 'عينة سائل نخاعي', 'CSF sample'], ['SERUM_ALIQUOT', 'عينة مصل', 'Serum aliquot']];
   return (
     <Page title={t('ship.create')} crumbs={[{ label: t('nav.shipments'), href: '#/shipments' }, { label: t('nav.newShipment') }]} sub={portal ? undefined : (lang === 'ar' ? 'إنشاء نيابة عن العميل — يُسجَّل في سجل التدقيق' : 'Created on behalf of the customer — recorded in the audit log')}>
-      <div className="steps">{steps.map((s, i) => <span key={i} className={i === step ? 'on' : i < step ? 'done' : ''}>{i + 1}. {s}</span>)}</div>
+      <ol className="steps" aria-label={lang === 'ar' ? `الخطوة ${step + 1} من ${steps.length}` : `Step ${step + 1} of ${steps.length}`}>{steps.map((s, i) => <motion.li layout key={i} aria-current={i === step ? 'step' : undefined} className={i === step ? 'on' : i < step ? 'done' : ''}>{s}</motion.li>)}</ol>
       <Section>
         {step < 3 && <FormFields fields={F[step]} values={v} set={(n, val) => { set(n, val); if (n === 'organizationId') setV((o) => ({ ...o, organizationId: val, branchId: '', senderAddressId: '' })); }} errors={e} />}
         {step === 1 && <div className="page">
@@ -300,12 +314,12 @@ export function ShipmentDetail({ params, portal }: { params: Record<string, stri
           <TempChart report={rep.data} />
           <Kpis items={[{ label: lang === 'ar' ? 'القراءات' : 'Readings', value: f.num(rep.data.summary.count) }, { label: t('ship.inRange') + ' %', value: rep.data.summary.inRangePct ?? '—', tone: rep.data.summary.inRangePct != null && rep.data.summary.inRangePct < 100 ? 'warn' : 'good' }, { label: lang === 'ar' ? 'دقائق الفجوات' : 'Gap minutes', value: f.num(rep.data.summary.gapMinutes), tone: rep.data.summary.gapMinutes ? 'warn' : undefined }, { label: lang === 'ar' ? 'قراءات متأخرة' : 'Backfilled', value: f.num(rep.data.summary.backfilled) }, { label: lang === 'ar' ? 'أدنى/أعلى' : 'Min/Max', value: `${f.temp(rep.data.summary.minC)} / ${f.temp(rep.data.summary.maxC)}` }]} />
           {rep.data.gaps.length > 0 && <DataTable rows={rep.data.gaps.map((g: any, i: number) => ({ id: String(i), ...g }))} pageSize={5} cols={[{ key: 'from', label: t('common.from'), render: (g: any) => f.dt(g.from) }, { key: 'to', label: t('common.to'), render: (g: any) => f.dt(g.to) }, { key: 'minutes', label: lang === 'ar' ? 'الدقائق' : 'Minutes', num: true }, { key: 'reason', label: t('common.reason'), render: (g: any) => x(g.reason) }]} />}
-          {d.data.excursions.map((e: any) => <div key={e.id} className="notice crit">{lang === 'ar' ? 'انحراف' : 'Excursion'} · {lang === 'ar' ? 'ذروة' : 'peak'} {f.temp(e.peakC)} · {f.dt(e.startedAt)} → {e.endedAt ? f.dt(e.endedAt) : (lang === 'ar' ? 'مستمر' : 'ongoing')} · <Pill v={e.status} /> {!portal && <a href="#/excursions">{t('common.open')}</a>}</div>)}
+          {d.data.excursions.map((e: any) => <div key={e.id} className="notice crit">{lang === 'ar' ? 'انحراف' : 'Excursion'} · {lang === 'ar' ? 'ذروة' : 'peak'} {f.temp(e.peakC)} · {f.dt(e.startedAt)} {lang === 'ar' ? '←' : '→'} {e.endedAt ? f.dt(e.endedAt) : (lang === 'ar' ? 'مستمر' : 'ongoing')} · <Pill v={e.status} /> {!portal && <a href="#/excursions">{t('common.open')}</a>}</div>)}
           <p className="muted">{x(rep.data.disclaimer)}</p>
         </> : rep.error ? <ErrorBox error={rep.error} /> : <Loading />}
       </Section>}
       {tab === 'custody' && <Section flush><DataTable rows={d.data.timeline.filter((e: any) => e.kind === 'custody').map((e: any, i: number) => ({ id: String(i), ...e }))} empty={lang === 'ar' ? 'لا أحداث حيازة بعد' : 'No custody events yet'} cols={[{ key: 'at', label: lang === 'ar' ? 'وقت الحدث' : 'Occurred', render: (e: any) => f.dt(e.at) }, { key: 'receivedAt', label: lang === 'ar' ? 'وقت الاستلام' : 'Received', render: (e: any) => f.dt(e.receivedAt) }, { key: 'title', label: lang === 'ar' ? 'النقل' : 'Transfer', render: (e: any) => x(e.title) }, { key: 'detail', label: lang === 'ar' ? 'الدليل' : 'Evidence' }, { key: 'source', label: lang === 'ar' ? 'المصدر' : 'Source', mono: true }]} /></Section>}
-      {tab === 'legs' && <Section flush><DataTable rows={d.data.legs} cols={[{ key: 'mode', label: lang === 'ar' ? 'الوسيلة' : 'Mode', render: (l: any) => label(lang, l.mode) }, { key: 'r', label: lang === 'ar' ? 'من/إلى' : 'From/to', render: (l: any) => `${L.city(l.originCity)} → ${L.city(l.destCity)}` }, { key: 'who', label: lang === 'ar' ? 'المنفذ' : 'Operator', render: (l: any) => x(l.partner) || x(l.courier) || '—' }, { key: 'flightNo', label: lang === 'ar' ? 'الرحلة' : 'Flight', render: (l: any) => l.flightNo ?? '—' }, { key: 'scheduledDeparture', label: lang === 'ar' ? 'المغادرة المخططة' : 'Sched. departure', render: (l: any) => f.dt(l.scheduledDeparture) }, { key: 'actualArrival', label: lang === 'ar' ? 'الوصول الفعلي' : 'Actual arrival', render: (l: any) => f.dt(l.actualArrival) }, { key: 'status', label: t('common.status'), render: (l: any) => <Pill v={l.status} /> }]} /></Section>}
+      {tab === 'legs' && <Section flush><DataTable rows={d.data.legs} cols={[{ key: 'mode', label: lang === 'ar' ? 'الوسيلة' : 'Mode', render: (l: any) => label(lang, l.mode) }, { key: 'r', label: lang === 'ar' ? 'من/إلى' : 'From/to', render: (l: any) => `${L.city(l.originCity)} ${lang === 'ar' ? '←' : '→'} ${L.city(l.destCity)}` }, { key: 'who', label: lang === 'ar' ? 'المنفذ' : 'Operator', render: (l: any) => x(l.partner) || x(l.courier) || '—' }, { key: 'flightNo', label: lang === 'ar' ? 'الرحلة' : 'Flight', render: (l: any) => l.flightNo ?? '—' }, { key: 'scheduledDeparture', label: lang === 'ar' ? 'المغادرة المخططة' : 'Sched. departure', render: (l: any) => f.dt(l.scheduledDeparture) }, { key: 'actualArrival', label: lang === 'ar' ? 'الوصول الفعلي' : 'Actual arrival', render: (l: any) => f.dt(l.actualArrival) }, { key: 'status', label: t('common.status'), render: (l: any) => <Pill v={l.status} /> }]} /></Section>}
       {tab === 'pod' && <div className="grid">
         <Section title={t('ship.pod')}>{d.data.pod ? <DL items={[[t('courier.recipientName'), d.data.pod.recipientName], [lang === 'ar' ? 'وقت التسليم' : 'Delivered at', f.dt(d.data.pod.deliveredAt)], [lang === 'ar' ? 'التوقيع' : 'Signature', <Mono key="s">{d.data.pod.signature}</Mono>], [lang === 'ar' ? 'الصورة' : 'Photo', d.data.pod.photoRef ?? '—'], [t('common.note'), d.data.pod.notes || '—']]} /> : <Empty text={lang === 'ar' ? 'لم تُسلّم بعد' : 'Not delivered yet'} />}
           {d.data.attempts.map((a: any) => <div key={a.id} className="notice warn">{lang === 'ar' ? 'محاولة فاشلة' : 'Failed attempt'} · {f.dt(a.attemptedAt)} · {a.reasonCode} · {a.notes}</div>)}</Section>
@@ -383,22 +397,58 @@ export function Dispatch() {
 
 // ================= A08 المسارات =================
 export function RoutesScreen() {
-  const { t, lang, run } = useApp(); const f = useFmt(); const L = useLookups();
+  const { t, lang, run, toast } = useApp(); const f = useFmt(); const L = useLookups();
   const routes = useList('routes', { sort: 'serviceDate', dir: 'desc' }); const stops = useList('routeStops');
   const ships = useList('shipments');
-  const [open, setOpen] = useState<string | null>(null); const [order, setOrder] = useState<string[]>([]);
+  const [open, setOpen] = useState<string | null>(null);
+  const [hist, setHist] = useState<string[][]>([]); // سجل التراجع: كل عنصر ترتيب سابق
+  const [order, setOrder] = useState<string[] | null>(null);
+  const [drag, setDrag] = useState<string | null>(null); const [over, setOver] = useState<string | null>(null); const [err, setErr] = useState<string | null>(null);
   const r = (routes.data?.items ?? []).find((x: any) => x.id === open);
-  const st = (stops.data?.items ?? []).filter((s: any) => s.routeId === open).sort((a: any, b: any) => (order.length ? order.indexOf(a.id) - order.indexOf(b.id) : a.seq - b.seq));
+  const base = (stops.data?.items ?? []).filter((s: any) => s.routeId === open).sort((a: any, b: any) => a.seq - b.seq);
+  const st = order ? order.map((id) => base.find((s: any) => s.id === id)).filter(Boolean) : base;
   const tn = (id: string) => (ships.data?.items ?? []).find((s: any) => s.id === id)?.trackingNo ?? id;
-  const move = (i: number, d: number) => { const ids = st.map((s: any) => s.id); const j = i + d; if (j < 0 || j >= ids.length) return; [ids[i], ids[j]] = [ids[j], ids[i]]; setOrder(ids); };
+  const editable = r && ['planned', 'dispatched', 'in_progress'].includes(r.status);
+  /** قواعد التحقق (مطابقة للخادم): التوقفات المنجزة ثابتة في موضعها، واستلام كل شحنة قبل تسليمها */
+  const check = (ids: string[]) => {
+    const seq = ids.map((id) => base.find((s: any) => s.id === id));
+    if (seq.some((s: any, i: number) => s.status === 'done' && base[i].id !== s.id)) return lang === 'ar' ? 'التوقفات المنجزة ثابتة في موضعها ولا يمكن تحريك غيرها فوقها' : 'Completed stops are locked in place';
+    for (let i = 0; i < seq.length; i++) for (const sid of seq[i].shipmentIds) if (seq[i].stopType === 'delivery') { const pi = seq.findIndex((x: any) => x.stopType === 'pickup' && x.shipmentIds.includes(sid)); if (pi > i) return lang === 'ar' ? `لا يمكن تسليم ${tn(sid)} قبل استلامها` : `${tn(sid)} cannot be delivered before it is picked up`; }
+    return null;
+  };
+  const apply = (ids: string[]) => { const e = check(ids); if (e) { setErr(e); return false; } setErr(null); setHist([...hist, st.map((s: any) => s.id)]); setOrder(ids); return true; };
+  const moveTo = (id: string, target: number) => { const ids = st.map((s: any) => s.id).filter((x: string) => x !== id); ids.splice(target, 0, id); apply(ids); };
+  const undo = () => { if (!hist.length) return; const prev = hist[hist.length - 1]; setHist(hist.slice(0, -1)); setOrder(prev.join() === base.map((s: any) => s.id).join() ? null : prev); setErr(null); };
+  useEffect(() => { const k = (e: KeyboardEvent) => { if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z' && hist.length) { e.preventDefault(); undo(); } }; window.addEventListener('keydown', k); return () => window.removeEventListener('keydown', k); });
+  const save = async () => { if (!order || !r) return; await run('route.reorder', { routeId: r.id, order }, { success: lang === 'ar' ? 'حُفظ ترتيب التوقفات' : 'Stop order saved' }); setOrder(null); setHist([]); };
+  const dirty = !!order && order.join() !== base.map((s: any) => s.id).join();
   return (
-    <Page title={t('nav.routes')} sub={lang === 'ar' ? 'مسارات متعددة التوقفات لكل مندوب ويوم (RTE-002)' : 'Multi-stop routes per courier and day (RTE-002)'}>
-      <div className="grid wide-narrow">
-        <Section flush><DataTable rows={routes.data?.items ?? null} onRow={(x: any) => { setOpen(x.id); setOrder([]); }} search={(x: any) => x.code} filters={[{ key: 'st', label: t('common.status'), options: ['planned', 'dispatched', 'in_progress', 'completed'].map((s) => ({ value: s, label: label(lang, s) })), get: (x: any) => x.status }]} cols={[
+    <Page title={t('nav.routes')} sub={lang === 'ar' ? 'مسارات متعددة التوقفات لكل مندوب ويوم (RTE-002) — اسحب التوقفات لإعادة ترتيبها' : 'Multi-stop routes per courier and day (RTE-002) — drag stops to reorder'}>
+      <div className="grid">
+        <Section flush><DataTable rows={routes.data?.items ?? null} onRow={(x: any) => { setOpen(x.id); setOrder(null); setHist([]); setErr(null); }} search={(x: any) => x.code} filters={[{ key: 'st', label: t('common.status'), options: ['planned', 'dispatched', 'in_progress', 'completed'].map((s) => ({ value: s, label: label(lang, s) })), get: (x: any) => x.status }]} cols={[
           { key: 'code', label: lang === 'ar' ? 'المسار' : 'Route', mono: true }, { key: 'serviceDate', label: t('common.date'), render: (x: any) => f.dt(x.serviceDate) }, { key: 'courier', label: lang === 'ar' ? 'المندوب' : 'Courier', render: (x: any) => L.courier(x.courierId) }, { key: 'stops', label: lang === 'ar' ? 'التوقفات' : 'Stops', num: true, render: (x: any) => (stops.data?.items ?? []).filter((s: any) => s.routeId === x.id).length }, { key: 'plannedDistanceKm', label: lang === 'ar' ? 'كم' : 'km', num: true }, { key: 'status', label: t('common.status'), render: (x: any) => <Pill v={x.status} /> },
         ]} /></Section>
-        <Section title={r ? <Mono>{r.code}</Mono> : (lang === 'ar' ? 'اختر مساراً' : 'Select a route')} actions={r && <>{order.length > 0 && <Btn kind="primary" onClick={async () => { await run('route.reorder', { routeId: r.id, order }); setOrder([]); }}>{lang === 'ar' ? 'حفظ الترتيب' : 'Save order'}</Btn>}{r.status === 'planned' && <Btn onClick={() => run('route.dispatch', { routeId: r.id })}>{lang === 'ar' ? 'إرسال المسار' : 'Dispatch'}</Btn>}</>}>
-          {!r ? <Empty /> : <ol className="timeline">{st.map((s: any, i: number) => <li key={s.id} className={s.status === 'done' ? 'k-pod' : ''}><span className="tdot" /><div className="row" style={{ justifyContent: 'space-between' }}><div><b>{i + 1}. {(dictStop as any)[s.stopType]?.[lang]}</b> · {s.shipmentIds.map((x: string) => <ShipLink key={x} id={x} no={tn(x)} />)}<div className="muted">{L.addr(s.addressId) ? (L.addr(s.addressId).label[lang]) : ''} · {f.dt(s.plannedAt)}</div></div><div className="row"><Pill v={s.status} /><Btn kind="ghost" onClick={() => move(i, -1)} aria-label="up" disabled={s.status === 'done'}>▲</Btn><Btn kind="ghost" onClick={() => move(i, 1)} aria-label="down" disabled={s.status === 'done'}>▼</Btn></div></div></li>)}</ol>}
+        <Section title={r ? <Mono>{r.code}</Mono> : (lang === 'ar' ? 'اختر مساراً' : 'Select a route')} actions={r && <>
+          <Btn kind="ghost" disabled={!hist.length} onClick={undo} title="Ctrl+Z">{lang === 'ar' ? 'تراجع' : 'Undo'}</Btn>
+          {dirty && <Btn kind="primary" onClick={save}>{lang === 'ar' ? 'حفظ الترتيب' : 'Save order'}</Btn>}
+          {r.status === 'planned' && <Btn disabled={dirty} onClick={() => run('route.dispatch', { routeId: r.id })}>{lang === 'ar' ? 'إرسال المسار' : 'Dispatch'}</Btn>}
+        </>}>
+          {!r ? <Empty text={lang === 'ar' ? 'اختر مساراً من القائمة لعرض توقفاته' : 'Select a route to see its stops'} /> : <>
+            {err && <div className="state err" role="alert">{err}</div>}
+            {dirty && <div className="notice warn" role="status">{lang === 'ar' ? 'ترتيب غير محفوظ — احفظه أو تراجع' : 'Unsaved order — save or undo'}</div>}
+            <p className="muted" style={{ fontSize: '.82rem' }}>{editable ? (lang === 'ar' ? 'اسحب المقبض أو ركّز عليه واستخدم السهمين للأعلى والأسفل. Ctrl+Z للتراجع.' : 'Drag the handle, or focus it and use the up/down arrows. Ctrl+Z to undo.') : (lang === 'ar' ? 'المسار مكتمل؛ لا يمكن تعديل الترتيب.' : 'Route is completed; order is locked.')}</p>
+            <ol className="timeline dnd" aria-label={lang === 'ar' ? 'توقفات المسار' : 'Route stops'}>{st.map((s: any, i: number) => { const locked = !editable || s.status === 'done'; return <motion.li layout transition={{ duration: 0.22 }} key={s.id} className={cx(s.status === 'done' && 'k-pod', locked && 'locked', drag === s.id && 'dragging', over === s.id && 'over')}
+              draggable={!locked} onDragStart={(e) => { setDrag(s.id); (e as any).dataTransfer?.setData('text/plain', s.id); }} onDragEnd={() => { setDrag(null); setOver(null); }}
+              onDragOver={(e) => { if (drag) { e.preventDefault(); setOver(s.id); } }} onDrop={(e) => { e.preventDefault(); if (drag && drag !== s.id) moveTo(drag, i); setDrag(null); setOver(null); }}>
+              <span className="tdot" /><div className="row" style={{ justifyContent: 'space-between', flexWrap: 'nowrap' }}>
+                <div className="row" style={{ flexWrap: 'nowrap', alignItems: 'flex-start' }}>
+                  {!locked && <button className="grip btn ghost" aria-label={(lang === 'ar' ? 'نقل التوقف ' : 'Move stop ') + (i + 1)} onKeyDown={(e) => { if (e.key === 'ArrowUp' && i > 0) { e.preventDefault(); moveTo(s.id, i - 1); } if (e.key === 'ArrowDown' && i < st.length - 1) { e.preventDefault(); moveTo(s.id, i + 1); } }}>⋮⋮</button>}
+                  <div><b>{i + 1}. {(dictStop as any)[s.stopType]?.[lang]}</b> · {s.shipmentIds.map((x: string) => <ShipLink key={x} id={x} no={tn(x)} />)}<div className="muted">{L.addr(s.addressId) ? (L.addr(s.addressId).label[lang]) : ''} · {f.dt(s.plannedAt)}</div></div>
+                </div>
+                <Pill v={s.status} />
+              </div>
+            </motion.li>; })}</ol>
+          </>}
         </Section>
       </div>
     </Page>
@@ -406,15 +456,27 @@ export function RoutesScreen() {
 }
 const dictStop = { pickup: { ar: 'استلام', en: 'Pickup' }, delivery: { ar: 'تسليم', en: 'Delivery' }, handover: { ar: 'تسليم لشريك', en: 'Handover' }, warehouse: { ar: 'مستودع', en: 'Warehouse' } };
 
+/** تعارضات مزامنة المندوبين (RTE-003 / NFR-009): قرار العمليات بقبول أو رفض إجراء سُجّل دون اتصال */
+function OfflineConflicts() {
+  const { lang, run } = useApp(); const f = useFmt(); const L = useLookups(); const c = useList('offlineConflicts', { sort: 'receivedAt', dir: 'desc' }); const sh = useList('shipments');
+  const tn = (id: string) => (sh.data?.items ?? []).find((s: any) => s.id === id)?.trackingNo ?? id;
+  return <Section title={lang === 'ar' ? 'تعارضات المزامنة دون اتصال' : 'Offline sync conflicts'} flush>
+    <DataTable rows={c.data?.items ?? null} empty={lang === 'ar' ? 'لا تعارضات' : 'No conflicts'} filters={[{ key: 'r', label: lang === 'ar' ? 'القرار' : 'Resolution', options: ['pending', 'accepted', 'rejected'].map((v) => ({ value: v, label: label(lang, v) })), get: (r: any) => r.resolution }]}
+      expand={(r: any) => <dl className="tldetail"><div><dt>{lang === 'ar' ? 'السبب' : 'Reason'}</dt><dd>{lang === 'en' && r.reasonEn ? r.reasonEn : r.reason}</dd></div><div><dt>{lang === 'ar' ? 'وقت الجهاز' : 'Device time'}</dt><dd>{f.dt(r.occurredAt)}</dd></div><div><dt>{lang === 'ar' ? 'وقت الاستلام' : 'Received'}</dt><dd>{f.dt(r.receivedAt)}</dd></div><div><dt>{lang === 'ar' ? 'معرّف الإجراء' : 'Client action ID'}</dt><dd className="mono">{r.clientActionId}</dd></div></dl>}
+      cols={[{ key: 'courierId', label: lang === 'ar' ? 'المندوب' : 'Courier', render: (r: any) => L.courier(r.courierId) }, { key: 'sh', label: lang === 'ar' ? 'الشحنة' : 'Shipment', render: (r: any) => <ShipLink id={r.shipmentId} no={tn(r.shipmentId)} /> }, { key: 'action', label: lang === 'ar' ? 'الإجراء' : 'Action' }, { key: 'occurredAt', label: lang === 'ar' ? 'وقت الجهاز' : 'Device time', render: (r: any) => f.dt(r.occurredAt) }, { key: 'resolution', label: lang === 'ar' ? 'القرار' : 'Resolution', render: (r: any) => <Pill v={r.resolution} /> },
+        { key: 'a', label: lang === 'ar' ? 'الإجراءات' : 'Actions', render: (r: any) => r.resolution === 'pending' ? <div className="row"><ActionForm kind="primary" label={lang === 'ar' ? 'قبول' : 'Accept'} title={lang === 'ar' ? 'قبول الإجراء المسجّل دون اتصال' : 'Accept offline action'} cmd="offline.resolve" fields={[{ name: 'note', label: lang === 'ar' ? 'المبرر' : 'Justification', type: 'textarea', required: true }]} map={(v) => ({ id: r.id, resolution: 'accepted', note: v.note })} /><ActionForm label={lang === 'ar' ? 'رفض' : 'Reject'} title={lang === 'ar' ? 'رفض الإجراء' : 'Reject action'} cmd="offline.resolve" fields={[{ name: 'note', label: lang === 'ar' ? 'المبرر' : 'Justification', type: 'textarea', required: true }]} map={(v) => ({ id: r.id, resolution: 'rejected', note: v.note })} /></div> : null }]} />
+  </Section>;
+}
+
 // ================= A09 أرجل النقل =================
 export function Legs() {
   const { t, lang, run } = useApp(); const f = useFmt(); const L = useLookups();
   const legs = useList('legs', { sort: 'scheduledDeparture', dir: 'desc' });
   const air = L.partners.filter((p: any) => p.partnerType === 'air');
   return (
-    <Page title={t('nav.legs')} sub={<>{lang === 'ar' ? 'أرجل برية وجوية؛ أحداث الناقل مولّدة تجريبياً' : 'Road and air legs; carrier events are simulated'} <Sim /></>}>
+    <Page title={t('nav.legs')} sub={<>{lang === 'ar' ? 'مراحل نقل برية وجوية؛ أحداث الناقل مولّدة تجريبياً' : 'Road and air legs; carrier events are simulated'} <Sim /></>}>
       <Section flush><DataTable rows={legs.data?.items ?? null} csvName="legs" search={(l: any) => `${l.flightNo ?? ''} ${l.originCity} ${l.destCity}`} filters={[{ key: 'mode', label: lang === 'ar' ? 'الوسيلة' : 'Mode', options: ['road', 'air'].map((m) => ({ value: m, label: label(lang, m) })), get: (l: any) => l.mode }, { key: 'st', label: t('common.status'), options: ['planned', 'departed', 'arrived'].map((s) => ({ value: s, label: label(lang, s) })), get: (l: any) => l.status }]} cols={[
-        { key: 'mode', label: lang === 'ar' ? 'الوسيلة' : 'Mode', render: (l: any) => label(lang, l.mode) }, { key: 'r', label: lang === 'ar' ? 'المسار' : 'Route', render: (l: any) => `${L.city(l.originCity)} → ${L.city(l.destCity)}` },
+        { key: 'mode', label: lang === 'ar' ? 'الوسيلة' : 'Mode', render: (l: any) => label(lang, l.mode) }, { key: 'r', label: lang === 'ar' ? 'المسار' : 'Route', render: (l: any) => `${L.city(l.originCity)} ${lang === 'ar' ? '←' : '→'} ${L.city(l.destCity)}` },
         { key: 'p', label: lang === 'ar' ? 'المنفذ' : 'Operator', render: (l: any) => l.partnerId ? L.partner(l.partnerId) : l.courierId ? L.courier(l.courierId) : '—' }, { key: 'flightNo', label: lang === 'ar' ? 'الرحلة' : 'Flight', render: (l: any) => l.flightNo ?? '—' },
         { key: 'scheduledDeparture', label: lang === 'ar' ? 'المغادرة' : 'Departure', render: (l: any) => f.dt(l.actualDeparture ?? l.scheduledDeparture) }, { key: 'status', label: t('common.status'), render: (l: any) => <Pill v={l.status} /> },
         { key: 'act', label: t('common.actions'), render: (l: any) => <div className="row">
@@ -439,6 +501,7 @@ export function Couriers() {
         { key: 'load', label: lang === 'ar' ? 'توقفات معلقة' : 'Pending stops', num: true },
         { key: 'a', label: t('common.actions'), render: (c: any) => <select aria-label={t('common.status')} value={c.status} onChange={(e) => run('courier.setStatus', { courierId: c.id, status: e.target.value })}>{['available', 'on_route', 'off_shift', 'suspended'].map((s) => <option key={s} value={s}>{label(lang, s)}</option>)}</select> },
       ]} /></Section>
+      <OfflineConflicts />
     </Page>
   );
 }

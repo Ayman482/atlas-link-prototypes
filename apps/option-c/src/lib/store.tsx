@@ -3,6 +3,8 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { createTransport, type ApiError, type Transport } from '@medlog/client';
 import { dir, t as tt, type Lang } from '@medlog/i18n';
+import { AnimatePresence, DUR, EASE, MotionRoot, SuccessMark, motion } from './motion';
+import { DICT_OVERRIDES } from './l10n';
 
 let shared: Transport | null = null;
 export function transport(): Transport {
@@ -41,7 +43,7 @@ export function AppProvider({ app, children }: { app: Ctx['app']; children: Reac
   useEffect(() => { if (!userId) { setMe(null); return; } transport().query('me').then(setMe).catch(() => { setUserId(null); }); }, [userId, tick]);
   const toast = useCallback((text: string, kind: Toast['kind'] = 'success') => { const id = ++n.current; setToasts((x) => [...x, { id, kind, text }]); setTimeout(() => setToasts((x) => x.filter((y) => y.id !== id)), kind === 'error' ? 6000 : 3200); }, []);
   const value = useMemo<Ctx>(() => ({
-    lang, setLang: setLangS, t: (k, v) => tt(lang, k, v), x: (e) => (e ? e[lang] : ''),
+    lang, setLang: setLangS, t: (k, v) => (DICT_OVERRIDES[k] && !v ? DICT_OVERRIDES[k][lang] : tt(lang, k, v)), x: (e) => (e ? e[lang] : ''),
     userId, me, signIn: (u) => setUserId(u), signOut: () => { transport().logout(); setUserId(null); },
     tick, toast, app,
     async run(cmd, input, opts) {
@@ -51,10 +53,10 @@ export function AppProvider({ app, children }: { app: Ctx['app']; children: Reac
   }), [lang, userId, me, tick, toast, app]);
   if (!ready) return null;
   return (
-    <AppCtx.Provider value={value}>
+    <MotionRoot><AppCtx.Provider value={value}>
       {children}
-      <div className="toasts" role="status" aria-live="polite">{toasts.map((x) => <div key={x.id} className={'toast ' + x.kind}>{x.text}</div>)}</div>
-    </AppCtx.Provider>
+      <div className="toasts" role="status" aria-live="polite"><AnimatePresence>{toasts.map((x) => <motion.div layout key={x.id} className={'toast ' + x.kind} initial={{ opacity: 0, y: 16, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 8, transition: { duration: DUR.fast } }} transition={{ duration: DUR.base, ease: EASE.emphasized }}>{x.kind === 'success' && <SuccessMark size={20} />}{x.text}</motion.div>)}</AnimatePresence></div>
+    </AppCtx.Provider></MotionRoot>
   );
 }
 

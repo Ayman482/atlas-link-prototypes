@@ -1,0 +1,282 @@
+[
+  {
+    "mode": "light",
+    "pair": "fg / bg",
+    "ratio": "11.23",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "light",
+    "pair": "fg / surface",
+    "ratio": "11.87",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "light",
+    "pair": "muted / surface",
+    "ratio": "6.07",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "light",
+    "pair": "muted / bg",
+    "ratio": "5.75",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "light",
+    "pair": "faint / surface",
+    "ratio": "3.34",
+    "aaText": false,
+    "aaLarge": true
+  },
+  {
+    "mode": "light",
+    "pair": "primary / surface",
+    "ratio": "4.91",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "light",
+    "pair": "primary / bg",
+    "ratio": "4.64",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "light",
+    "pair": "onPrimary / primary",
+    "ratio": "4.91",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "light",
+    "pair": "onNavy / navy",
+    "ratio": "11.87",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "light",
+    "pair": "goldText / surface",
+    "ratio": "5.91",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "light",
+    "pair": "goldText / goldSoft",
+    "ratio": "5.17",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "light",
+    "pair": "success / successSoft",
+    "ratio": "4.62",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "light",
+    "pair": "warning / warningSoft",
+    "ratio": "4.92",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "light",
+    "pair": "critical / criticalSoft",
+    "ratio": "5.55",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "light",
+    "pair": "info / infoSoft",
+    "ratio": "5.65",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "light",
+    "pair": "primaryText / primarySoft",
+    "ratio": "5.68",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "light",
+    "pair": "success / surface",
+    "ratio": "5.37",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "light",
+    "pair": "warning / surface",
+    "ratio": "5.56",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "light",
+    "pair": "critical / surface",
+    "ratio": "6.57",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "light",
+    "pair": "info / surface",
+    "ratio": "6.66",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "dark",
+    "pair": "fg / bg",
+    "ratio": "15.65",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "dark",
+    "pair": "fg / surface",
+    "ratio": "13.16",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "dark",
+    "pair": "muted / surface",
+    "ratio": "7.69",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "dark",
+    "pair": "muted / bg",
+    "ratio": "9.15",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "dark",
+    "pair": "faint / surface",
+    "ratio": "4.85",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "dark",
+    "pair": "primary / surface",
+    "ratio": "6.90",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "dark",
+    "pair": "primary / bg",
+    "ratio": "8.20",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "dark",
+    "pair": "onPrimary / primary",
+    "ratio": "7.67",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "dark",
+    "pair": "onNavy / navy",
+    "ratio": "13.96",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "dark",
+    "pair": "goldText / surface",
+    "ratio": "8.67",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "dark",
+    "pair": "goldText / goldSoft",
+    "ratio": "7.86",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "dark",
+    "pair": "success / successSoft",
+    "ratio": "6.55",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "dark",
+    "pair": "warning / warningSoft",
+    "ratio": "7.34",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "dark",
+    "pair": "critical / criticalSoft",
+    "ratio": "6.28",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "dark",
+    "pair": "info / infoSoft",
+    "ratio": "6.48",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "dark",
+    "pair": "primaryText / primarySoft",
+    "ratio": "6.42",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "dark",
+    "pair": "success / surface",
+    "ratio": "7.75",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "dark",
+    "pair": "warning / surface",
+    "ratio": "8.15",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "dark",
+    "pair": "critical / surface",
+    "ratio": "6.54",
+    "aaText": true,
+    "aaLarge": true
+  },
+  {
+    "mode": "dark",
+    "pair": "info / surface",
+    "ratio": "6.99",
+    "aaText": true,
+    "aaLarge": true
+  }
+]

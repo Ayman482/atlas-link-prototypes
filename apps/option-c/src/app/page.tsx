@@ -1,9 +1,9 @@
 // صفحة الخيار C — تجربة رعاية صحية متميزة: روابط التطبيقات الأربعة
 const APPS = [
-  { href: 'admin/', h: 'linear-gradient(135deg,#0f6b66,#2f8f83)', ar: 'لوحة الإدارة والعمليات', en: 'Administration & operations', dar: '60 شاشة: برج تحكم حي، خريطة بمسارات متحركة، توزيع، أصول، جودة، مالية، امتثال', den: '60 screens: live control tower, animated route map, dispatch, assets, quality, finance, compliance' },
-  { href: 'portal/', h: 'linear-gradient(135deg,#d9785c,#e9a87c)', ar: 'بوابة العملاء', en: 'Customer portal', dar: '20 شاشة للمستشفيات والمختبرات والفروع والأفراد ومختبر الاستلام', den: '20 screens for hospitals, labs, branches, individuals and the receiving lab' },
-  { href: 'mobile/customer/', h: 'linear-gradient(135deg,#8a74c4,#b3a2e6)', ar: 'تطبيق العميل (معاينة)', en: 'Customer app (preview)', dar: 'طلب بخطوات، تتبع حي، تقرير حرارة، دفع', den: 'Step-by-step request, live tracking, temperature report, payment' },
-  { href: 'mobile/courier/', h: 'linear-gradient(135deg,#b8914a,#d8b46c)', ar: 'تطبيق المندوب (معاينة)', en: 'Courier app (preview)', dar: 'مهام، مسح متحرك، توقيع، حيازة، عمل دون اتصال', den: 'Tasks, animated scanning, signatures, custody, offline work' },
+  { href: 'admin/', h: 'linear-gradient(135deg,#087F70,#0B9A87)', ar: 'لوحة الإدارة والعمليات', en: 'Administration & operations', dar: '60 شاشة: برج تحكم حي، خريطة بمسارات متحركة، توزيع، أصول، جودة، مالية، امتثال', den: '60 screens: live control tower, animated route map, dispatch, assets, quality, finance, compliance' },
+  { href: 'portal/', h: 'linear-gradient(135deg,#E6A65D,#F2C994)', ar: 'بوابة العملاء', en: 'Customer portal', dar: '20 شاشة للمستشفيات والمختبرات والفروع والأفراد ومختبر الاستلام', den: '20 screens for hospitals, labs, branches, individuals and the receiving lab' },
+  { href: 'mobile/customer/', h: 'linear-gradient(135deg,#173B4D,#3D6B80)', ar: 'تطبيق العميل (معاينة)', en: 'Customer app (preview)', dar: 'طلب بخطوات، تتبع حي، تقرير حرارة، دفع', den: 'Step-by-step request, live tracking, temperature report, payment' },
+  { href: 'mobile/courier/', h: 'linear-gradient(135deg,#C98A3E,#E6A65D)', ar: 'تطبيق المندوب (معاينة)', en: 'Courier app (preview)', dar: 'مهام، مسح متحرك، توقيع، حيازة، عمل دون اتصال', den: 'Tasks, animated scanning, signatures, custody, offline work' },
 ];
 export default function Home() {
   return (
