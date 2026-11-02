@@ -23,6 +23,10 @@ jobs:
         working-directory: apps/option-b
         env: { BASE_PATH: /atlas-link-prototypes/option-b }
         run: npx next build
+      - name: Build Option C (static export)
+        working-directory: apps/option-c
+        env: { BASE_PATH: /atlas-link-prototypes/option-c }
+        run: npx next build
       - name: Assemble site
         run: |
           mkdir -p site/foundation
@@ -30,6 +34,7 @@ jobs:
           cp site-src/index.html site/index.html
           cp -r apps/option-a/out site/option-a
           cp -r apps/option-b/out site/option-b
+          cp -r apps/option-c/out site/option-c
           touch site/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
