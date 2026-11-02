@@ -3,7 +3,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { dict, fmtDateTime, fmtRelative, fmtNumber, fmtSAR, fmtTemp, ltr } from '@medlog/i18n';
 import { useApp } from './store';
-import { VALUE_LABELS } from './l10n';
+import { label as tlabel, timelineTitle, timelineDetail } from './l10n';
 import { AnimatePresence, Collapse, DUR, EASE, Tip, fadeUp, motion, staggerParent } from './motion';
 
 export const cx = (...a: (string | false | null | undefined)[]) => a.filter(Boolean).join(' ');
@@ -20,27 +20,12 @@ const TONE: Record<string, 'good' | 'warn' | 'crit' | 'info' | 'mute'> = {
   parsed: 'good', quarantined: 'warn', dead_letter: 'crit', duplicate: 'mute', acked: 'good', sent: 'info', on_route: 'info', off_shift: 'mute', done: 'good',
   simulated: 'warn', not_configured: 'mute', planned_phase_2: 'mute', blocked: 'crit',
 };
-const DICTS = ['shipmentStatus', 'boxStatus', 'deviceState', 'excursionStatus', 'incidentStatus', 'claimStatus', 'invoiceStatus', 'settlementStatus', 'licenseStatus', 'severity', 'freshness', 'thermal', 'level', 'mode', 'custodian', 'approvalKind', 'roles', 'requestType'] as const;
-const EXTRA: Record<string, { ar: string; en: string }> = {
-  pending: { ar: 'معلّق', en: 'Pending' }, pending_approval: { ar: 'بانتظار الاعتماد', en: 'Pending approval' }, active: { ar: 'نشط', en: 'Active' }, published: { ar: 'منشور', en: 'Published' }, superseded: { ar: 'مستبدل', en: 'Superseded' }, planned: { ar: 'مخطط', en: 'Planned' }, dispatched: { ar: 'مُرسل', en: 'Dispatched' }, in_progress: { ar: 'جارٍ', en: 'In progress' }, completed: { ar: 'مكتمل', en: 'Completed' }, departed: { ar: 'غادر', en: 'Departed' }, arrived: { ar: 'وصل', en: 'Arrived' },
-  parsed: { ar: 'محلَّلة', en: 'Parsed' }, quarantined: { ar: 'معزولة', en: 'Quarantined' }, dead_letter: { ar: 'Dead-letter', en: 'Dead-letter' }, duplicate: { ar: 'مكررة', en: 'Duplicate' }, acked: { ar: 'مُستلم ACK', en: 'Acked' }, sent: { ar: 'مرسل', en: 'Sent' }, expired: { ar: 'منتهٍ', en: 'Expired' },
-  on_route: { ar: 'في مسار', en: 'On route' }, off_shift: { ar: 'خارج المناوبة', en: 'Off shift' }, done: { ar: 'منجز', en: 'Done' }, simulated: { ar: 'محاكاة', en: 'Simulated' }, not_configured: { ar: 'غير مهيأ', en: 'Not configured' }, planned_phase_2: { ar: 'مرحلة لاحقة', en: 'Later phase' }, blocked: { ar: 'محظور', en: 'Blocked' },
-  approved: { ar: 'معتمد', en: 'Approved' }, rejected: { ar: 'مرفوض', en: 'Rejected' }, draft: { ar: 'مسودة', en: 'Draft' }, overdue: { ar: 'متأخر', en: 'Overdue' }, inactive: { ar: 'غير نشط', en: 'Inactive' }, revoked: { ar: 'ملغى', en: 'Revoked' }, invited: { ar: 'مدعو', en: 'Invited' }, disabled: { ar: 'معطل', en: 'Disabled' }, skipped: { ar: 'تم تخطيه', en: 'Skipped' }, requested: { ar: 'مطلوب', en: 'Requested' }, under_review: { ar: 'قيد المراجعة', en: 'Under review' },
-  offline_expected_or_unknown: { ar: 'غير متصل (متوقع أثناء الطيران)', en: 'Offline (expected in flight)' }, online: { ar: 'متصل', en: 'Online' }, offline_or_delayed: { ar: 'غير متصل أو متأخر', en: 'Offline or delayed' }, no_device: { ar: 'لا جهاز', en: 'No device' }, unavailable: { ar: 'غير متاح', en: 'Unavailable' },
-  BLOOD_TUBES: { ar: 'أنابيب دم', en: 'Blood tubes' }, TISSUE_BIOPSY: { ar: 'خزعة نسيجية', en: 'Tissue biopsy' }, SWAB_PCR: { ar: 'مسحة PCR', en: 'PCR swab' }, URINE_CULTURE: { ar: 'مزرعة بول', en: 'Urine culture' }, CSF_SAMPLE: { ar: 'سائل نخاعي', en: 'CSF sample' }, SERUM_ALIQUOT: { ar: 'عينة مصل', en: 'Serum aliquot' },
-  pickup: { ar: 'استلام', en: 'Pickup' }, delivery: { ar: 'تسليم', en: 'Delivery' }, handover: { ar: 'نقل حيازة', en: 'Handover' }, return: { ar: 'إرجاع', en: 'Return' }, road: { ar: 'بري', en: 'Road' }, air: { ar: 'جوي', en: 'Air' },
-  applicable: { ar: 'منطبق', en: 'Applicable' }, not_applicable: { ar: 'غير منطبق', en: 'Not applicable' }, pending_legal_review: { ar: 'بانتظار المراجعة القانونية', en: 'Pending legal review' }, success: { ar: 'نجح', en: 'Success' }, failed: { ar: 'فشل', en: 'Failed' }, received: { ar: 'مستلمة', en: 'Received' }, simulated_cleared: { ar: 'مقبولة (محاكاة)', en: 'Cleared (simulated)' }, not_submitted: { ar: 'لم تُرسل', en: 'Not submitted' }, paused: { ar: 'موقوف', en: 'Paused' },
-};
-export function label(lang: 'ar' | 'en', v: string | null | undefined) {
-  if (!v) return '—';
-  if (VALUE_LABELS[v]) return VALUE_LABELS[v][lang];
-  for (const d of DICTS) { const e = (dict as any)[d][v]; if (e) return e[lang]; }
-  return EXTRA[v]?.[lang] ?? v;
-}
-export function Pill({ v, tone, children, tip }: { v?: string | null; tone?: string; children?: React.ReactNode; tip?: React.ReactNode }) {
+/** تسمية رمز تقني من المصدر المعتمد (packages/i18n/src/terms.ts)؛ domain يحل الرموز المتعددة المعنى (مثل outcome لـ failed) */
+export function label(lang: 'ar' | 'en', v: string | null | undefined, domain?: string) { return tlabel(lang, v, domain); }
+export function Pill({ v, d, tone, children, tip }: { v?: string | null; d?: string; tone?: string; children?: React.ReactNode; tip?: React.ReactNode }) {
   const { lang } = useApp();
   const t = tone ?? TONE[v ?? ''] ?? 'mute';
-  const el = <span className={cx('pill', t, (v === 'live' || v === 'open' || v === 'critical') && 'pulse')}>{children ?? label(lang, v)}</span>;
+  const el = <span className={cx('pill', t, (v === 'live' || v === 'open' || v === 'critical') && 'pulse')}>{children === undefined ? label(lang, v, d) : typeof children === 'string' && /^[A-Za-z_]+$/.test(children) ? label(lang, children, d) : children}</span>;
   return tip ? <Tip text={tip}>{el}</Tip> : el;
 }
 export const Mono = ({ children }: { children: React.ReactNode }) => <span className="mono">{children}</span>;
@@ -285,23 +270,22 @@ export function DataTable<R extends { id?: string }>({ rows, cols, filters = [],
 }
 
 // ---------- الخط الزمني ----------
-const SRC: Record<string, { ar: string; en: string }> = { device: { ar: 'جهاز التتبع', en: 'Tracker device' }, courier_app: { ar: 'تطبيق المندوب', en: 'Courier app' }, offline_sync: { ar: 'مزامنة بعد انقطاع', en: 'Offline sync' }, carrier: { ar: 'الناقل', en: 'Carrier' }, admin: { ar: 'العمليات', en: 'Operations' }, system: { ar: 'النظام', en: 'System' }, warehouse: { ar: 'المستودع', en: 'Warehouse' }, customer: { ar: 'العميل', en: 'Customer' }, manual: { ar: 'إدخال يدوي', en: 'Manual entry' } };
 /** خط زمني بمصدر كل حدث: كل حدث قابل للتوسيع لعرض وقت الجهاز ووقت الاستلام والتأخير والتفاصيل */
-export function Timeline({ items }: { items: { at: string; receivedAt?: string; kind: string; source: string; title: { ar: string; en: string }; detail?: string }[] }) {
+export function Timeline({ items }: { items: { at: string; receivedAt?: string; kind: string; source: string; title: { ar: string; en: string }; detail?: string; codes?: any }[] }) {
   const { lang } = useApp(); const f = useFmt(); const [open, setOpen] = useState<Record<number, boolean>>({}); const all = items.length > 0 && items.every((_, i) => open[i]);
   return <div className="tlwrap">
     {items.length > 1 && <div className="row" style={{ justifyContent: 'flex-end' }}><Btn kind="ghost" onClick={() => setOpen(all ? {} : Object.fromEntries(items.map((_, i) => [i, true])))}>{all ? (lang === 'ar' ? 'طي الكل' : 'Collapse all') : (lang === 'ar' ? 'توسيع الكل' : 'Expand all')}</Btn></div>}
     <motion.ol className="timeline" variants={staggerParent} initial="hidden" animate="show">{items.map((e, i) => { const lag = e.receivedAt ? Math.round((Date.parse(e.receivedAt) - Date.parse(e.at)) / 60000) : 0; return <motion.li key={i} variants={fadeUp} className={'k-' + e.kind}>
       <span className="tdot" aria-hidden="true" />
       <button className="tlhead" aria-expanded={!!open[i]} onClick={() => setOpen({ ...open, [i]: !open[i] })}>
-        <span><b>{e.title[lang]}</b>{lag > 5 && <span className="pill warn" style={{ marginInlineStart: 8 }}>{lang === 'ar' ? 'وصل متأخراً' : 'Late arrival'}</span>}</span>
-        <span className="tmeta"><time>{f.dt(e.at)}</time><span className="src">{SRC[e.source]?.[lang] ?? e.source}</span></span>
+        <span><b>{timelineTitle(lang, e)}</b>{lag > 5 && <span className="pill warn" style={{ marginInlineStart: 8 }}>{lang === 'ar' ? 'وصل متأخراً' : 'Late arrival'}</span>}</span>
+        <span className="tmeta"><time>{f.dt(e.at)}</time><span className="src">{label(lang, e.source)}</span></span>
       </button>
       <Collapse open={!!open[i]}><dl className="tldetail">
         <div><dt>{lang === 'ar' ? 'وقت الحدث (الجهاز/الميدان)' : 'Event time (device/field)'}</dt><dd>{f.dt(e.at)}</dd></div>
         <div><dt>{lang === 'ar' ? 'وقت الاستلام في النظام' : 'Received by system'}</dt><dd>{e.receivedAt ? f.dt(e.receivedAt) : '—'}{lag > 0 && <span className="muted"> · {lang === 'ar' ? `بعد ${lag} د` : `${lag} min later`}</span>}</dd></div>
-        <div><dt>{lang === 'ar' ? 'المصدر' : 'Source'}</dt><dd>{SRC[e.source]?.[lang] ?? e.source}</dd></div>
-        {e.detail && <div><dt>{lang === 'ar' ? 'التفاصيل' : 'Details'}</dt><dd>{e.detail}</dd></div>}
+        <div><dt>{lang === 'ar' ? 'المصدر' : 'Source'}</dt><dd>{label(lang, e.source)}</dd></div>
+        {e.detail && <div><dt>{lang === 'ar' ? 'التفاصيل' : 'Details'}</dt><dd>{timelineDetail(lang, e)}</dd></div>}
       </dl></Collapse>
     </motion.li>; })}</motion.ol>
   </div>;
@@ -393,7 +377,7 @@ export function KsaMap({ points, cities, onPick, height = 380 }: { points: MapPt
           <dl className="tldetail">
             <div><dt>{lang === 'ar' ? 'نوع الموقع' : 'Location type'}</dt><dd><i className={'sw mk ' + sel.kind} />{FRESH[sel.kind]?.[lang] ?? sel.kind}</dd></div>
             <div><dt>{sel.kind === 'planned' || sel.kind === 'pickup' ? (lang === 'ar' ? 'بداية نافذة الاستلام' : 'Pickup window start') : sel.kind === 'delivery' ? (lang === 'ar' ? 'التسليم قبل' : 'Deliver by') : (lang === 'ar' ? 'وقت آخر موقع مؤكد' : 'Last confirmed fix')}</dt><dd>{f.dt(sel.meta?.at)}</dd></div>
-            {sel.meta?.source && <div><dt>{lang === 'ar' ? 'مصدر الموقع' : 'Position source'}</dt><dd>{SRC[sel.meta.source]?.[lang] ?? sel.meta.source}</dd></div>}
+            {sel.meta?.source && <div><dt>{lang === 'ar' ? 'مصدر الموقع' : 'Position source'}</dt><dd>{label(lang, sel.meta.source)}</dd></div>}
             {o && d && <div><dt>{lang === 'ar' ? 'المسار' : 'Route'}</dt><dd>{o.name[lang]} {lang === 'ar' ? '←' : '→'} {d.name[lang]}</dd></div>}
           </dl>
           <span className="sim">{lang === 'ar' ? 'المواقع بيانات عرض محاكاة' : 'Positions are simulated demo data'}</span>

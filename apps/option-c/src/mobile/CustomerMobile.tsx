@@ -1,4 +1,5 @@
 'use client';
+import { timelineTitle } from '@/lib/l10n';
 // معاينة تطبيق العميل للجوال — الخيار A (CM01–CM12). نفس المحرك والبيانات؛ تطبيق Flutter الفعلي في mobile/customer_app
 import React, { useEffect, useMemo, useState } from 'react';
 import { AppProvider, useApp, useList, useQ, useRoute, go } from '@/lib/store';
@@ -163,7 +164,7 @@ function Track({ id }: { id: string }) {
         {s.status !== 'draft' && <ActionForm label={t('ship.fileClaim')} title={t('ship.fileClaim')} cmd="claim.submit" fields={[{ name: 'claimType', label: lang === 'ar' ? 'النوع' : 'Type', type: 'select', required: true, options: opts(lang, [{ value: 'damage', ar: 'تلف', en: 'Damage' }, { value: 'loss', ar: 'فقدان', en: 'Loss' }, { value: 'delay', ar: 'تأخير', en: 'Delay' }, { value: 'temperature', ar: 'حرارة', en: 'Temperature' }]) }, { name: 'amountSar', label: lang === 'ar' ? 'المبلغ (ر.س)' : 'Amount (SAR)', type: 'number', required: true, min: 1 }, { name: 'description', label: lang === 'ar' ? 'الوصف' : 'Description', type: 'textarea', required: true }]} map={(v) => ({ shipment: s.id, ...v })} success={lang === 'ar' ? 'قُدمت المطالبة' : 'Claim submitted'} />}
       </div>}
       <b>{lang === 'ar' ? 'الخط الزمني' : 'Timeline'}</b>
-      <ol className="mtimeline">{[...d.data.timeline].reverse().map((e: any, i: number) => <li key={i}><b>{x(e.title)}</b><span className="muted">{f.dt(e.at)} · {label(lang, e.source)}</span></li>)}</ol>
+      <ol className="mtimeline">{[...d.data.timeline].reverse().map((e: any, i: number) => <li key={i}><b>{timelineTitle(lang, e)}</b><span className="muted">{f.dt(e.at)} · {label(lang, e.source)}</span></li>)}</ol>
     </div></>;
 }
 

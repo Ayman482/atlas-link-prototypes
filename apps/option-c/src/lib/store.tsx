@@ -2,9 +2,9 @@
 // حالة التطبيق: النقل (خادم API أو المحرك المحلي)، الجلسة، اللغة، الإشعارات المنبثقة، وإعادة الجلب عند كل تغيير
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { createTransport, type ApiError, type Transport } from '@medlog/client';
-import { dir, t as tt, type Lang } from '@medlog/i18n';
+import { dir, type Lang } from '@medlog/i18n';
 import { AnimatePresence, DUR, EASE, MotionRoot, SuccessMark, motion } from './motion';
-import { DICT_OVERRIDES } from './l10n';
+import { term } from './l10n';
 
 let shared: Transport | null = null;
 export function transport(): Transport {
@@ -54,7 +54,7 @@ export function AppProvider({ app, children }: { app: Ctx['app']; children: Reac
   }, [userId, tick]);
   const toast = useCallback((text: string, kind: Toast['kind'] = 'success') => { const id = ++n.current; setToasts((x) => [...x, { id, kind, text }]); setTimeout(() => setToasts((x) => x.filter((y) => y.id !== id)), kind === 'error' ? 6000 : 3200); }, []);
   const value = useMemo<Ctx>(() => ({
-    lang, setLang: setLangS, t: (k, v) => (DICT_OVERRIDES[k] && !v ? DICT_OVERRIDES[k][lang] : tt(lang, k, v)), x: (e) => (e ? e[lang] : ''),
+    lang, setLang: setLangS, t: (k, v) => term(lang, k, v), x: (e) => (e ? e[lang] : ''),
     // لا يُعرض ملف مستخدم لا يطابق الحساب النشط (يمنع ظهور أدوار الحساب السابق لعملية عرض واحدة)
     userId, me: me && me.user?.id === userId ? me : null, signIn: (u) => setUserId(u), signOut: () => { transport().logout(); setUserId(null); },
     tick, toast, app,

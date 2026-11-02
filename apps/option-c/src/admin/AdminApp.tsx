@@ -1,4 +1,5 @@
 'use client';
+import { greeting, comma } from '@/lib/l10n';
 // لوحة الإدارة — الخيار C: قائمة جانبية عائمة بأقسام قابلة للطي، تحية بحسب الوقت، بحث، تبديل المظهر
 import React, { useEffect, useMemo, useState } from 'react';
 import { AppProvider, useApp, useQ, useRoute, go, transport } from '@/lib/store';
@@ -35,10 +36,10 @@ const GROUP_STYLE: Record<string, { hue: string; icon: string }> = {
 };
 const Ico = ({ d, size = 22 }: { d: string; size?: number }) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={d} /></svg>;
 function Greeting() {
-  const { lang, x, me } = useApp(); const h = Number(new Intl.DateTimeFormat('en-GB', { hour: 'numeric', hour12: false, timeZone: 'Asia/Riyadh' }).format(new Date()));
-  const g = h < 12 ? (lang === 'ar' ? 'صباح الخير' : 'Good morning') : h < 18 ? (lang === 'ar' ? 'مساء الخير' : 'Good afternoon') : (lang === 'ar' ? 'مساء النور' : 'Good evening');
+  const { lang, x, me } = useApp();
+  const g = greeting(lang); // «مساء الخير» بعد الظهر — من المصدر المعتمد للتوطين
   const d = new Intl.DateTimeFormat(lang === 'ar' ? 'ar-SA-u-nu-latn' : 'en-GB', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Asia/Riyadh' }).format(new Date());
-  return <div className="greet"><b>{g}، {x(me.user.name).split(' ').slice(0, 2).join(' ')}</b><span>{d}</span></div>;
+  return <div className="greet"><b>{g}{comma(lang)}{x(me.user.name).split(' ').slice(0, 2).join(' ')}</b><span>{d}</span></div>;
 }
 
 function Shell() {

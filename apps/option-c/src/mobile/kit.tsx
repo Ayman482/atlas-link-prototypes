@@ -24,7 +24,7 @@ export function PhoneStage({ title, screens, children, flutterPath }: { title: s
       <aside className="phone-side">
         <span className="sim">{lang === 'ar' ? 'معاينة متصفح للمراجعة' : 'Browser preview for review'}</span>
         <h1 style={{ margin: 0 }}>{title}</h1>
-        <p className="muted">{lang === 'ar' ? `هذه المعاينة تستخدم نفس المحرك والبيانات الحية. تطبيق Flutter الفعلي (Android/iOS) موجود في ${flutterPath} ويعمل مع خادم المحاكاة.` : `This preview uses the same engine and live data. The real Flutter app (Android/iOS) is in ${flutterPath} and runs against the mock API server.`}</p>
+        <p className="muted">{lang === 'ar' ? 'معاينة متصفح للمراجعة التصميمية، تعمل على نفس المحرك وبيانات العرض (ليست بيانات حقيقية). تطبيق Flutter الفعلي (Android/iOS) موجود في ' : 'Browser preview for design review, running on the same engine and demo data (not real data). The real Flutter app (Android/iOS) is in '}<code dir="ltr">{flutterPath}</code>{lang === 'ar' ? ' ويعمل مع خادم المحاكاة.' : ' and runs against the mock API server.'}</p>
         <div className="row"><Btn onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}>{lang === 'ar' ? 'English' : 'العربية'}</Btn><ThemeBtn /></div>
         <div className="card" style={{ padding: 14 }}>
           <b>{lang === 'ar' ? 'الشاشات' : 'Screens'}</b>
