@@ -181,6 +181,8 @@ export function ShipmentCreate({ portal }: { params?: any; portal?: { orgId: str
     if (step === 2 && Date.parse(v.pickupWindowStart) < Date.now() - 15 * 60_000) errs.pickupWindowStart = lang === 'ar' ? 'لا يمكن الجدولة في الماضي' : 'Cannot schedule in the past';
     setE(errs); return !Object.keys(errs).length;
   };
+  // تحقق مباشر: بعد أول محاولة يُعاد التحقق عند كل تعديل فتختفي الأخطاء فور تصحيحها
+  useEffect(() => { if (Object.keys(e).length) check(); }, [v]); // eslint-disable-line
   useEffect(() => {
     if (step !== 3) return; setQuote(null); setQErr(null);
     transport().exec('shipment.quote', { organizationId: v.organizationId, thermalClass: v.thermalClass, serviceLevel: v.serviceLevel, senderAddressId: v.senderAddressId, receiverAddressId: v.receiverAddressId, weightKg: weight, dedicatedBox: v.dedicatedBox }).then(setQuote).catch((err: any) => setQErr(err.message?.[lang] ?? String(err)));
@@ -192,7 +194,7 @@ export function ShipmentCreate({ portal }: { params?: any; portal?: { orgId: str
   const ITEMS = [['BLOOD_TUBES', 'أنابيب دم', 'Blood tubes'], ['TISSUE_BIOPSY', 'خزعة نسيجية', 'Tissue biopsy'], ['SWAB_PCR', 'مسحة PCR', 'PCR swab'], ['URINE_CULTURE', 'مزرعة بول', 'Urine culture'], ['CSF_SAMPLE', 'عينة سائل نخاعي', 'CSF sample'], ['SERUM_ALIQUOT', 'عينة مصل', 'Serum aliquot']];
   return (
     <Page title={t('ship.create')} crumbs={[{ label: t('nav.shipments'), href: '#/shipments' }, { label: t('nav.newShipment') }]} sub={portal ? undefined : (lang === 'ar' ? 'إنشاء نيابة عن العميل — يُسجَّل في سجل التدقيق' : 'Created on behalf of the customer — recorded in the audit log')}>
-      <div className="steps">{steps.map((s, i) => <span key={i} className={i === step ? 'on' : i < step ? 'done' : ''}>{i + 1}. {s}</span>)}</div>
+      <ol className="steps" aria-label={lang === 'ar' ? `الخطوة ${step + 1} من ${steps.length}` : `Step ${step + 1} of ${steps.length}`}>{steps.map((s, i) => <motion.span layout key={i} aria-current={i === step ? 'step' : undefined} className={i === step ? 'on' : i < step ? 'done' : ''}>{s}</motion.span>)}</ol>
       <Section>
         {step < 3 && <FormFields fields={F[step]} values={v} set={(n, val) => { set(n, val); if (n === 'organizationId') setV((o) => ({ ...o, organizationId: val, branchId: '', senderAddressId: '' })); }} errors={e} />}
         {step === 1 && <div className="page">
@@ -422,7 +424,7 @@ export function RoutesScreen() {
   const dirty = !!order && order.join() !== base.map((s: any) => s.id).join();
   return (
     <Page title={t('nav.routes')} sub={lang === 'ar' ? 'مسارات متعددة التوقفات لكل مندوب ويوم (RTE-002) — اسحب التوقفات لإعادة ترتيبها' : 'Multi-stop routes per courier and day (RTE-002) — drag stops to reorder'}>
-      <div className="grid wide-narrow">
+      <div className="grid">
         <Section flush><DataTable rows={routes.data?.items ?? null} onRow={(x: any) => { setOpen(x.id); setOrder(null); setHist([]); setErr(null); }} search={(x: any) => x.code} filters={[{ key: 'st', label: t('common.status'), options: ['planned', 'dispatched', 'in_progress', 'completed'].map((s) => ({ value: s, label: label(lang, s) })), get: (x: any) => x.status }]} cols={[
           { key: 'code', label: lang === 'ar' ? 'المسار' : 'Route', mono: true }, { key: 'serviceDate', label: t('common.date'), render: (x: any) => f.dt(x.serviceDate) }, { key: 'courier', label: lang === 'ar' ? 'المندوب' : 'Courier', render: (x: any) => L.courier(x.courierId) }, { key: 'stops', label: lang === 'ar' ? 'التوقفات' : 'Stops', num: true, render: (x: any) => (stops.data?.items ?? []).filter((s: any) => s.routeId === x.id).length }, { key: 'plannedDistanceKm', label: lang === 'ar' ? 'كم' : 'km', num: true }, { key: 'status', label: t('common.status'), render: (x: any) => <Pill v={x.status} /> },
         ]} /></Section>

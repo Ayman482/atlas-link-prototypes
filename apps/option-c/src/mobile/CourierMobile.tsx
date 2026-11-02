@@ -95,7 +95,7 @@ function RouteMap() {
   const { lang, x } = useApp(); const d = useQ<any>('courier.tasks', {}); const L = useLookups();
   if (!d.data) return <Loading />;
   const open = d.data.tasks.filter((t: any) => t.kind !== 'done');
-  const pts = open.map((t: any) => { const a = t.kind === 'pickup' ? t.sender : t.receiver; return a ? { id: t.shipmentId, lat: a.lat, lng: a.lng, kind: t.kind === 'pickup' ? 'pickup' : 'delivery', label: `${t.seq}. ${x(a.label)}` } : null; }).filter(Boolean);
+  const pts = open.map((t: any) => { const a = t.kind === 'pickup' ? t.sender : t.receiver; return a ? { id: t.shipmentId, lat: a.lat, lng: a.lng, kind: t.kind === 'pickup' ? 'pickup' : 'delivery', label: `${t.seq}. ${x(a.label)}`, meta: { trackingNo: t.trackingNo, status: t.status, at: t.kind === 'pickup' ? t.pickupWindowStart : t.deliverBy, origin: t.sender?.cityCode, dest: t.receiver?.cityCode } } : null; }).filter(Boolean);
   return <><MTop title={lang === 'ar' ? 'خريطة المسار' : 'Route map'} right={<Sim />} />
     <div className="mbodyx">
       <KsaMap points={pts as any} cities={L.cities} onPick={(id) => go('/t/' + id)} height={300} />

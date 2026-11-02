@@ -3,6 +3,7 @@
 // القاعدة: 150–300ms للتفاعلات الصغيرة، 420ms للتأكيدات فقط. MotionConfig reducedMotion="user" يعطّل الحركة الانتقالية تلقائياً
 // لمن فعّل «تقليل الحركة» في نظامه، ويُبقي تغيّر الشفافية فقط.
 import React, { useEffect, useId, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { AnimatePresence, MotionConfig, motion, useReducedMotion, type Variants } from 'motion/react';
 
 export const DUR = { instant: 0.12, fast: 0.16, base: 0.22, slow: 0.3, emphasis: 0.42 } as const;
@@ -57,14 +58,15 @@ export function Drawer({ open, onClose, title, side = 'end', children, width = 4
     };
     window.addEventListener('keydown', k); return () => { window.removeEventListener('keydown', k); (back.current as HTMLElement | null)?.focus?.(); };
   }, [open, onClose]);
-  return <AnimatePresence>{open && <>
+  if (typeof document === 'undefined') return null;
+  return createPortal(<AnimatePresence>{open && <>
     <motion.div className="scrim" onClick={onClose} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: DUR.fast }} />
     <motion.aside ref={ref} role="dialog" aria-modal="true" aria-label={typeof title === 'string' ? title : undefined} className="drawer" style={{ width: `min(${width}px, 100vw)`, [fromRight ? 'right' : 'left']: 0 }}
       initial={{ x: fromRight ? '100%' : '-100%' }} animate={{ x: 0 }} exit={{ x: fromRight ? '100%' : '-100%' }} transition={{ duration: DUR.slow, ease: EASE.emphasized }}>
       <header><h2>{title}</h2><button className="x" onClick={onClose} aria-label="close">×</button></header>
       <div className="drawerbody">{children}</div>
     </motion.aside>
-  </>}</AnimatePresence>;
+  </>}</AnimatePresence>, document.body);
 }
 
 /** قسم قابل للطي بارتفاع متحرك */
