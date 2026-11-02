@@ -1,4 +1,5 @@
 'use client';
+import { greeting, comma } from '@/lib/l10n';
 // لوحة الإدارة — الخيار C: قائمة جانبية عائمة بأقسام قابلة للطي، تحية بحسب الوقت، بحث، تبديل المظهر
 import React, { useEffect, useMemo, useState } from 'react';
 import { AppProvider, useApp, useQ, useRoute, go, transport } from '@/lib/store';
@@ -35,10 +36,10 @@ const GROUP_STYLE: Record<string, { hue: string; icon: string }> = {
 };
 const Ico = ({ d, size = 22 }: { d: string; size?: number }) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={d} /></svg>;
 function Greeting() {
-  const { lang, x, me } = useApp(); const h = Number(new Intl.DateTimeFormat('en-GB', { hour: 'numeric', hour12: false, timeZone: 'Asia/Riyadh' }).format(new Date()));
-  const g = h < 12 ? (lang === 'ar' ? 'صباح الخير' : 'Good morning') : h < 18 ? (lang === 'ar' ? 'مساء الخير' : 'Good afternoon') : (lang === 'ar' ? 'مساء النور' : 'Good evening');
+  const { lang, x, me } = useApp();
+  const g = greeting(lang); // «مساء الخير» بعد الظهر — من المصدر المعتمد للتوطين
   const d = new Intl.DateTimeFormat(lang === 'ar' ? 'ar-SA-u-nu-latn' : 'en-GB', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Asia/Riyadh' }).format(new Date());
-  return <div className="greet"><b>{g}، {x(me.user.name).split(' ').slice(0, 2).join(' ')}</b><span>{d}</span></div>;
+  return <div className="greet"><b>{g}{comma(lang)}{x(me.user.name).split(' ').slice(0, 2).join(' ')}</b><span>{d}</span></div>;
 }
 
 function Shell() {
@@ -85,7 +86,7 @@ function Shell() {
           <span className="grow" />
           <button className="search" onClick={() => setCmdk(true)} aria-keyshortcuts="Control+K"><Ico size={16} d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.3-4.3" /><span>{lang === 'ar' ? 'بحث…' : 'Search…'}</span><span className="grow" /><kbd>Ctrl K</kbd></button>
           <span className="sim" title="demo">{t('app.demoBadge')}</span>
-          <Btn kind="ghost" onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}>{t('common.switchLang')}</Btn>
+          <Btn kind="ghost" className="langbtn" lang={lang === 'ar' ? 'en' : 'ar'} onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}>{t('common.switchLang')}</Btn>
           <ThemeBtn />
           <div style={{ position: 'relative' }}>
             <Btn kind="ghost" className="iconbtn" aria-label={unread > 0 ? `${t('common.notifications')} ${unread}` : t('common.notifications')} onClick={() => setMenu(menu === 'ntf' ? null : 'ntf')}><Ico size={18} d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10 21a2 2 0 0 0 4 0" />{unread > 0 && <span className="badge">{unread}</span>}</Btn>

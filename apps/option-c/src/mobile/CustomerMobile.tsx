@@ -1,4 +1,5 @@
 'use client';
+import { timelineTitle } from '@/lib/l10n';
 // معاينة تطبيق العميل للجوال — الخيار A (CM01–CM12). نفس المحرك والبيانات؛ تطبيق Flutter الفعلي في mobile/customer_app
 import React, { useEffect, useMemo, useState } from 'react';
 import { AppProvider, useApp, useList, useQ, useRoute, go } from '@/lib/store';
@@ -145,13 +146,14 @@ function Track({ id }: { id: string }) {
   const owner = me.organizations?.some((o: any) => o.id === s.organizationId) && canCreate(me.roles);
   const reasons = [{ value: 'RECIPIENT_UNAVAILABLE', ar: 'المستلم غير متاح', en: 'Recipient unavailable' }, { value: 'ADDRESS_ISSUE', ar: 'مشكلة في العنوان', en: 'Address issue' }, { value: 'CUSTOMER_REQUEST', ar: 'طلب العميل', en: 'Customer request' }];
   const steps = ['confirmed', 'pickup_scheduled', 'collected', 'in_transit', 'delivered']; const idx = steps.indexOf(s.status === 'at_handover' ? 'in_transit' : s.status);
-  return <><MTop title={<Mono>{s.trackingNo}</Mono>} back="/shipments" right={<Pill v={s.status} />} />
+  return <><MTop title={<Mono>{s.trackingNo}</Mono>} back="/shipments" right={<Pill v={tr?.inAir ? 'in_air_transit' : s.status} />} />
     <div className="mbodyx" tabIndex={0}>
+      {tr?.inAir && <div className="notice" role="status">{t('ship.noLiveInFlight')}</div>}
       <div className="progress">{steps.map((k, i) => <span key={k} className={i <= idx ? 'on' : ''} title={label(lang, k)} />)}</div>
       <div className="mcard"><span>{x(d.data.sender?.label)} {lang === 'ar' ? '←' : '→'} {x(d.data.receiver?.label)}</span><span className="muted">{L.city(s.originCity)} {lang === 'ar' ? '←' : '→'} {L.city(s.destCity)} · {label(lang, s.thermalClass)} · {label(lang, s.serviceLevel)} · {label(lang, s.mode)}</span>
-        <span>{lang === 'ar' ? 'الوصول المتوقع' : 'ETA'}: <b>{s.eta?.at ? f.dt(s.eta.at) : '—'}</b> {s.eta && <Pill tone={s.eta.confidence === 'high' ? 'good' : s.eta.confidence === 'unavailable' ? 'mute' : 'warn'}>{label(lang, s.eta.confidence)}</Pill>}</span>
-        {tr?.lastConfirmedPosition && <span className="muted">{lang === 'ar' ? 'آخر موقع مؤكد' : 'Last confirmed position'}: {f.dt(tr.lastConfirmedPosition.at)} ({label(lang, tr.lastConfirmedPosition.source)}){!tr.lastConfirmedPosition.isLive && <> · {lang === 'ar' ? 'ليس مباشراً' : 'not live'}</>}</span>}
-        {tr?.lastReading && <span>{lang === 'ar' ? 'آخر حرارة' : 'Last temp'}: <b dir="ltr">{tr.lastReading.tempC ?? '—'}°C</b> · {f.dt(tr.lastReading.deviceTime)} · {label(lang, tr.freshness)} <Sim /></span>}
+        <span>{lang === 'ar' ? 'الوصول المتوقع' : 'ETA'}: <b>{s.eta?.at ? f.dt(s.eta.at) : '—'}</b> {s.eta && <Pill tone={s.eta.confidence === 'high' ? 'good' : s.eta.confidence === 'unavailable' ? 'mute' : 'warn'}>{label(lang, s.eta.confidence, 'confidence')}</Pill>}</span>
+        <span className="muted">{t('ship.lastConfirmed')}: {tr?.lastConfirmedPosition ? <>{f.dt(tr.lastConfirmedPosition.at)} ({f.rel(tr.lastConfirmedPosition.at)} · {label(lang, tr.lastConfirmedPosition.source)}){!tr.lastConfirmedPosition.isLive && <> · {lang === 'ar' ? 'ليس موقعاً مباشراً' : 'not a live position'}</>} <Sim /></> : (lang === 'ar' ? 'لا يوجد بعد' : 'none yet')}</span>
+        {tr?.lastReading && <span>{t('ship.lastKnownReading')}: <b>{f.temp(tr.lastReading.tempC)}</b> · {f.dt(tr.lastReading.deviceTime)} · {label(lang, tr.freshness)} <Sim /></span>}
       </div>
       <a className="btn bigbtn" href={`#/s/${s.id}/temp`}>{lang === 'ar' ? 'تقرير الحرارة' : 'Temperature report'}</a>
       {d.data.pod && <div className="mcard"><b>{t('ship.pod')}</b><span>{d.data.pod.recipientName} · {f.dt(d.data.pod.deliveredAt)}</span>{d.data.pod.signature?.startsWith('data:image') && <img src={d.data.pod.signature} alt="signature" style={{ maxWidth: 160, background: '#fff', borderRadius: 6 }} />}</div>}
@@ -162,7 +164,7 @@ function Track({ id }: { id: string }) {
         {s.status !== 'draft' && <ActionForm label={t('ship.fileClaim')} title={t('ship.fileClaim')} cmd="claim.submit" fields={[{ name: 'claimType', label: lang === 'ar' ? 'النوع' : 'Type', type: 'select', required: true, options: opts(lang, [{ value: 'damage', ar: 'تلف', en: 'Damage' }, { value: 'loss', ar: 'فقدان', en: 'Loss' }, { value: 'delay', ar: 'تأخير', en: 'Delay' }, { value: 'temperature', ar: 'حرارة', en: 'Temperature' }]) }, { name: 'amountSar', label: lang === 'ar' ? 'المبلغ (ر.س)' : 'Amount (SAR)', type: 'number', required: true, min: 1 }, { name: 'description', label: lang === 'ar' ? 'الوصف' : 'Description', type: 'textarea', required: true }]} map={(v) => ({ shipment: s.id, ...v })} success={lang === 'ar' ? 'قُدمت المطالبة' : 'Claim submitted'} />}
       </div>}
       <b>{lang === 'ar' ? 'الخط الزمني' : 'Timeline'}</b>
-      <ol className="mtimeline">{[...d.data.timeline].reverse().map((e: any, i: number) => <li key={i}><b>{x(e.title)}</b><span className="muted">{f.dt(e.at)} · {label(lang, e.source)}</span></li>)}</ol>
+      <ol className="mtimeline">{[...d.data.timeline].reverse().map((e: any, i: number) => <li key={i}><b>{timelineTitle(lang, e)}</b><span className="muted">{f.dt(e.at)} · {label(lang, e.source)}</span></li>)}</ol>
     </div></>;
 }
 

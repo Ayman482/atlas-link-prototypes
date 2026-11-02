@@ -4,7 +4,7 @@ import { defineCommand, must, type Ctx } from './engine';
 import { activePlan, price } from './pricing';
 import { branchGrants, canReadShipment, canWriteShipmentFor, courierOf, customerOrgIds, has, isStaff } from './access';
 import { ACTIVE, ELIGIBILITY_TEXT, addCustody, activePackings, boxReadiness, courierEligibility, currentCustodian, packingOf, partnerEligibility, shipment, transition } from './domain';
-import { DAY, HOUR, MIN, haversineKm, iso, sar } from './util';
+import { DAY, HOUR, MIN, clone, haversineKm, iso, sar } from './util';
 
 const L = (ar: string, en: string) => ({ ar, en });
 const STAFF_OPS: T.RoleCode[] = ['ops_controller', 'customer_service'];
@@ -525,22 +525,32 @@ defineCommand<{ actions: OfflineAction[] }, { results: { clientActionId: string;
   name: 'courier.sync', guard: ['courier'], desc: L('مزامنة إجراءات دون اتصال مع تقرير تعارض', 'Sync offline actions with conflict report'),
   run(ctx, { actions }) {
     const c = courierOf(ctx.actor, ctx.db); if (!c) ctx.fail('FORBIDDEN', 'ليس مندوباً', 'Not a courier', 403);
+    // كل معرّف إجراء عولج سابقاً (مقبول أو متعارض) يُعامل كتكرار: إعادة الإرسال بعد انقطاع لا تنشئ أثراً أو تعارضاً جديداً
     const seen = new Set(ctx.db.audit.filter((a) => a.action === 'offline.action').map((a) => a.entityId));
+    const conflicted = new Map(ctx.db.offlineConflicts.map((x) => [x.clientActionId, x]));
     const map: Record<OfflineAction['type'], string> = { scanPack: 'courier.scanPack', pickup: 'courier.pickup', handover: 'custody.handover', deliver: 'courier.deliver', failAttempt: 'courier.failAttempt' };
     const results = [];
     for (const a of [...actions].sort((x, y) => x.occurredAt.localeCompare(y.occurredAt))) {
-      if (seen.has(a.clientActionId)) { results.push({ clientActionId: a.clientActionId, status: 'duplicate' as const, message: L('تمت معالجته مسبقاً — لا أثر مكرر', 'Already processed — no duplicate effect') }); continue; }
-      const snapshot = JSON.stringify(ctx.db.shipments.find((s) => s.id === a.shipment || s.trackingNo === a.shipment));
+      if (seen.has(a.clientActionId) || conflicted.has(a.clientActionId)) {
+        const prev = conflicted.get(a.clientActionId);
+        results.push({ clientActionId: a.clientActionId, status: 'duplicate' as const, message: prev ? L(`عولج مسبقاً كتعارض: ${prev.reason}`, `Already processed as a conflict: ${prev.reasonEn ?? prev.reason}`) : L('تمت معالجته مسبقاً — لا أثر مكرر', 'Already processed — no duplicate effect') });
+        continue;
+      }
+      // لقطة لكل إجراء: إن فشل الإجراء يُستعاد كل ما عدّله جزئياً قبل الفشل (لا سجل محاولة أو حيازة وهمي)
+      const snap = clone(ctx.db);
       try {
+        if (!map[a.type as OfflineAction['type']]) ctx.fail('UNKNOWN_ACTION', `نوع إجراء غير معروف: ${a.type}`, `Unknown action type: ${a.type}`, 422);
         ctx.exec(map[a.type], { ...a.payload, shipment: a.shipment, occurredAt: a.occurredAt, offline: true });
         ctx.audit('offline.action', 'offline', a.clientActionId, `${a.type} ${a.shipment} (وقت الجهاز ${a.occurredAt})`);
         seen.add(a.clientActionId);
         results.push({ clientActionId: a.clientActionId, status: 'accepted' as const, message: L('تمت المزامنة', 'Synced') });
       } catch (e: any) {
-        void snapshot;
+        for (const k of Object.keys(snap) as (keyof T.Db)[]) (ctx.db as any)[k] = (snap as any)[k];
         const msg = e?.detail ?? L(String(e?.message ?? e), String(e?.message ?? e));
         const sh = ctx.db.shipments.find((s) => s.id === a.shipment || s.trackingNo === a.shipment);
-        ctx.db.offlineConflicts.push({ id: ctx.id('ofc'), clientActionId: a.clientActionId, courierId: c!.id, shipmentId: sh?.id ?? a.shipment, action: a.type, reason: msg.ar, reasonEn: msg.en, occurredAt: a.occurredAt, receivedAt: ctx.nowIso, resolution: 'pending' });
+        const conflict = { id: ctx.id('ofc'), clientActionId: a.clientActionId, courierId: c!.id, shipmentId: sh?.id ?? a.shipment, action: a.type, reason: msg.ar, reasonEn: msg.en, occurredAt: a.occurredAt, receivedAt: ctx.nowIso, resolution: 'pending' as const };
+        ctx.db.offlineConflicts.push(conflict as T.OfflineConflict);
+        conflicted.set(a.clientActionId, conflict as T.OfflineConflict);
         ctx.audit('offline.conflict', 'offline', a.clientActionId, `تعارض: ${msg.ar}`);
         results.push({ clientActionId: a.clientActionId, status: 'conflict' as const, message: msg });
       }

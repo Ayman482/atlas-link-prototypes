@@ -1,9 +1,9 @@
 'use client';
 // مكتبة مكوّنات الخيار C (Emerald Health): حركة Motion، جداول بتوسيع وإجراءات جماعية، خط زمني قابل للتوسيع، منحنى حرارة تفاعلي، خريطة بعلامات قابلة للنقر
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { dict, fmtDateTime, fmtNumber, fmtSAR, fmtTemp, ltr } from '@medlog/i18n';
+import { dict, fmtDateTime, fmtRelative, fmtNumber, fmtSAR, fmtTemp, ltr } from '@medlog/i18n';
 import { useApp } from './store';
-import { VALUE_LABELS } from './l10n';
+import { label as tlabel, timelineTitle, timelineDetail } from './l10n';
 import { AnimatePresence, Collapse, DUR, EASE, Tip, fadeUp, motion, staggerParent } from './motion';
 
 export const cx = (...a: (string | false | null | undefined)[]) => a.filter(Boolean).join(' ');
@@ -20,27 +20,12 @@ const TONE: Record<string, 'good' | 'warn' | 'crit' | 'info' | 'mute'> = {
   parsed: 'good', quarantined: 'warn', dead_letter: 'crit', duplicate: 'mute', acked: 'good', sent: 'info', on_route: 'info', off_shift: 'mute', done: 'good',
   simulated: 'warn', not_configured: 'mute', planned_phase_2: 'mute', blocked: 'crit',
 };
-const DICTS = ['shipmentStatus', 'boxStatus', 'deviceState', 'excursionStatus', 'incidentStatus', 'claimStatus', 'invoiceStatus', 'settlementStatus', 'licenseStatus', 'severity', 'freshness', 'thermal', 'level', 'mode', 'custodian', 'approvalKind', 'roles', 'requestType'] as const;
-const EXTRA: Record<string, { ar: string; en: string }> = {
-  pending: { ar: 'معلّق', en: 'Pending' }, pending_approval: { ar: 'بانتظار الاعتماد', en: 'Pending approval' }, active: { ar: 'نشط', en: 'Active' }, published: { ar: 'منشور', en: 'Published' }, superseded: { ar: 'مستبدل', en: 'Superseded' }, planned: { ar: 'مخطط', en: 'Planned' }, dispatched: { ar: 'مُرسل', en: 'Dispatched' }, in_progress: { ar: 'جارٍ', en: 'In progress' }, completed: { ar: 'مكتمل', en: 'Completed' }, departed: { ar: 'غادر', en: 'Departed' }, arrived: { ar: 'وصل', en: 'Arrived' },
-  parsed: { ar: 'محلَّلة', en: 'Parsed' }, quarantined: { ar: 'معزولة', en: 'Quarantined' }, dead_letter: { ar: 'Dead-letter', en: 'Dead-letter' }, duplicate: { ar: 'مكررة', en: 'Duplicate' }, acked: { ar: 'مُستلم ACK', en: 'Acked' }, sent: { ar: 'مرسل', en: 'Sent' }, expired: { ar: 'منتهٍ', en: 'Expired' },
-  on_route: { ar: 'في مسار', en: 'On route' }, off_shift: { ar: 'خارج المناوبة', en: 'Off shift' }, done: { ar: 'منجز', en: 'Done' }, simulated: { ar: 'محاكاة', en: 'Simulated' }, not_configured: { ar: 'غير مهيأ', en: 'Not configured' }, planned_phase_2: { ar: 'مرحلة لاحقة', en: 'Later phase' }, blocked: { ar: 'محظور', en: 'Blocked' },
-  approved: { ar: 'معتمد', en: 'Approved' }, rejected: { ar: 'مرفوض', en: 'Rejected' }, draft: { ar: 'مسودة', en: 'Draft' }, overdue: { ar: 'متأخر', en: 'Overdue' }, inactive: { ar: 'غير نشط', en: 'Inactive' }, revoked: { ar: 'ملغى', en: 'Revoked' }, invited: { ar: 'مدعو', en: 'Invited' }, disabled: { ar: 'معطل', en: 'Disabled' }, skipped: { ar: 'تم تخطيه', en: 'Skipped' }, requested: { ar: 'مطلوب', en: 'Requested' }, under_review: { ar: 'قيد المراجعة', en: 'Under review' },
-  offline_expected_or_unknown: { ar: 'غير متصل (متوقع أثناء الطيران)', en: 'Offline (expected in flight)' }, online: { ar: 'متصل', en: 'Online' }, offline_or_delayed: { ar: 'غير متصل أو متأخر', en: 'Offline or delayed' }, no_device: { ar: 'لا جهاز', en: 'No device' }, unavailable: { ar: 'غير متاح', en: 'Unavailable' },
-  BLOOD_TUBES: { ar: 'أنابيب دم', en: 'Blood tubes' }, TISSUE_BIOPSY: { ar: 'خزعة نسيجية', en: 'Tissue biopsy' }, SWAB_PCR: { ar: 'مسحة PCR', en: 'PCR swab' }, URINE_CULTURE: { ar: 'مزرعة بول', en: 'Urine culture' }, CSF_SAMPLE: { ar: 'سائل نخاعي', en: 'CSF sample' }, SERUM_ALIQUOT: { ar: 'عينة مصل', en: 'Serum aliquot' },
-  pickup: { ar: 'استلام', en: 'Pickup' }, delivery: { ar: 'تسليم', en: 'Delivery' }, handover: { ar: 'نقل حيازة', en: 'Handover' }, return: { ar: 'إرجاع', en: 'Return' }, road: { ar: 'بري', en: 'Road' }, air: { ar: 'جوي', en: 'Air' },
-  applicable: { ar: 'منطبق', en: 'Applicable' }, not_applicable: { ar: 'غير منطبق', en: 'Not applicable' }, pending_legal_review: { ar: 'بانتظار المراجعة القانونية', en: 'Pending legal review' }, success: { ar: 'نجح', en: 'Success' }, failed: { ar: 'فشل', en: 'Failed' }, received: { ar: 'مستلمة', en: 'Received' }, simulated_cleared: { ar: 'مقبولة (محاكاة)', en: 'Cleared (simulated)' }, not_submitted: { ar: 'لم تُرسل', en: 'Not submitted' }, paused: { ar: 'موقوف', en: 'Paused' },
-};
-export function label(lang: 'ar' | 'en', v: string | null | undefined) {
-  if (!v) return '—';
-  if (VALUE_LABELS[v]) return VALUE_LABELS[v][lang];
-  for (const d of DICTS) { const e = (dict as any)[d][v]; if (e) return e[lang]; }
-  return EXTRA[v]?.[lang] ?? v;
-}
-export function Pill({ v, tone, children, tip }: { v?: string | null; tone?: string; children?: React.ReactNode; tip?: React.ReactNode }) {
+/** تسمية رمز تقني من المصدر المعتمد (packages/i18n/src/terms.ts)؛ domain يحل الرموز المتعددة المعنى (مثل outcome لـ failed) */
+export function label(lang: 'ar' | 'en', v: string | null | undefined, domain?: string) { return tlabel(lang, v, domain); }
+export function Pill({ v, d, tone, children, tip }: { v?: string | null; d?: string; tone?: string; children?: React.ReactNode; tip?: React.ReactNode }) {
   const { lang } = useApp();
   const t = tone ?? TONE[v ?? ''] ?? 'mute';
-  const el = <span className={cx('pill', t, (v === 'live' || v === 'open' || v === 'critical') && 'pulse')}>{children ?? label(lang, v)}</span>;
+  const el = <span className={cx('pill', t, (v === 'live' || v === 'open' || v === 'critical') && 'pulse')}>{children === undefined ? label(lang, v, d) : typeof children === 'string' && /^[A-Za-z_]+$/.test(children) ? label(lang, children, d) : children}</span>;
   return tip ? <Tip text={tip}>{el}</Tip> : el;
 }
 export const Mono = ({ children }: { children: React.ReactNode }) => <span className="mono">{children}</span>;
@@ -50,7 +35,7 @@ export function Demo() { const { lang } = useApp(); return <span className="sim"
 // ---------- تنسيق ----------
 export function useFmt() {
   const { lang } = useApp();
-  return { dt: (s?: string | null) => fmtDateTime(lang, s), sar: (h?: number | null) => fmtSAR(lang, h), num: (n?: number | null, d = 0) => fmtNumber(lang, n, d), temp: (c?: number | null) => fmtTemp(lang, c), id: (s: string) => ltr(s) };
+  return { rel: (s?: string | null) => fmtRelative(lang, s), dt: (s?: string | null) => fmtDateTime(lang, s), sar: (h?: number | null) => fmtSAR(lang, h), num: (n?: number | null, d = 0) => fmtNumber(lang, n, d), temp: (c?: number | null) => fmtTemp(lang, c), id: (s: string) => ltr(s) };
 }
 
 // ---------- هيكل الصفحات ----------
@@ -285,23 +270,22 @@ export function DataTable<R extends { id?: string }>({ rows, cols, filters = [],
 }
 
 // ---------- الخط الزمني ----------
-const SRC: Record<string, { ar: string; en: string }> = { device: { ar: 'جهاز التتبع', en: 'Tracker device' }, courier_app: { ar: 'تطبيق المندوب', en: 'Courier app' }, offline_sync: { ar: 'مزامنة بعد انقطاع', en: 'Offline sync' }, carrier: { ar: 'الناقل', en: 'Carrier' }, admin: { ar: 'العمليات', en: 'Operations' }, system: { ar: 'النظام', en: 'System' }, warehouse: { ar: 'المستودع', en: 'Warehouse' }, customer: { ar: 'العميل', en: 'Customer' }, manual: { ar: 'إدخال يدوي', en: 'Manual entry' } };
 /** خط زمني بمصدر كل حدث: كل حدث قابل للتوسيع لعرض وقت الجهاز ووقت الاستلام والتأخير والتفاصيل */
-export function Timeline({ items }: { items: { at: string; receivedAt?: string; kind: string; source: string; title: { ar: string; en: string }; detail?: string }[] }) {
+export function Timeline({ items }: { items: { at: string; receivedAt?: string; kind: string; source: string; title: { ar: string; en: string }; detail?: string; codes?: any }[] }) {
   const { lang } = useApp(); const f = useFmt(); const [open, setOpen] = useState<Record<number, boolean>>({}); const all = items.length > 0 && items.every((_, i) => open[i]);
   return <div className="tlwrap">
     {items.length > 1 && <div className="row" style={{ justifyContent: 'flex-end' }}><Btn kind="ghost" onClick={() => setOpen(all ? {} : Object.fromEntries(items.map((_, i) => [i, true])))}>{all ? (lang === 'ar' ? 'طي الكل' : 'Collapse all') : (lang === 'ar' ? 'توسيع الكل' : 'Expand all')}</Btn></div>}
     <motion.ol className="timeline" variants={staggerParent} initial="hidden" animate="show">{items.map((e, i) => { const lag = e.receivedAt ? Math.round((Date.parse(e.receivedAt) - Date.parse(e.at)) / 60000) : 0; return <motion.li key={i} variants={fadeUp} className={'k-' + e.kind}>
       <span className="tdot" aria-hidden="true" />
       <button className="tlhead" aria-expanded={!!open[i]} onClick={() => setOpen({ ...open, [i]: !open[i] })}>
-        <span><b>{e.title[lang]}</b>{lag > 5 && <span className="pill warn" style={{ marginInlineStart: 8 }}>{lang === 'ar' ? 'وصل متأخراً' : 'Late arrival'}</span>}</span>
-        <span className="tmeta"><time>{f.dt(e.at)}</time><span className="src">{SRC[e.source]?.[lang] ?? e.source}</span></span>
+        <span><b>{timelineTitle(lang, e)}</b>{lag > 5 && <span className="pill warn" style={{ marginInlineStart: 8 }}>{lang === 'ar' ? 'وصل متأخراً' : 'Late arrival'}</span>}</span>
+        <span className="tmeta"><time>{f.dt(e.at)}</time><span className="src">{label(lang, e.source)}</span></span>
       </button>
       <Collapse open={!!open[i]}><dl className="tldetail">
         <div><dt>{lang === 'ar' ? 'وقت الحدث (الجهاز/الميدان)' : 'Event time (device/field)'}</dt><dd>{f.dt(e.at)}</dd></div>
         <div><dt>{lang === 'ar' ? 'وقت الاستلام في النظام' : 'Received by system'}</dt><dd>{e.receivedAt ? f.dt(e.receivedAt) : '—'}{lag > 0 && <span className="muted"> · {lang === 'ar' ? `بعد ${lag} د` : `${lag} min later`}</span>}</dd></div>
-        <div><dt>{lang === 'ar' ? 'المصدر' : 'Source'}</dt><dd>{SRC[e.source]?.[lang] ?? e.source}</dd></div>
-        {e.detail && <div><dt>{lang === 'ar' ? 'التفاصيل' : 'Details'}</dt><dd>{e.detail}</dd></div>}
+        <div><dt>{lang === 'ar' ? 'المصدر' : 'Source'}</dt><dd>{label(lang, e.source)}</dd></div>
+        {e.detail && <div><dt>{lang === 'ar' ? 'التفاصيل' : 'Details'}</dt><dd>{timelineDetail(lang, e)}</dd></div>}
       </dl></Collapse>
     </motion.li>; })}</motion.ol>
   </div>;
@@ -339,11 +323,11 @@ export function TempChart({ report, height = 240 }: { report: any; height?: numb
         <div className="seg" role="group" aria-label={lang === 'ar' ? 'النطاق الزمني' : 'Time range'}>{(['1h', '6h', '24h', 'all'] as const).map((r) => <button key={r} className={range === r ? 'on' : ''} aria-pressed={range === r} onClick={() => { setRange(r); setIdx(null); }}>{r === 'all' ? (lang === 'ar' ? 'الكل' : 'All') : lang === 'ar' ? r.replace('h', ' س') : r}</button>)}</div>
         <span className="muted" aria-live="polite">{sel ? <><b dir="ltr" style={{ color: out(sel.c) ? 'var(--crit)' : 'var(--fg)' }}>{f.temp(sel.c)}</b> · {f.dt(sel.t)}{sel.backfilled && <> · {lang === 'ar' ? 'مُستكمَلة لاحقاً' : 'backfilled'}</>}{out(sel.c) && <> · <b style={{ color: 'var(--crit)' }}>{lang === 'ar' ? 'خارج النطاق' : 'Out of range'}</b></>}</> : (lang === 'ar' ? 'مرّر المؤشر أو استخدم الأسهم لقراءة كل نقطة' : 'Hover or use arrow keys to read each point')}</span>
       </div>
-      <svg ref={ref} viewBox={`0 0 ${W} ${H}`} role="img" tabIndex={0} aria-label={lang === 'ar' ? `منحنى الحرارة: ${pts.length} قراءة، النطاق المسموح ${report.profile.minC} إلى ${report.profile.maxC} درجة` : `Temperature chart: ${pts.length} readings, allowed range ${report.profile.minC} to ${report.profile.maxC} °C`} onPointerMove={onMove} onPointerLeave={() => setIdx(null)} onKeyDown={onKey}>
+      <div className="chartscroll"><svg ref={ref} viewBox={`0 0 ${W} ${H}`} role="img" tabIndex={0} aria-label={lang === 'ar' ? `منحنى الحرارة: ${pts.length} قراءة، النطاق المسموح ${f.num(report.profile.minC, 1)} إلى ${f.num(report.profile.maxC, 1)} درجة` : `Temperature chart: ${pts.length} readings, allowed range ${f.num(report.profile.minC, 1)} to ${f.num(report.profile.maxC, 1)} °C`} onPointerMove={onMove} onPointerLeave={() => setIdx(null)} onKeyDown={onKey}>
         <defs><linearGradient id="tline" x1="0" x2="1"><stop offset="0" stopColor="var(--primary)" /><stop offset="1" stopColor="var(--navy)" /></linearGradient><linearGradient id="tarea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="var(--primary)" stopOpacity=".22" /><stop offset="1" stopColor="var(--primary)" stopOpacity="0" /></linearGradient><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="var(--muted)" strokeWidth="1" opacity="0.4" /></pattern></defs>
-        <rect x={pl} y={Y(report.profile.maxC)} width={W - pl - pr} height={Y(report.profile.minC) - Y(report.profile.maxC)} fill="var(--success-soft)" />
+        {!report.profile.observedOnly && <rect x={pl} y={Y(report.profile.maxC)} width={W - pl - pr} height={Y(report.profile.minC) - Y(report.profile.maxC)} fill="var(--success-soft)" />}
         {ticks.map((v, i) => <g key={i}><line x1={pl} x2={W - pr} y1={Y(v)} y2={Y(v)} stroke="var(--line)" /><text x={pl - 6} y={Y(v) + 4} textAnchor="end" fontSize="11" fill="var(--muted)">{v.toFixed(0)}°</text></g>)}
-        {[report.profile.maxC, report.profile.minC].map((v: number, i: number) => <g key={'th' + i}><line x1={pl} x2={W - pr} y1={Y(v)} y2={Y(v)} stroke="var(--success)" strokeDasharray="6 4" strokeWidth="1.4" /><text x={W - pr - 4} y={Y(v) - 4} textAnchor="end" fontSize="11" fill="var(--success)">{i === 0 ? (lang === 'ar' ? 'الحد الأعلى' : 'Max') : (lang === 'ar' ? 'الحد الأدنى' : 'Min')} {v}°</text></g>)}
+        {(report.profile.observedOnly ? [] : [report.profile.maxC, report.profile.minC]).map((v: number, i: number) => <g key={'th' + i}><line x1={pl} x2={W - pr} y1={Y(v)} y2={Y(v)} stroke="var(--success)" strokeDasharray="6 4" strokeWidth="1.4" /><text x={W - pr - 4} y={Y(v) - 4} textAnchor="end" fontSize="11" fill="var(--success)">{i === 0 ? (lang === 'ar' ? 'الحد الأعلى' : 'Max') : (lang === 'ar' ? 'الحد الأدنى' : 'Min')} {f.num(v, 1)}°</text></g>)}
         {xt.map((v, i) => <text key={i} x={X(v)} y={H - 8} textAnchor="middle" fontSize="11" fill="var(--muted)">{hm.format(new Date(v))}</text>)}
         {gaps.map((g: any, i: number) => <rect key={i} x={X(Math.max(t0, Date.parse(g.from)))} y={pt} width={Math.max(2, X(Date.parse(g.to)) - X(Math.max(t0, Date.parse(g.from))))} height={H - pt - pb} fill="url(#hatch)"><title>{(lang === 'ar' ? 'فجوة بيانات ' : 'Data gap ') + g.minutes + (lang === 'ar' ? ' دقيقة — ' : ' min — ') + (g.reason?.[lang] ?? '')}</title></rect>)}
         {report.excursions.map((e: any, i: number) => <rect key={'e' + i} x={X(Math.max(t0, Date.parse(e.startedAt)))} y={pt} width={Math.max(3, X(Date.parse(e.endedAt ?? new Date(t1).toISOString())) - X(Math.max(t0, Date.parse(e.startedAt))))} height={H - pt - pb} fill="var(--critical)" opacity="0.14" />)}
@@ -351,9 +335,9 @@ export function TempChart({ report, height = 240 }: { report: any; height?: numb
         {segs.map((d, i) => <path key={range + i} className="line" d={d} fill="none" stroke="url(#tline)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />)}
         {pts.filter((p: any) => out(p.c)).map((p: any, i: number) => <circle key={i} cx={X(Date.parse(p.t))} cy={Y(p.c)} r="3.2" fill="var(--critical)" />)}
         {sel && <g pointerEvents="none"><line x1={X(Date.parse(sel.t))} x2={X(Date.parse(sel.t))} y1={pt} y2={H - pb} stroke="var(--fg)" strokeOpacity=".35" /><circle cx={X(Date.parse(sel.t))} cy={Y(sel.c)} r="5.5" fill={out(sel.c) ? 'var(--critical)' : 'var(--primary)'} stroke="var(--surface)" strokeWidth="2" /></g>}
-      </svg>
+      </svg></div>
       <figcaption className="legend">
-        <span><i className="sw band" />{lang === 'ar' ? `النطاق ${report.profile.minC} إلى ${report.profile.maxC} °م (غير معتمد بعد)` : `Range ${report.profile.minC} to ${report.profile.maxC} °C (not yet approved)`}</span>
+        {report.profile.observedOnly ? <span className="muted">{lang === 'ar' ? 'لا يوجد ملف حراري مرتبط بالجهاز الآن — لا تُعرض حدود مسموحة' : 'No thermal profile linked to this device now — no allowed limits shown'}</span> : <span><i className="sw band" />{lang === 'ar' ? `النطاق ${f.num(report.profile.minC, 1)} إلى ${f.num(report.profile.maxC, 1)} °م (غير معتمد بعد)` : `Range ${f.num(report.profile.minC, 1)} to ${f.num(report.profile.maxC, 1)} °C (not yet approved)`}</span>}
         <span><i className="sw gap" />{lang === 'ar' ? 'فجوة بيانات — لا تعني الالتزام' : 'Data gap — does not imply compliance'}</span>
         <span><i className="sw exc" />{lang === 'ar' ? 'انحراف' : 'Excursion'}</span>
         <span className="muted">{lang === 'ar' ? 'آخر قراءة' : 'Last reading'}: {f.temp(all[all.length - 1].c)} · {f.dt(all[all.length - 1].t)}</span>
@@ -385,7 +369,7 @@ export function KsaMap({ points, cities, onPick, height = 380 }: { points: MapPt
           {points.map((pt) => { const p = project(pt.lat, pt.lng); const on = pt.id === selId; return <g key={pt.id} className={cx('mk', pt.kind, on && 'on')} onClick={() => setSel(on ? null : pt.id)} tabIndex={0} role="button" aria-pressed={on} aria-label={pt.label} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSel(on ? null : pt.id); } }}>
             {pt.alert && <circle className="alertring" cx={p.x} cy={p.y} r="12" />}
             {pt.kind === 'live' && <circle className="halo" cx={p.x} cy={p.y} r="6" />}
-            <circle className="core" cx={p.x} cy={p.y} r={on ? 9 : 6} /><title>{pt.label}</title></g>; })}
+            <circle className="hit" cx={p.x} cy={p.y} r={14} /><circle className="core" cx={p.x} cy={p.y} r={on ? 9 : 6} /><title>{pt.label}</title></g>; })}
         </svg>
         <AnimatePresence>{sel && <motion.div className="mapcard" role="region" aria-live="polite" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} transition={{ duration: DUR.base }}>
           <div className="row" style={{ justifyContent: 'space-between' }}><b className="mono">{sel.meta?.trackingNo ?? sel.label}</b><button className="x" onClick={() => setSel(null)} aria-label={lang === 'ar' ? 'إغلاق' : 'Close'}>×</button></div>
@@ -393,7 +377,7 @@ export function KsaMap({ points, cities, onPick, height = 380 }: { points: MapPt
           <dl className="tldetail">
             <div><dt>{lang === 'ar' ? 'نوع الموقع' : 'Location type'}</dt><dd><i className={'sw mk ' + sel.kind} />{FRESH[sel.kind]?.[lang] ?? sel.kind}</dd></div>
             <div><dt>{sel.kind === 'planned' || sel.kind === 'pickup' ? (lang === 'ar' ? 'بداية نافذة الاستلام' : 'Pickup window start') : sel.kind === 'delivery' ? (lang === 'ar' ? 'التسليم قبل' : 'Deliver by') : (lang === 'ar' ? 'وقت آخر موقع مؤكد' : 'Last confirmed fix')}</dt><dd>{f.dt(sel.meta?.at)}</dd></div>
-            {sel.meta?.source && <div><dt>{lang === 'ar' ? 'مصدر الموقع' : 'Position source'}</dt><dd>{SRC[sel.meta.source]?.[lang] ?? sel.meta.source}</dd></div>}
+            {sel.meta?.source && <div><dt>{lang === 'ar' ? 'مصدر الموقع' : 'Position source'}</dt><dd>{label(lang, sel.meta.source)}</dd></div>}
             {o && d && <div><dt>{lang === 'ar' ? 'المسار' : 'Route'}</dt><dd>{o.name[lang]} {lang === 'ar' ? '←' : '→'} {d.name[lang]}</dd></div>}
           </dl>
           <span className="sim">{lang === 'ar' ? 'المواقع بيانات عرض محاكاة' : 'Positions are simulated demo data'}</span>

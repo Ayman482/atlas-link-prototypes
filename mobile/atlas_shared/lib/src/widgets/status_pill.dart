@@ -19,13 +19,14 @@ class StatusPill extends StatelessWidget {
   final String? value;
   final String? text;
   final Tone? tone;
-  const StatusPill(this.value, {super.key, this.text, this.tone});
+  final String? domain; // سياق التسمية (مثل confidence) — نفس منطق الويب
+  const StatusPill(this.value, {super.key, this.text, this.tone, this.domain});
   @override
   Widget build(BuildContext context) {
     final c = AtlasColors.of(context);
     final t = tone ?? _tones[value] ?? Tone.mute;
     final (fg, bg) = switch (t) { Tone.good => (c.success, c.successSoft), Tone.warn => (c.warning, c.warningSoft), Tone.crit => (c.critical, c.criticalSoft), Tone.info => (c.info, c.infoSoft), Tone.mute => (c.muted, c.line.withValues(alpha: .5)) };
-    final label = text ?? S(Localizations.localeOf(context).languageCode).label(value);
+    final label = text ?? S(Localizations.localeOf(context).languageCode).label(value, domain);
     final pulse = value == 'live' || value == 'open' || value == 'critical';
     return Semantics(
       label: label,

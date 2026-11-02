@@ -16,6 +16,8 @@ export function scoped(db: T.Db, a: Actor, col: T.Collection): unknown[] {
   if (isStaff(a)) {
     if (FINANCE_COLLECTIONS.has(col) && !canSeeInternalFinance(a) && !has(a, 'super_admin')) return col === 'ratePlans' ? all : [];
     if (col === 'audit' && !has(a, 'super_admin', 'compliance', 'executive')) return (all as T.AuditEvent[]).filter((x) => x.actorId === a.user.id);
+    // الجلسات: كل موظف يرى جلساته فقط؛ مدير المنصة ومسؤول الامتثال يرون الكل (معرّفات الجلسات حساسة)
+    if (col === 'sessions' && !has(a, 'super_admin', 'compliance')) return (all as T.Session[]).filter((x) => x.userId === a.user.id);
     return all;
   }
   const orgs = new Set(customerOrgIds(a));
@@ -67,7 +69,8 @@ const textOf = (o: any): string => JSON.stringify(o).toLowerCase();
 defineQuery<{ collection: T.Collection; filter?: Record<string, unknown>; q?: string; sort?: string; dir?: 'asc' | 'desc'; page?: number; pageSize?: number }, { items: unknown[]; total: number; page: number; pageSize: number }>({
   name: 'list', guard: 'any',
   run(db, a, p) {
-    if (!(p.collection in db) || p.collection === ('meta' as never)) throw nf();
+    // Object.hasOwn: لا تُقبل أسماء موروثة مثل constructor أو __proto__ (كانت تعيد 500)
+    if (typeof p.collection !== 'string' || !Object.hasOwn(db, p.collection) || p.collection === ('meta' as never) || !Array.isArray(db[p.collection])) throw nf();
     let items = scoped(db, a, p.collection);
     for (const [k, v] of Object.entries(p.filter ?? {})) {
       if (v === undefined || v === '' || v === null) continue;
@@ -83,7 +86,7 @@ defineQuery<{ collection: T.Collection; filter?: Record<string, unknown>; q?: st
 
 defineQuery<{ id: string; collection: T.Collection }, unknown>({
   name: 'get', guard: 'any',
-  run(db, a, { id, collection }) { const x = (scoped(db, a, collection) as { id?: string }[]).find((r) => r.id === id); if (!x) throw nf(); return x; },
+  run(db, a, { id, collection }) { if (typeof collection !== 'string' || !Object.hasOwn(db, collection) || !Array.isArray(db[collection])) throw nf(); const x = (scoped(db, a, collection) as { id?: string }[]).find((r) => r.id === id); if (!x) throw nf(); return x; },
 });
 
 defineQuery<Record<string, never>, unknown>({
@@ -97,17 +100,27 @@ defineQuery<Record<string, never>, unknown>({
 
 /** الخط الزمني الموحّد بمصادره (MMT-001..018) */
 function timeline(db: T.Db, a: Actor, s: T.Shipment) {
-  const ev: { at: string; receivedAt?: string; kind: string; source: string; title: T.L; detail?: string; live?: boolean }[] = [];
+  const ev: { at: string; receivedAt?: string; kind: string; source: string; title: T.L; detail?: string; live?: boolean; codes?: Record<string, string | number> }[] = [];
   const S: Record<string, T.L> = { draft: { ar: 'مسودة', en: 'Draft' }, confirmed: { ar: 'مؤكدة', en: 'Confirmed' }, pickup_scheduled: { ar: 'جُدول الاستلام', en: 'Pickup scheduled' }, collected: { ar: 'تم الاستلام', en: 'Collected' }, in_transit: { ar: 'في الطريق', en: 'In transit' }, at_handover: { ar: 'عند نقطة التسليم', en: 'At handover' }, delivered: { ar: 'تم التسليم', en: 'Delivered' }, failed: { ar: 'تعذّر التسليم', en: 'Delivery failed' }, return_pending: { ar: 'بانتظار الإرجاع', en: 'Return pending' }, returned: { ar: 'تم الإرجاع', en: 'Returned' }, cancelled: { ar: 'ملغاة', en: 'Cancelled' }, exception: { ar: 'استثناء', en: 'Exception' } };
-  for (const e of db.statusEvents.filter((x) => x.shipmentId === s.id)) ev.push({ at: e.occurredAt, kind: 'status', source: e.source, title: e.fromStatus === e.toStatus ? { ar: e.reason, en: e.reason } : S[e.toStatus], detail: e.fromStatus === e.toStatus ? undefined : e.reason });
-  for (const c of db.custody.filter((x) => x.shipmentId === s.id)) ev.push({ at: c.occurredAt, receivedAt: c.receivedAt, kind: 'custody', source: c.source, title: { ar: `نقل حيازة: ${c.fromType} ← ${c.toType}`, en: `Custody: ${c.fromType} → ${c.toType}` }, detail: `${c.evidence.signedBy} (${c.evidence.method})` });
+  for (const e of db.statusEvents.filter((x) => x.shipmentId === s.id)) ev.push({ at: e.occurredAt, kind: 'status', source: e.source, title: e.fromStatus === e.toStatus ? { ar: e.reason, en: e.reason } : S[e.toStatus], detail: e.fromStatus === e.toStatus ? undefined : e.reason , codes: { status: e.toStatus } });
+  for (const c of db.custody.filter((x) => x.shipmentId === s.id)) ev.push({ at: c.occurredAt, receivedAt: c.receivedAt, kind: 'custody', source: c.source, title: { ar: `نقل حيازة: ${c.fromType} ← ${c.toType}`, en: `Custody: ${c.fromType} → ${c.toType}` }, detail: `${c.evidence.signedBy} (${c.evidence.method})` , codes: { fromType: c.fromType, toType: c.toType, method: c.evidence.method } });
   const legIds = db.shipmentLegs.filter((x) => x.shipmentId === s.id).map((x) => x.legId);
-  for (const c of db.carrierEvents.filter((x) => legIds.includes(x.legId))) ev.push({ at: c.occurredAt, receivedAt: c.receivedAt, kind: 'carrier', source: 'carrier_api (محاكاة)', title: { ar: `الناقل: ${c.eventType}`, en: `Carrier: ${c.eventType}` }, detail: db.legs.find((l) => l.id === c.legId)?.flightNo ?? '' });
-  for (const e of db.excursions.filter((x) => x.shipmentId === s.id)) ev.push({ at: e.startedAt, kind: 'excursion', source: 'cold_chain', title: { ar: `انحراف حراري (ذروة ${e.peakC} °م)`, en: `Excursion (peak ${e.peakC} °C)` }, detail: e.status });
+  for (const c of db.carrierEvents.filter((x) => legIds.includes(x.legId))) ev.push({ at: c.occurredAt, receivedAt: c.receivedAt, kind: 'carrier', source: 'carrier_api (محاكاة)', title: { ar: `الناقل: ${c.eventType}`, en: `Carrier: ${c.eventType}` }, detail: db.legs.find((l) => l.id === c.legId)?.flightNo ?? '' , codes: { eventType: c.eventType } });
+  for (const e of db.excursions.filter((x) => x.shipmentId === s.id)) ev.push({ at: e.startedAt, kind: 'excursion', source: 'cold_chain', title: { ar: `انحراف حراري (ذروة ${e.peakC} °م)`, en: `Excursion (peak ${e.peakC} °C)` }, detail: e.status , codes: { status: e.status, peakC: e.peakC } });
   for (const p of db.pods.filter((x) => x.shipmentId === s.id)) ev.push({ at: p.deliveredAt, kind: 'pod', source: 'courier_app', title: { ar: 'إثبات التسليم', en: 'Proof of delivery' }, detail: p.recipientName });
-  for (const d of db.deliveryAttempts.filter((x) => x.shipmentId === s.id)) ev.push({ at: d.attemptedAt, kind: 'attempt', source: 'courier_app', title: { ar: 'محاولة تسليم فاشلة', en: 'Failed attempt' }, detail: d.reasonCode });
-  if (isStaff(a)) { const pk = db.packings.find((p) => p.shipmentId === s.id); if (pk) for (const h of db.deviceHealth.filter((h) => h.deviceId === deviceOfBox(db, pk.boxId)?.id && h.observedAt >= pk.packedAt && (!pk.unpackedAt || h.observedAt <= pk.unpackedAt))) ev.push({ at: h.observedAt, kind: 'device', source: 'gpt45m', title: { ar: `الجهاز: ${h.eventType}`, en: `Device: ${h.eventType}` } }); }
+  for (const d of db.deliveryAttempts.filter((x) => x.shipmentId === s.id)) ev.push({ at: d.attemptedAt, kind: 'attempt', source: 'courier_app', title: { ar: 'محاولة تسليم فاشلة', en: 'Failed attempt' }, detail: d.reasonCode , codes: { reasonCode: d.reasonCode } });
+  if (isStaff(a)) { const pk = db.packings.find((p) => p.shipmentId === s.id); if (pk) for (const h of db.deviceHealth.filter((h) => h.deviceId === deviceOfBox(db, pk.boxId)?.id && h.observedAt >= pk.packedAt && (!pk.unpackedAt || h.observedAt <= pk.unpackedAt))) ev.push({ at: h.observedAt, kind: 'device', source: 'gpt45m', title: { ar: `الجهاز: ${h.eventType}`, en: `Device: ${h.eventType}` } , codes: { eventType: h.eventType } }); }
   return ev.sort((x, y) => x.at.localeCompare(y.at));
+}
+
+/** اسم الحائز الحالي للعرض (لا يُعرض معرّف داخلي مثل cou_01 للعميل) */
+function custodianName(db: T.Db, c: { type: string; id: string } | null): T.L | null {
+  if (!c) return null;
+  if (c.type === 'courier') return db.couriers.find((x) => x.id === c.id)?.name ?? null;
+  if (c.type === 'partner' || c.type === 'air_carrier') return db.partners.find((x) => x.id === c.id)?.name ?? null;
+  if (c.type === 'warehouse') return db.warehouses.find((x) => x.id === c.id)?.name ?? null;
+  if (c.type === 'customer') { const o = db.organizations.find((x) => x.id === c.id); return o ? o.legalName : null; }
+  return null;
 }
 
 /** التتبع: آخر موقع مؤكد وحداثة البيانات — لا موقع حي مختلق (API §4.2) */
@@ -150,7 +163,7 @@ defineQuery<{ id: string }, unknown>({
       items: db.shipmentItems.filter((x) => x.shipmentId === s.id), profile: db.serviceProfiles.find((p) => p.id === s.serviceProfileId),
       box: box ? (staff ? { ...box, device: deviceOfBox(db, box.id), coPacked } : { code: box.code, size: box.size, thermalClass: box.thermalClass }) : null,
       packings: staff ? packs : packs.map((p) => ({ packedAt: p.packedAt, unpackedAt: p.unpackedAt })),
-      legs, timeline: timeline(db, a, s), tracking: tracking(db, s, now), custodian: currentCustodian(db, s.id),
+      legs, timeline: timeline(db, a, s), tracking: tracking(db, s, now), custodian: currentCustodian(db, s.id), custodianName: custodianName(db, currentCustodian(db, s.id)),
       pod: db.pods.find((p) => p.shipmentId === s.id) ?? null, attempts: db.deliveryAttempts.filter((x) => x.shipmentId === s.id), returns: db.returns.filter((x) => x.shipmentId === s.id),
       excursions: db.excursions.filter((x) => x.shipmentId === s.id), incidents: staff ? db.incidents.filter((x) => x.shipmentId === s.id) : [], claims: db.claims.filter((x) => x.shipmentId === s.id && (staff || customerOrgIds(a).includes(x.organizationId))),
       disposition: db.dispositions.find((d) => d.shipmentId === s.id) ?? null, legalHold: staff ? db.legalHolds.find((h) => h.subjectId === s.id && !h.releasedAt) ?? null : null,

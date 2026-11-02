@@ -21,6 +21,7 @@ class Fmt {
     return lang == 'ar' ? '$whole.${parts[1]} ر.س' : 'SAR $whole.${parts[1]}';
   }
   /// الحرارة والأرقام اللاتينية تُعزل اتجاهياً (LRI…PDI) كي لا تنقلب داخل النص العربي
-  String temp(num? c) => c == null ? '—' : '\u2066${c.toStringAsFixed(1)}°C\u2069';
+  /// الوحدة كما في الويب (fmtTemp): «°م» بالعربية و«°C» بالإنجليزية، مع عزل الاتجاه للقيم السالبة
+  String temp(num? c) => c == null ? '—' : '\u2066${c.toStringAsFixed(1)} °${lang == 'ar' ? 'م' : 'C'}\u2069';
   static String ltr(Object? v) => v == null ? '—' : '\u2066$v\u2069';
 }

@@ -1,0 +1,36 @@
+{
+ "routes": {
+  "stops": 2,
+  "changedOrBlocked": true,
+  "validationMsg": "لا يمكن تسليم ML-2026-000063 قبل استلامهااسحب المقبض أو ركّز عليه و",
+  "undoRestored": true
+ },
+ "tempChart": {
+  "live": "5.9 °م · 02 نوفمبر، 11:19 م",
+  "ranges": [
+   "1 س",
+   "6 س",
+   "24 س",
+   "الكل"
+  ]
+ },
+ "timelineExpand": "true",
+ "mapCard": "ML-2026-000001×في الطريق تنبيه مفتوحنوع الموقعمستنتج من أحداث الناقل (رحلة جوية ",
+ "bulkAck": {
+  "bar": "محدد: 2إقرار المفتوح من المحددإلغاء التحديد",
+  "criticalBarBefore": 1,
+  "criticalBarAfter": 0
+ },
+ "wizardValidation": {
+  "stepsAreLi": 4,
+  "errorsShown": 3,
+  "current": "المسار"
+ },
+ "reducedMotion": [
+  "none"
+ ],
+ "qr": {
+  "failure": "!هذا الرمز لا يخص هذه المهمة. تأكد من ملصق الشحنة.إعادة المحاولة",
+  "afterRetryOk": true
+ }
+}

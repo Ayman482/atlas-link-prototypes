@@ -53,4 +53,19 @@ void main() {
       try { await api.query('me'); fail('expected'); } on ApiException catch (e) { expect(e.isNetwork, isTrue); }
     });
   });
+
+  test('التوطين من المصدر المعتمد: السياق، التحية، والخط الزمني (مطابق للويب)', () {
+    const ar = S('ar'); const en = S('en');
+    expect(ar.label('failed'), 'تعذّر التسليم');
+    expect(ar.label('failed', 'outcome'), 'فشل');
+    expect(ar.label('pickup_scheduled'), 'الاستلام مجدول');
+    expect(ar.greeting(DateTime.utc(2026, 11, 2, 18)), 'مساء الخير'); // 21:00 الرياض
+    expect(ar.greeting(DateTime.utc(2026, 11, 2, 6)), 'صباح الخير');
+    expect(en.greeting(DateTime.utc(2026, 11, 2, 18)), 'Good evening');
+    for (var h = 0; h < 24; h++) { expect(ar.greeting(DateTime.utc(2026, 11, 2, h)), isNot('مساء النور')); }
+    final e = {'kind': 'custody', 'title': {'ar': 'نقل حيازة: customer ← courier', 'en': ''}, 'detail': 'أ. خالد (signature)', 'codes': {'fromType': 'customer', 'toType': 'courier', 'method': 'signature'}};
+    expect(ar.timelineTitle(e), 'نقل الحيازة: العميل ← المندوب');
+    expect(ar.timelineDetail(e), 'أ. خالد (توقيع)');
+    expect(en.timelineTitle(e), 'Custody transfer: Customer → Courier');
+  });
 }

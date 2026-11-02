@@ -2,9 +2,9 @@
 // حالة التطبيق: النقل (خادم API أو المحرك المحلي)، الجلسة، اللغة، الإشعارات المنبثقة، وإعادة الجلب عند كل تغيير
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { createTransport, type ApiError, type Transport } from '@medlog/client';
-import { dir, t as tt, type Lang } from '@medlog/i18n';
+import { dir, type Lang } from '@medlog/i18n';
 import { AnimatePresence, DUR, EASE, MotionRoot, SuccessMark, motion } from './motion';
-import { DICT_OVERRIDES } from './l10n';
+import { term } from './l10n';
 
 let shared: Transport | null = null;
 export function transport(): Transport {
@@ -40,11 +40,23 @@ export function AppProvider({ app, children }: { app: Ctx['app']; children: Reac
     return tr.subscribe(() => setTick((x) => x + 1));
   }, []);
   useEffect(() => { currentLang = lang; document.documentElement.lang = lang; document.documentElement.dir = dir(lang); try { localStorage.setItem('al-lang', lang); } catch { /* */ } }, [lang]);
-  useEffect(() => { if (!userId) { setMe(null); return; } transport().query('me').then(setMe).catch(() => { setUserId(null); }); }, [userId, tick]);
+  // عند تغيّر الحساب: يُمسح ملف المستخدم السابق فوراً حتى لا تُعرض أدواره أو بياناته للحساب الجديد
+  const meOwner = useRef<string | null>(null);
+  useEffect(() => {
+    if (!userId) { meOwner.current = null; setMe(null); return; }
+    if (meOwner.current !== userId) { meOwner.current = userId; setMe(null); }
+    let alive = true;
+    transport().query('me').then((m) => { if (alive) setMe(m); }).catch((e: ApiError) => {
+      // يُنهى الدخول فقط عند رفض الجلسة؛ انقطاع الشبكة المؤقت لا يُخرج المستخدم
+      if (alive && (e?.status === 401 || e?.code === 'UNAUTHENTICATED')) { transport().logout(); setUserId(null); }
+    });
+    return () => { alive = false; };
+  }, [userId, tick]);
   const toast = useCallback((text: string, kind: Toast['kind'] = 'success') => { const id = ++n.current; setToasts((x) => [...x, { id, kind, text }]); setTimeout(() => setToasts((x) => x.filter((y) => y.id !== id)), kind === 'error' ? 6000 : 3200); }, []);
   const value = useMemo<Ctx>(() => ({
-    lang, setLang: setLangS, t: (k, v) => (DICT_OVERRIDES[k] && !v ? DICT_OVERRIDES[k][lang] : tt(lang, k, v)), x: (e) => (e ? e[lang] : ''),
-    userId, me, signIn: (u) => setUserId(u), signOut: () => { transport().logout(); setUserId(null); },
+    lang, setLang: setLangS, t: (k, v) => term(lang, k, v), x: (e) => (e ? e[lang] : ''),
+    // لا يُعرض ملف مستخدم لا يطابق الحساب النشط (يمنع ظهور أدوار الحساب السابق لعملية عرض واحدة)
+    userId, me: me && me.user?.id === userId ? me : null, signIn: (u) => setUserId(u), signOut: () => { transport().logout(); setUserId(null); },
     tick, toast, app,
     async run(cmd, input, opts) {
       try { const r = await transport().exec(cmd, input ?? {}); setTick((x) => x + 1); if (!opts?.silent) toast(opts?.success ?? (lang === 'ar' ? 'تم بنجاح' : 'Done')); return r; }
@@ -60,19 +72,32 @@ export function AppProvider({ app, children }: { app: Ctx['app']; children: Reac
   );
 }
 
-/** استعلام يُعاد عند كل تغيير في البيانات */
+/** حالة استعلام مربوطة بنطاقه (الحساب + اسم الاستعلام + المعاملات).
+ *  لا تُعاد بيانات نطاق سابق أبداً: عند تغيّر الحساب أو المعاملات أو تعطّل الاستعلام تُعاد حالة فارغة فوراً
+ *  (دون انتظار التأثير)، وتُتجاهل الاستجابات المتأخرة من نطاق قديم. التحديث داخل نفس النطاق يُبقي البيانات (refreshing). */
+export interface QState<R> { data: R | null; error: ApiError | null; loading: boolean; refreshing: boolean }
+export const queryScope = (userId: string | null, name: string | null, key: string) => (name && userId ? `${userId}|${name}|${key}` : null);
+export function viewOf<R>(st: { scope: string | null } & QState<R>, scope: string | null): QState<R> {
+  if (!scope) return { data: null, error: null, loading: false, refreshing: false };
+  if (st.scope !== scope) return { data: null, error: null, loading: true, refreshing: false };
+  return { data: st.data, error: st.error, loading: st.loading, refreshing: st.refreshing };
+}
 export function useQ<R = any>(name: string | null, params: unknown = {}, deps: unknown[] = []) {
   const { tick, userId } = useApp();
-  const [state, set] = useState<{ data: R | null; error: ApiError | null; loading: boolean }>({ data: null, error: null, loading: true });
   const key = JSON.stringify(params);
+  const scope = queryScope(userId, name, key);
+  const [state, set] = useState<{ scope: string | null } & QState<R>>({ scope: null, data: null, error: null, loading: true, refreshing: false });
   useEffect(() => {
-    if (!name || !userId) return;
+    if (!scope) { set({ scope: null, data: null, error: null, loading: false, refreshing: false }); return; }
     let alive = true;
-    transport().query<R>(name, params).then((data) => alive && set({ data, error: null, loading: false })).catch((error) => alive && set({ data: null, error, loading: false }));
+    set((s) => (s.scope === scope ? { ...s, refreshing: true } : { scope, data: null, error: null, loading: true, refreshing: false }));
+    transport().query<R>(name!, params)
+      .then((data) => alive && set({ scope, data, error: null, loading: false, refreshing: false }))
+      .catch((error) => alive && set({ scope, data: null, error, loading: false, refreshing: false }));
     return () => { alive = false; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [name, key, tick, userId, ...deps]);
-  return state;
+  }, [scope, tick, ...deps]);
+  return viewOf(state, scope);
 }
 export const useList = (collection: string, params: Record<string, unknown> = {}) => useQ<{ items: any[]; total: number }>('list', { collection, pageSize: 500, ...params });
 
