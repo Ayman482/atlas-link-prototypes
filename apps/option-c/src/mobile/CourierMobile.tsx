@@ -34,7 +34,7 @@ let offlineFlag = false;
 function useOffline() {
   const { userId } = useApp(); const [off, setOff] = useState(offlineFlag); const [q, setQ] = useState<QAction[]>(() => loadQ(userId!));
   useEffect(() => { const h = () => { setOff(offlineFlag); setQ(loadQ(userId!)); }; window.addEventListener('al-offline', h); return () => window.removeEventListener('al-offline', h); }, [userId]);
-  return { off, q, toggle: () => { offlineFlag = !offlineFlag; window.dispatchEvent(new Event('al-offline')); }, push: (a: Omit<QAction, 'clientActionId' | 'occurredAt'>) => { const n = [...loadQ(userId!), { ...a, clientActionId: 'ca-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), occurredAt: new Date().toISOString() }]; saveQ(userId!, n); window.dispatchEvent(new Event('al-offline')); }, clear: () => { saveQ(userId!, []); window.dispatchEvent(new Event('al-offline')); } };
+  return { off, q, toggle: () => { offlineFlag = !offlineFlag; window.dispatchEvent(new Event('al-offline')); }, push: (a: Omit<QAction, 'clientActionId' | 'occurredAt'>) => { const n = [...loadQ(userId!), { ...a, clientActionId: 'ca-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), occurredAt: new Date().toISOString() }]; saveQ(userId!, n); window.dispatchEvent(new Event('al-offline')); }, clear: (ids?: string[]) => { saveQ(userId!, ids ? loadQ(userId!).filter((a) => !ids.includes(a.clientActionId)) : []); window.dispatchEvent(new Event('al-offline')); } };
 }
 /** ينفذ الإجراء مباشرة أو يضيفه للطابور عند انقطاع الاتصال */
 function useAct() {
@@ -191,17 +191,24 @@ function Task({ id }: { id: string }) {
 // K12
 function Sync() {
   const { lang, x, run, toast } = useApp(); const f = useFmt(); const o = useOffline(); const d = useQ<any>('courier.tasks', {}); const [res, setRes] = useState<any[] | null>(null);
+  const [busy, setBusy] = useState(false);
   const sync = async () => {
     if (o.off) { toast(lang === 'ar' ? 'أعد الاتصال أولاً' : 'Reconnect first', 'error'); return; }
-    const r: any = await run('courier.sync', { actions: o.q.map(({ label: _l, ...a }) => a) }, { success: lang === 'ar' ? 'اكتملت المزامنة' : 'Sync complete' });
-    setRes(r.results.map((y: any) => ({ ...y, label: o.q.find((q) => q.clientActionId === y.clientActionId)?.label }))); o.clear();
+    if (busy) return; // لا مزامنتان متزامنتان
+    setBusy(true);
+    const batch = o.q;
+    try {
+      const r: any = await run('courier.sync', { actions: batch.map(({ label: _l, ...a }) => a) }, { success: lang === 'ar' ? 'اكتملت المزامنة' : 'Sync complete' });
+      setRes(r.results.map((y: any) => ({ ...y, label: batch.find((q) => q.clientActionId === y.clientActionId)?.label })));
+      o.clear(r.results.map((y: any) => y.clientActionId)); // يُحذف فقط ما أعاد له الخادم نتيجة نهائية
+    } catch { /* الطابور يبقى كما هو؛ الرسالة تظهر من run */ } finally { setBusy(false); }
   };
   return <><MTop title={lang === 'ar' ? 'دون اتصال والمزامنة' : 'Offline & sync'} />
     <div className="mbodyx" tabIndex={0}>
       <div className="mcard"><b>{lang === 'ar' ? 'حالة الشبكة' : 'Network'}: {o.off ? (lang === 'ar' ? 'دون اتصال' : 'Offline') : (lang === 'ar' ? 'متصل' : 'Online')} <Sim /></b><span className="muted">{lang === 'ar' ? 'محاكاة انقطاع الشبكة لاختبار العمل الميداني. تُخزّن الإجراءات محلياً بمعرف فريد وتُزامن دون تكرار.' : 'Simulates network loss for field testing. Actions are stored locally with unique IDs and synced idempotently.'}</span><Btn onClick={o.toggle}>{o.off ? (lang === 'ar' ? 'استعادة الاتصال' : 'Go online') : (lang === 'ar' ? 'قطع الاتصال' : 'Go offline')}</Btn></div>
       <b>{lang === 'ar' ? 'الطابور' : 'Queue'} ({o.q.length})</b>
       {o.q.length ? o.q.map((q) => <div key={q.clientActionId} className="mcard"><b>{q.label}</b><span className="muted"><Mono>{q.clientActionId}</Mono> · {f.dt(q.occurredAt)}</span></div>) : <Empty text={lang === 'ar' ? 'لا إجراءات معلّقة' : 'Nothing pending'} />}
-      <Btn kind="primary" className="bigbtn" disabled={!o.q.length || o.off} onClick={sync}>{lang === 'ar' ? 'مزامنة الآن' : 'Sync now'}</Btn>
+      <Btn kind="primary" className="bigbtn" disabled={!o.q.length || o.off || busy} aria-busy={busy} onClick={sync}>{lang === 'ar' ? 'مزامنة الآن' : 'Sync now'}</Btn>
       {res && res.map((r) => <div key={r.clientActionId} className="mcard"><div className="row" style={{ justifyContent: 'space-between' }}><b>{r.label}</b><Pill tone={r.status === 'accepted' ? 'good' : r.status === 'duplicate' ? 'mute' : 'crit'}>{r.status}</Pill></div><span>{x(r.message)}</span></div>)}
       {(d.data?.conflicts ?? []).length > 0 && <><b>{lang === 'ar' ? 'سجل التعارضات' : 'Conflict log'}</b>{d.data.conflicts.map((c: any) => <div key={c.id} className="mcard"><div className="row" style={{ justifyContent: 'space-between' }}><span>{label(lang, c.action)}</span><Pill v={c.resolution} /></div><span className="muted">{lang === 'en' && c.reasonEn ? c.reasonEn : c.reason}</span><span className="muted">{f.dt(c.occurredAt)}</span></div>)}</>}
     </div></>;

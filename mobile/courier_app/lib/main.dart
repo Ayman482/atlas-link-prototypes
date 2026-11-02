@@ -13,7 +13,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final state = AppState(ApiClient(), 'courier');
   await state.load();
-  await OfflineQueue.instance.load();
+  OfflineQueue.instance.attach(state);
   runApp(CourierApp(state: state));
 }
 

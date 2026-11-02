@@ -29,7 +29,7 @@ void main() {
   testWidgets('K01→K02→K05: المهام ثم مسح رمز خاطئ يعرض الفشل وإعادة المحاولة', (tester) async {
     final log = <String>[];
     final state = AppState(ApiClient(base: 'http://t/api/v1', client: fakeApi(log)), 'courier');
-    await state.load(); await OfflineQueue.instance.load();
+    await state.load(); OfflineQueue.instance.attach(state);
     await tester.pumpWidget(CourierApp(state: state));
     await tester.pumpAndSettle();
     await tester.tap(find.text('محمد الدوسري'));
@@ -47,7 +47,8 @@ void main() {
   test('الطابور دون اتصال يحتفظ بمعرّف فريد ويُرسل للمزامنة ثم يُفرّغ', () async {
     final log = <String>[];
     final state = AppState(ApiClient(base: 'http://t/api/v1', client: fakeApi(log)), 'courier');
-    final q = OfflineQueue.instance; await q.load(); q.offline = true;
+    await state.signedInWith('tok');
+    final q = OfflineQueue()..attach(state); await q.bind(OfflineQueue.ownerOf(state)); q.offline = true;
     final executed = await q.act(state, 'pickup', 'courier.pickup', 'shp_9', {'signedBy': 'x'}, 'استلام');
     expect(executed, isFalse);
     expect(q.items.single['clientActionId'], startsWith('ca-'));

@@ -59,6 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ]),
       )),
       const SizedBox(height: 18),
+      if (st.sessionExpired && err == null) Padding(padding: const EdgeInsets.only(bottom: 12), child: Semantics(liveRegion: true, child: Container(padding: const EdgeInsets.all(12), decoration: BoxDecoration(color: c.warningSoft, borderRadius: BorderRadius.circular(14)), child: Text(s.t('انتهت الجلسة. سجّل الدخول مجدداً — الإجراءات المحفوظة دون اتصال لم تُحذف وستُزامن بعد دخولك.', 'Your session expired. Sign in again — actions saved offline were kept and will sync after you sign in.'))))),
       if (err != null) Padding(padding: const EdgeInsets.only(bottom: 12), child: Semantics(liveRegion: true, child: Container(padding: const EdgeInsets.all(12), decoration: BoxDecoration(color: c.criticalSoft, borderRadius: BorderRadius.circular(14)), child: Text(err!, style: TextStyle(color: c.critical))))),
       if (challenge == null) ...[
         TextField(controller: _email, keyboardType: TextInputType.emailAddress, textDirection: TextDirection.ltr, decoration: InputDecoration(labelText: s.email)),

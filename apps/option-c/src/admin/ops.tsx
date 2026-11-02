@@ -292,8 +292,11 @@ export function ShipmentDetail({ params, portal }: { params: Record<string, stri
           <Section title={lang === 'ar' ? 'التتبع' : 'Tracking'}>
             {tr.inAir && <div className="notice">{t('ship.noLiveInFlight')}</div>}
             <DL items={[
-              [t('ship.lastConfirmed'), tr.lastConfirmedPosition ? <>{f.dt(tr.lastConfirmedPosition.at)} <Pill v={tr.lastConfirmedPosition.isLive ? 'live' : tr.freshness} /></> : '—'],
-              [t('ship.lastKnownReading'), tr.lastReading ? <>{f.temp(tr.lastReading.tempC)} · {f.dt(tr.lastReading.deviceTime)} <Sim /></> : '—'],
+              // آخر موقع مؤكد: الوقت والعمر والمصدر وحالة الحداثة — لا يُعرض موقعاً حياً أثناء الطيران أو انقطاع الجهاز
+              [t('ship.lastConfirmed'), tr.lastConfirmedPosition ? <>{f.dt(tr.lastConfirmedPosition.at)} <span className="muted">({f.rel(tr.lastConfirmedPosition.at)} · {lang === 'ar' ? 'المصدر' : 'source'}: {label(lang, tr.lastConfirmedPosition.source)})</span> <Pill v={tr.lastConfirmedPosition.isLive ? 'live' : tr.inAir ? 'inferred' : tr.freshness === 'live' ? 'delayed' : tr.freshness} /> <Sim /></> : <span className="muted">{lang === 'ar' ? 'لا يوجد موقع مؤكد بعد' : 'No confirmed position yet'}</span>],
+              // آخر قراءة: وقت الجهاز ووقت الاستلام منفصلان (القراءات المخزنة تصل متأخرة)
+              [t('ship.lastKnownReading'), tr.lastReading ? <>{f.temp(tr.lastReading.tempC)} · {lang === 'ar' ? 'وقت الجهاز' : 'device time'} {f.dt(tr.lastReading.deviceTime)} · {lang === 'ar' ? 'استُلمت' : 'received'} {f.dt(tr.lastReading.receivedAt)}{tr.lastReading.backfilled && <> <Pill tone="info">{lang === 'ar' ? 'قراءة مخزنة' : 'backfilled'}</Pill></>} <Sim /></> : '—'],
+              [lang === 'ar' ? 'عرض الحرارة' : 'Temperature view', tr.temperatureVisibility === 'current' ? (lang === 'ar' ? 'حالية' : 'Current') : (lang === 'ar' ? 'آخر قيمة معروفة فقط' : 'Last known value only')],
               [lang === 'ar' ? 'اتصال الجهاز' : 'Device connectivity', label(lang, tr.deviceConnectivity)], [t('ship.eta'), s.eta ? (s.eta.at ? <>{f.dt(s.eta.at)} <Pill tone="info">{lang === 'ar' ? 'ثقة' : 'confidence'}: {label(lang, s.eta.confidence)}</Pill></> : <Pill tone="mute">{t('ship.etaUnavailable')}</Pill>) : '—'],
             ]} />
             {s.eta?.basis && <p className="muted" style={{ fontSize: '.82rem' }}>{s.eta.basis}</p>}

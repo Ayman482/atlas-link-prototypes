@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'api/api_client.dart';
@@ -13,6 +14,8 @@ class AppState extends ChangeNotifier {
   ThemeMode themeMode = ThemeMode.system;
   Map<String, dynamic>? me;
   int tick = 0; // يزيد بعد كل أمر لتحديث الشاشات
+  bool sessionExpired = false; // تُعرض رسالة «انتهت الجلسة» في شاشة الدخول
+  bool startedOffline = false; // فُتح التطبيق دون شبكة باستخدام آخر ملف مستخدم محفوظ
 
   S get s => S(lang);
   Locale get locale => Locale(lang);
@@ -27,7 +30,18 @@ class AppState extends ChangeNotifier {
     final t = p.getString('$appKey.token');
     if (t != null) {
       api.token = t;
-      try { me = await api.query('me'); } catch (_) { api.token = null; }
+      try {
+        me = await api.query('me');
+        p.setString('$appKey.me', jsonEncode(me));
+      } on ApiException catch (e) {
+        if (e.isNetwork) {
+          // دون شبكة عند الفتح: يبقى المندوب داخل التطبيق بآخر ملف محفوظ ليعمل دون اتصال (لا يُخرج)
+          final cached = p.getString('$appKey.me');
+          if (cached != null) { me = (jsonDecode(cached) as Map).cast<String, dynamic>(); startedOffline = true; } else { api.token = null; }
+        } else {
+          await _dropSession(p, expired: e.status == 401);
+        }
+      } catch (_) { api.token = null; }
     }
     notifyListeners();
   }
@@ -38,23 +52,37 @@ class AppState extends ChangeNotifier {
   Future<void> signedInWith(String token) async {
     api.token = token;
     me = await api.query('me');
-    (await SharedPreferences.getInstance()).setString('$appKey.token', token);
+    sessionExpired = false; startedOffline = false;
+    final p = await SharedPreferences.getInstance();
+    p.setString('$appKey.token', token);
+    p.setString('$appKey.me', jsonEncode(me));
     notifyListeners();
   }
 
   Future<void> signOut() async {
     await api.logout();
-    me = null;
-    (await SharedPreferences.getInstance()).remove('$appKey.token');
+    await _dropSession(await SharedPreferences.getInstance());
+  }
+
+  Future<void> _dropSession(SharedPreferences p, {bool expired = false}) async {
+    api.token = null; me = null; sessionExpired = expired;
+    p.remove('$appKey.token'); p.remove('$appKey.me');
     notifyListeners();
   }
 
-  /// ينفّذ أمراً ويحدّث الشاشات؛ يعيد الخطأ للمستدعي ليعرضه بجانب الحقل أو في رسالة
-  Future<dynamic> run(String cmd, [Map<String, dynamic>? input]) async {
-    final r = await api.exec(cmd, input);
-    tick++;
-    notifyListeners();
-    return r;
+  /// ينفّذ أمراً ويحدّث الشاشات؛ يعيد الخطأ للمستدعي ليعرضه بجانب الحقل أو في رسالة.
+  /// انتهاء الجلسة (401) يعيد المستخدم لشاشة الدخول مع رسالة، دون حذف أي إجراءات محفوظة دون اتصال.
+  Future<dynamic> run(String cmd, [Map<String, dynamic>? input, String? idempotencyKey]) async {
+    try {
+      final r = await api.exec(cmd, input, idempotencyKey);
+      startedOffline = false;
+      tick++;
+      notifyListeners();
+      return r;
+    } on ApiException catch (e) {
+      if (e.status == 401) await _dropSession(await SharedPreferences.getInstance(), expired: true);
+      rethrow;
+    }
   }
 
   void refresh() { tick++; notifyListeners(); }

@@ -23,7 +23,7 @@ class TrackPage extends StatelessWidget {
           final pos = tr['lastConfirmedPosition'] as Map?; final rd = tr['lastReading'] as Map?; final eta = sh['eta'] as Map?;
           final owner = canCreate(st.roles) && ((st.me?['organizations'] as List?) ?? []).any((o) => o['id'] == sh['organizationId']);
           return ListView(padding: const EdgeInsets.all(16), children: [
-            Row(children: [Text('${sh['trackingNo']}', textDirection: TextDirection.ltr, style: Theme.of(context).textTheme.titleLarge), const Spacer(), StatusPill('${sh['status']}')]),
+            Row(children: [Text('${sh['trackingNo']}', textDirection: TextDirection.ltr, style: Theme.of(context).textTheme.titleLarge), const Spacer(), StatusPill('${tr['operationalStatus'] ?? sh['status']}')]),
             const SizedBox(height: 12),
             Semantics(label: s.t('تقدّم الشحنة: ${s.label(sh['status'])}', 'Progress: ${s.label(sh['status'])}'), child: Row(children: [for (var i = 0; i < steps.length; i++) Expanded(child: AnimatedContainer(duration: Motion.d(context, AtlasTokens.durSlow), margin: const EdgeInsets.symmetric(horizontal: 2), height: 6, decoration: BoxDecoration(borderRadius: BorderRadius.circular(4), color: i <= idx ? cs.primary : c.line)))])),
             const SizedBox(height: 14),
@@ -32,7 +32,8 @@ class TrackPage extends StatelessWidget {
               Text('${city(sh['originCity'], st.lang)} ${arrow(st.lang)} ${city(sh['destCity'], st.lang)} · ${s.label(sh['thermalClass'])} · ${s.label(sh['serviceLevel'])} · ${s.label(sh['mode'])}', style: TextStyle(color: c.muted)),
               const Divider(height: 24),
               _row(s.d('ship.eta'), eta?['at'] == null ? s.label('unavailable') : f.dt(eta!['at']), trailing: eta == null ? null : StatusPill('${eta['confidence']}', tone: eta['confidence'] == 'high' ? Tone.good : Tone.warn)),
-              _row(s.d('ship.lastConfirmed'), pos == null ? s.t('لا يوجد بعد', 'None yet') : '${f.dt(pos['at'])} · ${s.label(pos['source'])}', trailing: pos == null ? null : StatusPill('${tr['freshness']}')),
+              // آخر موقع مؤكد بوقته ومصدره؛ «مباشر» فقط إن كان الموقع حياً فعلاً (ليس أثناء الطيران أو انقطاع الجهاز)
+              _row(s.d('ship.lastConfirmed'), pos == null ? s.t('لا يوجد بعد', 'None yet') : '${f.dt(pos['at'])} · ${s.label(pos['source'])}${pos['isLive'] == true ? '' : s.t(' · ليس موقعاً مباشراً', ' · not a live position')}', trailing: pos == null ? null : StatusPill(pos['isLive'] == true ? 'live' : (tr['inAir'] == true ? 'inferred' : (tr['freshness'] == 'live' ? 'delayed' : '${tr['freshness']}')))),
               if (tr['operationalStatus'] == 'in_air_transit') Padding(padding: const EdgeInsets.only(top: 4), child: Text(s.d('ship.noLiveInFlight'), style: TextStyle(color: c.info))),
               _row(s.d('ship.lastKnownReading'), rd == null ? '—' : '${f.temp(rd['tempC'])} · ${f.dt(rd['deviceTime'])}', trailing: const SimBadge()),
             ])))),
