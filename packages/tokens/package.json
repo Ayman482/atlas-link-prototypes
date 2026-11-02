@@ -1,1 +1,1 @@
-{ "name": "@medlog/tokens", "version": "1.0.0", "private": true, "type": "module", "scripts": { "build": "DART_OUT=../../mobile/customer_app/lib/theme,../../mobile/courier_app/lib/theme node build.mjs ." } }
+{ "name": "@medlog/tokens", "version": "1.0.0", "private": true, "type": "module", "scripts": { "build": "DART_OUT=../../mobile/atlas_shared/lib/src/theme node build.mjs ." } }

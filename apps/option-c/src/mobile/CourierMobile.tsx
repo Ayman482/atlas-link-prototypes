@@ -120,7 +120,7 @@ function Task({ id }: { id: string }) {
   const queuedFor = o.q.filter((q) => q.shipment === t.shipmentId);
   const ret = (rets.data?.items ?? []).find((r: any) => r.shipmentId === t.shipmentId && r.status === 'in_progress');
   const reasons = [['RECIPIENT_UNAVAILABLE', 'المستلم غير متاح', 'Recipient unavailable'], ['ADDRESS_ISSUE', 'مشكلة في العنوان', 'Address issue'], ['REFUSED', 'رفض الاستلام', 'Refused'], ['ACCESS_DENIED', 'تعذّر الدخول للموقع', 'Site access denied']];
-  const targets = hv.toType === 'warehouse' ? d.data.warehouses.map((w: any) => ({ id: w.id, name: w.name })) : hv.toType === 'courier' ? d.data.colleagues : d.data.partners.filter((p: any) => (hv.toType === 'air_carrier' ? p.partnerType === 'air_carrier' : p.partnerType !== 'air_carrier'));
+  const targets = hv.toType === 'warehouse' ? d.data.warehouses.map((w: any) => ({ id: w.id, name: w.name })) : hv.toType === 'courier' ? d.data.colleagues : d.data.partners.filter((p: any) => (hv.toType === 'air_carrier' ? p.partnerType === 'air' : p.partnerType === 'road'));
   return <><MTop title={<Mono>{t.trackingNo}</Mono>} back="/" right={<Pill v={t.status} />} />
     <div className="mbodyx">
       <div className="mcard">
