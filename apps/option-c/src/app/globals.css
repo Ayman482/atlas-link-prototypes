@@ -344,4 +344,5 @@ th.selcol input, td.selcol input { width: 24px; height: 24px; margin: 0 }
 h1 .mono, h1 bdi { white-space: nowrap }
 @media (max-width: 520px) { h1 { font-size: 1.4rem } }
 
-.check input[type=checkbox] { width: 22px; height: 22px }
+.check input[type=checkbox] { width: 24px; height: 24px }
+input[type=checkbox], input[type=radio] { width: 24px; height: 24px; accent-color: var(--primary); flex-shrink: 0 }
