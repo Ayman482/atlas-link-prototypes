@@ -30,7 +30,7 @@ jobs:
         run: npx next build
       - name: Build Option C v1 baseline (for before/after)
         run: |
-          mkdir -p baseline && git archive option-c-v1-baseline apps/option-c | tar -x -C baseline
+          mkdir -p baseline && git archive origin/backup/option-c-v1 apps/option-c | tar -x -C baseline
           mv baseline/apps/option-c apps/option-c-v1 && sed -i 's/"@medlog\/option-c"/"@medlog\/option-c-v1"/' apps/option-c-v1/package.json
           cd apps/option-c-v1 && BASE_PATH=/atlas-link-prototypes/option-c-v1 npx next build
       - name: Assemble site
