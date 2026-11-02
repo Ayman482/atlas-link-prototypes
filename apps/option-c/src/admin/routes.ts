@@ -1,6 +1,7 @@
 // خريطة شاشات لوحة الإدارة A01..A60 — المعرّفات مطابقة لجرد الشاشات في وثيقة التحليل
 import type React from 'react';
 import { dict } from '@medlog/i18n';
+import { withOverrides } from '@/lib/l10n';
 import * as Ops from './ops';
 import * as Assets from './assets';
 import * as Q from './quality';
@@ -13,7 +14,7 @@ import * as S from './system';
 
 type L = { ar: string; en: string };
 export interface RouteDef { id: string; path: string; screen: React.ComponentType<{ params: Record<string, string> }>; roles?: string[] }
-const N = dict.nav;
+const N = withOverrides(dict.nav, 'nav');
 const OPS = ['ops_controller', 'customer_service', 'executive', 'quality'];
 const FIN = ['finance', 'finance_approver', 'executive'];
 const WH = ['warehouse', 'ops_controller', 'quality'];

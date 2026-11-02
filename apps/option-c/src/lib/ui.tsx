@@ -3,6 +3,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { dict, fmtDateTime, fmtNumber, fmtSAR, fmtTemp, ltr } from '@medlog/i18n';
 import { useApp } from './store';
+import { VALUE_LABELS } from './l10n';
 import { AnimatePresence, Collapse, DUR, EASE, Tip, fadeUp, motion, staggerParent } from './motion';
 
 export const cx = (...a: (string | false | null | undefined)[]) => a.filter(Boolean).join(' ');
@@ -32,6 +33,7 @@ const EXTRA: Record<string, { ar: string; en: string }> = {
 };
 export function label(lang: 'ar' | 'en', v: string | null | undefined) {
   if (!v) return '—';
+  if (VALUE_LABELS[v]) return VALUE_LABELS[v][lang];
   for (const d of DICTS) { const e = (dict as any)[d][v]; if (e) return e[lang]; }
   return EXTRA[v]?.[lang] ?? v;
 }
@@ -206,6 +208,8 @@ export function ConfirmBtn({ children, message, onConfirm, kind = 'default', dis
 }
 
 // ---------- الجدول ----------
+/** القيم الرمزية (مثل card_simulated) تُعرض بتسميتها المترجمة إن وُجدت؛ غير ذلك تُعرض كما هي */
+const codeLabel = (lang: 'ar' | 'en', v: unknown) => (typeof v === 'string' && /^[A-Za-z_]+$/.test(v) ? label(lang, v) : String(v ?? '—'));
 export type Col<R> = { key: string; label: string; render?(r: R): React.ReactNode; sort?(r: R): string | number; num?: boolean; mono?: boolean; hideSm?: boolean };
 export type Filter<R> = { key: string; label: string; options: { value: string; label: string }[]; get(r: R): string | string[] | null | undefined };
 export type BulkAction<R> = { label: string; kind?: 'default' | 'primary' | 'danger'; run(rows: R[]): Promise<unknown> | void };
@@ -261,7 +265,7 @@ export function DataTable<R extends { id?: string }>({ rows, cols, filters = [],
             <tr className={cx(onRow && 'click', sel.has(k) && 'selected', isOpen && 'open')} onClick={onRow ? () => onRow(r) : expand ? () => setOpen({ ...open, [k]: !isOpen }) : undefined} tabIndex={onRow ? 0 : undefined} onKeyDown={onRow ? (e) => e.key === 'Enter' && onRow(r) : undefined}>
               {bulk && <td className="selcol" onClick={(e) => e.stopPropagation()}><input type="checkbox" checked={sel.has(k)} onChange={() => { const n = new Set(sel); n.has(k) ? n.delete(k) : n.add(k); setSel(n); }} aria-label={lang === 'ar' ? 'تحديد الصف' : 'Select row'} /></td>}
               {expand && <td className="expcol" onClick={(e) => e.stopPropagation()}><button className="expbtn" aria-expanded={isOpen} aria-label={isOpen ? (lang === 'ar' ? 'طي التفاصيل' : 'Collapse details') : (lang === 'ar' ? 'عرض التفاصيل' : 'Show details')} onClick={() => setOpen({ ...open, [k]: !isOpen })}><motion.svg width="14" height="14" viewBox="0 0 24 24" animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: DUR.fast }} aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2.5" /></motion.svg></button></td>}
-              {cols.map((c) => <td key={c.key} className={cx(c.num && 'num', c.mono && 'mono', c.hideSm && 'hidesm')}>{c.render ? c.render(r) : String((r as any)[c.key] ?? '—')}</td>)}
+              {cols.map((c) => <td key={c.key} className={cx(c.num && 'num', c.mono && 'mono', c.hideSm && 'hidesm')}>{c.render ? c.render(r) : codeLabel(lang, (r as any)[c.key])}</td>)}
             </tr>
             {expand && isOpen && <tr className="exprow"><td colSpan={cols.length + extra}><Collapse open>{<div className="expbody">{expand(r)}</div>}</Collapse></td></tr>}
           </React.Fragment>; })}</tbody>

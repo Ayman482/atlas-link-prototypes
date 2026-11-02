@@ -138,7 +138,7 @@ export interface OutboxEvent { id: ID; eventType: string; aggregateType: string;
 export interface DelayAlert { id: ID; shipmentId: ID; ruleVersion: string; risk: 'low' | 'medium' | 'high'; reason: L; raisedAt: ISO; resolvedAt: ISO | null; escalated: boolean }
 export interface Scorecard { id: ID; partnerId: ID; periodStart: ISO; periodEnd: ISO; ruleVersion: string; score: number; onTimePct: number; tempCompliancePct: number; incidents: number; shipments: number }
 export interface BackupRun { id: ID; kind: 'snapshot' | 'pitr' | 'restore_drill'; at: ISO; status: 'success' | 'failed'; durationMin: number; rpoMin: number | null; rtoMin: number | null; simulated: true }
-export interface OfflineConflict { id: ID; clientActionId: string; courierId: ID; shipmentId: ID; action: string; reason: string; occurredAt: ISO; receivedAt: ISO; resolution: 'pending' | 'accepted' | 'rejected' }
+export interface OfflineConflict { id: ID; clientActionId: string; courierId: ID; shipmentId: ID; action: string; reason: string; reasonEn?: string; occurredAt: ISO; receivedAt: ISO; resolution: 'pending' | 'accepted' | 'rejected' }
 
 export interface Meta { schemaVersion: number; seededAt: ISO; seed: number; idempotency: Record<string, { fingerprint: string; result: unknown; at: ISO }>; counters: Record<string, number> }
 

@@ -48,7 +48,7 @@ const canCreate = (r: string[]) => r.some((x) => ['corp_admin', 'branch_manager'
 function ShipCard({ s }: { s: any }) {
   const { lang } = useApp(); const f = useFmt(); const L = useLookups();
   const H = ['delivered'].includes(s.status) ? 'var(--c-green)' : ['failed', 'exception'].includes(s.status) ? 'var(--c-pink)' : ['in_transit', 'collected', 'at_handover'].includes(s.status) ? 'var(--c-cyan)' : 'var(--c-violet)';
-  return <a className="mcard hue" style={{ '--h': H } as React.CSSProperties} href={'#/s/' + s.id}><div className="row" style={{ justifyContent: 'space-between' }}><Mono>{s.trackingNo}</Mono><Pill v={s.status} /></div><span>{L.city(s.originCity)} → {L.city(s.destCity)} · {label(lang, s.thermalClass)}</span><span className="muted">{lang === 'ar' ? 'التسليم قبل' : 'Deliver by'} {f.dt(s.deliverBy)}</span></a>;
+  return <a className="mcard hue" style={{ '--h': H } as React.CSSProperties} href={'#/s/' + s.id}><div className="row" style={{ justifyContent: 'space-between' }}><Mono>{s.trackingNo}</Mono><Pill v={s.status} /></div><span>{L.city(s.originCity)} {lang === 'ar' ? '←' : '→'} {L.city(s.destCity)} · {label(lang, s.thermalClass)}</span><span className="muted">{lang === 'ar' ? 'التسليم قبل' : 'Deliver by'} {f.dt(s.deliverBy)}</span></a>;
 }
 
 // CM02
@@ -148,7 +148,7 @@ function Track({ id }: { id: string }) {
   return <><MTop title={<Mono>{s.trackingNo}</Mono>} back="/shipments" right={<Pill v={s.status} />} />
     <div className="mbodyx">
       <div className="progress">{steps.map((k, i) => <span key={k} className={i <= idx ? 'on' : ''} title={label(lang, k)} />)}</div>
-      <div className="mcard"><span>{x(d.data.sender?.label)} → {x(d.data.receiver?.label)}</span><span className="muted">{L.city(s.originCity)} → {L.city(s.destCity)} · {label(lang, s.thermalClass)} · {label(lang, s.serviceLevel)} · {label(lang, s.mode)}</span>
+      <div className="mcard"><span>{x(d.data.sender?.label)} {lang === 'ar' ? '←' : '→'} {x(d.data.receiver?.label)}</span><span className="muted">{L.city(s.originCity)} {lang === 'ar' ? '←' : '→'} {L.city(s.destCity)} · {label(lang, s.thermalClass)} · {label(lang, s.serviceLevel)} · {label(lang, s.mode)}</span>
         <span>{lang === 'ar' ? 'الوصول المتوقع' : 'ETA'}: <b>{s.eta?.at ? f.dt(s.eta.at) : '—'}</b> {s.eta && <Pill tone={s.eta.confidence === 'high' ? 'good' : s.eta.confidence === 'unavailable' ? 'mute' : 'warn'}>{label(lang, s.eta.confidence)}</Pill>}</span>
         {tr?.lastConfirmedPosition && <span className="muted">{lang === 'ar' ? 'آخر موقع مؤكد' : 'Last confirmed position'}: {f.dt(tr.lastConfirmedPosition.at)} ({label(lang, tr.lastConfirmedPosition.source)}){!tr.lastConfirmedPosition.isLive && <> · {lang === 'ar' ? 'ليس مباشراً' : 'not live'}</>}</span>}
         {tr?.lastReading && <span>{lang === 'ar' ? 'آخر حرارة' : 'Last temp'}: <b dir="ltr">{tr.lastReading.tempC ?? '—'}°C</b> · {f.dt(tr.lastReading.deviceTime)} · {label(lang, tr.freshness)} <Sim /></span>}
@@ -174,7 +174,7 @@ function Temp({ id }: { id: string }) {
       <div className="notice warn">{x(r.data.disclaimer)}</div>
       <div className="mcard"><b>{x(r.data.profile.name)} <span dir="ltr">({r.data.profile.minC}…{r.data.profile.maxC}°C)</span></b><span>{lang === 'ar' ? 'قراءات' : 'Readings'}: {r.data.summary.count} · {lang === 'ar' ? 'ضمن النطاق' : 'In range'}: {r.data.summary.inRangePct ?? '—'}% · {lang === 'ar' ? 'فجوات' : 'Gaps'}: {r.data.summary.gapMinutes} {lang === 'ar' ? 'د' : 'min'}</span></div>
       <TempChart report={r.data} height={200} />
-      {r.data.gaps.map((g: any, i: number) => <div key={i} className="mcard"><b>{lang === 'ar' ? 'فجوة' : 'Gap'} {g.minutes} {lang === 'ar' ? 'دقيقة' : 'min'}</b><span className="muted">{f.dt(g.from)} → {f.dt(g.to)}</span><span>{x(g.reason)}</span></div>)}
+      {r.data.gaps.map((g: any, i: number) => <div key={i} className="mcard"><b>{lang === 'ar' ? 'فجوة' : 'Gap'} {g.minutes} {lang === 'ar' ? 'دقيقة' : 'min'}</b><span className="muted">{f.dt(g.from)} {lang === 'ar' ? '←' : '→'} {f.dt(g.to)}</span><span>{x(g.reason)}</span></div>)}
       {r.data.excursions.map((e: any, i: number) => <div key={'e' + i} className="mcard"><b>{lang === 'ar' ? 'انحراف' : 'Excursion'} <Pill v={e.severity} /></b><span dir="ltr">{e.peakC}°C · {f.dt(e.startedAt)}</span><Pill v={e.status} /></div>)}
     </>}</div></>;
 }
@@ -197,7 +197,7 @@ function Invoices() {
 // CM10
 function Claims() {
   const { lang } = useApp(); const f = useFmt(); const c = useList('claims', { sort: 'createdAt', dir: 'desc' });
-  return <><MTop title={lang === 'ar' ? 'المطالبات' : 'Claims'} back="/" /><div className="mbodyx"><p className="muted">{lang === 'ar' ? 'لتقديم مطالبة افتح الشحنة واختر "تقديم مطالبة".' : 'To file a claim, open the shipment and choose “File claim”.'}</p>{!c.data ? <Loading /> : c.data.items.length ? c.data.items.map((r: any) => <a key={r.id} className="mcard" href={'#/s/' + r.shipmentId}><div className="row" style={{ justifyContent: 'space-between' }}><Mono>{r.code}</Mono><Pill v={r.status} /></div><span>{r.claimType} · {f.sar(r.claimedAmount)}{r.approvedAmount != null && ['approved', 'closed'].includes(r.status) && <> → {f.sar(r.approvedAmount)}</>}</span><span className="muted">{f.dt(r.createdAt)}</span></a>) : <Empty />}</div></>;
+  return <><MTop title={lang === 'ar' ? 'المطالبات' : 'Claims'} back="/" /><div className="mbodyx"><p className="muted">{lang === 'ar' ? 'لتقديم مطالبة افتح الشحنة واختر "تقديم مطالبة".' : 'To file a claim, open the shipment and choose “File claim”.'}</p>{!c.data ? <Loading /> : c.data.items.length ? c.data.items.map((r: any) => <a key={r.id} className="mcard" href={'#/s/' + r.shipmentId}><div className="row" style={{ justifyContent: 'space-between' }}><Mono>{r.code}</Mono><Pill v={r.status} /></div><span>{label(lang, r.claimType)} · {f.sar(r.claimedAmount)}{r.approvedAmount != null && ['approved', 'closed'].includes(r.status) && <> {lang === 'ar' ? '←' : '→'} {f.sar(r.approvedAmount)}</>}</span><span className="muted">{f.dt(r.createdAt)}</span></a>) : <Empty />}</div></>;
 }
 
 // CM11

@@ -203,7 +203,7 @@ function Sync() {
       {o.q.length ? o.q.map((q) => <div key={q.clientActionId} className="mcard"><b>{q.label}</b><span className="muted"><Mono>{q.clientActionId}</Mono> · {f.dt(q.occurredAt)}</span></div>) : <Empty text={lang === 'ar' ? 'لا إجراءات معلّقة' : 'Nothing pending'} />}
       <Btn kind="primary" className="bigbtn" disabled={!o.q.length || o.off} onClick={sync}>{lang === 'ar' ? 'مزامنة الآن' : 'Sync now'}</Btn>
       {res && res.map((r) => <div key={r.clientActionId} className="mcard"><div className="row" style={{ justifyContent: 'space-between' }}><b>{r.label}</b><Pill tone={r.status === 'accepted' ? 'good' : r.status === 'duplicate' ? 'mute' : 'crit'}>{r.status}</Pill></div><span>{x(r.message)}</span></div>)}
-      {(d.data?.conflicts ?? []).length > 0 && <><b>{lang === 'ar' ? 'سجل التعارضات' : 'Conflict log'}</b>{d.data.conflicts.map((c: any) => <div key={c.id} className="mcard"><div className="row" style={{ justifyContent: 'space-between' }}><span>{c.action}</span><Pill v={c.resolution} /></div><span className="muted">{c.reason}</span><span className="muted">{f.dt(c.occurredAt)}</span></div>)}</>}
+      {(d.data?.conflicts ?? []).length > 0 && <><b>{lang === 'ar' ? 'سجل التعارضات' : 'Conflict log'}</b>{d.data.conflicts.map((c: any) => <div key={c.id} className="mcard"><div className="row" style={{ justifyContent: 'space-between' }}><span>{label(lang, c.action)}</span><Pill v={c.resolution} /></div><span className="muted">{lang === 'en' && c.reasonEn ? c.reasonEn : c.reason}</span><span className="muted">{f.dt(c.occurredAt)}</span></div>)}</>}
     </div></>;
 }
 

@@ -540,7 +540,7 @@ defineCommand<{ actions: OfflineAction[] }, { results: { clientActionId: string;
         void snapshot;
         const msg = e?.detail ?? L(String(e?.message ?? e), String(e?.message ?? e));
         const sh = ctx.db.shipments.find((s) => s.id === a.shipment || s.trackingNo === a.shipment);
-        ctx.db.offlineConflicts.push({ id: ctx.id('ofc'), clientActionId: a.clientActionId, courierId: c!.id, shipmentId: sh?.id ?? a.shipment, action: a.type, reason: msg.ar, occurredAt: a.occurredAt, receivedAt: ctx.nowIso, resolution: 'pending' });
+        ctx.db.offlineConflicts.push({ id: ctx.id('ofc'), clientActionId: a.clientActionId, courierId: c!.id, shipmentId: sh?.id ?? a.shipment, action: a.type, reason: msg.ar, reasonEn: msg.en, occurredAt: a.occurredAt, receivedAt: ctx.nowIso, resolution: 'pending' });
         ctx.audit('offline.conflict', 'offline', a.clientActionId, `تعارض: ${msg.ar}`);
         results.push({ clientActionId: a.clientActionId, status: 'conflict' as const, message: msg });
       }
