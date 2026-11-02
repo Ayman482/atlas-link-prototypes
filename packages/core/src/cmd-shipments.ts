@@ -599,6 +599,11 @@ defineCommand<{ routeId: string; order: string[] }, T.Route>({
     const r = must(ctx, ctx.db.routes.find((x) => x.id === routeId), 'route');
     const stops = ctx.db.routeStops.filter((s) => s.routeId === routeId);
     if (order.length !== stops.length || !stops.every((s) => order.includes(s.id))) ctx.fail('VALIDATION', 'الترتيب لا يطابق التوقفات', 'Order does not match stops', 422);
+    if (r.status === 'completed') ctx.fail('ROUTE_LOCKED', 'المسار مكتمل ولا يمكن تعديل ترتيبه', 'Route is completed and cannot be reordered', 422);
+    const seq = order.map((sid) => stops.find((s) => s.id === sid)!);
+    const current = [...stops].sort((a, b) => a.seq - b.seq);
+    if (seq.some((s, i) => s.status === 'done' && current[i].id !== s.id)) ctx.fail('STOP_LOCKED', 'التوقفات المنجزة ثابتة في موضعها', 'Completed stops are locked in place', 422);
+    seq.forEach((s, i) => { if (s.stopType === 'delivery') for (const sh of s.shipmentIds) { const pi = seq.findIndex((x) => x.stopType === 'pickup' && x.shipmentIds.includes(sh)); if (pi > i) ctx.fail('PICKUP_AFTER_DELIVERY', 'لا يمكن وضع التسليم قبل الاستلام لنفس الشحنة', 'A delivery cannot come before its pickup', 422); } });
     order.forEach((sid, i) => (stops.find((s) => s.id === sid)!.seq = i + 1));
     ctx.audit('route.reorder', 'route', r.id, `إعادة ترتيب ${r.code}`); return r;
   },

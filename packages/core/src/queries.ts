@@ -217,7 +217,7 @@ defineQuery<{ city?: string; thermalClass?: string; customerId?: string; severit
       const src = s.lastPosition ?? (() => { const ad = db.addresses.find((x) => x.id === s.senderAddressId)!; return { lat: ad.lat, lng: ad.lng, at: s.pickupWindowStart, source: 'manual' as const }; })();
       // OPS-004: تمييز بصري بين الحي والمتأخر واليدوي والمستنتج
       const dataKind = tr.inAir ? 'inferred' : !s.lastPosition ? 'planned' : tr.freshness === 'live' ? 'live' : tr.freshness === 'delayed' ? 'delayed' : 'stale';
-      return { id: s.id, trackingNo: s.trackingNo, status: s.status, thermalClass: s.thermalClass, lat: src.lat, lng: src.lng, at: src.at, dataKind, origin: s.originCity, dest: s.destCity, hasAlert: filtered.some((x) => x.shipmentId === s.id) };
+      return { id: s.id, trackingNo: s.trackingNo, status: s.status, thermalClass: s.thermalClass, lat: src.lat, lng: src.lng, at: src.at, dataKind, source: src.source, origin: s.originCity, dest: s.destCity, hasAlert: filtered.some((x) => x.shipmentId === s.id) };
     });
     const boxes = db.boxes.filter((b) => b.status !== 'retired');
     const kpis = {

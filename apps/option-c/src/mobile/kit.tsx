@@ -6,6 +6,7 @@ import { useApp, transport, useRoute } from '@/lib/store';
 import { Btn, cx } from '@/lib/ui';
 import type { DemoAcct } from '@/lib/login';
 import { ThemeBtn } from '@/lib/theme';
+import { SuccessMark, motion } from '@/lib/motion';
 
 /** احتفال قصير بعد إتمام تسليم أو طلب (يُتجاهل مع تقليل الحركة) */
 export function celebrate() {
@@ -97,13 +98,24 @@ export function SigPad({ onChange }: { onChange(v: string | null): void }) {
 }
 
 /** ماسح QR محاكى: الكاميرا غير متاحة في المعاينة، فيختار المستخدم رمزاً متوقعاً أو يدخله يدوياً */
-export function ScanSim({ label, suggestions, onScan }: { label: string; suggestions: { value: string; hint: string }[]; onScan(v: string): void }) {
-  const { lang } = useApp(); const [v, setV] = useState(''); const [anim, setAnim] = useState(false);
+/** مسح QR محاكى بحالات واضحة: جاهز ← جارٍ المسح ← نجاح (علامة تُرسم) أو فشل (سبب + إعادة المحاولة). الكاميرا غير متاحة في المعاينة */
+export function ScanSim({ label, suggestions, onScan }: { label: string; suggestions: { value: string; hint: string }[]; onScan(v: string): Promise<string | null | void> | string | null | void }) {
+  const { lang } = useApp(); const [v, setV] = useState(''); const [st, setSt] = useState<{ k: 'idle' | 'busy' | 'ok' | 'bad'; msg?: string; code?: string }>({ k: 'idle' });
+  const go = async (code: string) => {
+    setSt({ k: 'busy', code });
+    await new Promise((r) => setTimeout(r, 450));
+    try { const e = await onScan(code); setSt(e ? { k: 'bad', msg: e, code } : { k: 'ok', code }); } catch (x: any) { setSt({ k: 'bad', msg: x?.message?.[lang] ?? String(x), code }); }
+  };
   return <div className="mcard">
     <b>{label}</b>
-    <div className={cx('scanbox', anim && 'on')} aria-hidden="true"><span /></div>
+    <div className={cx('scanbox', st.k === 'busy' && 'on')} aria-hidden="true"><span /></div>
+    <div aria-live="assertive">
+      {st.k === 'busy' && <div className="scanstate busy"><span className="spinner" style={{ width: 18, height: 18, borderWidth: 2 }} />{lang === 'ar' ? 'جارٍ قراءة الرمز…' : 'Reading code…'}</div>}
+      {st.k === 'ok' && <motion.div className="scanstate ok" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.22 }}><SuccessMark />{lang === 'ar' ? 'تم التحقق من الرمز' : 'Code verified'} <span className="mono">{st.code}</span></motion.div>}
+      {st.k === 'bad' && <motion.div className="scanstate bad" role="alert" initial={{ x: 0 }} animate={{ x: [0, -6, 6, -3, 0] }} transition={{ duration: 0.3 }}><b>!</b><span style={{ flex: 1 }}>{st.msg}</span><Btn onClick={() => setSt({ k: 'idle' })}>{lang === 'ar' ? 'إعادة المحاولة' : 'Retry'}</Btn></motion.div>}
+    </div>
     <span className="sim">{lang === 'ar' ? 'الكاميرا محاكاة — اختر رمزاً أو أدخله يدوياً' : 'Camera simulated — pick a code or type it'}</span>
-    {suggestions.map((s) => <Btn key={s.value} onClick={() => { setAnim(true); setTimeout(() => { setAnim(false); onScan(s.value); }, 450); }}><span className="mono">{s.value}</span> <span className="muted">{s.hint}</span></Btn>)}
-    <div className="row"><input dir="ltr" value={v} onChange={(e) => setV(e.target.value)} placeholder={lang === 'ar' ? 'إدخال يدوي' : 'Manual entry'} style={{ flex: 1, minWidth: 0 }} /><Btn kind="primary" disabled={!v.trim()} onClick={() => { onScan(v.trim()); setV(''); }}>{lang === 'ar' ? 'تأكيد' : 'Confirm'}</Btn></div>
+    {suggestions.map((s) => <Btn key={s.value} disabled={st.k === 'busy'} onClick={() => go(s.value)}><span className="mono">{s.value}</span> <span className="muted">{s.hint}</span></Btn>)}
+    <div className="row"><input dir="ltr" value={v} onChange={(e) => setV(e.target.value)} aria-label={lang === 'ar' ? 'إدخال الرمز يدوياً' : 'Enter code manually'} placeholder={lang === 'ar' ? 'إدخال يدوي' : 'Manual entry'} style={{ flex: 1, minWidth: 0 }} /><Btn kind="primary" disabled={!v.trim() || st.k === 'busy'} onClick={() => { go(v.trim()); setV(''); }}>{lang === 'ar' ? 'تأكيد' : 'Confirm'}</Btn></div>
   </div>;
 }

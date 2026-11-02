@@ -2,7 +2,8 @@
 // لوحة الإدارة — الخيار C: قائمة جانبية عائمة بأقسام قابلة للطي، تحية بحسب الوقت، بحث، تبديل المظهر
 import React, { useEffect, useMemo, useState } from 'react';
 import { AppProvider, useApp, useQ, useRoute, go, transport } from '@/lib/store';
-import { Btn, Modal, cx } from '@/lib/ui';
+import { Btn, Modal, Pill, cx, useFmt } from '@/lib/ui';
+import { Drawer, motion } from '@/lib/motion';
 import { Login } from '@/lib/login';
 import { ThemeBtn } from '@/lib/theme';
 import { ADMIN_ACCOUNTS } from '@/lib/accounts';
@@ -69,6 +70,7 @@ function Shell() {
   const initials = x(me.user.name).replace(/^(د\.|م\.|أ\.|Dr\.|Eng\.)\s*/, '').split(' ').filter((w: string) => /\p{L}/u.test(w[0] ?? '')).map((w: string) => w[0]).slice(0, 2).join('');
   return (
     <div className="capp">
+      {open && <div className="scrim navscrim" onClick={() => setOpen(false)} />}
       <aside className={cx('sidecard', open && 'open')} aria-label="navigation">
         <a href="#/" className="brandb" style={{ color: 'inherit', textDecoration: 'none' }}><span className="logo"><svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 27s-10-6.2-10-13.5A5.5 5.5 0 0 1 16 10a5.5 5.5 0 0 1 10 3.5C26 20.8 16 27 16 27z" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinejoin="round" /><path d="M10 17h4l2-3 2 5 1.5-2H22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg></span><div><b>{t('app.short')}</b><span>{t('app.admin')}</span></div></a>
         {groups.map((g) => <div key={g.id} className={cx('sgroup', isExp(g.id) && 'open')} style={{ '--hue': st(g.id).hue } as React.CSSProperties}>
@@ -87,11 +89,7 @@ function Shell() {
           <ThemeBtn />
           <div style={{ position: 'relative' }}>
             <Btn kind="ghost" className="iconbtn" aria-label={t('common.notifications')} onClick={() => setMenu(menu === 'ntf' ? null : 'ntf')}><Ico size={18} d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10 21a2 2 0 0 0 4 0" />{unread > 0 && <span className="badge">{unread}</span>}</Btn>
-            {menu === 'ntf' && <div className="menu" role="menu">
-              <div className="row" style={{ padding: '12px 16px', justifyContent: 'space-between' }}><b>{t('common.notifications')}</b><Btn kind="ghost" onClick={() => run('notification.markAllRead', { ids: mine.map((n: any) => n.id) }, { silent: true })}>{t('common.markAllRead')}</Btn></div>
-              {mine.length === 0 && <p className="muted" style={{ padding: 16 }}>{t('common.empty')}</p>}
-              {mine.slice(0, 15).map((n: any) => <a key={n.id} className={cx('mi', !n.readAt && 'unread')} href={n.link ? '#' + n.link : '#/'} onClick={() => run('notification.markRead', { id: n.id }, { silent: true })}><b>{x(n.title)}</b>{n.critical && <span className="pill crit" style={{ marginInlineStart: 6 }}>{lang === 'ar' ? 'حرج' : 'Critical'}</span>}<div className="muted" style={{ fontSize: '.84rem' }}>{x(n.body)}</div></a>)}
-            </div>}
+            <NotificationCenter open={menu === 'ntf'} onClose={() => setMenu(null)} items={mine} />
           </div>
           <div style={{ position: 'relative' }}>
             <button className="btn ghost" onClick={() => setMenu(menu === 'user' ? null : 'user')} aria-haspopup="menu" style={{ padding: 4 }}><span className="avatar">{initials}</span><span className="who"><b>{x(me.user.name)}</b><span>{roles.map((r) => t('roles.' + r)).join('، ')}</span></span></button>
@@ -102,6 +100,7 @@ function Shell() {
             </div>}
           </div>
         </header>
+        {!partnerOnly && <CriticalBar />}
         <main className="content" id="main" key={path}>
           {Screen ? <Screen params={route!.params} /> : m ? <Forbidden /> : <NotFound />}
         </main>
@@ -109,6 +108,51 @@ function Shell() {
       {cmdk && <CommandK onClose={() => setCmdk(false)} can={can} />}
     </div>
   );
+}
+
+/** شريط التنبيهات الحرجة: يظهر فوراً دون أي تأخير دخول (لا يُخفى خلف حركة) ويبقى حتى الإقرار */
+function CriticalBar() {
+  const { x, lang, run } = useApp(); const q = useQ<any>('controlTower.summary', {});
+  const crit = (q.data?.alerts ?? []).filter((a: any) => a.kind === 'excursion' && a.status === 'open' && ['critical', 'high'].includes(a.severity));
+  if (!crit.length) return null;
+  const a = crit[0];
+  return <div className="alertbar" role="alert">
+    <span className="dot" aria-hidden="true" />
+    <b>{lang === 'ar' ? `${crit.length} انحراف حراري مفتوح يتطلب إقراراً` : `${crit.length} open temperature excursion(s) need acknowledgement`}</b>
+    <span>{x(a.title)}</span><span className="grow" />
+    <Btn kind="danger" onClick={() => run('excursion.acknowledge', { id: a.id }, { success: lang === 'ar' ? 'تم الإقرار — انتقل إلى مراجعة الجودة' : 'Acknowledged — moved to quality review' })}>{lang === 'ar' ? 'إقرار الآن' : 'Acknowledge now'}</Btn>
+    <a href={'#' + a.link}>{lang === 'ar' ? 'عرض الشحنة' : 'View shipment'}</a>
+    {crit.length > 1 && <a href="#/excursions">{lang === 'ar' ? 'كل الانحرافات' : 'All excursions'}</a>}
+  </div>;
+}
+
+/** مركز الإشعارات: درج جانبي بتبويبات (الكل/غير المقروء/الحرج) + تنبيهات تشغيلية قابلة للإقرار والتصعيد */
+function NotificationCenter({ open, onClose, items }: { open: boolean; onClose(): void; items: any[] }) {
+  const { x, lang, t, run } = useApp(); const f = useFmt(); const [tab, setTab] = useState<'all' | 'unread' | 'critical' | 'ops'>('all');
+  const q = useQ<any>(open ? 'controlTower.summary' : null, {});
+  const list = tab === 'unread' ? items.filter((n) => !n.readAt) : tab === 'critical' ? items.filter((n) => n.critical) : items;
+  const alerts = (q.data?.alerts ?? []).filter((a: any) => (a.kind === 'excursion' && a.status === 'open') || a.kind === 'delay').slice(0, 20);
+  const tabs: [typeof tab, string, number][] = [['all', lang === 'ar' ? 'الكل' : 'All', items.length], ['unread', lang === 'ar' ? 'غير المقروء' : 'Unread', items.filter((n) => !n.readAt).length], ['critical', lang === 'ar' ? 'الحرج' : 'Critical', items.filter((n) => n.critical).length], ['ops', lang === 'ar' ? 'تتطلب إجراء' : 'Need action', alerts.length]];
+  return <Drawer open={open} onClose={onClose} title={t('common.notifications')}>
+    <div className="tabs ntf-tabs" role="tablist">{tabs.map(([k, l, c]) => <button key={k} role="tab" aria-selected={tab === k} className={tab === k ? 'on' : ''} onClick={() => setTab(k)}>{l}<span className="count">{c}</span></button>)}</div>
+    {tab !== 'ops' && <div className="row" style={{ justifyContent: 'flex-end' }}><Btn kind="ghost" disabled={!items.some((n) => !n.readAt)} onClick={() => run('notification.markAllRead', { ids: items.map((n) => n.id) }, { success: lang === 'ar' ? 'عُلّمت كلها كمقروءة' : 'All marked as read' })}>{t('common.markAllRead')}</Btn></div>}
+    {tab !== 'ops' && (list.length === 0 ? <p className="muted">{t('common.empty')}</p> : list.slice(0, 40).map((n: any, i: number) => <motion.div key={n.id} className={cx('ntf', !n.readAt && 'unread', n.critical && 'crit')} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: Math.min(i, 6) * 0.03 }}>
+      <span className="ic" aria-hidden="true">{n.critical ? '!' : '•'}</span>
+      <b>{x(n.title)} {n.critical && <Pill tone="crit">{lang === 'ar' ? 'حرج' : 'Critical'}</Pill>}</b>
+      <span className="muted" style={{ fontSize: '.86rem' }}>{x(n.body)} · {f.dt(n.createdAt)}</span>
+      <span className="acts">{n.link && <a className="btn ghost" href={'#' + n.link} onClick={() => { run('notification.markRead', { id: n.id }, { silent: true }); onClose(); }}>{lang === 'ar' ? 'فتح' : 'Open'}</a>}{!n.readAt && <Btn kind="ghost" onClick={() => run('notification.markRead', { id: n.id }, { silent: true })}>{lang === 'ar' ? 'تعليم كمقروء' : 'Mark read'}</Btn>}</span>
+    </motion.div>))}
+    {tab === 'ops' && (!q.data ? <p className="muted">{t('common.loading')}</p> : alerts.length === 0 ? <p className="muted">{lang === 'ar' ? 'لا تنبيهات تتطلب إجراء' : 'No alerts need action'}</p> : alerts.map((a: any) => <div key={a.id} className={cx('ntf', ['critical', 'high'].includes(a.severity) && 'crit')}>
+      <span className="ic" aria-hidden="true">{a.kind === 'excursion' ? '°' : '⏱'}</span>
+      <b>{x(a.title)} <Pill v={a.severity} /></b>
+      <span className="muted" style={{ fontSize: '.86rem' }}>{f.dt(a.at)}</span>
+      <span className="acts">
+        {a.kind === 'excursion' && <Btn kind="primary" onClick={() => run('excursion.acknowledge', { id: a.id }, { success: lang === 'ar' ? 'تم الإقرار' : 'Acknowledged' })}>{lang === 'ar' ? 'إقرار' : 'Acknowledge'}</Btn>}
+        {a.kind === 'delay' && <Btn onClick={() => run('delay.action', { id: a.id, action: 'escalate' }, { success: lang === 'ar' ? 'تم التصعيد' : 'Escalated' })}>{lang === 'ar' ? 'تصعيد' : 'Escalate'}</Btn>}
+        <a className="btn ghost" href={'#' + a.link} onClick={onClose}>{lang === 'ar' ? 'عرض' : 'View'}</a>
+      </span>
+    </div>))}
+  </Drawer>;
 }
 
 function Forbidden() { const { lang } = useApp(); return <div className="state err">{lang === 'ar' ? 'ليست لديك صلاحية على هذه الشاشة. القائمة الجانبية تعرض الشاشات المتاحة لدورك.' : 'You do not have access to this screen. The side menu shows the screens available to your role.'}</div>; }
