@@ -136,6 +136,8 @@ export const DOMAIN_LABELS: Record<string, Record<string, Entry>> = {
   role: Object.fromEntries(Object.entries(dict.roles).map(([k, v]) => [k, v as Entry])),
   claimStatus: { approved: E('معتمدة', 'Approved'), rejected: E('مرفوضة', 'Rejected'), closed: E('مغلقة', 'Closed') },
   invoiceStatus: { overdue: E('متأخرة السداد', 'Overdue') },
+  /** ثقة الوصول المتوقع: «متوسط» وحدها تُقرأ كشدة؛ تُعرض «ثقة متوسطة» */
+  confidence: { high: E('ثقة مرتفعة', 'High confidence'), medium: E('ثقة متوسطة', 'Medium confidence'), low: E('ثقة منخفضة', 'Low confidence'), unavailable: E('غير متاح', 'Unavailable') },
 };
 
 /** القواميس الأساسية التي تُستخدم كاحتياط بعد LABELS (بترتيبها) */

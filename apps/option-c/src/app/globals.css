@@ -319,7 +319,7 @@ tr.exprow td { background: var(--raise); padding: 0 } .expbody { padding: 14px 1
 .topbar .search { min-width: 0 }
 @media (max-width: 520px) {
   .topbar { gap: 6px; padding-inline: max(12px, env(safe-area-inset-left, 0px)) }
-  .topbar .search { flex: 1 1 44px; min-width: 44px; padding: 9px 10px } .topbar .search kbd, .topbar .search > span:not(.grow) { display: none }
+  .topbar .search { flex: 1 1 44px; min-width: 44px; padding: 9px 10px } .topbar .search kbd { display: none } .topbar .search > span:not(.grow) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap } /* يبقى اسماً مقروءاً للزر */
   .topbar .langbtn { padding-inline: 8px !important }
 }
 /* U3: أزرار فرز رؤوس الجداول كانت بارتفاع 19px (< 24px في WCAG 2.5.8) */
@@ -343,3 +343,5 @@ th.selcol input, td.selcol input { width: 24px; height: 24px; margin: 0 }
 /* U11: رقم التتبع في عنوان الصفحة لا يُكسر في منتصفه على الجوال */
 h1 .mono, h1 bdi { white-space: nowrap }
 @media (max-width: 520px) { h1 { font-size: 1.4rem } }
+
+.check input[type=checkbox] { width: 22px; height: 22px }

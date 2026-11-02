@@ -151,7 +151,7 @@ function Track({ id }: { id: string }) {
       {tr?.inAir && <div className="notice" role="status">{t('ship.noLiveInFlight')}</div>}
       <div className="progress">{steps.map((k, i) => <span key={k} className={i <= idx ? 'on' : ''} title={label(lang, k)} />)}</div>
       <div className="mcard"><span>{x(d.data.sender?.label)} {lang === 'ar' ? '←' : '→'} {x(d.data.receiver?.label)}</span><span className="muted">{L.city(s.originCity)} {lang === 'ar' ? '←' : '→'} {L.city(s.destCity)} · {label(lang, s.thermalClass)} · {label(lang, s.serviceLevel)} · {label(lang, s.mode)}</span>
-        <span>{lang === 'ar' ? 'الوصول المتوقع' : 'ETA'}: <b>{s.eta?.at ? f.dt(s.eta.at) : '—'}</b> {s.eta && <Pill tone={s.eta.confidence === 'high' ? 'good' : s.eta.confidence === 'unavailable' ? 'mute' : 'warn'}>{label(lang, s.eta.confidence)}</Pill>}</span>
+        <span>{lang === 'ar' ? 'الوصول المتوقع' : 'ETA'}: <b>{s.eta?.at ? f.dt(s.eta.at) : '—'}</b> {s.eta && <Pill tone={s.eta.confidence === 'high' ? 'good' : s.eta.confidence === 'unavailable' ? 'mute' : 'warn'}>{label(lang, s.eta.confidence, 'confidence')}</Pill>}</span>
         <span className="muted">{t('ship.lastConfirmed')}: {tr?.lastConfirmedPosition ? <>{f.dt(tr.lastConfirmedPosition.at)} ({f.rel(tr.lastConfirmedPosition.at)} · {label(lang, tr.lastConfirmedPosition.source)}){!tr.lastConfirmedPosition.isLive && <> · {lang === 'ar' ? 'ليس موقعاً مباشراً' : 'not a live position'}</>} <Sim /></> : (lang === 'ar' ? 'لا يوجد بعد' : 'none yet')}</span>
         {tr?.lastReading && <span>{t('ship.lastKnownReading')}: <b>{f.temp(tr.lastReading.tempC)}</b> · {f.dt(tr.lastReading.deviceTime)} · {label(lang, tr.freshness)} <Sim /></span>}
       </div>

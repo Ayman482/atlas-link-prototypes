@@ -144,3 +144,17 @@ test('me: خطأ شبكة مؤقت لا يُخرج المستخدم، و401 يُ
   assert.equal(h.renders.at(-1).user, null, 'رفض الجلسة يُنهي الدخول');
   tr.query = orig; await h.unmount();
 });
+
+test('تبديل العربية/الإنجليزية: الاتجاه واللغة والمصطلحات المصححة والحفظ', async () => {
+  const h = await mount((ctx) => ({ lang: ctx.lang, legs: ctx.t('nav.legs'), dir: document.documentElement.dir, docLang: document.documentElement.lang }));
+  await signInAs(h, 'ops@medlog.demo');
+  assert.equal(h.renders.at(-1).dir, 'rtl'); assert.equal(h.renders.at(-1).legs, 'مراحل النقل');
+  await act(async () => { h.ctx().setLang('en'); }); await h.flush();
+  const en = h.renders.at(-1);
+  assert.equal(en.lang, 'en'); assert.equal(en.legs, 'Transport legs');
+  assert.equal(document.documentElement.dir, 'ltr'); assert.equal(document.documentElement.lang, 'en');
+  assert.equal(localStorage.getItem('al-lang'), 'en');
+  await act(async () => { h.ctx().setLang('ar'); }); await h.flush();
+  assert.equal(document.documentElement.dir, 'rtl');
+  await h.unmount();
+});

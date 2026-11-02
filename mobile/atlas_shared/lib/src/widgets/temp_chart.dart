@@ -53,7 +53,7 @@ class _TempChartState extends State<TempChart> with SingleTickerProviderStateMix
           onTapDown: (d) => pick(d.localPosition),
           onHorizontalDragUpdate: (d) => pick(d.localPosition),
           child: Semantics(
-            label: s.t('منحنى الحرارة: ${pts.length} قراءة، النطاق المسموح $minC إلى $maxC درجة', 'Temperature chart: ${pts.length} readings, allowed range $minC to $maxC °C'),
+            label: s.t('منحنى الحرارة: ${pts.length} قراءة، النطاق المسموح ${minC.toStringAsFixed(1)} إلى ${maxC.toStringAsFixed(1)} درجة', 'Temperature chart: ${pts.length} readings, allowed range ${minC.toStringAsFixed(1)} to ${maxC.toStringAsFixed(1)} °C'),
             child: AnimatedBuilder(animation: _draw, builder: (_, __) => CustomPaint(
               size: Size(box.maxWidth, 200),
               painter: _ChartPainter(pts: pts, gaps: gaps, minC: minC, maxC: maxC, progress: _draw.value, sel: sel, line: cs.primary, band: c.successSoft, bandLine: c.success, crit: c.critical, grid: c.line, label: c.muted, rtl: Directionality.of(context) == TextDirection.rtl),
@@ -63,7 +63,7 @@ class _TempChartState extends State<TempChart> with SingleTickerProviderStateMix
       }),
       const SizedBox(height: 8),
       Wrap(spacing: 14, runSpacing: 4, children: [
-        _legend(c.successSoft, s.t('النطاق $minC إلى $maxC °م (غير معتمد بعد)', 'Range $minC to $maxC °C (not yet approved)'), c),
+        _legend(c.successSoft, s.t('النطاق ${f.temp(minC)} إلى ${f.temp(maxC)} (غير معتمد بعد)', 'Range ${f.temp(minC)} to ${f.temp(maxC)} (not yet approved)'), c),
         _legend(c.line, s.t('فجوة بيانات — لا تعني الالتزام', 'Data gap — does not imply compliance'), c),
         _legend(c.critical, s.t('خارج النطاق', 'Out of range'), c),
       ]),

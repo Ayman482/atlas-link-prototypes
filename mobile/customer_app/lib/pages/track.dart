@@ -31,7 +31,7 @@ class TrackPage extends StatelessWidget {
               Text('${(d['sender']?['label'] as Map?)?[st.lang] ?? ''} ${arrow(st.lang)} ${(d['receiver']?['label'] as Map?)?[st.lang] ?? ''}', style: const TextStyle(fontWeight: FontWeight.w600)),
               Text('${city(sh['originCity'], st.lang)} ${arrow(st.lang)} ${city(sh['destCity'], st.lang)} · ${s.label(sh['thermalClass'])} · ${s.label(sh['serviceLevel'])} · ${s.label(sh['mode'])}', style: TextStyle(color: c.muted)),
               const Divider(height: 24),
-              _row(s.d('ship.eta'), eta?['at'] == null ? s.label('unavailable') : f.dt(eta!['at']), trailing: eta == null ? null : StatusPill('${eta['confidence']}', tone: eta['confidence'] == 'high' ? Tone.good : Tone.warn)),
+              _row(s.d('ship.eta'), eta?['at'] == null ? s.label('unavailable') : f.dt(eta!['at']), trailing: eta == null ? null : StatusPill('${eta['confidence']}', domain: 'confidence', tone: eta['confidence'] == 'high' ? Tone.good : Tone.warn)),
               // آخر موقع مؤكد بوقته ومصدره؛ «مباشر» فقط إن كان الموقع حياً فعلاً (ليس أثناء الطيران أو انقطاع الجهاز)
               _row(s.d('ship.lastConfirmed'), pos == null ? s.t('لا يوجد بعد', 'None yet') : '${f.dt(pos['at'])} · ${s.label(pos['source'])}${pos['isLive'] == true ? '' : s.t(' · ليس موقعاً مباشراً', ' · not a live position')}', trailing: pos == null ? null : StatusPill(pos['isLive'] == true ? 'live' : (tr['inAir'] == true ? 'inferred' : (tr['freshness'] == 'live' ? 'delayed' : '${tr['freshness']}')))),
               if (tr['operationalStatus'] == 'in_air_transit') Padding(padding: const EdgeInsets.only(top: 4), child: Text(s.d('ship.noLiveInFlight'), style: TextStyle(color: c.info))),

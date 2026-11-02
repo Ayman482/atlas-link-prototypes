@@ -20,7 +20,7 @@ class TemperaturePage extends StatelessWidget {
             Container(padding: const EdgeInsets.all(12), decoration: BoxDecoration(color: c.goldSoft, borderRadius: BorderRadius.circular(14)), child: Text('${(r['disclaimer'] as Map)[st.lang]}', style: TextStyle(color: c.goldText))),
             const SizedBox(height: 12),
             Card(child: Padding(padding: const EdgeInsets.all(16), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text('${(prof['name'] as Map)[st.lang]} (${prof['minC']}…${prof['maxC']}°C)', style: const TextStyle(fontWeight: FontWeight.w600)),
+              Text('${(prof['name'] as Map)[st.lang]} (${Fmt(st.lang).temp(prof['minC'] as num?)} … ${Fmt(st.lang).temp(prof['maxC'] as num?)})', style: const TextStyle(fontWeight: FontWeight.w600)),
               const SizedBox(height: 6),
               Text('${s.t('قراءات', 'Readings')}: ${sum['count']} · ${s.d('ship.inRange')}: ${sum['inRangePct'] ?? '—'}% · ${s.d('ship.gap')}: ${sum['gapMinutes']} ${s.t('د', 'min')}'),
               const SizedBox(height: 14),
