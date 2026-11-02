@@ -65,11 +65,11 @@ const KIND: Record<string, [string, string]> = { pickup: ['استلام', 'Picku
 // K02
 function Tasks() {
   const { lang, x } = useApp(); const f = useFmt(); const d = useQ<any>('courier.tasks', {}); const [showDone, setShowDone] = useState(false);
-  if (d.error) return <div className="mbodyx"><ErrorBox error={d.error} /></div>;
+  if (d.error) return <div className="mbodyx" tabIndex={0}><ErrorBox error={d.error} /></div>;
   if (!d.data) return <Loading />;
   const open = d.data.tasks.filter((t: any) => t.kind !== 'done'); const done = d.data.tasks.filter((t: any) => t.kind === 'done');
   return <><MTop title={lang === 'ar' ? 'مهام اليوم' : 'Today’s tasks'} right={<Pill v={d.data.courier.status} />} />
-    <div className="mbodyx">
+    <div className="mbodyx" tabIndex={0}>
       <div className="mkpis"><div><b>{open.filter((t: any) => t.kind === 'pickup').length}</b><span>{KIND.pickup[lang === 'ar' ? 0 : 1]}</span></div><div><b>{open.filter((t: any) => t.kind !== 'pickup').length}</b><span>{KIND.delivery[lang === 'ar' ? 0 : 1]}</span></div><div><b>{d.data.boxesInCustody.length}</b><span>{lang === 'ar' ? 'صناديق' : 'Boxes'}</span></div></div>
       {d.data.conflicts.some((c: any) => c.resolution === 'pending') && <a className="notice warn" href="#/sync">{lang === 'ar' ? 'لديك تعارضات مزامنة بانتظار العمليات' : 'You have sync conflicts awaiting operations'}</a>}
       {open.length ? open.map((t: any) => <TaskCard key={t.shipmentId} t={t} />) : <Empty text={lang === 'ar' ? 'لا مهام مفتوحة' : 'No open tasks'} />}
@@ -97,7 +97,7 @@ function RouteMap() {
   const open = d.data.tasks.filter((t: any) => t.kind !== 'done');
   const pts = open.map((t: any) => { const a = t.kind === 'pickup' ? t.sender : t.receiver; return a ? { id: t.shipmentId, lat: a.lat, lng: a.lng, kind: t.kind === 'pickup' ? 'pickup' : 'delivery', label: `${t.seq}. ${x(a.label)}`, meta: { trackingNo: t.trackingNo, status: t.status, at: t.kind === 'pickup' ? t.pickupWindowStart : t.deliverBy, origin: t.sender?.cityCode, dest: t.receiver?.cityCode } } : null; }).filter(Boolean);
   return <><MTop title={lang === 'ar' ? 'خريطة المسار' : 'Route map'} right={<Sim />} />
-    <div className="mbodyx">
+    <div className="mbodyx" tabIndex={0}>
       <KsaMap points={pts as any} cities={L.cities} onPick={(id) => go('/t/' + id)} height={300} />
       <p className="muted">{lang === 'ar' ? 'الملاحة الفعلية تُفتح في تطبيق الخرائط على الجهاز؛ هنا ترتيب التوقفات المسند من الإرسال.' : 'Turn-by-turn navigation opens in the device maps app; this shows the stop order assigned by dispatch.'}</p>
       <ol className="mtimeline">{open.map((t: any) => { const a = t.kind === 'pickup' ? t.sender : t.receiver; return <li key={t.shipmentId}><a href={'#/t/' + t.shipmentId}><b>{t.seq === 99 ? '—' : t.seq}. {x(a?.label)}</b></a><span className="muted">{KIND[t.kind][lang === 'ar' ? 0 : 1]} · {L.city(a?.cityCode)}</span></li>; })}</ol>
@@ -113,7 +113,7 @@ function Task({ id }: { id: string }) {
   const rets = useList('returns');
   if (!d.data) return <Loading />;
   const t = d.data.tasks.find((y: any) => y.shipmentId === id);
-  if (!t) return <><MTop title="—" back="/" /><div className="mbodyx"><div className="state err">{lang === 'ar' ? 'المهمة غير موجودة أو لم تعد مسندة إليك' : 'Task not found or no longer assigned to you'}</div></div></>;
+  if (!t) return <><MTop title="—" back="/" /><div className="mbodyx" tabIndex={0}><div className="state err">{lang === 'ar' ? 'المهمة غير موجودة أو لم تعد مسندة إليك' : 'Task not found or no longer assigned to you'}</div></div></>;
   const reset = () => { setStage(null); setSig(null); setName(''); setPhoto(false); setErr(null); setScannedShip(false); setNote(''); };
   const safe = async (fn: () => Promise<unknown>) => { setErr(null); try { await fn(); reset(); } catch (e: any) { setErr(e?.message?.[lang] ?? String(e)); } };
   const a = t.kind === 'pickup' ? t.sender : t.receiver;
@@ -122,7 +122,7 @@ function Task({ id }: { id: string }) {
   const reasons = [['RECIPIENT_UNAVAILABLE', 'المستلم غير متاح', 'Recipient unavailable'], ['ADDRESS_ISSUE', 'مشكلة في العنوان', 'Address issue'], ['REFUSED', 'رفض الاستلام', 'Refused'], ['ACCESS_DENIED', 'تعذّر الدخول للموقع', 'Site access denied']];
   const targets = hv.toType === 'warehouse' ? d.data.warehouses.map((w: any) => ({ id: w.id, name: w.name })) : hv.toType === 'courier' ? d.data.colleagues : d.data.partners.filter((p: any) => (hv.toType === 'air_carrier' ? p.partnerType === 'air' : p.partnerType === 'road'));
   return <><MTop title={<Mono>{t.trackingNo}</Mono>} back="/" right={<Pill v={t.status} />} />
-    <div className="mbodyx">
+    <div className="mbodyx" tabIndex={0}>
       <div className="mcard">
         <b>{KIND[t.kind][lang === 'ar' ? 0 : 1]} — {x(a?.label)}</b>
         <span>{a?.contactName} · <span dir="ltr">{a?.contactPhone}</span></span>
@@ -197,7 +197,7 @@ function Sync() {
     setRes(r.results.map((y: any) => ({ ...y, label: o.q.find((q) => q.clientActionId === y.clientActionId)?.label }))); o.clear();
   };
   return <><MTop title={lang === 'ar' ? 'دون اتصال والمزامنة' : 'Offline & sync'} />
-    <div className="mbodyx">
+    <div className="mbodyx" tabIndex={0}>
       <div className="mcard"><b>{lang === 'ar' ? 'حالة الشبكة' : 'Network'}: {o.off ? (lang === 'ar' ? 'دون اتصال' : 'Offline') : (lang === 'ar' ? 'متصل' : 'Online')} <Sim /></b><span className="muted">{lang === 'ar' ? 'محاكاة انقطاع الشبكة لاختبار العمل الميداني. تُخزّن الإجراءات محلياً بمعرف فريد وتُزامن دون تكرار.' : 'Simulates network loss for field testing. Actions are stored locally with unique IDs and synced idempotently.'}</span><Btn onClick={o.toggle}>{o.off ? (lang === 'ar' ? 'استعادة الاتصال' : 'Go online') : (lang === 'ar' ? 'قطع الاتصال' : 'Go offline')}</Btn></div>
       <b>{lang === 'ar' ? 'الطابور' : 'Queue'} ({o.q.length})</b>
       {o.q.length ? o.q.map((q) => <div key={q.clientActionId} className="mcard"><b>{q.label}</b><span className="muted"><Mono>{q.clientActionId}</Mono> · {f.dt(q.occurredAt)}</span></div>) : <Empty text={lang === 'ar' ? 'لا إجراءات معلّقة' : 'Nothing pending'} />}
@@ -212,7 +212,7 @@ function Boxes() {
   const { lang } = useApp(); const d = useQ<any>('courier.tasks', {}); const f = useFmt();
   if (!d.data) return <Loading />;
   return <><MTop title={lang === 'ar' ? 'الصناديق بعهدتي' : 'Boxes in my custody'} />
-    <div className="mbodyx">{d.data.boxesInCustody.length ? d.data.boxesInCustody.map((b: any) => <div key={b.id} className="mcard"><div className="row" style={{ justifyContent: 'space-between' }}><Mono>{b.code}</Mono><Pill v={b.status} /></div><span>{label(lang, b.thermalClass)} · {b.size}</span>{b.device ? <span className="muted">GPT45-M <Mono>{b.device.imei}</Mono> · {lang === 'ar' ? 'بطارية' : 'battery'} {b.device.batteryPct ?? '—'}% · {f.dt(b.device.lastSeenAt)} <Sim /></span> : <Pill tone="warn">{lang === 'ar' ? 'لا جهاز مقترن' : 'No paired device'}</Pill>}</div>) : <Empty />}</div></>;
+    <div className="mbodyx" tabIndex={0}>{d.data.boxesInCustody.length ? d.data.boxesInCustody.map((b: any) => <div key={b.id} className="mcard"><div className="row" style={{ justifyContent: 'space-between' }}><Mono>{b.code}</Mono><Pill v={b.status} /></div><span>{label(lang, b.thermalClass)} · {b.size}</span>{b.device ? <span className="muted">GPT45-M <Mono>{b.device.imei}</Mono> · {lang === 'ar' ? 'بطارية' : 'battery'} {b.device.batteryPct ?? '—'}% · {f.dt(b.device.lastSeenAt)} <Sim /></span> : <Pill tone="warn">{lang === 'ar' ? 'لا جهاز مقترن' : 'No paired device'}</Pill>}</div>) : <Empty />}</div></>;
 }
 
 // K14
@@ -220,7 +220,7 @@ function Me() {
   const { lang, setLang, x, t, me, run, signOut } = useApp(); const d = useQ<any>('courier.tasks', {}); const h = useList('custody', { sort: 'occurredAt', dir: 'desc' }); const f = useFmt();
   const c = d.data?.courier;
   return <><MTop title={lang === 'ar' ? 'حسابي' : 'Me'} />
-    <div className="mbodyx">
+    <div className="mbodyx" tabIndex={0}>
       <div className="mcard"><b>{x(me.user.name)}</b><span className="mono">{me.user.email}</span>{c && <span>{label(lang, c.employmentType)} · {lang === 'ar' ? 'التأهيل حتى' : 'Qualified until'} {f.dt(c.qualificationExpiry)}</span>}{d.data?.vehicle && <span className="muted">{d.data.vehicle.plate} · {d.data.vehicle.vehicleType ?? ''}</span>}</div>
       {c && <div className="mcard"><b>{lang === 'ar' ? 'المناوبة' : 'Shift'}: <Pill v={c.status} /></b>{c.status === 'off_shift' ? <Btn kind="primary" onClick={() => run('courier.setStatus', { courierId: c.id, status: 'available' })}>{t('courier.startShift')}</Btn> : <Btn onClick={() => run('courier.setStatus', { courierId: c.id, status: 'off_shift' })}>{t('courier.endShift')}</Btn>}</div>}
       <div className="mcard"><b>{lang === 'ar' ? 'اللغة' : 'Language'}</b><div className="seg"><button className={lang === 'ar' ? 'on' : ''} onClick={() => setLang('ar')}>العربية</button><button className={lang === 'en' ? 'on' : ''} onClick={() => setLang('en')}>English</button></div></div>

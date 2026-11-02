@@ -83,12 +83,12 @@ function Shell() {
           <Btn kind="ghost" className="hamb iconbtn" onClick={() => setOpen(!open)} aria-label="menu"><Ico size={18} d="M4 6h16M4 12h16M4 18h16" /></Btn>
           <Greeting />
           <span className="grow" />
-          <button className="search" onClick={() => setCmdk(true)} aria-label={t('common.search')}><Ico size={16} d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.3-4.3" /><span>{lang === 'ar' ? 'بحث…' : 'Search…'}</span><span className="grow" /><kbd>Ctrl K</kbd></button>
+          <button className="search" onClick={() => setCmdk(true)} aria-keyshortcuts="Control+K"><Ico size={16} d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.3-4.3" /><span>{lang === 'ar' ? 'بحث…' : 'Search…'}</span><span className="grow" /><kbd>Ctrl K</kbd></button>
           <span className="sim" title="demo">{t('app.demoBadge')}</span>
           <Btn kind="ghost" onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}>{t('common.switchLang')}</Btn>
           <ThemeBtn />
           <div style={{ position: 'relative' }}>
-            <Btn kind="ghost" className="iconbtn" aria-label={t('common.notifications')} onClick={() => setMenu(menu === 'ntf' ? null : 'ntf')}><Ico size={18} d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10 21a2 2 0 0 0 4 0" />{unread > 0 && <span className="badge">{unread}</span>}</Btn>
+            <Btn kind="ghost" className="iconbtn" aria-label={unread > 0 ? `${t('common.notifications')} ${unread}` : t('common.notifications')} onClick={() => setMenu(menu === 'ntf' ? null : 'ntf')}><Ico size={18} d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10 21a2 2 0 0 0 4 0" />{unread > 0 && <span className="badge">{unread}</span>}</Btn>
             <NotificationCenter open={menu === 'ntf'} onClose={() => setMenu(null)} items={mine} />
           </div>
           <div style={{ position: 'relative' }}>

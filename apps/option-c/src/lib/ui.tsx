@@ -259,7 +259,7 @@ export function DataTable<R extends { id?: string }>({ rows, cols, filters = [],
           <thead><tr>
             {bulk && <th className="selcol"><input type="checkbox" checked={allOnPage} onChange={toggleAll} aria-label={lang === 'ar' ? 'تحديد كل صفوف الصفحة' : 'Select all rows on page'} /></th>}
             {expand && <th className="expcol"><span className="sr-only">{lang === 'ar' ? 'توسيع' : 'Expand'}</span></th>}
-            {cols.map((c) => <th key={c.key} className={cx(c.num && 'num', c.hideSm && 'hidesm')} aria-sort={sort?.key === c.key ? (sort.dir === 'asc' ? 'ascending' : 'descending') : undefined}><button className="th" onClick={() => setSort(sort?.key === c.key ? { key: c.key, dir: sort.dir === 'asc' ? 'desc' : 'asc' } : { key: c.key, dir: 'asc' })}>{c.label}<span aria-hidden="true">{sort?.key === c.key ? (sort.dir === 'asc' ? ' ▲' : ' ▼') : ''}</span></button></th>)}
+            {cols.map((c) => <th key={c.key} className={cx(c.num && 'num', c.hideSm && 'hidesm')} aria-sort={sort?.key === c.key ? (sort.dir === 'asc' ? 'ascending' : 'descending') : undefined}>{!c.label ? <span className="sr-only">{lang === 'ar' ? 'إجراءات' : 'Actions'}</span> : <button className="th" onClick={() => setSort(sort?.key === c.key ? { key: c.key, dir: sort.dir === 'asc' ? 'desc' : 'asc' } : { key: c.key, dir: 'asc' })}>{c.label}<span aria-hidden="true">{sort?.key === c.key ? (sort.dir === 'asc' ? ' ▲' : ' ▼') : ''}</span></button>}</th>)}
           </tr></thead>
           <tbody>{shown.map((r, i) => { const k = key(r, i); const isOpen = !!open[k]; return <React.Fragment key={k}>
             <tr className={cx(onRow && 'click', sel.has(k) && 'selected', isOpen && 'open')} onClick={onRow ? () => onRow(r) : expand ? () => setOpen({ ...open, [k]: !isOpen }) : undefined} tabIndex={onRow ? 0 : undefined} onKeyDown={onRow ? (e) => e.key === 'Enter' && onRow(r) : undefined}>
@@ -408,7 +408,7 @@ export function KsaMap({ points, cities, onPick, height = 380 }: { points: MapPt
 export function Bars({ data, height = 180, valueLabel }: { data: { label: string; a: number; b?: number }[]; height?: number; valueLabel?: [string, string?] }) {
   const max = Math.max(1, ...data.flatMap((d) => [d.a, d.b ?? 0]));
   const W = 760, H = height, pb = 26, pt = 10, bw = (W - 20) / data.length;
-  return <figure className="chart"><svg viewBox={`0 0 ${W} ${H}`} role="img">
+  return <figure className="chart"><svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={data.map((d) => `${d.label}: ${d.a}${d.b != null ? ` / ${d.b}` : ''}`).join('، ')}>
     <defs><linearGradient id="bga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#0B9A87" /><stop offset="1" stopColor="#087F70" /></linearGradient><linearGradient id="bgb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#F2C994" /><stop offset="1" stopColor="#E6A65D" /></linearGradient></defs>
     {[0, 0.5, 1].map((r) => <line key={r} x1={10} x2={W - 10} y1={pt + (H - pt - pb) * (1 - r)} y2={pt + (H - pt - pb) * (1 - r)} stroke="var(--line)" />)}
     {data.map((d, i) => { const h1 = ((H - pt - pb) * d.a) / max, h2 = ((H - pt - pb) * (d.b ?? 0)) / max; const x = 10 + i * bw; return <g key={i}>

@@ -186,8 +186,8 @@ input[type="checkbox"] { accent-color: var(--accent); width: 17px; height: 17px 
 .mk .alertring { fill: var(--crit); opacity: .22; transform-box: fill-box; transform-origin: center; animation: halo 2s ease-out infinite }
 .sw.mk { border-radius: 50%; width: 10px }
 .alerts { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column } .alerts li { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; padding: 12px 4px; border-bottom: 1px solid var(--line); animation: soft .5s var(--ease) both } .alerts li:last-child { border: 0 }
-.steps { display: flex; gap: 8px; flex-wrap: wrap; counter-reset: s; list-style: none; margin: 0; padding: 0 } .steps span { counter-increment: s; font-size: .84rem; padding: 6px 14px 6px 8px; border-radius: 99px; background: var(--raise); color: var(--muted); border: 1px solid var(--line); display: inline-flex; gap: 8px; align-items: center; transition: .4s var(--ease) } .steps span::before { content: counter(s); width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-solid); font-size: .74rem; border: 1px solid var(--line) }
-.steps span.on { background: var(--accent); color: var(--accent-ink); border-color: var(--accent) } .steps span.on::before { background: rgba(255, 255, 255, .2); border-color: transparent; color: inherit } .steps span.done { background: var(--accent-soft); color: var(--accent-text) } .steps span.done::before { content: "✓" }
+.steps { display: flex; gap: 8px; flex-wrap: wrap; counter-reset: s; list-style: none; margin: 0; padding: 0 } .steps :is(span,li) { counter-increment: s; font-size: .84rem; padding: 6px 14px 6px 8px; border-radius: 99px; background: var(--raise); color: var(--muted); border: 1px solid var(--line); display: inline-flex; gap: 8px; align-items: center; transition: .4s var(--ease) } .steps :is(span,li)::before { content: counter(s); width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-solid); font-size: .74rem; border: 1px solid var(--line) }
+.steps :is(span,li).on { background: var(--accent); color: var(--accent-ink); border-color: var(--accent) } .steps :is(span,li).on::before { background: rgba(255, 255, 255, .2); border-color: transparent; color: inherit } .steps :is(span,li).done { background: var(--accent-soft); color: var(--accent-text) } .steps :is(span,li).done::before { content: "✓" }
 .price { display: grid; grid-template-columns: 1fr auto; gap: 6px 16px; font-size: .92rem } .price b { font-family: var(--f-display); font-size: 1.25rem; font-weight: 500; color: var(--accent) }
 .gauge { --v: 50; width: 128px; aspect-ratio: 1; max-width: 100%; border-radius: 50%; background: conic-gradient(var(--accent) calc(var(--v) * 1%), var(--sunk) 0); -webkit-mask: radial-gradient(farthest-side, transparent 78%, #000 79%); mask: radial-gradient(farthest-side, transparent 78%, #000 79%) }
 .gaugewrap { position: relative; width: 128px; display: grid; place-items: center } .gaugewrap b { position: absolute; font-family: var(--f-display); font-weight: 500; font-size: 1.6rem }
@@ -228,9 +228,9 @@ meter::-moz-meter-bar { background: var(--grad); border-radius: 99px }
 .mbodyx { flex: 1; overflow: auto; padding: 4px 16px 16px; display: flex; flex-direction: column; gap: 12px }
 .mbodyx > * { animation: soft .5s var(--ease) both } .mbodyx > *:nth-child(2) { animation-delay: 50ms } .mbodyx > *:nth-child(3) { animation-delay: 100ms } .mbodyx > *:nth-child(n+4) { animation-delay: 150ms }
 .mtabs { display: grid; grid-template-columns: repeat(5, 1fr); background: var(--surface-solid); border-top: 1px solid var(--line); padding-bottom: 6px }
-.mtabs a { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 10px 0 4px; font-size: .68rem; color: var(--faint); text-decoration: none; position: relative; transition: color .3s }
+.mtabs a { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 10px 0 4px; font-size: .68rem; color: var(--muted); text-decoration: none; position: relative; transition: color .3s }
 .mtabs a::before { content: ""; position: absolute; top: 0; width: 26px; height: 3px; border-radius: 0 0 4px 4px; background: var(--accent); transform: scaleX(0); transition: transform .4s var(--ease) }
-.mtabs a.on { color: var(--accent); font-weight: 600 } .mtabs a.on::before { transform: scaleX(1) }
+.mtabs a.on { color: var(--accent-text); font-weight: 600 } .mtabs a.on::before { transform: scaleX(1) }
 .mtabs svg { width: 22px; height: 22px }
 .mcard { background: var(--surface-solid); border: 1px solid var(--line); border-radius: 22px; padding: 16px; display: flex; flex-direction: column; gap: 6px; color: var(--fg); text-decoration: none !important; box-shadow: var(--shadow); transition: transform .35s var(--ease), box-shadow .35s }
 a.mcard:hover, button.mcard:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg) }
@@ -301,3 +301,9 @@ tr.exprow td { background: var(--raise); padding: 0 } .expbody { padding: 14px 1
 .scanstate { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 14px; font-weight: 500 } .scanstate.ok { background: var(--success-soft); color: var(--success) } .scanstate.bad { background: var(--critical-soft); color: var(--critical) } .scanstate.busy { background: var(--sunk); color: var(--muted) }
 .mtabs a, .bigbtn, .seg button, .mcard .btn { min-height: var(--touch-min) }
 .navscrim { display: none; z-index: 25 } @media (max-width: 1050px) { .navscrim { display: block } }
+
+/* ===== تدقيق الوصول (WCAG 2.2 AA) — مؤشر تركيز موحّد ومرئي دائماً، تباين المعرّفات، وأهداف لمس ===== */
+:where(a, button, [role="button"], [tabindex], summary, svg, g, tr, input, select, textarea):focus-visible { outline: 2px solid var(--focus) !important; outline-offset: 2px !important }
+.slinks .sid { color: var(--muted) } .slinks a.on .sid { color: var(--primary-text) }
+.iconbtn { flex-shrink: 0; min-width: 40px; min-height: 40px }
+.ntf-tabs { gap: 14px; flex-wrap: wrap; row-gap: 4px }

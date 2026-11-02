@@ -15,6 +15,12 @@ const shot = async (p, url, name, wait = 2200) => { await p.goto(B + url); await
   await shot(p, '/admin/#/map', '07-admin-map');
   await p.evaluate(() => { localStorage.setItem('al-lang', 'en'); }); await shot(p, '/admin/#/', '08-admin-control-tower-en');
   await p.evaluate(() => { localStorage.setItem('al-lang', 'ar'); });
+  if (process.env.EXTRA) { // حالات تفاعلية (بعد التحسين فقط)
+    await shot(p, '/admin/#/', '18-admin-notification-center'); await p.click('button[aria-label^="الإشعارات"]'); await p.waitForTimeout(700); await p.screenshot({ path: `${out}/18-admin-notification-center.png` });
+    await shot(p, '/admin/#/map', '19-admin-map-selected'); await p.locator('.mk').first().click({ force: true }); await p.waitForTimeout(700); await p.screenshot({ path: `${out}/19-admin-map-selected.png` });
+    await shot(p, '/admin/#/shipments', '20-admin-table-expanded'); await p.locator('.expbtn').first().click(); await p.waitForTimeout(600); await p.screenshot({ path: `${out}/20-admin-table-expanded.png` });
+    const d = await (await b.newContext({ viewport: { width: 1440, height: 900 }, colorScheme: 'dark' })).newPage(); await login(d, '/admin/', 'ops@medlog.demo'); await shot(d, '/admin/#/', '21-admin-control-tower-dark');
+  }
   const q = await (await b.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
   await login(q, '/portal/', 'corp.admin@medlog.demo'); await shot(q, '/portal/#/', '09-portal-home'); await shot(q, '/portal/#/shipments/shp_0002', '10-portal-tracking'); await shot(q, '/portal/#/shipments/new', '11-portal-new-shipment');
   const m = await (await b.newContext({ viewport: { width: 1200, height: 900 } })).newPage();

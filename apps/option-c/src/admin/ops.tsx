@@ -194,7 +194,7 @@ export function ShipmentCreate({ portal }: { params?: any; portal?: { orgId: str
   const ITEMS = [['BLOOD_TUBES', 'أنابيب دم', 'Blood tubes'], ['TISSUE_BIOPSY', 'خزعة نسيجية', 'Tissue biopsy'], ['SWAB_PCR', 'مسحة PCR', 'PCR swab'], ['URINE_CULTURE', 'مزرعة بول', 'Urine culture'], ['CSF_SAMPLE', 'عينة سائل نخاعي', 'CSF sample'], ['SERUM_ALIQUOT', 'عينة مصل', 'Serum aliquot']];
   return (
     <Page title={t('ship.create')} crumbs={[{ label: t('nav.shipments'), href: '#/shipments' }, { label: t('nav.newShipment') }]} sub={portal ? undefined : (lang === 'ar' ? 'إنشاء نيابة عن العميل — يُسجَّل في سجل التدقيق' : 'Created on behalf of the customer — recorded in the audit log')}>
-      <ol className="steps" aria-label={lang === 'ar' ? `الخطوة ${step + 1} من ${steps.length}` : `Step ${step + 1} of ${steps.length}`}>{steps.map((s, i) => <motion.span layout key={i} aria-current={i === step ? 'step' : undefined} className={i === step ? 'on' : i < step ? 'done' : ''}>{s}</motion.span>)}</ol>
+      <ol className="steps" aria-label={lang === 'ar' ? `الخطوة ${step + 1} من ${steps.length}` : `Step ${step + 1} of ${steps.length}`}>{steps.map((s, i) => <motion.li layout key={i} aria-current={i === step ? 'step' : undefined} className={i === step ? 'on' : i < step ? 'done' : ''}>{s}</motion.li>)}</ol>
       <Section>
         {step < 3 && <FormFields fields={F[step]} values={v} set={(n, val) => { set(n, val); if (n === 'organizationId') setV((o) => ({ ...o, organizationId: val, branchId: '', senderAddressId: '' })); }} errors={e} />}
         {step === 1 && <div className="page">
