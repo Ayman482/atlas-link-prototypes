@@ -68,7 +68,7 @@ function Overview({ lang, as }: { lang: Lang; as: string }) {
           <ul className="facts">
             <li><b>{listCommands().length}</b> {tx(lang, UI.cmds)} · <b>{listQueries().length}</b> {tx(lang, UI.qs)}</li>
             <li>{tx(lang, { ar: '19 حساب عرض لكل الأدوار، مع عضوية مختلفة لنفس المستخدم في فرعين', en: '19 demo accounts across all roles, including one user with different roles in two branches' })}</li>
-            <li>{tx(lang, { ar: '12 سيناريو عرض و32 اختبار قبول ناجحاً (UAT-001..015 وDB-AT)', en: '12 demo scenarios and 32 passing acceptance tests (UAT-001..015, DB-AT)' })}</li>
+            <li>{tx(lang, { ar: '11 سيناريو قابلاً للتشغيل هنا (S04 مغطى باختبار UAT-005) و32 اختبار قبول ناجحاً', en: '11 scenarios runnable here (S04 is covered by the UAT-005 test) and 32 passing acceptance tests' })}</li>
             <li>{tx(lang, { ar: 'كل القراءات الحرارية ومواقع GPS بيانات عرض مُعلَّمة، وكل التكاملات الخارجية محاكاة', en: 'All temperature and GPS readings are labelled demo data; all external integrations are simulated' })}</li>
           </ul>
           <p className="muted">{tx(lang, UI.storage)}</p>
