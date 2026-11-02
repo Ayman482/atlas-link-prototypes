@@ -307,3 +307,39 @@ tr.exprow td { background: var(--raise); padding: 0 } .expbody { padding: 14px 1
 .slinks .sid { color: var(--muted) } .slinks a.on .sid { color: var(--primary-text) }
 .iconbtn { flex-shrink: 0; min-width: 40px; min-height: 40px }
 .ntf-tabs { gap: 14px; flex-wrap: wrap; row-gap: 4px }
+
+/* ===== معالجة تدقيق الواجهة (UI_UX_AUDIT.md) ===== */
+/* U2: القائمة الجانبية المغلقة على الشاشات الضيقة تُخرج من ترتيب التركيز (كانت تستقبل Tab وهي خارج الشاشة) */
+@media (max-width: 1050px) {
+  .sidecard:not(.open), .pside:not(.open) { visibility: hidden; transition: transform .45s var(--ease), visibility 0s linear .45s }
+  .sidecard.open, .pside.open { visibility: visible; transition: transform .45s var(--ease), visibility 0s }
+}
+@media (prefers-reduced-motion: reduce) { .sidecard, .pside { transition: none !important } }
+/* U1: الشريط العلوي عند 390px كان يتجاوز عرض الشاشة (تمرير أفقي في كل شاشات الإدارة) */
+.topbar .search { min-width: 0 }
+@media (max-width: 520px) {
+  .topbar { gap: 6px; padding-inline: max(12px, env(safe-area-inset-left, 0px)) }
+  .topbar .search { flex: 1 1 44px; min-width: 44px; padding: 9px 10px } .topbar .search kbd, .topbar .search > span:not(.grow) { display: none }
+  .topbar .langbtn { padding-inline: 8px !important }
+}
+/* U3: أزرار فرز رؤوس الجداول كانت بارتفاع 19px (< 24px في WCAG 2.5.8) */
+.th { min-height: 28px; display: inline-flex; align-items: center; padding-block: 2px }
+/* U5: مربعات التحديد في الجداول 17px → 24px */
+th.selcol input, td.selcol input { width: 22px; height: 22px; margin: 1px; cursor: pointer }
+/* U4: منطقة نقر أوسع لعلامات الخريطة (العلامة المرئية كما هي) */
+.mk .hit { fill: transparent; stroke: none }
+/* U7/U8: روابط الإشعارات وأزرار الجوال بأهداف لمس كافية */
+.notice a { display: inline-block; padding-block: 3px; min-height: 24px }
+.mbodyx .btn, .phone .btn { min-height: var(--touch-min) }
+/* U6: عمود واحد بحد أدنى صفري — الجدول الواسع يتمرر داخل بطاقته بدل توسيع الصفحة (التوزيع عند 768px) */
+@media (max-width: 1100px) { .grid.wide-narrow { grid-template-columns: minmax(0, 1fr) } }
+.grid > * { min-width: 0 }
+.th { min-width: 24px; justify-content: center }
+th.selcol input, td.selcol input { width: 24px; height: 24px; margin: 0 }
+.legend .mk { min-height: 24px; display: inline-flex; align-items: center }
+/* U10: أزرار نطاق المنحنى لا تنكسر على سطرين؛ المنحنى يحافظ على عرض مقروء ويتمرر أفقياً على الشاشات الضيقة */
+.tchart .seg button { white-space: nowrap }
+@media (max-width: 600px) { .tchart .chartscroll { overflow-x: auto } .tchart .chartscroll svg { min-width: 560px } }
+/* U11: رقم التتبع في عنوان الصفحة لا يُكسر في منتصفه على الجوال */
+h1 .mono, h1 bdi { white-space: nowrap }
+@media (max-width: 520px) { h1 { font-size: 1.4rem } }

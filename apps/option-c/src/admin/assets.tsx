@@ -78,7 +78,7 @@ export function DeviceDetail({ params }: { params: Record<string, string> }) {
   const [tab, setTab] = useState('readings');
   if (d.error) return <ErrorBox error={d.error} />; if (!d.data) return <Loading />;
   const dev = d.data.device; const reads = d.data.readings;
-  const report = reads.length ? { readings: reads.map((r: any) => ({ t: r.deviceTime, c: r.tempC })), gaps: [], excursions: [], profile: { minC: Math.min(...reads.map((r: any) => r.tempC ?? 0)) - 1, maxC: Math.max(...reads.map((r: any) => r.tempC ?? 0)) + 1 } } : null;
+  const report = reads.length ? { readings: reads.map((r: any) => ({ t: r.deviceTime, c: r.tempC })), gaps: [], excursions: [], profile: { minC: Math.min(...reads.map((r: any) => r.tempC ?? 0)) - 1, maxC: Math.max(...reads.map((r: any) => r.tempC ?? 0)) + 1, observedOnly: true } } : null;
   return (
     <Page title={<><Mono>{dev.imei}</Mono> <Pill v={dev.state} /></>} crumbs={[{ label: t('nav.devices'), href: '#/devices' }, { label: dev.imei }]} sub={<><Sim /> {lang === 'ar' ? 'القراءات مولّدة للعرض' : 'Readings are generated for demo'}</>}
       actions={<>
