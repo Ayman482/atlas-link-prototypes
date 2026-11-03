@@ -16,6 +16,7 @@ class FakeServer {
   bool down = false; bool expired = false;
   String user = 'usr_courier1';
   Completer<void>? holdSync;
+  Completer<void>? holdCommands;
   final processed = <String>{};
   late final client = MockClient((r) async {
     log.add(r);
@@ -24,6 +25,8 @@ class FakeServer {
     http.Response j(Object o, [int s = 200]) => http.Response.bytes(utf8.encode(jsonEncode(o)), s);
     if (expired && !p.endsWith('/auth/login')) return j({'error': {'code': 'SESSION_EXPIRED', 'message_ar': 'انتهت الجلسة', 'message_en': 'Session expired'}}, 401);
     if (p.endsWith('/queries/me')) return j({'data': {'user': {'id': user, 'name': {'ar': 'م', 'en': 'C'}}, 'roles': ['courier']}});
+    if (holdCommands != null && p.contains('/commands/') && !p.endsWith('courier.sync')) await holdCommands!.future;
+    if (p.endsWith('/health')) return j({'ok': true});
     if (p.endsWith('/commands/courier.sync')) {
       if (holdSync != null) await holdSync!.future;
       final acts = (jsonDecode(r.body)['actions'] as List).cast<Map>();
@@ -121,5 +124,60 @@ void main() {
     final third = AppState(ApiClient(base: 'http://t/api/v1', client: srv.client), 'courier');
     await third.load();
     expect(third.signedIn, isFalse); expect(third.sessionExpired, isTrue);
+  });
+
+  test('مراقبة الاتصال: الانقطاع الفعلي يُكتشف بالنبض، والعودة تطلق مزامنة تلقائية مرة واحدة', () async {
+    final (st, q, srv) = await boot();
+    final m = ConnectivityMonitor(st.api, onlineInterval: const Duration(hours: 1), offlineInterval: const Duration(hours: 1));
+    q.attachMonitor(m);
+    srv.down = true;
+    expect(await m.check(), isFalse);
+    expect(q.offline, isTrue, reason: 'الانقطاع الفعلي يجعل الطابور في وضع دون اتصال');
+    await q.act(st, 'deliver', 'courier.deliver', 'shp_7', {'recipientName': 'أ'}, 'تسليم');
+    expect(q.items, hasLength(1));
+    srv.down = false;
+    expect(await m.check(), isTrue);
+    for (var i = 0; i < 20 && q.items.isNotEmpty; i++) { await Future<void>.delayed(const Duration(milliseconds: 10)); }
+    expect(q.items, isEmpty, reason: 'مزامنة تلقائية بعد العودة');
+    expect(srv.log.where((r) => r.url.path.endsWith('courier.sync')), hasLength(1));
+    await m.check(); // فحص ثانٍ وهو متصل: لا مزامنة جديدة
+    expect(srv.log.where((r) => r.url.path.endsWith('courier.sync')), hasLength(1));
+    m.dispose();
+  });
+
+  test('خطأ شبكة أثناء إجراء مباشر يحوّل المراقب فوراً لوضع الانقطاع دون انتظار الدورة', () async {
+    final (st, q, srv) = await boot();
+    final m = ConnectivityMonitor(st.api, onlineInterval: const Duration(hours: 1));
+    q.attachMonitor(m);
+    srv.down = true;
+    expect(await q.act(st, 'pickup', 'courier.pickup', 'shp_8', {}, 'استلام'), isFalse);
+    expect(m.online, isFalse);
+    // الإجراء التالي يُحفظ مباشرة دون محاولة طلب (لا انتظار مهلة 20 ثانية)
+    final before = srv.log.length;
+    await q.act(st, 'deliver', 'courier.deliver', 'shp_9', {}, 'تسليم');
+    expect(srv.log.length, before, reason: 'لا طلب أثناء الانقطاع المعروف');
+    m.dispose();
+  });
+
+  test('منع التكرار: تسليم أو استلام نفس الشحنة مرتين دون اتصال يُحفظ مرة واحدة', () async {
+    final (st, q, _) = await boot();
+    q.offline = true;
+    await q.act(st, 'deliver', 'courier.deliver', 'shp_10', {'recipientName': 'أ'}, 'تسليم');
+    await q.act(st, 'deliver', 'courier.deliver', 'shp_10', {'recipientName': 'أ'}, 'تسليم');
+    await q.act(st, 'pickup', 'courier.pickup', 'shp_11', {}, 'استلام');
+    await q.act(st, 'pickup', 'courier.pickup', 'shp_11', {}, 'استلام');
+    expect(q.items.where((a) => a['shipment'] == 'shp_10'), hasLength(1));
+    expect(q.items.where((a) => a['shipment'] == 'shp_11'), hasLength(1));
+  });
+
+  test('ضغط مزدوج أثناء إجراء مباشر يرسل طلباً واحداً فقط', () async {
+    final (st, q, srv) = await boot();
+    srv.holdCommands = Completer<void>();
+    final a = q.act(st, 'deliver', 'courier.deliver', 'shp_12', {'recipientName': 'أ'}, 'تسليم');
+    await Future<void>.delayed(const Duration(milliseconds: 5));
+    final b = await q.act(st, 'deliver', 'courier.deliver', 'shp_12', {'recipientName': 'أ'}, 'تسليم');
+    expect(b, isFalse);
+    srv.holdCommands!.complete(); await a;
+    expect(srv.log.where((r) => r.url.path.endsWith('/commands/courier.deliver')), hasLength(1));
   });
 }

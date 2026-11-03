@@ -34,7 +34,26 @@ let offlineFlag = false;
 function useOffline() {
   const { userId } = useApp(); const [off, setOff] = useState(offlineFlag); const [q, setQ] = useState<QAction[]>(() => loadQ(userId!));
   useEffect(() => { const h = () => { setOff(offlineFlag); setQ(loadQ(userId!)); }; window.addEventListener('al-offline', h); return () => window.removeEventListener('al-offline', h); }, [userId]);
-  return { off, q, toggle: () => { offlineFlag = !offlineFlag; window.dispatchEvent(new Event('al-offline')); }, push: (a: Omit<QAction, 'clientActionId' | 'occurredAt'>) => { const n = [...loadQ(userId!), { ...a, clientActionId: 'ca-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), occurredAt: new Date().toISOString() }]; saveQ(userId!, n); window.dispatchEvent(new Event('al-offline')); }, clear: (ids?: string[]) => { saveQ(userId!, ids ? loadQ(userId!).filter((a) => !ids.includes(a.clientActionId)) : []); window.dispatchEvent(new Event('al-offline')); } };
+  return { off, q, toggle: () => { offlineFlag = !offlineFlag; window.dispatchEvent(new Event('al-offline')); }, push: (a: Omit<QAction, 'clientActionId' | 'occurredAt'>) => { if (loadQ(userId!).some((x) => x.type === a.type && x.shipment === a.shipment)) return; /* منع التكرار لنفس الشحنة */ const n = [...loadQ(userId!), { ...a, clientActionId: 'ca-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), occurredAt: new Date().toISOString() }]; saveQ(userId!, n); window.dispatchEvent(new Event('al-offline')); }, clear: (ids?: string[]) => { saveQ(userId!, ids ? loadQ(userId!).filter((a) => !ids.includes(a.clientActionId)) : []); window.dispatchEvent(new Event('al-offline')); } };
+}
+/** مراقبة الاتصال في المعاينة: أحداث المتصفح online/offline تبدّل الوضع، والعودة تطلق مزامنة تلقائية للطابور (مرة واحدة) */
+function useAutoSync(o: ReturnType<typeof useOffline>) {
+  const { run, lang, toast } = useApp(); const busy = React.useRef(false);
+  useEffect(() => {
+    const goOff = () => { if (!offlineFlag) { offlineFlag = true; window.dispatchEvent(new Event('al-offline')); } };
+    const goOn = () => { if (offlineFlag) { offlineFlag = false; window.dispatchEvent(new Event('al-offline')); } };
+    window.addEventListener('offline', goOff); window.addEventListener('online', goOn);
+    return () => { window.removeEventListener('offline', goOff); window.removeEventListener('online', goOn); };
+  }, []);
+  useEffect(() => {
+    if (o.off || !o.q.length || busy.current) return;
+    busy.current = true; const batch = o.q;
+    run<any>('courier.sync', { actions: batch.map(({ label: _l, ...a }) => a) }, { silent: true })
+      .then((r) => { o.clear(r.results.map((y: any) => y.clientActionId)); toast(lang === 'ar' ? `عاد الاتصال — زُومنت ${r.results.length} إجراءات تلقائياً` : `Back online — ${r.results.length} actions synced automatically`, 'info'); })
+      .catch(() => { /* يبقى الطابور؛ تُعاد المحاولة عند التغيير التالي */ })
+      .finally(() => { busy.current = false; });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [o.off]);
 }
 /** ينفذ الإجراء مباشرة أو يضيفه للطابور عند انقطاع الاتصال */
 function useAct() {
@@ -47,6 +66,7 @@ function useAct() {
 
 function App() {
   const { parts, path } = useRoute(); const o = useOffline(); const { lang } = useApp();
+  useAutoSync(o);
   let s: React.ReactNode;
   if (parts[0] === 't' && parts[1]) s = <Task id={parts[1]} />;
   else if (path === '/map') s = <RouteMap />;

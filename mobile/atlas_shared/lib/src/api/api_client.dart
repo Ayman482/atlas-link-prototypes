@@ -79,6 +79,9 @@ class ApiClient {
   Future<dynamic> exec(String command, [Map<String, dynamic>? input, String? idempotencyKey]) async => (await _send('POST', '/commands/$command', input ?? {}, idempotencyKey))['data'];
 
   /// استعلام مقيّد بنطاق المستخدم
+  /// نبض بدون مصادقة لمراقبة الاتصال (GET /health)
+  Future<void> ping() async { await _send('GET', '/health'); }
+
   Future<dynamic> query(String name, [Map<String, dynamic>? params]) async => (await _send('GET', '/queries/$name?p=${Uri.encodeComponent(jsonEncode(params ?? {}))}'))['data'];
 
   Future<List<Map<String, dynamic>>> list(String collection, {String? sort, String dir = 'desc', int pageSize = 200}) async {

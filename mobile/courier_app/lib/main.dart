@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:atlas_shared/atlas_shared.dart';
@@ -14,6 +15,9 @@ Future<void> main() async {
   final state = AppState(ApiClient(), 'courier');
   await state.load();
   OfflineQueue.instance.attach(state);
+  final monitor = ConnectivityMonitor(state.api)..start();
+  OfflineQueue.instance.attachMonitor(monitor);
+  unawaited(monitor.check()); // فحص فوري عند الإقلاع
   runApp(CourierApp(state: state));
 }
 
@@ -24,7 +28,7 @@ class CourierApp extends StatelessWidget {
   Widget build(BuildContext context) => AppScope(
         state: state,
         child: ListenableBuilder(
-          listenable: Listenable.merge([state, OfflineQueue.instance]),
+          listenable: Listenable.merge([state, OfflineQueue.instance]), // يشمل المراقب عبر الطابور
           builder: (_, __) => MaterialApp(
             title: 'Atlas Link — Courier',
             debugShowCheckedModeBanner: false,
