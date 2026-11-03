@@ -156,3 +156,86 @@ admin/compliance/retention [en 1440] «Edit» OK
 admin/system/notifications [en 1440] «Edit» OK
 admin/system/settings [en 1440] «Propose change» OK
 admin/system/audit [en 1440] «Export CSV» OK
+admin/system/health [en 1440] «Backup snapshot» OK
+admin/system/health [en 1440] «Restore drill» OK
+admin/approvals [en 768] «Approve» OK
+admin/approvals [en 768] «Reject» OK
+admin/system/integrations [en 768] «Add» OK
+admin/system/integrations [en 768] «Revoke» OK
+admin/system/users [en 768] «Invite staff» OK
+admin/system/users [en 768] «Export CSV» OK
+admin/system/users [en 768] «Disable» OK
+admin/legs [en 768] «Export CSV» OK
+admin/legs [en 768] «Assign carrier» OK
+admin/legs [en 768] «Event: departed» OK
+admin/boxes [en 768] «Register box» OK
+admin/boxes [en 768] «Export CSV» OK
+admin/devices [en 768] «Register device» OK
+admin/devices [en 768] «Export CSV» OK
+admin/devices [en 768] «Pair» OK
+admin/gateway [en 768] «Simulate unknown device» OK
+admin/gateway [en 768] «Export CSV» OK
+admin/incidents [en 768] «New incident» OK
+admin/capa [en 768] «Complete» OK
+admin/warehouse [en 768] «Export CSV» OK
+admin/warehouse/partner-custody [en 768] «Record return» OK
+admin/customers [en 768] «New customer» OK
+admin/customers [en 768] «Export CSV» OK
+admin/contracts [en 768] «New contract» OK
+admin/simulations [en 768] «New simulation» OK
+admin/simulations [en 768] «To tariff draft» OK
+admin/invoices [en 768] «Generate invoice» OK
+admin/invoices [en 768] «Export CSV» OK
+admin/settlements [en 768] «Generate settlement» OK
+admin/compliance/licenses [en 768] «Run expiry check» OK
+admin/compliance/licenses [en 768] «New license» OK
+admin/compliance/licenses [en 768] «Export CSV» OK
+admin/compliance/licenses [en 768] «Renew» OK
+admin/compliance/retention [en 768] «Run archive» OK
+admin/compliance/retention [en 768] «Edit» OK
+admin/system/notifications [en 768] «Edit» OK
+admin/system/settings [en 768] «Propose change» OK
+admin/system/audit [en 768] «Export CSV» OK
+admin/system/health [en 768] «Backup snapshot» OK
+admin/system/health [en 768] «Restore drill» OK
+admin/approvals [en 390] «Approve» OK
+admin/approvals [en 390] «Reject» OK
+admin/system/integrations [en 390] «Add» OK
+admin/system/integrations [en 390] «Revoke» OK
+admin/system/users [en 390] «Invite staff» OK
+admin/system/users [en 390] «Export CSV» OK
+admin/system/users [en 390] «Disable» OK
+admin/legs [en 390] «Export CSV» OK
+admin/legs [en 390] «Assign carrier» OK
+admin/legs [en 390] «Event: departed» OK
+admin/boxes [en 390] «Register box» OK
+admin/boxes [en 390] «Export CSV» OK
+admin/devices [en 390] «Register device» OK
+admin/devices [en 390] «Export CSV» OK
+admin/devices [en 390] «Pair» OK
+admin/gateway [en 390] «Simulate unknown device» OK
+admin/gateway [en 390] «Export CSV» OK
+admin/incidents [en 390] «New incident» OK
+admin/capa [en 390] «Complete» OK
+admin/warehouse [en 390] «Export CSV» OK
+admin/warehouse/partner-custody [en 390] «Record return» OK
+admin/customers [en 390] «New customer» OK
+admin/customers [en 390] «Export CSV» OK
+admin/contracts [en 390] «New contract» OK
+admin/simulations [en 390] «New simulation» OK
+admin/simulations [en 390] «To tariff draft» OK
+admin/invoices [en 390] «Generate invoice» OK
+admin/invoices [en 390] «Export CSV» OK
+admin/settlements [en 390] «Generate settlement» OK
+admin/compliance/licenses [en 390] «Run expiry check» OK
+admin/compliance/licenses [en 390] «New license» OK
+admin/compliance/licenses [en 390] «Export CSV» OK
+admin/compliance/licenses [en 390] «Renew» OK
+admin/compliance/retention [en 390] «Run archive» OK
+admin/compliance/retention [en 390] «Edit» OK
+admin/system/notifications [en 390] «Edit» OK
+admin/system/settings [en 390] «Propose change» OK
+admin/system/audit [en 390] «Export CSV» OK
+admin/system/health [en 390] «Backup snapshot» OK
+admin/system/health [en 390] «Restore drill» OK
+dialogs 240, with issues 1

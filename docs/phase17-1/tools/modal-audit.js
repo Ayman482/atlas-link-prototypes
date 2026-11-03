@@ -39,7 +39,9 @@ const inspect = () => {
   res.bodyScrollable = body.scrollHeight > body.clientHeight + 2 ? getComputedStyle(body).overflowY : 'fits';
   // 3) تداخل الحقول والتسميات والأزرار
   const items = [...dlg.querySelectorAll('label > span, .field > span, input:not([type=checkbox]):not([type=radio]):not([type=hidden]), select, textarea, button, .err')].filter((e) => { const b = e.getBoundingClientRect(); return b.width > 0 && b.height > 0 && getComputedStyle(e).visibility !== 'hidden'; });
-  const rect = (e) => e.getBoundingClientRect();
+  // المستطيل المرئي فعلاً: عناصر جسم النافذة تُقصّ بحدود حاوية التمرير (الجزء الممرَّر تحت التذييل غير مرئي وليس تداخلاً)
+  const bodyR = body !== dlg ? body.getBoundingClientRect() : null;
+  const rect = (e) => { const r = e.getBoundingClientRect(); if (!bodyR || !body.contains(e)) return r; const top = Math.max(r.top, bodyR.top), bottom = Math.min(r.bottom, bodyR.bottom); return { left: r.left, right: r.right, top, bottom: Math.max(top, bottom) }; };
   for (let a = 0; a < items.length; a++) for (let b = a + 1; b < items.length; b++) {
     const A = items[a], Bx = items[b]; if (A.contains(Bx) || Bx.contains(A)) continue;
     const p = rect(A), q = rect(Bx); const ix = Math.min(p.right, q.right) - Math.max(p.left, q.left); const iy = Math.min(p.bottom, q.bottom) - Math.max(p.top, q.top);

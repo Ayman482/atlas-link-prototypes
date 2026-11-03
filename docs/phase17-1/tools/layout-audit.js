@@ -19,6 +19,8 @@ const STRESS = process.env.STRESS === '1'; // يحقن مبالغ كبيرة و�
 const stress = () => {
   const w = document.createTreeWalker(document.querySelector('main, .phone') || document.body, NodeFilter.SHOW_TEXT); const nodes = []; let n; while ((n = w.nextNode())) nodes.push(n);
   for (const t of nodes) { const v = t.textContent; if (/\d[\d,]*\.\d{2}/.test(v) && /(ر\.س|SAR)/.test(v + (t.parentElement?.parentElement?.textContent || ''))) t.textContent = v.replace(/\d[\d,]*\.\d{2}/, '12,345,678.90'); }
+  // كما يفعل KpiValue عند العرض: معامل حجم الخط --k يُحسب من طول القيمة (المبلغ + رمز العملة)
+  for (const kv of document.querySelectorAll('.kpi b.kv')) { const a = kv.querySelector('.amt'); if (!a) continue; const len = Math.max(4, a.textContent.trim().length + (kv.querySelector('.cur') ? 2 : 0)); kv.style.setProperty('--k', (150 / len).toFixed(2)); }
   for (const tr of document.querySelectorAll('tbody tr')) { const td = [...tr.children].find((c) => c.textContent.trim() && !/\d/.test(c.textContent) && !c.querySelector('button, input, select')); if (td) { const leaf = [...td.querySelectorAll('*')].reverse().find((e) => e.children.length === 0 && e.textContent.trim()) || td; leaf.textContent = document.documentElement.lang === 'ar' ? 'مجموعة مستشفيات الرعاية الصحية المتقدمة التخصصية — فرع الرياض الشمالي' : 'Advanced Specialized Healthcare Hospitals Group — Riyadh North Branch'; } }
 };
 const src = fs.readFileSync(__dirname + '/../../option-c-enhancement/audit.js', 'utf8');
@@ -53,7 +55,7 @@ const inspect = () => {
     if (textRight > kb.right - 4 || textLeft < kb.left + 4 || v.scrollWidth > v.clientWidth + 2) out.kpiOverflow.push(`${(v.innerText || '').trim()} (${Math.round(textRight - textLeft)}px في ${Math.round(kb.width)}px)`);
     // التفاف داخل الرقم: أجزاء الرقم في أكثر من سطر
     const num = v.querySelector('.amt') ?? v; const nr = num.getClientRects ? [...(() => { const r = document.createRange(); r.selectNodeContents(num); return r.getClientRects(); })()] : [];
-    const lines = new Set(nr.map((r) => Math.round(r.top))); if (num !== v && lines.size > 1) out.kpiOverflow.push(`رقم ملتف: ${num.innerText}`);
+    /* سطران فعلياً فقط إذا بدأ مستطيل تحت نهاية آخر (الأحجام المختلفة على السطر نفسه لها قمم مختلفة) */ const wrapped = nr.some((a) => nr.some((c) => c.top >= a.bottom - 1)); if (num !== v && wrapped) out.kpiOverflow.push(`رقم ملتف: ${num.innerText}`);
     void vb;
   }
   // سهم القائمة المنسدلة

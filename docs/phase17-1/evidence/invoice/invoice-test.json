@@ -1,12 +1,12 @@
 {
- "executedAt": "2026-11-03T11:17:12.350Z",
+ "executedAt": "2026-11-03T12:31:56.702Z",
  "steps": [
   {
    "id": "INV-ADM-ar-1440",
    "step": "الإدارة ← INV-2026-00001 ← عرض الفاتورة (ar، 1440px)",
    "expected": "معاينة A4 دون عناصر خارج الورقة أو تداخل أو أرقام مقصوصة",
    "actual": {
-    "sheets": 2,
+    "sheets": 1,
     "outside": [],
     "overlaps": [],
     "clippedNums": [],
@@ -21,7 +21,7 @@
    "expected": "اتجاه ltr دون تداخل",
    "actual": {
     "dir": "ltr",
-    "sheets": 2,
+    "sheets": 1,
     "outside": [],
     "overlaps": [],
     "clippedNums": []
@@ -35,9 +35,9 @@
    "expected": "ملف PDF صالح بصفحة A4 واحدة على الأقل",
    "actual": {
     "file": "INV-2026-00001_ar-ui.pdf",
-    "bytes": 695332,
+    "bytes": 546257,
     "header": "%PDF-",
-    "pages": 2,
+    "pages": 1,
     "mediaBoxA4": false
    },
    "status": "PASS",
@@ -49,8 +49,8 @@
    "expected": "صفحات A4 بعدد أوراق الفاتورة فقط (لا واجهة التطبيق)",
    "actual": {
     "file": "print_INV-2026-00001_ar.pdf",
-    "pages": 2,
-    "sheets": 2
+    "pages": 1,
+    "sheets": 1
    },
    "status": "PASS",
    "evidence": "print_INV-2026-00001_ar.pdf"
@@ -69,7 +69,7 @@
    "step": "الإدارة ← INV-2026-00001 ← عرض الفاتورة (ar، 768px)",
    "expected": "معاينة A4 دون عناصر خارج الورقة أو تداخل أو أرقام مقصوصة",
    "actual": {
-    "sheets": 2,
+    "sheets": 1,
     "outside": [],
     "overlaps": [],
     "clippedNums": [],
@@ -83,7 +83,7 @@
    "step": "الإدارة ← INV-2026-00001 ← عرض الفاتورة (ar، 390px)",
    "expected": "معاينة A4 دون عناصر خارج الورقة أو تداخل أو أرقام مقصوصة",
    "actual": {
-    "sheets": 2,
+    "sheets": 1,
     "outside": [],
     "overlaps": [],
     "clippedNums": [],
@@ -97,7 +97,7 @@
    "step": "الإدارة ← INV-2026-00001 ← عرض الفاتورة (en، 1440px)",
    "expected": "معاينة A4 دون عناصر خارج الورقة أو تداخل أو أرقام مقصوصة",
    "actual": {
-    "sheets": 2,
+    "sheets": 1,
     "outside": [],
     "overlaps": [],
     "clippedNums": [],
@@ -112,7 +112,7 @@
    "expected": "اتجاه rtl دون تداخل",
    "actual": {
     "dir": "rtl",
-    "sheets": 2,
+    "sheets": 1,
     "outside": [],
     "overlaps": [],
     "clippedNums": []
@@ -126,9 +126,9 @@
    "expected": "ملف PDF صالح بصفحة A4 واحدة على الأقل",
    "actual": {
     "file": "INV-2026-00001_en-ui.pdf",
-    "bytes": 704805,
+    "bytes": 560938,
     "header": "%PDF-",
-    "pages": 2,
+    "pages": 1,
     "mediaBoxA4": false
    },
    "status": "PASS",
@@ -140,8 +140,8 @@
    "expected": "صفحات A4 بعدد أوراق الفاتورة فقط (لا واجهة التطبيق)",
    "actual": {
     "file": "print_INV-2026-00001_en.pdf",
-    "pages": 2,
-    "sheets": 2
+    "pages": 1,
+    "sheets": 1
    },
    "status": "PASS",
    "evidence": "print_INV-2026-00001_en.pdf"
@@ -160,7 +160,7 @@
    "step": "الإدارة ← INV-2026-00001 ← عرض الفاتورة (en، 768px)",
    "expected": "معاينة A4 دون عناصر خارج الورقة أو تداخل أو أرقام مقصوصة",
    "actual": {
-    "sheets": 2,
+    "sheets": 1,
     "outside": [],
     "overlaps": [],
     "clippedNums": [],
@@ -174,7 +174,7 @@
    "step": "الإدارة ← INV-2026-00001 ← عرض الفاتورة (en، 390px)",
    "expected": "معاينة A4 دون عناصر خارج الورقة أو تداخل أو أرقام مقصوصة",
    "actual": {
-    "sheets": 2,
+    "sheets": 1,
     "outside": [],
     "overlaps": [],
     "clippedNums": [],
@@ -188,7 +188,7 @@
    "step": "بوابة العميل ← الفاتورة ← عرض الفاتورة الضريبية",
    "expected": "معاينة سليمة",
    "actual": {
-    "sheets": 2,
+    "sheets": 1,
     "outside": [],
     "overlaps": [],
     "clippedNums": [],
@@ -202,7 +202,7 @@
    "step": "بوابة العميل ← الفاتورة ← عرض الفاتورة الضريبية",
    "expected": "معاينة سليمة",
    "actual": {
-    "sheets": 2,
+    "sheets": 1,
     "outside": [],
     "overlaps": [],
     "clippedNums": [],
@@ -220,7 +220,7 @@
     "outside": [],
     "overlaps": [],
     "clippedNums": [],
-    "pdfBytes": 804167,
+    "pdfBytes": 760552,
     "pdf": "%PDF-",
     "errs": []
    },
@@ -236,7 +236,7 @@
     "outside": [],
     "overlaps": [],
     "clippedNums": [],
-    "pdfBytes": 803352,
+    "pdfBytes": 748922,
     "pdf": "%PDF-",
     "errs": []
    },

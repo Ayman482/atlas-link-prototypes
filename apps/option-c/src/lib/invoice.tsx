@@ -215,7 +215,7 @@ export function InvoiceViewer({ id, onClose }: { id: string; onClose(): void }) 
         <div className="inv-bar">
           <b>{lang === 'ar' ? 'الفاتورة الضريبية' : 'Tax invoice'} {d.data && <span className="ltr">{d.data.invoice.invoiceNo}</span>}</b>
           <div className="row">
-            <div className="seg" role="group" aria-label={lang === 'ar' ? 'لغة المستند' : 'Document language'}>
+            <div className="inv-seg" role="group" aria-label={lang === 'ar' ? 'لغة المستند' : 'Document language'}>
               <button type="button" aria-pressed={l === 'ar'} className={l === 'ar' ? 'on' : ''} onClick={() => setL('ar')}>العربية</button>
               <button type="button" aria-pressed={l === 'en'} className={l === 'en' ? 'on' : ''} onClick={() => setL('en')}>English</button>
             </div>

@@ -33,7 +33,7 @@ const sheetCheck = () => {
     rec(`INV-ADM-${lang}-${w}`, `الإدارة ← INV-2026-00001 ← عرض الفاتورة (${lang}، ${w}px)`, 'معاينة A4 دون عناصر خارج الورقة أو تداخل أو أرقام مقصوصة', { ...chk, errs }, chk.sheets >= 1 && !chk.outside.length && !chk.overlaps.length && !chk.clippedNums.length && !errs.length, shot);
     if (w === 1440) {
       // تبديل لغة المستند داخل العارض
-      await p.click(lang === 'ar' ? '.seg button:has-text("English")' : '.seg button:has-text("العربية")'); await p.waitForTimeout(700);
+      await p.click(lang === 'ar' ? '.inv-seg button:has-text("English")' : '.inv-seg button:has-text("العربية")'); await p.waitForTimeout(700);
       const dir = await p.evaluate(() => document.querySelector('.inv-sheets')?.getAttribute('dir'));
       const shot2 = `admin-invoice-viewer_${lang}-ui_doc-${lang === 'ar' ? 'en' : 'ar'}_${w}.png`; await p.screenshot({ path: `${OUT}/${shot2}` });
       const chk2 = await p.evaluate(sheetCheck);
