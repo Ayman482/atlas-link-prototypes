@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { DEMO_MFA, DEMO_PASSWORD } from '@medlog/core';
 import { useApp, transport } from './store';
+import { IS_DEMO } from '@medlog/client';
 import { Btn, FormFields, validate } from './ui';
 
 export interface DemoAcct { email: string; name: { ar: string; en: string }; role: string }
@@ -36,7 +37,7 @@ export function Login({ title, subtitle, accounts, allowed }: { title: string; s
   return (
     <div className="login">
       <div className="l">
-        <div className="row" style={{ justifyContent: 'space-between' }}><span className="sim">{t('app.demoBadge')}</span><Btn kind="ghost" onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}>{t('common.switchLang')}</Btn></div>
+        <div className="row" style={{ justifyContent: 'space-between' }}>{IS_DEMO ? <span className="sim">{t('app.demoBadge')}</span> : <span />}<Btn kind="ghost" onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}>{t('common.switchLang')}</Btn></div>
         <div><h1>{title}</h1><p className="muted">{subtitle}</p></div>
         <div className="glass">
         {!challenge ? (
@@ -44,11 +45,11 @@ export function Login({ title, subtitle, accounts, allowed }: { title: string; s
             {err && <div className="state err" role="alert">{err}</div>}
             <FormFields fields={fields} values={v} set={(n, x) => setV({ ...v, [n]: x })} errors={fe} />
             <Btn kind="primary" onClick={() => submit()} disabled={busy}>{t('auth.signIn')}</Btn>
-            <p className="muted">{t('auth.demoNote')}</p>
+            {IS_DEMO && <p className="muted">{t('auth.demoNote')}</p>}
           </form>
         ) : (
           <form onSubmit={verify} noValidate className="page">
-            <h2>{t('auth.mfaTitle')}</h2><p className="muted">{t('auth.mfaHint')} — {lang === 'ar' ? 'رمز العرض' : 'Demo code'} <span className="mono">{DEMO_MFA}</span></p>
+            <h2>{t('auth.mfaTitle')}</h2><p className="muted">{t('auth.mfaHint')}{IS_DEMO && <> — {lang === 'ar' ? 'رمز العرض' : 'Demo code'} <span className="mono">{DEMO_MFA}</span></>}</p>
             {err && <div className="state err" role="alert">{err}</div>}
             <input id="mfa" inputMode="numeric" autoComplete="one-time-code" dir="ltr" maxLength={6} value={code} onChange={(e) => setCode(e.target.value.replace(/\D/g, ''))} aria-label={t('auth.mfaHint')} style={{ fontSize: '1.4rem', letterSpacing: '.4em', textAlign: 'center' }} />
             <div className="row"><Btn kind="primary" onClick={() => verify()} disabled={busy}>{t('auth.verify')}</Btn><Btn kind="ghost" onClick={() => { setChallenge(null); setCode(''); }}>{t('common.back')}</Btn></div>
@@ -58,9 +59,11 @@ export function Login({ title, subtitle, accounts, allowed }: { title: string; s
       </div>
       <div className="r">
         <Hero />
+        {IS_DEMO && accounts.length > 0 && <>
         <h2>{t('auth.demoAccounts')}</h2>
         <p>{lang === 'ar' ? 'اختر حساباً لتعبئة البيانات، ثم أكمل الدخول والتحقق الثنائي.' : 'Pick an account to fill the form, then complete sign-in and verification.'}</p>
         <div className="accts">{accounts.map((a, i) => <button key={a.email} className="acct" style={{ '--i': i, '--ah': AH[i % AH.length] } as React.CSSProperties} onClick={() => { setV({ email: a.email, password: DEMO_PASSWORD }); submit(undefined, { email: a.email, password: DEMO_PASSWORD }); }}><span className="avatar">{a.name[lang].replace(/^(د\.|م\.|أ\.|Dr\.|Eng\.)\s*/, '').split(' ').filter((w) => /\p{L}/u.test(w[0] ?? '')).map((w) => w[0]).slice(0, 2).join('')}</span><b>{a.name[lang]}</b><span>{t('roles.' + a.role)}</span><code>{a.email}</code></button>)}</div>
+        </>}
       </div>
     </div>
   );

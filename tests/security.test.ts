@@ -119,3 +119,19 @@ test('انتهاء الجلسة بعد الخمول، والدخول السري�
   assert.equal(exp.status, 401); assert.equal(exp.body.error.code, 'SESSION_EXPIRED');
   assert.equal((await get(B2, q('me', {}), d.body.token)).body.error.code, 'UNAUTHENTICATED', 'الجلسة المنتهية تُلغى نهائياً');
 });
+
+test('وضع الإنتاج: يرفض التشغيل دون مفتاح سري وقائمة أصول، ومصادقة العرض وإعادة الضبط معطّلة', async () => {
+  // بدون MEDLOG_SECRET وCORS_ORIGIN: يخرج فوراً
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'medlog-prod-')); dirs.push(dir);
+  const bad = spawn(process.execPath, ['--import', 'tsx', 'packages/mock-api/src/server.ts', '--reset'], { env: { ...process.env, NODE_ENV: 'production', PORT: '4799', MEDLOG_DATA_DIR: dir, MEDLOG_SECRET: '', CORS_ORIGIN: '' }, stdio: 'ignore' });
+  const code: number = await new Promise((r) => bad.on('exit', (c) => r(c ?? -1)));
+  assert.equal(code, 1, 'يجب أن يرفض التشغيل');
+  const B3 = await server({ NODE_ENV: 'production', MEDLOG_SECRET: 'x'.repeat(40), CORS_ORIGIN: 'https://ops.atlaslink.example', MEDLOG_ENABLE_DEMO_LOGIN: '1' });
+  const l = await post(B3, '/auth/login', { email: 'ops@medlog.demo', password: 'Demo@2026' });
+  assert.equal(l.status, 501); assert.equal(l.body.error.code, 'AUTH_PROVIDER_NOT_CONFIGURED');
+  assert.equal((await post(B3, '/auth/demo-login', { email: 'courier1@medlog.demo' })).status, 501, 'الدخول السريع معطّل مهما كانت المتغيرات');
+  assert.equal((await post(B3, '/auth/mfa/verify', { challengeId: 'x', code: '123456' })).status, 501);
+  assert.equal((await get(B3, '/health', undefined, { origin: 'http://localhost:5071' })).headers.get('access-control-allow-origin'), null, 'لا أصول محلية في الإنتاج');
+  assert.equal((await get(B3, '/health', undefined, { origin: 'https://ops.atlaslink.example' })).headers.get('access-control-allow-origin'), 'https://ops.atlaslink.example');
+  assert.equal((await get(B3, '')).body.mode, 'production-guarded');
+});

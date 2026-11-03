@@ -22,7 +22,7 @@ function Gate() {
   const { userId, me, lang, signOut } = useApp();
   useEffect(() => { if (me && !me.roles.some((r: string) => ALLOWED.includes(r))) signOut(); }, [me, signOut]);
   if (!userId) return <MobileLogin title={lang === 'ar' ? 'أطلس لينك — العميل' : 'Atlas Link — Customer'} accounts={CUSTOMER_APP_ACCOUNTS} allowed={(r) => r.some((x) => ALLOWED.includes(x))} />;
-  if (!me) return <Loading />;
+  if (!me || !me.roles.some((r: string) => ALLOWED.includes(r))) return <Loading />;
   return <App />;
 }
 

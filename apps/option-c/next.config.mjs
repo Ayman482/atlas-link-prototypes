@@ -7,6 +7,6 @@ const nextConfig = {
   images: { unoptimized: true },
   transpilePackages: ['@medlog/core', '@medlog/client', '@medlog/i18n'],
   reactStrictMode: true,
-  env: { NEXT_PUBLIC_MEDLOG_API: process.env.NEXT_PUBLIC_MEDLOG_API || '' },
+  env: { NEXT_PUBLIC_MEDLOG_API: process.env.NEXT_PUBLIC_MEDLOG_API || '', NEXT_PUBLIC_MEDLOG_MODE: process.env.NEXT_PUBLIC_MEDLOG_MODE || 'demo' },
 };
 export default nextConfig;

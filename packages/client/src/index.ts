@@ -1,5 +1,7 @@
 // عميل موحّد للتطبيقات: نفس الواجهة فوق خادم API الدائم (HTTP) أو المحرك داخل المتصفح (للمعاينات المستضافة)
 import { Engine, DomainError, DEMO_MFA, DEMO_PASSWORD, type Db } from '@medlog/core';
+import { IS_DEMO, MEDLOG_MODE } from './mode';
+export { IS_DEMO, MEDLOG_MODE } from './mode';
 
 export interface ApiError { code: string; status: number; message: { ar: string; en: string }; field?: string }
 export type ChangeEvent = { command?: string; at: string; events: { type: string; aggregateType: string; aggregateId: string }[] };
@@ -82,7 +84,10 @@ export class HttpTransport implements Transport {
   private keep(res: LoginResult) { if (res.token) { this.token = res.token; try { sessionStorage.setItem('medlog-token', res.token); } catch { /* */ } this.connect(); } return res; }
   async login(email: string, password: string) { return this.keep(await this.req('POST', '/auth/login', { email, password })); }
   async verifyMfa(challengeId: string, code: string) { return this.keep(await this.req('POST', '/auth/mfa/verify', { challengeId, code })); }
-  async demoLogin(email: string) { return this.keep(await this.req('POST', '/auth/demo-login', { email })); }
+  async demoLogin(email: string) {
+    if (!IS_DEMO) throw { code: 'FORBIDDEN', status: 403, message: { ar: 'الدخول السريع غير متاح في بناء الإنتاج', en: 'Quick demo login is not available in production builds' } } as ApiError;
+    return this.keep(await this.req('POST', '/auth/demo-login', { email }));
+  }
   async logout() { try { await this.req('POST', '/auth/logout'); } catch { /* */ } this.token = null; this.es?.close(); try { sessionStorage.removeItem('medlog-token'); } catch { /* */ } }
   async exec<R>(command: string, input: unknown = {}, key?: string): Promise<R> { return (await this.req('POST', `/commands/${command}`, input, key)).data; }
   async query<R>(name: string, params: unknown = {}): Promise<R> { return (await this.req('GET', `/queries/${name}?p=${encodeURIComponent(JSON.stringify(params))}`)).data; }
@@ -93,5 +98,10 @@ export class HttpTransport implements Transport {
 
 /** يختار النقل: NEXT_PUBLIC_MEDLOG_API لخادم دائم، وإلا المحرك المحلي */
 export function createTransport(apiBase?: string | null, lang?: () => 'ar' | 'en'): Transport {
+  if (MEDLOG_MODE === 'production') {
+    // بناء الإنتاج: خادم حقيقي إلزامي، ولا محرك محلي (هويته = معرّف المستخدم، أي قابل للانتحال)
+    if (!apiBase) throw new Error('NEXT_PUBLIC_MEDLOG_API is required in production builds');
+    return new HttpTransport(apiBase, lang);
+  }
   return apiBase ? new HttpTransport(apiBase, lang) : new LocalTransport();
 }

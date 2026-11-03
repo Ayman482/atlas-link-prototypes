@@ -2,7 +2,7 @@ import '@medlog/tokens/tokens.css';
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
 
-export const metadata: Metadata = { title: 'أطلس لينك — الخيار C: تجربة رعاية صحية متميزة', description: 'نموذج أولي تفاعلي — بيانات عرض ومحاكاة' };
+export const metadata: Metadata = { title: 'أطلس لينك — الخيار C: Emerald Health', description: process.env.NEXT_PUBLIC_MEDLOG_MODE === 'production' ? 'أطلس لينك للشحن الطبي' : 'نموذج أولي تفاعلي — بيانات عرض ومحاكاة' };
 export const viewport: Viewport = { width: 'device-width', initialScale: 1, viewportFit: 'cover' };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

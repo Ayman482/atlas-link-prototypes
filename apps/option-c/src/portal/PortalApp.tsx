@@ -1,4 +1,5 @@
 'use client';
+import { IS_DEMO } from '@medlog/client';
 import { greeting, comma } from '@/lib/l10n';
 // بوابة العملاء — الخيار C (قائمة جانبية عائمة بأيقونات ناعمة وتحية شخصية) (C01–C20): المؤسسات والفروع والأفراد ومختبر الاستلام، بلا أي تكلفة داخلية (BI-003)
 import React, { useEffect, useMemo, useState } from 'react';
@@ -16,7 +17,7 @@ function Gate() {
   const { userId, me, t, signOut } = useApp();
   useEffect(() => { if (me && !me.roles.some((r: string) => CUST.includes(r))) signOut(); }, [me, signOut]);
   if (!userId) return <Login title={t('app.portal')} subtitle={t('app.name')} accounts={PORTAL_ACCOUNTS} allowed={(r) => r.some((x) => CUST.includes(x))} />;
-  if (!me) return null;
+  if (!me || !me.roles.some((r: string) => CUST.includes(r))) return null;
   return <Shell />;
 }
 
@@ -75,7 +76,7 @@ function Shell() {
           <Btn kind="ghost" className="hamb iconbtn" onClick={() => setOpen(!open)} aria-label="menu">☰</Btn>
           <div className="greet"><b>{greeting(lang)}{comma(lang)}{x(me.user.name).split(' ').slice(0, 2).join(' ')}</b><span>{me.organizations?.map((o: any) => x(o.legalName)).join('، ')}</span></div>
           <span className="grow" />
-          <span className="sim">{t('app.demoBadge')}</span>
+          {IS_DEMO && <span className="sim">{t('app.demoBadge')}</span>}
           <Btn kind="ghost" onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}>{t('common.switchLang')}</Btn>
           <ThemeBtn />
           <a href="#/profile" className="row" style={{ gap: 8, color: 'inherit', textDecoration: 'none' }}><span className="avatar">{initials}</span><span className="who"><b>{x(me.user.name)}</b><span>{roles.map((r) => t('roles.' + r)).join('، ')}</span></span></a>

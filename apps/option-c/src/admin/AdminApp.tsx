@@ -1,4 +1,5 @@
 'use client';
+import { IS_DEMO } from '@medlog/client';
 import { greeting, comma } from '@/lib/l10n';
 // لوحة الإدارة — الخيار C: قائمة جانبية عائمة بأقسام قابلة للطي، تحية بحسب الوقت، بحث، تبديل المظهر
 import React, { useEffect, useMemo, useState } from 'react';
@@ -17,7 +18,7 @@ function Gate() {
   const { userId, me, t, x, signOut } = useApp();
   useEffect(() => { if (me && !me.roles.some((r: string) => !NON_STAFF.includes(r))) signOut(); }, [me, signOut]);
   if (!userId) return <Login title={t('app.admin')} subtitle={t('app.name')} accounts={ADMIN_ACCOUNTS} allowed={(r) => r.some((x) => !NON_STAFF.includes(x))} />;
-  if (!me) return null;
+  if (!me || !me.roles.some((r: string) => !NON_STAFF.includes(r))) return null; // لا يُعرض الهيكل لدور غير مخوّل ولو لعملية عرض واحدة
   void x;
   return <Shell />;
 }
@@ -85,7 +86,7 @@ function Shell() {
           <Greeting />
           <span className="grow" />
           <button className="search" onClick={() => setCmdk(true)} aria-keyshortcuts="Control+K"><Ico size={16} d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.3-4.3" /><span>{lang === 'ar' ? 'بحث…' : 'Search…'}</span><span className="grow" /><kbd>Ctrl K</kbd></button>
-          <span className="sim" title="demo">{t('app.demoBadge')}</span>
+          {IS_DEMO && <span className="sim" title="demo">{t('app.demoBadge')}</span>}
           <Btn kind="ghost" className="langbtn" lang={lang === 'ar' ? 'en' : 'ar'} onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}>{t('common.switchLang')}</Btn>
           <ThemeBtn />
           <div style={{ position: 'relative' }}>

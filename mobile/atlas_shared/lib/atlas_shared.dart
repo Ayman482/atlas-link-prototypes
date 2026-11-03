@@ -17,3 +17,4 @@ export 'src/widgets/signature_pad.dart';
 export 'src/widgets/scan_panel.dart';
 export 'src/widgets/login_screen.dart';
 export 'src/widgets/kpi_tile.dart';
+export 'src/mode.dart';

@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final st = AppScope.of(context); final s = st.s; final name = (((st.me?['user']?['name'] as Map?)?[st.lang] ?? '') as String).replaceAll(RegExp(r'^(د\.|م\.|أ\.|Dr\.|Eng\.)\s*'), '');
     return Scaffold(
-      appBar: AppBar(title: Text(s.t('أهلاً ${name.split(' ').first}', 'Hi ${name.split(' ').first}')), actions: [Padding(padding: const EdgeInsetsDirectional.only(end: 12), child: Center(child: SimBadge(text: s.demoBadge)))]),
+      appBar: AppBar(title: Text(s.t('أهلاً ${name.split(' ').first}', 'Hi ${name.split(' ').first}')), actions: [if (kDemoMode) Padding(padding: const EdgeInsetsDirectional.only(end: 12), child: Center(child: SimBadge(text: s.demoBadge)))]),
       body: RefreshIndicator(
         onRefresh: () async => st.refresh(),
         child: AsyncView<dynamic>(
