@@ -106,3 +106,30 @@ admin/simulations [ar 390] «محاكاة جديدة» OK
 admin/simulations [ar 390] «تحويل إلى مسودة جدول أسعار» OK
 admin/invoices [ar 390] «إنشاء فاتورة» OK
 admin/invoices [ar 390] «تصدير CSV» OK
+admin/settlements [ar 390] «إنشاء تسوية» OK
+admin/compliance/licenses [ar 390] «تشغيل فحص الانتهاء» OK
+admin/compliance/licenses [ar 390] «ترخيص جديد» esc-no-close
+admin/compliance/licenses [ar 390] «تصدير CSV» OK
+admin/compliance/licenses [ar 390] «تجديد» OK
+admin/compliance/retention [ar 390] «تشغيل الأرشفة» OK
+admin/compliance/retention [ar 390] «تعديل» OK
+admin/system/notifications [ar 390] «تعديل» OK
+admin/system/settings [ar 390] «اقتراح تغيير» OK
+admin/system/audit [ar 390] «تصدير CSV» OK
+admin/system/health [ar 390] «نسخة احتياطية» OK
+admin/system/health [ar 390] «تمرين استعادة» OK
+admin/approvals [en 1440] «Approve» OK
+admin/approvals [en 1440] «Reject» OK
+admin/system/integrations [en 1440] «Add» OK
+admin/system/integrations [en 1440] «Revoke» OK
+admin/system/users [en 1440] «Invite staff» OK
+admin/system/users [en 1440] «Export CSV» OK
+admin/system/users [en 1440] «Disable» OK
+admin/legs [en 1440] «Export CSV» OK
+admin/legs [en 1440] «Assign carrier» OK
+admin/legs [en 1440] «Event: departed» OK
+admin/boxes [en 1440] «Register box» OK
+admin/boxes [en 1440] «Export CSV» OK
+admin/devices [en 1440] «Register device» OK
+admin/devices [en 1440] «Export CSV» OK
+admin/devices [en 1440] «Pair» OK

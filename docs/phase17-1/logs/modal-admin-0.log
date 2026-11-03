@@ -34,3 +34,21 @@ admin/costs [ar 1440] «تسجيل تكلفة» OK
 admin/costs [ar 1440] «تشغيل توزيع التكاليف (23)» OK
 admin/costs [ar 1440] «طلب تجاوز» OK
 admin/compliance/blocks [ar 1440] «رفع القيد» OK
+admin/compliance/legal-holds [ar 1440] «فرض تحفظ قانوني» OK
+admin/compliance/legal-holds [ar 1440] «رفع» OK
+admin/reports/finance [ar 1440] «تصدير CSV» OK
+admin/profiles [ar 768] «اقتراح ملف حراري» OK
+admin/shipments [ar 768] «تصدير CSV» OK
+admin/shipments/shp_0004 [ar 768] «تسجيل تعذّر التسليم» OK
+admin/shipments/shp_0004 [ar 768] «تسليم نيابة عن المندوب» OK
+admin/shipments/shp_0004 [ar 768] «اشتباه فقدان» OK
+admin/couriers [ar 768] «إضافة» OK
+admin/boxes/box_002 [ar 768] «استبدال الجهاز» OK
+admin/boxes/box_002 [ar 768] «إخراج من الخدمة» OK
+admin/devices/dev_004 [ar 768] «إدخال قراءة تجريبية» OK
+admin/devices/dev_004 [ar 768] «تغيير الحالة» OK
+admin/devices/dev_004 [ar 768] «طلب أمر للجهاز» OK
+admin/incidents/inc_0002 [ar 768] «تغيير الحالة إلى: بانتظار القرار» OK
+admin/incidents/inc_0002 [ar 768] «إضافة إجراء تصحيحي/وقائي (CAPA)» OK
+admin/claims [ar 768] «تسجيل مطالبة نيابة عن عميل» OK
+admin/claims [ar 768] «بدء التحقيق» OK

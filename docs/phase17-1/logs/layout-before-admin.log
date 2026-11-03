@@ -2,3 +2,54 @@ admin/ [ar 390] clipped:2
 admin/shipments [ar 390] clipped:2
 admin/invoices [ar 390] clipped:2
 admin/payments [ar 390] clipped:2 cell-bleed:1
+admin/aging [ar 390] clipped:2
+admin/reports/finance [ar 390] clipped:2
+admin/system/settings [ar 390] clipped:2
+admin/customers [ar 390] clipped:3
+admin/journals [ar 390] clipped:1
+admin/ [ar 768] clipped:3
+admin/shipments [ar 768] clipped:3
+admin/invoices [ar 768] clipped:3 kpi:2
+admin/payments [ar 768] clipped:3 cell-bleed:1
+admin/aging [ar 768] clipped:3 kpi:3
+admin/reports/finance [ar 768] clipped:3
+admin/system/settings [ar 768] clipped:3
+admin/customers [ar 768] clipped:4
+admin/journals [ar 768] clipped:3
+admin/ [ar 1280] clipped:2
+admin/shipments [ar 1280] clipped:2
+admin/invoices [ar 1280] clipped:2 kpi:2
+admin/payments [ar 1280] clipped:2 cell-bleed:1
+admin/aging [ar 1280] clipped:1 kpi:5
+admin/reports/finance [ar 1280] clipped:3 kpi:3
+admin/system/settings [ar 1280] clipped:2
+admin/customers [ar 1280] clipped:3
+admin/journals [ar 1280] clipped:2
+admin/ [en 390] clipped:3
+admin/shipments [en 390] clipped:2
+admin/invoices [en 390] clipped:2
+admin/payments [en 390] clipped:2 cell-bleed:1
+admin/aging [en 390] clipped:2
+admin/reports/finance [en 390] clipped:2
+admin/system/settings [en 390] clipped:2
+admin/customers [en 390] clipped:3
+admin/journals [en 390] clipped:1
+admin/ [en 768] clipped:3
+admin/shipments [en 768] clipped:3
+admin/invoices [en 768] clipped:3 kpi:2
+admin/payments [en 768] clipped:3 cell-bleed:1
+admin/aging [en 768] clipped:3 kpi:5
+admin/reports/finance [en 768] clipped:3 kpi:3
+admin/system/settings [en 768] clipped:3
+admin/customers [en 768] clipped:4
+admin/journals [en 768] clipped:3
+admin/ [en 1280] clipped:5
+admin/shipments [en 1280] clipped:3
+admin/invoices [en 1280] clipped:3 kpi:2
+admin/payments [en 1280] clipped:3 cell-bleed:1
+admin/aging [en 1280] clipped:3 kpi:5
+admin/reports/finance [en 1280] clipped:4 kpi:3
+admin/system/settings [en 1280] clipped:3
+admin/customers [en 1280] clipped:4
+admin/journals [en 1280] clipped:3
+runs 54, with issues 54

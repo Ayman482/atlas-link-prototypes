@@ -1,0 +1,1192 @@
+[
+ {
+  "app": "admin",
+  "route": "/",
+  "lang": "ar",
+  "w": 390,
+  "issues": [
+   "clipped:2"
+  ],
+  "shot": "admin___ar_390_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38",
+   "td. «مجموعة مستشفيات الرعاية الصح» 457>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments",
+  "lang": "ar",
+  "w": 390,
+  "issues": [
+   "clipped:2"
+  ],
+  "shot": "admin_shipments__ar_390_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38",
+   "td. «مجموعة مستشفيات الرعاية الصح» 457>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/invoices",
+  "lang": "ar",
+  "w": 390,
+  "issues": [
+   "clipped:2"
+  ],
+  "shot": "admin_invoices__ar_390_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38",
+   "td. «مجموعة مستشفيات الرعاية الصح» 457>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/payments",
+  "lang": "ar",
+  "w": 390,
+  "issues": [
+   "clipped:2",
+   "cell-bleed:1"
+  ],
+  "shot": "admin_payments__ar_390_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38",
+   "td. «مجموعة مستشفيات الرعاية الصح» 436>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": [
+   "span.pill «مجموعة مستشفيات الرعاية الصح»"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/aging",
+  "lang": "ar",
+  "w": 390,
+  "issues": [
+   "clipped:2"
+  ],
+  "shot": "admin_aging__ar_390_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38",
+   "td. «مجموعة مستشفيات الرعاية الصح» 457>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/reports/finance",
+  "lang": "ar",
+  "w": 390,
+  "issues": [
+   "clipped:2"
+  ],
+  "shot": "admin_reports_finance__ar_390_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38",
+   "td. «مجموعة مستشفيات الرعاية الصح» 457>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/settings",
+  "lang": "ar",
+  "w": 390,
+  "issues": [
+   "clipped:2"
+  ],
+  "shot": "admin_system_settings__ar_390_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38",
+   "td.mono «مجموعة مستشفيات الرعاية الصح» 498>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/customers",
+  "lang": "ar",
+  "w": 390,
+  "issues": [
+   "clipped:3"
+  ],
+  "shot": "admin_customers__ar_390_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38",
+   "td. «مجموعة مستشفيات الرعاية الصح» 457>320",
+   "td.mono «مجموعة مستشفيات الرعاية الصح» 498>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/journals",
+  "lang": "ar",
+  "w": 390,
+  "issues": [
+   "clipped:1"
+  ],
+  "shot": "admin_journals__ar_390_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/",
+  "lang": "ar",
+  "w": 768,
+  "issues": [
+   "clipped:3"
+  ],
+  "shot": "admin___ar_768_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «English» 78>69",
+   "button.btn «3» 41>38",
+   "td. «مجموعة مستشفيات الرعاية الصح» 457>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments",
+  "lang": "ar",
+  "w": 768,
+  "issues": [
+   "clipped:3"
+  ],
+  "shot": "admin_shipments__ar_768_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «English» 78>69",
+   "button.btn «3» 41>38",
+   "td. «مجموعة مستشفيات الرعاية الصح» 457>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/invoices",
+  "lang": "ar",
+  "w": 768,
+  "issues": [
+   "clipped:3",
+   "kpi:2"
+  ],
+  "shot": "admin_invoices__ar_768_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «English» 78>69",
+   "button.btn «3» 41>38",
+   "td. «مجموعة مستشفيات الرعاية الصح» 457>320"
+  ],
+  "kpiOverflow": [
+   "12,345,678.90 ر.س (230px في 227px)",
+   "12,345,678.90 ر.س (230px في 227px)"
+  ],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/payments",
+  "lang": "ar",
+  "w": 768,
+  "issues": [
+   "clipped:3",
+   "cell-bleed:1"
+  ],
+  "shot": "admin_payments__ar_768_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «English» 78>69",
+   "button.btn «3» 41>38",
+   "td. «مجموعة مستشفيات الرعاية الصح» 436>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": [
+   "span.pill «مجموعة مستشفيات الرعاية الصح»"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/aging",
+  "lang": "ar",
+  "w": 768,
+  "issues": [
+   "clipped:3",
+   "kpi:3"
+  ],
+  "shot": "admin_aging__ar_768_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «English» 78>69",
+   "button.btn «3» 41>38",
+   "td. «مجموعة مستشفيات الرعاية الصح» 457>350"
+  ],
+  "kpiOverflow": [
+   "12,345,678.90 ر.س (230px في 211px)",
+   "12,345,678.90 ر.س (230px في 211px)",
+   "12,345,678.90 ر.س (230px في 211px)"
+  ],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/reports/finance",
+  "lang": "ar",
+  "w": 768,
+  "issues": [
+   "clipped:3"
+  ],
+  "shot": "admin_reports_finance__ar_768_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «English» 78>69",
+   "button.btn «3» 41>38",
+   "td. «مجموعة مستشفيات الرعاية الصح» 457>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/settings",
+  "lang": "ar",
+  "w": 768,
+  "issues": [
+   "clipped:3"
+  ],
+  "shot": "admin_system_settings__ar_768_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «English» 78>69",
+   "button.btn «3» 41>38",
+   "td.mono «مجموعة مستشفيات الرعاية الصح» 498>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/customers",
+  "lang": "ar",
+  "w": 768,
+  "issues": [
+   "clipped:4"
+  ],
+  "shot": "admin_customers__ar_768_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «English» 78>69",
+   "button.btn «3» 41>38",
+   "td. «مجموعة مستشفيات الرعاية الصح» 457>320",
+   "td.mono «مجموعة مستشفيات الرعاية الصح» 498>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/journals",
+  "lang": "ar",
+  "w": 768,
+  "issues": [
+   "clipped:3"
+  ],
+  "shot": "admin_journals__ar_768_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «English» 78>69",
+   "button.btn «3» 41>38",
+   "td.hidesm «مجموعة مستشفيات الرعاية الصح» 457>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/",
+  "lang": "ar",
+  "w": 1280,
+  "issues": [
+   "clipped:2"
+  ],
+  "shot": "admin___ar_1280_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38",
+   "td. «مجموعة مستشفيات الرعاية الصح» 457>390"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments",
+  "lang": "ar",
+  "w": 1280,
+  "issues": [
+   "clipped:2"
+  ],
+  "shot": "admin_shipments__ar_1280_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38",
+   "td. «مجموعة مستشفيات الرعاية الصح» 457>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/invoices",
+  "lang": "ar",
+  "w": 1280,
+  "issues": [
+   "clipped:2",
+   "kpi:2"
+  ],
+  "shot": "admin_invoices__ar_1280_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38",
+   "td. «مجموعة مستشفيات الرعاية الصح» 457>320"
+  ],
+  "kpiOverflow": [
+   "12,345,678.90 ر.س (230px في 222px)",
+   "12,345,678.90 ر.س (230px في 222px)"
+  ],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/payments",
+  "lang": "ar",
+  "w": 1280,
+  "issues": [
+   "clipped:2",
+   "cell-bleed:1"
+  ],
+  "shot": "admin_payments__ar_1280_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38",
+   "td. «مجموعة مستشفيات الرعاية الصح» 436>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": [
+   "span.pill «مجموعة مستشفيات الرعاية الصح»"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/aging",
+  "lang": "ar",
+  "w": 1280,
+  "issues": [
+   "clipped:1",
+   "kpi:5"
+  ],
+  "shot": "admin_aging__ar_1280_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38"
+  ],
+  "kpiOverflow": [
+   "12,345,678.90 ر.س (230px في 210px)",
+   "12,345,678.90 ر.س (230px في 210px)",
+   "12,345,678.90 ر.س (230px في 210px)",
+   "12,345,678.90 ر.س (230px في 210px)",
+   "12,345,678.90 ر.س (230px في 210px)"
+  ],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/reports/finance",
+  "lang": "ar",
+  "w": 1280,
+  "issues": [
+   "clipped:3",
+   "kpi:3"
+  ],
+  "shot": "admin_reports_finance__ar_1280_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38",
+   "td. «مجموعة مستشفيات الرعاية الصح» 457>377",
+   "td. «مجموعة مستشفيات الرعاية الصح» 457>375"
+  ],
+  "kpiOverflow": [
+   "12,345,678.90 ر.س (230px في 222px)",
+   "12,345,678.90 ر.س (230px في 222px)",
+   "12,345,678.90 ر.س (230px في 222px)"
+  ],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/settings",
+  "lang": "ar",
+  "w": 1280,
+  "issues": [
+   "clipped:2"
+  ],
+  "shot": "admin_system_settings__ar_1280_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38",
+   "td.mono «مجموعة مستشفيات الرعاية الصح» 498>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/customers",
+  "lang": "ar",
+  "w": 1280,
+  "issues": [
+   "clipped:3"
+  ],
+  "shot": "admin_customers__ar_1280_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38",
+   "td. «مجموعة مستشفيات الرعاية الصح» 457>320",
+   "td.mono «مجموعة مستشفيات الرعاية الصح» 498>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/journals",
+  "lang": "ar",
+  "w": 1280,
+  "issues": [
+   "clipped:2"
+  ],
+  "shot": "admin_journals__ar_1280_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38",
+   "td.hidesm «مجموعة مستشفيات الرعاية الصح» 457>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/",
+  "lang": "en",
+  "w": 390,
+  "issues": [
+   "clipped:3"
+  ],
+  "shot": "admin___en_390_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38",
+   "button.btn «Acknowledge» 129>126",
+   "td. «Advanced Specialized Healthc» 494>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments",
+  "lang": "en",
+  "w": 390,
+  "issues": [
+   "clipped:2"
+  ],
+  "shot": "admin_shipments__en_390_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38",
+   "td. «Advanced Specialized Healthc» 494>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/invoices",
+  "lang": "en",
+  "w": 390,
+  "issues": [
+   "clipped:2"
+  ],
+  "shot": "admin_invoices__en_390_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38",
+   "td. «Advanced Specialized Healthc» 494>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/payments",
+  "lang": "en",
+  "w": 390,
+  "issues": [
+   "clipped:2",
+   "cell-bleed:1"
+  ],
+  "shot": "admin_payments__en_390_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38",
+   "td. «Advanced Specialized Healthc» 471>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": [
+   "span.pill «Advanced Specialized Healthc»"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/aging",
+  "lang": "en",
+  "w": 390,
+  "issues": [
+   "clipped:2"
+  ],
+  "shot": "admin_aging__en_390_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38",
+   "td. «Advanced Specialized Healthc» 494>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/reports/finance",
+  "lang": "en",
+  "w": 390,
+  "issues": [
+   "clipped:2"
+  ],
+  "shot": "admin_reports_finance__en_390_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38",
+   "td. «Advanced Specialized Healthc» 494>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/settings",
+  "lang": "en",
+  "w": 390,
+  "issues": [
+   "clipped:2"
+  ],
+  "shot": "admin_system_settings__en_390_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38",
+   "td.mono «Advanced Specialized Healthc» 497>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/customers",
+  "lang": "en",
+  "w": 390,
+  "issues": [
+   "clipped:3"
+  ],
+  "shot": "admin_customers__en_390_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38",
+   "td. «Advanced Specialized Healthc» 494>320",
+   "td.mono «Advanced Specialized Healthc» 497>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/journals",
+  "lang": "en",
+  "w": 390,
+  "issues": [
+   "clipped:1"
+  ],
+  "shot": "admin_journals__en_390_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «3» 41>38"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/",
+  "lang": "en",
+  "w": 768,
+  "issues": [
+   "clipped:3"
+  ],
+  "shot": "admin___en_768_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «العربية» 66>56",
+   "button.btn «3» 41>38",
+   "td. «Advanced Specialized Healthc» 494>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments",
+  "lang": "en",
+  "w": 768,
+  "issues": [
+   "clipped:3"
+  ],
+  "shot": "admin_shipments__en_768_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «العربية» 66>56",
+   "button.btn «3» 41>38",
+   "td. «Advanced Specialized Healthc» 494>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/invoices",
+  "lang": "en",
+  "w": 768,
+  "issues": [
+   "clipped:3",
+   "kpi:2"
+  ],
+  "shot": "admin_invoices__en_768_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «العربية» 66>56",
+   "button.btn «3» 41>38",
+   "td. «Advanced Specialized Healthc» 494>320"
+  ],
+  "kpiOverflow": [
+   "12,345,678.90 SAR (230px في 227px)",
+   "12,345,678.90 SAR (230px في 227px)"
+  ],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/payments",
+  "lang": "en",
+  "w": 768,
+  "issues": [
+   "clipped:3",
+   "cell-bleed:1"
+  ],
+  "shot": "admin_payments__en_768_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «العربية» 66>56",
+   "button.btn «3» 41>38",
+   "td. «Advanced Specialized Healthc» 471>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": [
+   "span.pill «Advanced Specialized Healthc»"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/aging",
+  "lang": "en",
+  "w": 768,
+  "issues": [
+   "clipped:3",
+   "kpi:5"
+  ],
+  "shot": "admin_aging__en_768_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «العربية» 66>56",
+   "button.btn «3» 41>38",
+   "td. «Advanced Specialized Healthc» 494>350"
+  ],
+  "kpiOverflow": [
+   "12,345,678.90 SAR (230px في 211px)",
+   "12,345,678.90 SAR (230px في 211px)",
+   "12,345,678.90 SAR (230px في 211px)",
+   "12,345,678.90 SAR (230px في 211px)",
+   "12,345,678.90 SAR (230px في 211px)"
+  ],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/reports/finance",
+  "lang": "en",
+  "w": 768,
+  "issues": [
+   "clipped:3",
+   "kpi:3"
+  ],
+  "shot": "admin_reports_finance__en_768_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «العربية» 66>56",
+   "button.btn «3» 41>38",
+   "td. «Advanced Specialized Healthc» 494>320"
+  ],
+  "kpiOverflow": [
+   "12,345,678.90 SAR (230px في 227px)",
+   "12,345,678.90 SAR (230px في 227px)",
+   "12,345,678.90 SAR (230px في 227px)"
+  ],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/settings",
+  "lang": "en",
+  "w": 768,
+  "issues": [
+   "clipped:3"
+  ],
+  "shot": "admin_system_settings__en_768_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «العربية» 66>56",
+   "button.btn «3» 41>38",
+   "td.mono «Advanced Specialized Healthc» 497>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/customers",
+  "lang": "en",
+  "w": 768,
+  "issues": [
+   "clipped:4"
+  ],
+  "shot": "admin_customers__en_768_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «العربية» 66>56",
+   "button.btn «3» 41>38",
+   "td. «Advanced Specialized Healthc» 494>320",
+   "td.mono «Advanced Specialized Healthc» 497>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/journals",
+  "lang": "en",
+  "w": 768,
+  "issues": [
+   "clipped:3"
+  ],
+  "shot": "admin_journals__en_768_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «العربية» 66>56",
+   "button.btn «3» 41>38",
+   "td.hidesm «Advanced Specialized Healthc» 494>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/",
+  "lang": "en",
+  "w": 1280,
+  "issues": [
+   "clipped:5"
+  ],
+  "shot": "admin___en_1280_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «العربية» 71>66",
+   "button.btn «3» 41>38",
+   "button.btn «Acknowledge» 114>97",
+   "button.btn «Escalate» 81>68",
+   "td. «Advanced Specialized Healthc» 494>393"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments",
+  "lang": "en",
+  "w": 1280,
+  "issues": [
+   "clipped:3"
+  ],
+  "shot": "admin_shipments__en_1280_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «العربية» 71>66",
+   "button.btn «3» 41>38",
+   "td. «Advanced Specialized Healthc» 494>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/invoices",
+  "lang": "en",
+  "w": 1280,
+  "issues": [
+   "clipped:3",
+   "kpi:2"
+  ],
+  "shot": "admin_invoices__en_1280_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «العربية» 71>66",
+   "button.btn «3» 41>38",
+   "td. «Advanced Specialized Healthc» 494>320"
+  ],
+  "kpiOverflow": [
+   "12,345,678.90 SAR (230px في 222px)",
+   "12,345,678.90 SAR (230px في 222px)"
+  ],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/payments",
+  "lang": "en",
+  "w": 1280,
+  "issues": [
+   "clipped:3",
+   "cell-bleed:1"
+  ],
+  "shot": "admin_payments__en_1280_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «العربية» 71>66",
+   "button.btn «3» 41>38",
+   "td. «Advanced Specialized Healthc» 471>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": [
+   "span.pill «Advanced Specialized Healthc»"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/aging",
+  "lang": "en",
+  "w": 1280,
+  "issues": [
+   "clipped:3",
+   "kpi:5"
+  ],
+  "shot": "admin_aging__en_1280_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «العربية» 71>66",
+   "button.btn «3» 41>38",
+   "td. «Advanced Specialized Healthc» 494>467"
+  ],
+  "kpiOverflow": [
+   "12,345,678.90 SAR (230px في 210px)",
+   "12,345,678.90 SAR (230px في 210px)",
+   "12,345,678.90 SAR (230px في 210px)",
+   "12,345,678.90 SAR (230px في 210px)",
+   "12,345,678.90 SAR (230px في 210px)"
+  ],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/reports/finance",
+  "lang": "en",
+  "w": 1280,
+  "issues": [
+   "clipped:4",
+   "kpi:3"
+  ],
+  "shot": "admin_reports_finance__en_1280_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «العربية» 71>66",
+   "button.btn «3» 41>38",
+   "td. «Advanced Specialized Healthc» 494>378",
+   "td. «Advanced Specialized Healthc» 494>376"
+  ],
+  "kpiOverflow": [
+   "12,345,678.90 SAR (230px في 222px)",
+   "12,345,678.90 SAR (230px في 222px)",
+   "12,345,678.90 SAR (230px في 222px)"
+  ],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/settings",
+  "lang": "en",
+  "w": 1280,
+  "issues": [
+   "clipped:3"
+  ],
+  "shot": "admin_system_settings__en_1280_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «العربية» 71>66",
+   "button.btn «3» 41>38",
+   "td.mono «Advanced Specialized Healthc» 497>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/customers",
+  "lang": "en",
+  "w": 1280,
+  "issues": [
+   "clipped:4"
+  ],
+  "shot": "admin_customers__en_1280_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «العربية» 71>66",
+   "button.btn «3» 41>38",
+   "td. «Advanced Specialized Healthc» 494>320",
+   "td.mono «Advanced Specialized Healthc» 497>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "admin",
+  "route": "/journals",
+  "lang": "en",
+  "w": 1280,
+  "issues": [
+   "clipped:3"
+  ],
+  "shot": "admin_journals__en_1280_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "button.btn «العربية» 71>66",
+   "button.btn «3» 41>38",
+   "td.hidesm «Advanced Specialized Healthc» 494>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ }
+]
