@@ -65,3 +65,15 @@ admin/rate-plans [ar 768] «مسودة إصدار جديد» OK
 admin/quotes [ar 768] «عرض سعر جديد» OK
 admin/invoices/inv_0001 [ar 768] «عرض الفاتورة الضريبية» footer-hidden
 admin/invoices/inv_0001 [ar 768] «إشعار دائن» OK
+admin/payments [ar 768] «تسجيل دفعة واردة» OK
+admin/payments [ar 768] «تصدير CSV» OK
+admin/payments [ar 768] «مطابقة بنكية» OK
+admin/journals [ar 768] «قيد يدوي» OK
+admin/costs [ar 768] «تسجيل تكلفة» OK
+admin/costs [ar 768] «تشغيل توزيع التكاليف (23)» OK
+admin/costs [ar 768] «طلب تجاوز» OK
+admin/compliance/blocks [ar 768] «رفع القيد» OK
+admin/compliance/legal-holds [ar 768] «فرض تحفظ قانوني» OK
+admin/compliance/legal-holds [ar 768] «رفع» OK
+admin/reports/finance [ar 768] «تصدير CSV» OK
+admin/profiles [ar 390] «اقتراح ملف حراري» field-overlap:3

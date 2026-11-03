@@ -145,3 +145,14 @@ admin/contracts [en 1440] «New contract» OK
 admin/simulations [en 1440] «New simulation» OK
 admin/simulations [en 1440] «To tariff draft» OK
 admin/invoices [en 1440] «Generate invoice» OK
+admin/invoices [en 1440] «Export CSV» OK
+admin/settlements [en 1440] «Generate settlement» OK
+admin/compliance/licenses [en 1440] «Run expiry check» OK
+admin/compliance/licenses [en 1440] «New license» OK
+admin/compliance/licenses [en 1440] «Export CSV» OK
+admin/compliance/licenses [en 1440] «Renew» OK
+admin/compliance/retention [en 1440] «Run archive» OK
+admin/compliance/retention [en 1440] «Edit» OK
+admin/system/notifications [en 1440] «Edit» OK
+admin/system/settings [en 1440] «Propose change» OK
+admin/system/audit [en 1440] «Export CSV» OK
