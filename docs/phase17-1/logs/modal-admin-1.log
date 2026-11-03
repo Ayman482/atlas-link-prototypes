@@ -137,3 +137,11 @@ admin/gateway [en 1440] «Simulate unknown device» OK
 admin/gateway [en 1440] «Export CSV» OK
 admin/incidents [en 1440] «New incident» OK
 admin/capa [en 1440] «Complete» OK
+admin/warehouse [en 1440] «Export CSV» OK
+admin/warehouse/partner-custody [en 1440] «Record return» OK
+admin/customers [en 1440] «New customer» OK
+admin/customers [en 1440] «Export CSV» OK
+admin/contracts [en 1440] «New contract» OK
+admin/simulations [en 1440] «New simulation» OK
+admin/simulations [en 1440] «To tariff draft» OK
+admin/invoices [en 1440] «Generate invoice» OK

@@ -56,3 +56,12 @@ admin/claims [ar 768] «تقييم» OK
 admin/claims [ar 768] «إغلاق» OK
 admin/returns [ar 768] «اتخاذ القرار» OK
 admin/returns [ar 768] «إتمام الإرجاع» OK
+admin/warehouse/cleaning [ar 768] «تسجيل التنظيف» OK
+admin/warehouse/cleaning [ar 768] «تسجيل الفحص» OK
+admin/warehouse/consumables [ar 768] «حركة» OK
+admin/customers/org_nkh [ar 768] «فرع جديد» OK
+admin/customers/org_nkh [ar 768] «دعوة مستخدم» OK
+admin/rate-plans [ar 768] «مسودة إصدار جديد» OK
+admin/quotes [ar 768] «عرض سعر جديد» OK
+admin/invoices/inv_0001 [ar 768] «عرض الفاتورة الضريبية» footer-hidden
+admin/invoices/inv_0001 [ar 768] «إشعار دائن» OK
