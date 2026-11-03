@@ -1,0 +1,175 @@
+{
+ "invoice": {
+  "id": "inv_0001",
+  "invoiceNo": "INV-2026-00001",
+  "type": "standard",
+  "typeCode": "388",
+  "subtypeCode": "0100000",
+  "status": "paid",
+  "issueDate": "2026-09-02T23:59:59.999Z",
+  "supplyFrom": "2026-08-01T00:00:00.000Z",
+  "supplyTo": "2026-08-31T23:59:59.999Z",
+  "dueDate": "2026-10-02T23:59:59.999Z",
+  "currency": "SAR",
+  "contractNo": "CT-2026-001",
+  "branch": null
+ },
+ "seller": {
+  "legalName": {
+   "ar": "شركة أطلس لينك للخدمات اللوجستية الطبية",
+   "en": "Atlas Link Medical Logistics Company"
+  },
+  "vatNumber": "310987654300003",
+  "crNumber": "1010987654",
+  "address": {
+   "building": "2451",
+   "street": {
+    "ar": "طريق الملك فهد",
+    "en": "King Fahd Road"
+   },
+   "district": {
+    "ar": "حي العليا",
+    "en": "Al Olaya District"
+   },
+   "city": {
+    "ar": "الرياض",
+    "en": "Riyadh"
+   },
+   "postalCode": "12214",
+   "additionalNo": "7788",
+   "country": {
+    "ar": "المملكة العربية السعودية",
+    "en": "Kingdom of Saudi Arabia"
+   }
+  },
+  "phone": "+966 11 000 4455",
+  "email": "billing@atlaslink.example",
+  "bank": {
+   "name": {
+    "ar": "بنك تجريبي",
+    "en": "Demo Bank"
+   },
+   "iban": "SA03 8000 0000 6080 1016 7519"
+  },
+  "fictional": true
+ },
+ "buyer": {
+  "legalName": {
+   "ar": "مستشفى النخبة التخصصي",
+   "en": "Al-Nukhba Specialist Hospital"
+  },
+  "vatNumber": "345540769900003",
+  "crNumber": "1028538103",
+  "customerType": "hospital",
+  "address": {
+   "district": {
+    "ar": "فرع العليا",
+    "en": "Olaya Branch"
+   },
+   "city": {
+    "ar": "الرياض",
+    "en": "Riyadh"
+   },
+   "country": {
+    "ar": "المملكة العربية السعودية",
+    "en": "Kingdom of Saudi Arabia"
+   },
+   "contact": "أ. خالد الحربي",
+   "phone": "+966566115744"
+  }
+ },
+ "lines": [
+  {
+   "no": 1,
+   "description": {
+    "ar": "رسوم إضافية لشحنات أغسطس 2026 (45 شحنة)",
+    "en": "Add-on charges August 2026 (45 shipments)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 45,
+   "unitPrice": 6000,
+   "discount": 0,
+   "taxable": 270000,
+   "vatRate": 15,
+   "vat": 40500,
+   "total": 310500
+  }
+ ],
+ "totals": {
+  "gross": 270000,
+  "discount": 0,
+  "taxable": 270000,
+  "vat": 40500,
+  "total": 310500,
+  "vatRate": 15,
+  "paid": 310500,
+  "credited": 0,
+  "balance": 0
+ },
+ "payments": [
+  {
+   "ref": "RCPT-2026-00001",
+   "date": "2026-09-08T15:16:10.388Z",
+   "amount": 310500,
+   "method": "bank_transfer",
+   "bankRef": "SNB-4878342"
+  }
+ ],
+ "creditNotes": [],
+ "zatca": {
+  "simulated": true,
+  "status": "simulated_cleared",
+  "uuid": "ce9feae7-1d0e-4655-aa75-f1170664e331",
+  "icv": 1,
+  "invoiceHash": "857ad10771fd3b75",
+  "previousHash": "0000000000000000",
+  "qrBase64": "AUnYtNix2YPYqSDYo9i32YTYsyDZhNmK2YbZgyDZhNmE2K7Yr9mF2KfYqiDYp9mE2YTZiNis2LPYqtmK2Kkg2KfZhNi32KjZitipAg8zMTA5ODc2NTQzMDAwMDMDFDIwMjYtMDktMDJUMjM6NTk6NTlaBAczMTA1LjAwBQY0MDUuMDA=",
+  "qrTags": [
+   {
+    "tag": 1,
+    "label": {
+     "ar": "اسم البائع",
+     "en": "Seller name"
+    },
+    "value": "شركة أطلس لينك للخدمات اللوجستية الطبية"
+   },
+   {
+    "tag": 2,
+    "label": {
+     "ar": "الرقم الضريبي للبائع",
+     "en": "Seller VAT number"
+    },
+    "value": "310987654300003"
+   },
+   {
+    "tag": 3,
+    "label": {
+     "ar": "تاريخ ووقت الفاتورة",
+     "en": "Invoice timestamp"
+    },
+    "value": "2026-09-02T23:59:59Z"
+   },
+   {
+    "tag": 4,
+    "label": {
+     "ar": "الإجمالي شامل الضريبة",
+     "en": "Total with VAT"
+    },
+    "value": "3105.00"
+   },
+   {
+    "tag": 5,
+    "label": {
+     "ar": "إجمالي ضريبة القيمة المضافة",
+     "en": "VAT total"
+    },
+    "value": "405.00"
+   }
+  ],
+  "note": {
+   "ar": "بيانات الفوترة الإلكترونية محاكاة لأغراض العرض: لم تُرسل الفاتورة إلى هيئة الزكاة والضريبة والجمارك، ولا يوجد ختم تشفيري (CSID) ولا رمز تحقق صادر من الهيئة. لا تُعد هذه الفاتورة متوافقة نظامياً قبل التكامل الفعلي والتحقق.",
+   "en": "E-invoicing data is simulated for demonstration: the invoice was not submitted to ZATCA, there is no cryptographic stamp (CSID) and no authority-issued validation. This invoice is not claimed to be compliant before real integration and verification."
+  }
+ }
+}

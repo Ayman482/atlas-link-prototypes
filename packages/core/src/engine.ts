@@ -73,7 +73,7 @@ export class Engine {
       const k = `${userId}:${name}:${idempotencyKey}`;
       const prev = this.db.meta.idempotency[k];
       if (prev) {
-        if (prev.fingerprint !== fp) throw new DomainError('IDEMPOTENCY_CONFLICT', 409, { ar: 'نفس مفتاح Idempotency استُخدم بطلب مختلف', en: 'Idempotency key reused with a different payload' });
+        if (prev.fingerprint !== fp) throw new DomainError('IDEMPOTENCY_CONFLICT', 409, { ar: 'مفتاح منع التكرار (Idempotency) مستخدم مسبقاً لطلب ببيانات مختلفة', en: 'Idempotency key reused with a different payload' });
         return prev.result as R;
       }
     }

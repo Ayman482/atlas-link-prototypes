@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
                 const SizedBox(width: 10),
                 Expanded(child: KpiTile(label: s.t('مسلّمة', 'Delivered'), value: t['delivered'] ?? 0, icon: Icons.check_circle_outline)),
                 const SizedBox(width: 10),
-                Expanded(child: KpiTile(label: s.t('انحرافات', 'Excursions'), value: t['excursions'] ?? 0, icon: Icons.thermostat, critical: (t['excursions'] ?? 0) > 0)),
+                Expanded(child: KpiTile(label: s.t('انحرافات حرارية', 'Excursions'), value: t['excursions'] ?? 0, icon: Icons.thermostat, critical: (t['excursions'] ?? 0) > 0)),
               ]),
               const SizedBox(height: 14),
               if (canCreate(st.roles)) FilledButton.icon(onPressed: onNew, icon: const Icon(Icons.add), label: Text(s.t('طلب استلام جديد', 'Request a pickup'))),

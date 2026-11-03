@@ -31,7 +31,7 @@ class _NewShipmentPageState extends State<NewShipmentPage> {
   Map<String, String> _validate(S s) {
     final e = <String, String>{};
     if (step == 0) { if (fromId == null) e['from'] = s.required; if (toId == null) e['to'] = s.required; if (fromId != null && fromId == toId) e['to'] = s.t('عنوانا الاستلام والتسليم متطابقان', 'Pickup and delivery addresses are the same'); }
-    if (step == 1) { if ((int.tryParse(qty.text) ?? 0) < 1) e['qty'] = s.t('الكمية 1 على الأقل', 'At least 1'); final w = double.tryParse(kg.text) ?? 0; if (w <= 0 || w > 25) e['kg'] = s.t('الوزن بين 0.1 و25 كجم', 'Weight between 0.1 and 25 kg'); }
+    if (step == 1) { if ((int.tryParse(qty.text) ?? 0) < 1) e['qty'] = s.t('الكمية 1 على الأقل', 'At least 1'); final w = double.tryParse(kg.text) ?? 0; if (w <= 0 || w > 25) e['kg'] = s.t('الوزن بين 0.1 و25 كغ', 'Weight between 0.1 and 25 kg'); }
     if (step == 2 && start.isBefore(DateTime.now().subtract(const Duration(minutes: 15)))) e['start'] = s.t('لا يمكن الجدولة في الماضي', 'Cannot schedule in the past');
     return e;
   }
@@ -96,7 +96,7 @@ class _NewShipmentPageState extends State<NewShipmentPage> {
           })),
           if (errs['start'] != null) Text(errs['start']!, style: TextStyle(color: c.critical)),
           const SizedBox(height: 12),
-          Text(s.t('مدة الفترة', 'Window length')),
+          Text(s.t('مدة فترة الاستلام', 'Window length')),
           SegmentedButton<int>(showSelectedIcon: false, segments: [for (final h in [1, 2, 4]) ButtonSegment(value: h, label: Text(s.t('$h س', '${h}h')))], selected: {window.inHours}, onSelectionChanged: (v) => setState(() => window = Duration(hours: v.first))),
         ]),
       _ => quote == null ? const Skeleton() : Card(child: Padding(padding: const EdgeInsets.all(16), child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [

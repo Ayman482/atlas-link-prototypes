@@ -1,0 +1,28 @@
+   Woah! You appear to be trying to run flutter as root.
+   We strongly recommend running the flutter tool without superuser privileges.
+  /
+📎
+Resolving dependencies...
+Downloading packages...
+  material_color_utilities 0.13.0 (0.13.1 available)
+  meta 1.18.3 (1.19.0 available)
+  shared_preferences_foundation 2.5.7 (2.6.1 available)
+  test_api 0.7.12 (0.7.15 available)
+  vector_math 2.4.0 (2.4.4 available)
+Got dependencies!
+5 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+00:00 +0: loading /home/claude/medlog/mobile/atlas_shared/test/format_parity_test.dart
+00:00 +0: /home/claude/medlog/mobile/atlas_shared/test/format_parity_test.dart: التاريخ والعملة والحرارة مطابقة للويب
+00:00 +1: loading /home/claude/medlog/mobile/atlas_shared/test/prod_mode_test.dart
+00:00 +1: /home/claude/medlog/mobile/atlas_shared/test/prod_mode_test.dart: بناء الإنتاج: لا حسابات عرض ولا رمز عرض ولا شارة عرض في شاشة الدخول
+00:01 +2: loading /home/claude/medlog/mobile/atlas_shared/test/shared_test.dart
+00:02 +2: /home/claude/medlog/mobile/atlas_shared/test/shared_test.dart: Fmt الريال من الهللات مع فواصل الآلاف
+00:02 +3: /home/claude/medlog/mobile/atlas_shared/test/shared_test.dart: Fmt التاريخ بتوقيت الرياض (UTC+3)
+00:02 +4: /home/claude/medlog/mobile/atlas_shared/test/shared_test.dart: S (التوطين) تسميات الحالات من نفس مصدر الويب، والرموز التقنية مترجمة
+00:02 +5: /home/claude/medlog/mobile/atlas_shared/test/shared_test.dart: S (التوطين) تصحيحات القاموس للخيار C
+00:02 +6: /home/claude/medlog/mobile/atlas_shared/test/shared_test.dart: ApiClient الدخول مع تحقق بخطوتين ثم أمر برمز الجلسة
+00:02 +7: /home/claude/medlog/mobile/atlas_shared/test/shared_test.dart: ApiClient أخطاء المجال تُعاد برمزها ورسالتيها والحقل المعني
+00:02 +8: /home/claude/medlog/mobile/atlas_shared/test/shared_test.dart: ApiClient انقطاع الشبكة يُعاد كخطأ NETWORK مفهوم
+00:02 +9: /home/claude/medlog/mobile/atlas_shared/test/shared_test.dart: التوطين من المصدر المعتمد: السياق، التحية، والخط الزمني (مطابق للويب)
+00:02 +10: All tests passed!

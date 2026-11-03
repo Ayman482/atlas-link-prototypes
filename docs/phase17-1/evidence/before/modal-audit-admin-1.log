@@ -1,0 +1,34 @@
+admin/legs [ar 1440] «تصدير CSV» background-scrolls esc-no-close
+admin/legs [ar 1440] «إسناد ناقل» overlap:18 background-scrolls
+admin/legs [ar 1440] «حدث: غادر» overlap:18 background-scrolls
+admin/boxes [ar 1440] «تسجيل صندوق» background-scrolls
+admin/boxes [ar 1440] «تصدير CSV» background-scrolls
+admin/devices [ar 1440] «تسجيل جهاز» overlap:18 background-scrolls
+admin/devices [ar 1440] «تصدير CSV» background-scrolls
+admin/devices [ar 1440] «اقتران» overlap:36 background-scrolls
+admin/gateway [ar 1440] «محاكاة جهاز مجهول» background-scrolls
+admin/gateway [ar 1440] «تصدير CSV» background-scrolls
+admin/incidents [ar 1440] «حادث جديد» overlap:9
+admin/capa [ar 1440] «إكمال» overlap:36
+admin/warehouse [ar 1440] «تصدير CSV» background-scrolls
+admin/warehouse/partner-custody [ar 1440] «تسجيل الإرجاع» overlap:18
+admin/customers [ar 1440] «عميل جديد» overlap:9 background-scrolls
+admin/customers [ar 1440] «تصدير CSV» background-scrolls
+admin/contracts [ar 1440] «عقد جديد» background-scrolls
+admin/simulations [ar 1440] «محاكاة جديدة» OK
+admin/simulations [ar 1440] «تحويل لمسودة تعرفة» OK
+admin/invoices [ar 1440] «توليد فاتورة» overlap:18 background-scrolls
+admin/invoices [ar 1440] «تصدير CSV» background-scrolls
+admin/settlements [ar 1440] «توليد تسوية» overlap:9
+admin/compliance/licenses [ar 1440] «تشغيل فحص الانتهاء» overlap:18 background-scrolls
+admin/compliance/licenses [ar 1440] «ترخيص جديد» overlap:9 background-scrolls
+admin/compliance/licenses [ar 1440] «تصدير CSV» background-scrolls
+admin/compliance/licenses [ar 1440] «تجديد» overlap:18 background-scrolls
+admin/compliance/retention [ar 1440] «تشغيل الأرشفة» overlap:63 background-scrolls
+admin/compliance/retention [ar 1440] «تعديل» overlap:54 background-scrolls
+admin/system/notifications [ar 1440] «تعديل» overlap:36
+admin/system/settings [ar 1440] «اقتراح تغيير» overlap:18 background-scrolls
+admin/system/audit [ar 1440] «تصدير CSV» background-scrolls
+admin/system/health [ar 1440] «نسخة احتياطية» background-scrolls
+admin/system/health [ar 1440] «تمرين استعادة» background-scrolls
+dialogs 33, with issues 31

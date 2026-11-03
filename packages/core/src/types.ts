@@ -28,7 +28,9 @@ export interface City { code: string; name: L; lat: number; lng: number; active:
 
 // ---------- الخدمات وسلسلة التبريد (M03) ----------
 export type ThermalClass = 'chilled' | 'frozen' | 'ambient';
-export interface ServiceProfile { id: ID; code: string; thermalClass: ThermalClass; name: L; minC: number; maxC: number; toleranceSeconds: number; version: number; effectiveFrom: ISO; effectiveTo: ISO | null; approved: boolean; status: 'draft' | 'pending_approval' | 'active' | 'retired' }
+export interface ServiceProfile { id: ID; code: string; thermalClass: ThermalClass; name: L; minC: number; maxC: number; toleranceSeconds: number; version: number; effectiveFrom: ISO; effectiveTo: ISO | null; approved: boolean; status: 'draft' | 'pending_approval' | 'active' | 'retired' | 'rejected';
+  /** Phase 17.1: نطاق التطبيق — بلا نطاق = الافتراضي للفئة؛ sampleTypes = أنواع عينات محددة؛ contractId = اتفاقية خدمة محددة */
+  scope?: { sampleTypes?: string[]; contractId?: ID | null }; approvedBy?: ID | null; proposedBy?: ID | null; basis?: string }
 export type ServiceLevel = 'standard' | 'express' | 'stat';
 
 // ---------- الشحنات (M01) ----------
@@ -104,7 +106,7 @@ export interface Quote { id: ID; quoteNo: string; organizationId: ID; shipmentId
 export interface PriceBreakdown { base: Halala; weight: Halala; levelSurcharge: Halala; dedicatedBox: Halala; subtotal: Halala; vat: Halala; total: Halala; ratePlanId: ID; ratePlanVersion: number; coveredByContract: boolean }
 export interface Simulation { id: ID; name: string; createdBy: ID; createdAt: ISO; ratePlanId: ID; adjustments: { thermalClass: ThermalClass | 'all'; pct: number }[]; result: { currentRevenue: Halala; proposedRevenue: Halala; estimatedCost: Halala; shipmentsAnalysed: number }; status: 'draft' | 'submitted' | 'approved' | 'published'; liveChangesApplied: false }
 export interface Invoice { id: ID; invoiceNo: string; organizationId: ID; branchId: ID | null; issueDate: ISO | null; dueDate: ISO | null; periodFrom: ISO; periodTo: ISO; subtotal: Halala; vat: Halala; total: Halala; paid: Halala; status: 'draft' | 'issued' | 'partially_paid' | 'paid' | 'overdue' | 'void'; zatcaStatus: 'not_submitted' | 'simulated_cleared' | 'simulated_rejected'; journalId: ID | null; createdAt: ISO }
-export interface InvoiceLine { id: ID; invoiceId: ID; shipmentId: ID | null; description: L; qty: number; unitPrice: Halala; vat: Halala; lineTotal: Halala }
+export interface InvoiceLine { id: ID; invoiceId: ID; shipmentId: ID | null; description: L; qty: number; unitPrice: Halala; vat: Halala; lineTotal: Halala; discount?: Halala }
 export interface CreditNote { id: ID; creditNo: string; invoiceId: ID; reason: string; amount: Halala; status: 'draft' | 'pending_approval' | 'approved' | 'rejected'; requestedBy: ID; approvedBy: ID | null; journalId: ID | null; createdAt: ISO }
 export interface Payment { id: ID; ref: string; direction: 'in' | 'out'; counterpartyType: 'organization' | 'partner'; counterpartyId: ID; amount: Halala; method: 'bank_transfer' | 'card_simulated' | 'sadad_simulated'; status: 'pending' | 'received' | 'reconciled' | 'failed'; bankRef: string | null; receivedAt: ISO; journalId: ID | null; allocated: Halala }
 export interface PaymentAllocation { id: ID; paymentId: ID; invoiceId: ID; amount: Halala }
@@ -124,7 +126,7 @@ export interface RetentionPolicy { id: ID; category: string; activeDays: number;
 export interface LegalHold { id: ID; subjectType: string; subjectId: ID; reason: string; openedAt: ISO; releasedAt: ISO | null; authorizedBy: ID }
 export interface ArchiveRun { id: ID; ranAt: ISO; examined: number; archived: number; skippedForHold: number; by: ID }
 export interface ConfigVersion { id: ID; key: string; version: number; value: unknown; status: 'draft' | 'pending_approval' | 'active' | 'superseded' | 'rejected'; effectiveAt: ISO; requestedBy: ID; approvedBy: ID | null; createdAt: ISO }
-export interface ApprovalRequest { id: ID; kind: 'device_exception' | 'credit_note' | 'settlement' | 'rate_plan' | 'config' | 'cost_override' | 'device_command' | 'lost_declaration' | 'claim_resolution'; subjectId: ID; title: L; requestedBy: ID; requiredRole: RoleCode; status: 'pending' | 'approved' | 'rejected'; decidedBy: ID | null; decidedAt: ISO | null; note: string; createdAt: ISO }
+export interface ApprovalRequest { id: ID; kind: 'device_exception' | 'credit_note' | 'settlement' | 'rate_plan' | 'service_profile' | 'config' | 'cost_override' | 'device_command' | 'lost_declaration' | 'claim_resolution'; subjectId: ID; title: L; requestedBy: ID; requiredRole: RoleCode; status: 'pending' | 'approved' | 'rejected'; decidedBy: ID | null; decidedAt: ISO | null; note: string; createdAt: ISO }
 
 // ---------- المنصة (M08/M11/M12/M14) ----------
 export interface Notification { id: ID; userId: ID | null; organizationId: ID | null; audience: 'staff' | 'customer' | 'courier'; channel: 'in_app' | 'sms' | 'email' | 'push'; templateCode: string; title: L; body: L; link: string | null; critical: boolean; readAt: ISO | null; createdAt: ISO; deliveryStatus: 'simulated_sent' | 'simulated_failed' | 'queued' }

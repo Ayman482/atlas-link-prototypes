@@ -49,10 +49,10 @@ export function seed(nowMs = Date.now(), seedNo = 2026): T.Db {
 
   // ---------------- ملفات الخدمة الحرارية (TEMP-001) — قيم تجريبية غير معتمدة (OD-011) ----------------
   db.serviceProfiles.push(
-    { id: 'svc_chilled_v1', code: 'CHILLED', thermalClass: 'chilled', name: L('مبرّد ‎+2 إلى ‎+8 °م', 'Chilled +2 to +8 °C'), minC: 2, maxC: 8, toleranceSeconds: 900, version: 1, effectiveFrom: t(-24 * 120), effectiveTo: t(-24 * 30), approved: true, status: 'retired' },
-    { id: 'svc_chilled_v2', code: 'CHILLED', thermalClass: 'chilled', name: L('مبرّد ‎+4 إلى ‎+8 °م', 'Chilled +4 to +8 °C'), minC: 4, maxC: 8, toleranceSeconds: 600, version: 2, effectiveFrom: t(-24 * 30), effectiveTo: null, approved: true, status: 'active' },
+    { id: 'svc_chilled_v1', code: 'CHILLED', thermalClass: 'chilled', name: L('مبرّد ‎+2 إلى ‎+8 °م (إصدار قديم مستبدل)', 'Chilled +2 to +8 °C (superseded legacy version)'), minC: 2, maxC: 8, toleranceSeconds: 900, version: 1, effectiveFrom: t(-24 * 120), effectiveTo: t(-24 * 30), approved: true, status: 'retired', basis: 'إصدار تجريبي سابق — لا يطابق النطاق المعتمد +4 إلى +8 °م' },
+    { id: 'svc_chilled_v2', code: 'CHILLED', thermalClass: 'chilled', name: L('مبرّد ‎+4 إلى ‎+8 °م', 'Chilled +4 to +8 °C'), minC: 4, maxC: 8, toleranceSeconds: 600, version: 2, effectiveFrom: t(-24 * 30), effectiveTo: null, approved: true, status: 'active', basis: 'SRS TEMP-001 — النطاق الافتراضي المعتمد للمبرّد' },
     { id: 'svc_frozen_v1', code: 'FROZEN', thermalClass: 'frozen', name: L('مجمّد ‎−25 إلى ‎−15 °م', 'Frozen −25 to −15 °C'), minC: -25, maxC: -15, toleranceSeconds: 600, version: 1, effectiveFrom: t(-24 * 120), effectiveTo: null, approved: true, status: 'active' },
-    { id: 'svc_ambient_v1', code: 'AMBIENT', thermalClass: 'ambient', name: L('محيط ‎+15 إلى ‎+25 °م', 'Ambient +15 to +25 °C'), minC: 15, maxC: 25, toleranceSeconds: 1800, version: 1, effectiveFrom: t(-24 * 120), effectiveTo: null, approved: true, status: 'active' },
+    { id: 'svc_ambient_v1', code: 'AMBIENT', thermalClass: 'ambient', name: L('درجة حرارة الغرفة ‎+15 إلى ‎+25 °م', 'Room temperature +15 to +25 °C'), minC: 15, maxC: 25, toleranceSeconds: 1800, version: 1, effectiveFrom: t(-24 * 120), effectiveTo: null, approved: true, status: 'active' },
   );
   const profileFor = (tc: T.ThermalClass) => db.serviceProfiles.find((p) => p.thermalClass === tc && p.status === 'active')!;
 
@@ -75,7 +75,7 @@ export function seed(nowMs = Date.now(), seedNo = 2026): T.Db {
   const branchesOf: Record<string, T.Branch[]> = {};
   const addrOfBranch: Record<string, T.Address> = {};
   for (const o of orgDefs) {
-    const org: T.Organization = { id: `org_${o.code.toLowerCase()}`, code: o.code, legalName: o.name, customerType: o.type, status: 'active', taxId: `3${pad(Math.floor(rnd() * 1e8), 8)}00003`, cityCode: o.city, isReceivingInstitution: o.recv, createdAt: t(-24 * 200) };
+    const org: T.Organization = { id: `org_${o.code.toLowerCase()}`, code: o.code, legalName: o.name, customerType: o.type, status: 'active', taxId: `3${pad(Math.floor(rnd() * 1e9), 9)}00003`, cityCode: o.city, isReceivingInstitution: o.recv, createdAt: t(-24 * 200) };
     db.organizations.push(org); orgByCode[o.code] = org; branchesOf[org.id] = [];
     for (const [bc, bn, bcity, lat, lng] of o.branches) {
       const br: T.Branch = { id: `br_${o.code.toLowerCase()}_${bc.toLowerCase()}`, organizationId: org.id, code: bc, name: bn, cityCode: bcity, status: 'active', createdAt: t(-24 * 190) };
@@ -294,7 +294,7 @@ export function seed(nowMs = Date.now(), seedNo = 2026): T.Db {
     const destCourier = courierIn(sh.destCity);
     const reached = (st: T.ShipmentStatus) => db.statusEvents.some((e) => e.shipmentId === sh.id && e.toStatus === st);
 
-    // المسار والأرجل (RTE/MMT)
+    // المسار ومراحل النقل (RTE/MMT)
     if (reached('pickup_scheduled')) {
       const rDate = new Date(pick0); const rc = `RT-${sh.originCity}-${pad(rDate.getUTCMonth() + 1, 2)}${pad(rDate.getUTCDate(), 2)}-${courier.id.slice(-2)}`;
       let route = db.routes.find((r) => r.code === rc);
@@ -765,6 +765,30 @@ export function seed(nowMs = Date.now(), seedNo = 2026): T.Db {
   db.sessions.push({ id: id('ses'), userId: U.admin.id, device: 'Chrome / macOS', ip: '10.20.0.14', createdAt: t(-2), lastSeenAt: t(-0.1), revokedAt: null }, { id: id('ses'), userId: U.ops.id, device: 'Edge / Windows', ip: '10.20.0.31', createdAt: t(-6), lastSeenAt: t(-0.05), revokedAt: null }, { id: id('ses'), userId: U.finance.id, device: 'Safari / iPadOS', ip: '10.20.0.52', createdAt: t(-28), lastSeenAt: t(-20), revokedAt: null });
   db.recurrings.push({ id: 'rec_0001', organizationId: NKH.id, branchId: 'br_nkh_oly', template: { thermalClass: 'chilled', serviceLevel: 'standard', senderAddressId: A('nkh', 'oly').id, receiverAddressId: nrlAddr.id, receiverOrgId: orgByCode.NRL.id }, rrule: 'weekdays', time: '09:00', active: true, nextRunAt: t(20), createdBy: U.branchOp.id });
 
+  // Phase 17.1 — كشف خدمات شهري مفصّل لمركز الجينوم (26 بنداً وخصم كمية) لعرض الفاتورة متعددة الصفحات. بعد آخر استخدام للمولّد العشوائي حتى لا تتغير بقية البيانات.
+  {
+    const GNM = orgByCode.GNM; const n = next('inv'); const from = Date.parse('2026-10-01T00:00:00Z'); const to = Date.parse('2026-10-31T23:59:59Z');
+    const inv: T.Invoice = { id: `inv_${pad(n)}`, invoiceNo: `INV-2026-${pad(n, 5)}`, organizationId: GNM.id, branchId: null, issueDate: iso(to + 2 * DAY), dueDate: iso(to + 32 * DAY), periodFrom: iso(from), periodTo: iso(to), subtotal: 0, vat: 0, total: 0, paid: 0, status: 'issued', zatcaStatus: 'simulated_cleared', journalId: null, createdAt: iso(to + 2 * DAY) };
+    const routes: [string, string, string, string, number][] = [['جدة', 'الرياض', 'Jeddah', 'Riyadh', 640], ['جدة', 'مكة المكرمة', 'Jeddah', 'Makkah', 180], ['جدة', 'المدينة المنورة', 'Jeddah', 'Madinah', 420], ['جدة', 'الدمام', 'Jeddah', 'Dammam', 760], ['جدة', 'أبها', 'Jeddah', 'Abha', 510]];
+    const classes: [string, string, number][] = [['مبرّد', 'chilled', 1], ['مجمّد', 'frozen', 1.35], ['درجة حرارة الغرفة', 'room temperature', 0.8]];
+    const lines: T.InvoiceLine[] = [];
+    for (let k = 0; k < 24; k++) {
+      const r = routes[k % routes.length]; const c = classes[k % classes.length]; const qty = 2 + (k * 7) % 9; const unit = Math.round((r[4] * c[2] * 100) / 5) * 5; const disc = qty >= 8 ? Math.round(unit * qty * 0.1) : 0; const taxable = unit * qty - disc; const v = pct(taxable, VAT_PCT);
+      lines.push({ id: id('inl'), invoiceId: inv.id, shipmentId: null, description: L(`نقل عينات ${c[0]} — ${r[0]} ← ${r[1]} (الأسبوع ${1 + (k % 4)})`, `${c[1][0].toUpperCase()}${c[1].slice(1)} sample transport — ${r[2]} → ${r[3]} (week ${1 + (k % 4)})`), qty, unitPrice: unit, vat: v, lineTotal: taxable + v, discount: disc });
+    }
+    for (const [ar, en, amount] of [['تأجير صندوق مخصص بجهاز تتبع — أكتوبر 2026', 'Dedicated tracked box rental — October 2026', sar(1_250)], ['تقرير أدلة حرارة معتمد (إصدار إضافي)', 'Certified temperature evidence report (additional copy)', sar(150)]] as [string, string, number][]) { const v = pct(amount, VAT_PCT); lines.push({ id: id('inl'), invoiceId: inv.id, shipmentId: null, description: L(ar, en), qty: 1, unitPrice: amount, vat: v, lineTotal: amount + v, discount: 0 }); }
+    inv.subtotal = lines.reduce((a, l) => a + l.unitPrice * l.qty - (l.discount ?? 0), 0); inv.vat = lines.reduce((a, l) => a + l.vat, 0); inv.total = inv.subtotal + inv.vat;
+    db.invoices.push(inv); db.invoiceLines.push(...lines);
+    inv.journalId = jr(`إصدار فاتورة ${inv.invoiceNo}`, Date.parse(inv.issueDate!), 'invoice', inv.id, [{ accountId: 'gl_1200', debit: inv.total, credit: 0, memo: GNM.legalName.ar }, { accountId: 'gl_4100', debit: 0, credit: inv.subtotal, memo: '' }, { accountId: 'gl_2200', debit: 0, credit: inv.vat, memo: '' }]).id;
+  }
+  // Phase 17.1 — مثال على اختلاف متطلب عميل: اقتراح ملف +2 إلى +8 °م لاتفاقية مختبرات الدقة الطبية «بانتظار الاعتماد» — لا يسري على أي شحنة قبل اعتماد الامتثال
+  {
+    const gnmContract = db.contracts.find((c) => c.organizationId === orgByCode.DQA.id && c.status === 'active');
+    if (gnmContract) {
+      db.serviceProfiles.push({ id: 'svc_chilled_dqa_v1', code: `CHILLED-${gnmContract.id.toUpperCase()}`, thermalClass: 'chilled', name: L('مبرّد ‎+2 إلى ‎+8 °م — اتفاقية مختبرات الدقة الطبية (مقترح)', 'Chilled +2 to +8 °C — Al-Diqqa Medical Laboratories agreement (proposed)'), minC: 2, maxC: 8, toleranceSeconds: 600, version: 1, effectiveFrom: t(24 * 7), effectiveTo: null, approved: false, status: 'pending_approval', scope: { sampleTypes: [], contractId: gnmContract.id }, proposedBy: U.quality.id, approvedBy: null, basis: 'طلب العميل في ملحق العقد — يختلف عن النطاق الافتراضي المعتمد (+4 إلى +8 °م) ويتطلب قراراً' });
+      db.approvalRequests.push({ id: id('apr'), kind: 'service_profile', subjectId: 'svc_chilled_dqa_v1', title: L('اعتماد ملف حراري: مبرّد +2 إلى +8 °م لاتفاقية مختبرات الدقة الطبية', 'Approve temperature profile: chilled +2 to +8 °C for the Al-Diqqa Medical Laboratories agreement'), requestedBy: U.quality.id, requiredRole: 'compliance', status: 'pending', decidedBy: null, decidedAt: null, note: 'يختلف عن النطاق الافتراضي المعتمد +4 إلى +8 °م', createdAt: t(-6) });
+    }
+  }
   // سجل تدقيق أولي
   // مزامنة عدّادات المعرّفات مع المعرّفات المكتوبة يدوياً حتى لا يتصادم المحرك معها لاحقاً
   for (const [k, v] of Object.entries(db)) if (k !== 'meta') for (const row of v as { id?: string }[]) { const m = /^([a-z]+)_(\d+)$/.exec(row.id ?? ''); if (m) counters['id:' + m[1]] = Math.max(counters['id:' + m[1]] ?? 0, Number(m[2])); }

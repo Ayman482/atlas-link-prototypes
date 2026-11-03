@@ -4,6 +4,7 @@ import { DomainError } from './types';
 import { defineQuery } from './engine';
 import { FINANCE_COLLECTIONS, branchGrants, canReadShipment, canSeeInternalFinance, courierOf, courierShipmentIds, customerOrgIds, has, isStaff, shipmentView, type Actor } from './access';
 import { ACTIVE, TRANSITIONS, boxReadiness, courierEligibility, currentCustodian, deviceOfBox, partnerEligibility } from './domain';
+import { label, configLabel } from '../../i18n/src/terms';
 import { DAY, HOUR, MIN, iso } from './util';
 
 const nf = () => new DomainError('NOT_FOUND', 404, { ar: 'غير موجود', en: 'Not found' });
@@ -101,15 +102,15 @@ defineQuery<Record<string, never>, unknown>({
 /** الخط الزمني الموحّد بمصادره (MMT-001..018) */
 function timeline(db: T.Db, a: Actor, s: T.Shipment) {
   const ev: { at: string; receivedAt?: string; kind: string; source: string; title: T.L; detail?: string; live?: boolean; codes?: Record<string, string | number> }[] = [];
-  const S: Record<string, T.L> = { draft: { ar: 'مسودة', en: 'Draft' }, confirmed: { ar: 'مؤكدة', en: 'Confirmed' }, pickup_scheduled: { ar: 'جُدول الاستلام', en: 'Pickup scheduled' }, collected: { ar: 'تم الاستلام', en: 'Collected' }, in_transit: { ar: 'في الطريق', en: 'In transit' }, at_handover: { ar: 'عند نقطة التسليم', en: 'At handover' }, delivered: { ar: 'تم التسليم', en: 'Delivered' }, failed: { ar: 'تعذّر التسليم', en: 'Delivery failed' }, return_pending: { ar: 'بانتظار الإرجاع', en: 'Return pending' }, returned: { ar: 'تم الإرجاع', en: 'Returned' }, cancelled: { ar: 'ملغاة', en: 'Cancelled' }, exception: { ar: 'استثناء', en: 'Exception' } };
+  const S: Record<string, T.L> = { draft: { ar: 'مسودة', en: 'Draft' }, confirmed: { ar: 'مؤكدة', en: 'Confirmed' }, pickup_scheduled: { ar: 'الاستلام مجدول', en: 'Pickup scheduled' }, collected: { ar: 'تم الاستلام', en: 'Collected' }, in_transit: { ar: 'في الطريق', en: 'In transit' }, at_handover: { ar: 'عند نقطة التسليم', en: 'At handover' }, delivered: { ar: 'تم التسليم', en: 'Delivered' }, failed: { ar: 'تعذّر التسليم', en: 'Delivery failed' }, return_pending: { ar: 'بانتظار الإرجاع', en: 'Return pending' }, returned: { ar: 'تم الإرجاع', en: 'Returned' }, cancelled: { ar: 'ملغاة', en: 'Cancelled' }, exception: { ar: 'استثناء', en: 'Exception' } };
   for (const e of db.statusEvents.filter((x) => x.shipmentId === s.id)) ev.push({ at: e.occurredAt, kind: 'status', source: e.source, title: e.fromStatus === e.toStatus ? { ar: e.reason, en: e.reason } : S[e.toStatus], detail: e.fromStatus === e.toStatus ? undefined : e.reason , codes: { status: e.toStatus } });
-  for (const c of db.custody.filter((x) => x.shipmentId === s.id)) ev.push({ at: c.occurredAt, receivedAt: c.receivedAt, kind: 'custody', source: c.source, title: { ar: `نقل حيازة: ${c.fromType} ← ${c.toType}`, en: `Custody: ${c.fromType} → ${c.toType}` }, detail: `${c.evidence.signedBy} (${c.evidence.method})` , codes: { fromType: c.fromType, toType: c.toType, method: c.evidence.method } });
+  for (const c of db.custody.filter((x) => x.shipmentId === s.id)) ev.push({ at: c.occurredAt, receivedAt: c.receivedAt, kind: 'custody', source: c.source, title: { ar: `نقل حيازة: ${label('ar', c.fromType, 'custodian')} ← ${label('ar', c.toType, 'custodian')}`, en: `Custody: ${label('en', c.fromType, 'custodian')} → ${label('en', c.toType, 'custodian')}` }, detail: `${c.evidence.signedBy} (${c.evidence.method})` , codes: { fromType: c.fromType, toType: c.toType, method: c.evidence.method } });
   const legIds = db.shipmentLegs.filter((x) => x.shipmentId === s.id).map((x) => x.legId);
-  for (const c of db.carrierEvents.filter((x) => legIds.includes(x.legId))) ev.push({ at: c.occurredAt, receivedAt: c.receivedAt, kind: 'carrier', source: 'carrier_api (محاكاة)', title: { ar: `الناقل: ${c.eventType}`, en: `Carrier: ${c.eventType}` }, detail: db.legs.find((l) => l.id === c.legId)?.flightNo ?? '' , codes: { eventType: c.eventType } });
+  for (const c of db.carrierEvents.filter((x) => legIds.includes(x.legId))) ev.push({ at: c.occurredAt, receivedAt: c.receivedAt, kind: 'carrier', source: 'carrier_api (محاكاة)', title: { ar: `الناقل: ${label('ar', c.eventType)}`, en: `Carrier: ${label('en', c.eventType)}` }, detail: db.legs.find((l) => l.id === c.legId)?.flightNo ?? '' , codes: { eventType: c.eventType } });
   for (const e of db.excursions.filter((x) => x.shipmentId === s.id)) ev.push({ at: e.startedAt, kind: 'excursion', source: 'cold_chain', title: { ar: `انحراف حراري (ذروة ${e.peakC} °م)`, en: `Excursion (peak ${e.peakC} °C)` }, detail: e.status , codes: { status: e.status, peakC: e.peakC } });
   for (const p of db.pods.filter((x) => x.shipmentId === s.id)) ev.push({ at: p.deliveredAt, kind: 'pod', source: 'courier_app', title: { ar: 'إثبات التسليم', en: 'Proof of delivery' }, detail: p.recipientName });
   for (const d of db.deliveryAttempts.filter((x) => x.shipmentId === s.id)) ev.push({ at: d.attemptedAt, kind: 'attempt', source: 'courier_app', title: { ar: 'محاولة تسليم فاشلة', en: 'Failed attempt' }, detail: d.reasonCode , codes: { reasonCode: d.reasonCode } });
-  if (isStaff(a)) { const pk = db.packings.find((p) => p.shipmentId === s.id); if (pk) for (const h of db.deviceHealth.filter((h) => h.deviceId === deviceOfBox(db, pk.boxId)?.id && h.observedAt >= pk.packedAt && (!pk.unpackedAt || h.observedAt <= pk.unpackedAt))) ev.push({ at: h.observedAt, kind: 'device', source: 'gpt45m', title: { ar: `الجهاز: ${h.eventType}`, en: `Device: ${h.eventType}` } , codes: { eventType: h.eventType } }); }
+  if (isStaff(a)) { const pk = db.packings.find((p) => p.shipmentId === s.id); if (pk) for (const h of db.deviceHealth.filter((h) => h.deviceId === deviceOfBox(db, pk.boxId)?.id && h.observedAt >= pk.packedAt && (!pk.unpackedAt || h.observedAt <= pk.unpackedAt))) ev.push({ at: h.observedAt, kind: 'device', source: 'gpt45m', title: { ar: `الجهاز: ${label('ar', h.eventType)}`, en: `Device: ${label('en', h.eventType)}` } , codes: { eventType: h.eventType } }); }
   return ev.sort((x, y) => x.at.localeCompare(y.at));
 }
 
@@ -190,7 +191,7 @@ defineQuery<{ id: string }, unknown>({
     const air = db.shipmentLegs.filter((x) => x.shipmentId === s.id).map((x) => db.legs.find((l) => l.id === x.legId)!).find((l) => l.mode === 'air');
     for (let i = 1; i < reads.length; i++) {
       const d = (Date.parse(reads[i].deviceTime) - Date.parse(reads[i - 1].deviceTime)) / MIN;
-      if (d > 15) { const inAir = air && reads[i - 1].deviceTime <= (air.actualArrival ?? air.scheduledArrival) && reads[i].deviceTime >= (air.actualDeparture ?? air.scheduledDeparture); gaps.push({ from: reads[i - 1].deviceTime, to: reads[i].deviceTime, minutes: Math.round(d), reason: inAir ? { ar: 'رحلة جوية — لا بيانات (لم يثبت دعم التخزين المؤقت)', en: 'Air leg — no data (buffering not verified)' } : { ar: 'لا بيانات من الجهاز', en: 'No device data' } }); }
+      if (d > 15) { const inAir = air && reads[i - 1].deviceTime <= (air.actualArrival ?? air.scheduledArrival) && reads[i].deviceTime >= (air.actualDeparture ?? air.scheduledDeparture); gaps.push({ from: reads[i - 1].deviceTime, to: reads[i].deviceTime, minutes: Math.round(d), reason: inAir ? { ar: 'رحلة جوية — لا بيانات (لم يُتحقق من دعم الجهاز لتخزين القراءات)', en: 'Air leg — no data (buffering not verified)' } : { ar: 'لا بيانات من الجهاز', en: 'No device data' } }); }
     }
     const open = packs.find((p) => !p.unpackedAt);
     if (open && reads.length && now - Date.parse(reads[reads.length - 1].deviceTime) > 15 * MIN) gaps.push({ from: reads[reads.length - 1].deviceTime, to: iso(now), minutes: Math.round((now - Date.parse(reads[reads.length - 1].deviceTime)) / MIN), reason: { ar: 'مستمرة حتى الآن — آخر قراءة معروفة فقط', en: 'Ongoing — last known reading only' } });
@@ -201,13 +202,13 @@ defineQuery<{ id: string }, unknown>({
       readings: reads.map((r) => ({ t: r.deviceTime, receivedAt: r.receivedAt, c: r.tempC, backfilled: r.backfilled, ...(isStaff(a) ? { lat: r.lat, lng: r.lng } : {}) })),
       gaps, excursions: db.excursions.filter((e) => e.shipmentId === s.id).map((e) => ({ startedAt: e.startedAt, endedAt: e.endedAt, peakC: e.peakC, severity: e.severity, status: e.status })),
       summary: { count: reads.length, inRangePct: valid.length ? Math.round((inRange / valid.length) * 1000) / 10 : null, minC: valid.length ? Math.min(...valid.map((r) => r.tempC!)) : null, maxC: valid.length ? Math.max(...valid.map((r) => r.tempC!)) : null, gapMinutes: gaps.reduce((x, g) => x + g.minutes, 0), backfilled: reads.filter((r) => r.backfilled).length },
-      disclaimer: { ar: 'بيانات عرض تجريبية — ليست قراءات أجهزة حقيقية. الفجوات لا تعني الالتزام. القرار السريري للمؤسسة المستلمة فقط.', en: 'Demo data — not real device readings. Gaps do not imply compliance. Clinical decisions belong to the receiving institution only.' },
+      disclaimer: { ar: 'بيانات عرض تجريبية — ليست قراءات أجهزة حقيقية. فجوات البيانات لا تعني الالتزام بالنطاق الحراري. القرار السريري للجهة المستلمة فقط.', en: 'Demo data — not real device readings. Gaps do not imply compliance. Clinical decisions belong to the receiving institution only.' },
       disposition: db.dispositions.find((d) => d.shipmentId === s.id) ?? null,
     };
   },
 });
 
-/** برج التحكم (OPS-001..004) */
+/** مركز مراقبة العمليات (OPS-001..004) */
 defineQuery<{ city?: string; thermalClass?: string; customerId?: string; severity?: string }, unknown>({
   name: 'controlTower.summary', guard: 'staff',
   run(db, a, f, now) {
@@ -222,7 +223,7 @@ defineQuery<{ city?: string; thermalClass?: string; customerId?: string; severit
     db.shipments.filter((s) => s.status === 'failed' && ids.has(s.id)).forEach((s) => alerts.push({ id: `fail_${s.id}`, kind: 'failed', severity: 'high', title: { ar: `تعذّر تسليم ${s.trackingNo} — بانتظار قرار`, en: `Failed delivery ${s.trackingNo} — decision needed` }, at: s.updatedAt, link: `/returns`, shipmentId: s.id }));
     db.shipments.filter((s) => s.lostState === 'suspected').forEach((s) => alerts.push({ id: `lost_${s.id}`, kind: 'lost', severity: 'critical', title: { ar: `اشتباه فقدان ${s.trackingNo}`, en: `Suspected loss ${s.trackingNo}` }, at: s.updatedAt, link: `/shipments/${s.id}`, shipmentId: s.id }));
     db.devices.filter((d) => ['offline', 'low_battery', 'faulty'].includes(d.state)).forEach((d) => alerts.push({ id: `dev_${d.id}`, kind: 'device', severity: d.state === 'faulty' ? 'medium' : 'low', title: { ar: `جهاز ${d.imei.slice(-6)}: ${({ offline: 'غير متصل', low_battery: 'بطارية منخفضة', faulty: 'معطل' } as Record<string, string>)[d.state]}`, en: `Device ${d.imei.slice(-6)}: ${d.state.replace('_', ' ')}` }, at: d.lastSeenAt ?? iso(now), link: `/devices/${d.id}` }));
-    db.blocks.filter((b) => !b.resolvedAt).forEach((b) => alerts.push({ id: b.id, kind: 'compliance', severity: 'medium', title: { ar: `حظر ${({ partner: 'شريك', vehicle: 'مركبة', courier: 'مندوب', route: 'مسار', box: 'صندوق', device: 'جهاز' } as Record<string, string>)[b.scopeType]}: ${b.reason}`, en: `${b.scopeType} blocked: ${b.reason}` }, at: b.activeFrom, link: '/compliance/blocks' }));
+    db.blocks.filter((b) => !b.resolvedAt).forEach((b) => alerts.push({ id: b.id, kind: 'compliance', severity: 'medium', title: { ar: `قيد تشغيلي على ${({ partner: 'شريك', vehicle: 'مركبة', courier: 'مندوب', route: 'مسار', box: 'صندوق', device: 'جهاز' } as Record<string, string>)[b.scopeType]}: ${b.reason}`, en: `${b.scopeType} blocked: ${b.reason}` }, at: b.activeFrom, link: '/compliance/blocks' }));
     const sevRank = { critical: 0, high: 1, medium: 2, low: 3 };
     const filtered = (f.severity ? alerts.filter((x) => x.severity === f.severity) : alerts).sort((x, y) => sevRank[x.severity] - sevRank[y.severity] || y.at.localeCompare(x.at));
     const map = ships.filter((s) => s.lastPosition || ['pickup_scheduled', 'confirmed'].includes(s.status)).map((s) => {
@@ -349,7 +350,7 @@ defineQuery<Record<string, never>, unknown>({
   },
 });
 
-/** مهام المندوب لليوم (K02) — من المسارات والأرجل المسندة له */
+/** مهام المندوب لليوم (K02) — من المسارات ومراحل النقل المسندة له */
 defineQuery<Record<string, never>, unknown>({
   name: 'courier.tasks', guard: ['courier', 'ops_controller'],
   run(db, a, _p, now) {

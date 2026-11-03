@@ -62,7 +62,7 @@ export function MobileLogin({ accounts, allowed, title }: { accounts: DemoAcct[]
         <b style={{ marginTop: 8 }}>{t('auth.demoAccounts')}</b>
         {IS_DEMO && accounts.map((a) => <button key={a.email} className="mcard" style={{ textAlign: 'start', cursor: 'pointer' }} onClick={() => { setEmail(a.email); setPw(DEMO_PASSWORD); login(a.email, DEMO_PASSWORD); }}><b>{a.name[lang]}</b><span className="muted">{t('roles.' + a.role)} · <span className="mono">{a.email}</span></span></button>)}
       </> : <>
-        <p>{t('auth.mfaHint')}{IS_DEMO && <> — {lang === 'ar' ? 'رمز العرض' : 'Demo code'} <span className="mono">{DEMO_MFA}</span></>}</p>
+        <p>{t('auth.mfaHint')}{IS_DEMO && <> — {lang === 'ar' ? 'رمز تجريبي للعرض' : 'Demo code'} <span className="mono">{DEMO_MFA}</span></>}</p>
         <input inputMode="numeric" dir="ltr" maxLength={6} value={code} onChange={(e) => setCode(e.target.value.replace(/\D/g, ''))} aria-label="MFA" style={{ fontSize: '1.4rem', letterSpacing: '.4em', textAlign: 'center' }} />
         <Btn kind="primary" className="bigbtn" disabled={busy} onClick={verify}>{t('auth.verify')}</Btn>
         <Btn kind="ghost" onClick={() => { setCh(null); setCode(''); }}>{t('common.back')}</Btn>

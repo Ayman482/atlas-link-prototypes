@@ -37,17 +37,17 @@ export const SCENARIOS: Scenario[] = [
     ],
   },
   {
-    id: 'S03', title: L('انحراف حراري من الإنذار إلى CAPA', 'Temperature excursion from alert to CAPA'), uat: ['UAT-004'], proves: L('القراءة خارج النطاق تفتح انحرافاً يظهر في البرج وسير الجودة', 'An out-of-range reading opens an excursion seen by the tower and quality'),
+    id: 'S03', title: L('انحراف حراري من الإنذار إلى الإجراء التصحيحي والوقائي (CAPA)', 'Temperature excursion from alert to CAPA'), uat: ['UAT-004'], proves: L('القراءة خارج النطاق تفتح انحرافاً حرارياً يظهر في مركز مراقبة العمليات وسير عمل الجودة', 'An out-of-range reading opens an excursion seen by the tower and quality'),
     steps: [
       { as: 'usr_iot', title: L('قراءة تجريبية 11.8 °م على صندوق مبرّد نشط', 'Demo reading of 11.8 °C on an active chilled box'), run(api, c) { const db = api.db(); const p = db.packings.find((x) => !x.unpackedAt && ['box_001', 'box_003', 'box_005', 'box_006', 'box_008'].includes(x.boxId) && db.shipments.find((s) => s.id === x.shipmentId)!.status === 'in_transit')!; c.ship = p.shipmentId; const dev = db.pairings.find((x) => x.boxId === p.boxId && !x.unpairedAt)!.deviceId; api.exec('usr_iot', 'telemetry.injectDemo', { device: dev, tempC: 11.8 }); c.exc = api.db().excursions.at(-1)!.id; return { excursion: c.exc, shipment: db.shipments.find((s) => s.id === c.ship)!.trackingNo }; } },
-      { as: 'usr_ops', title: L('يظهر في برج التحكم والعمليات تُقر', 'Appears in the tower; operations acknowledge'), run(api, c) { const seen = api.query<any>('usr_ops', 'controlTower.summary', {}).alerts.some((a: any) => a.id === c.exc); api.exec('usr_ops', 'excursion.acknowledge', { id: c.exc }); return { inTower: seen, status: 'acknowledged' }; } },
-      { as: 'usr_quality', title: L('الجودة تراجع وتفتح حادثاً', 'Quality reviews and opens an incident'), run(api, c) { const e = api.exec<any>('usr_quality', 'excursion.qualityReview', { id: c.exc, decision: 'انحراف رئيسي أثناء توقف المسار؛ فتح تحقيق', openIncident: true }); c.inc = e.incidentId; return e.status; } },
-      { as: 'usr_quality', title: L('إضافة إجراء CAPA', 'Add a CAPA action'), run(api, c) { return api.exec<any>('usr_quality', 'capa.create', { incidentId: c.inc, actionType: 'corrective', description: 'تقليص زمن فتح الصندوق في نقاط التوقف', ownerId: 'usr_ops', dueAt: new Date(api.now() + 7 * 24 * H).toISOString() }).status; } },
+      { as: 'usr_ops', title: L('يظهر في مركز مراقبة العمليات والعمليات تُقرّ به', 'Appears in the tower; operations acknowledge'), run(api, c) { const seen = api.query<any>('usr_ops', 'controlTower.summary', {}).alerts.some((a: any) => a.id === c.exc); api.exec('usr_ops', 'excursion.acknowledge', { id: c.exc }); return { inTower: seen, status: 'acknowledged' }; } },
+      { as: 'usr_quality', title: L('الجودة تراجع وتفتح حادثة جودة', 'Quality reviews and opens an incident'), run(api, c) { const e = api.exec<any>('usr_quality', 'excursion.qualityReview', { id: c.exc, decision: 'انحراف رئيسي أثناء توقف المسار؛ فتح تحقيق', openIncident: true }); c.inc = e.incidentId; return e.status; } },
+      { as: 'usr_quality', title: L('إضافة إجراء تصحيحي ووقائي (CAPA)', 'Add a CAPA action'), run(api, c) { return api.exec<any>('usr_quality', 'capa.create', { incidentId: c.inc, actionType: 'corrective', description: 'تقليص زمن فتح الصندوق في نقاط التوقف', ownerId: 'usr_ops', dueAt: new Date(api.now() + 7 * 24 * H).toISOString() }).status; } },
       { as: 'usr_corp_admin', title: L('العميل يرى الانحراف في تقرير الأدلة', 'Customer sees the excursion in the evidence report'), run(api, c) { const db = api.db(); const sh = db.shipments.find((s) => s.id === c.ship)!; const owner = sh.organizationId === 'org_nkh' ? 'usr_corp_admin' : null; return owner ? api.query<any>('usr_corp_admin', 'shipment.temperatureReport', { id: c.ship }).excursions : { note: 'الشحنة لعميل آخر — يُعرض للعمليات', excursions: api.query<any>('usr_ops', 'shipment.temperatureReport', { id: c.ship }).excursions.length }; } },
     ],
   },
   {
-    id: 'S05', title: L('صندوق غير جاهز واستثناء مضبوط', 'Box not ready and a controlled exception'), uat: ['UAT-007'], proves: L('الحظر التلقائي والاستثناء باعتماد الجودة، ورفض تجاوز الضوابط الإلزامية', 'Automatic block, quality-approved exception, mandatory safeguards stay'),
+    id: 'S05', title: L('صندوق غير جاهز واستثناء خاضع للضوابط', 'Box not ready and a controlled exception'), uat: ['UAT-007'], proves: L('المنع التلقائي للإسناد، والاستثناء باعتماد الجودة، مع بقاء الضوابط الإلزامية', 'Automatic block, quality-approved exception, mandatory safeguards stay'),
     steps: [
       { as: 'usr_branch_op', title: L('طلب جديد', 'New request'), run(api, c) { const db = api.db(); const s = api.exec<Shipment>('usr_branch_op', 'shipment.create', { organizationId: 'org_nkh', branchId: 'br_nkh_oly', senderAddressId: addr(db, 'br_nkh_oly').id, receiverAddressId: addr(db, 'br_nrl_main').id, thermalClass: 'chilled', serviceLevel: 'standard', pickupWindowStart: new Date(api.now() + H).toISOString(), pickupWindowEnd: new Date(api.now() + 3 * H).toISOString(), items: [{ descriptionCode: 'SERUM_ALIQUOT', quantity: 2, weightKg: 0.8 }] }); c.id = s.id; return s.trackingNo; } },
       { as: 'usr_ops', expectError: 'BOX_NOT_READY', title: L('إسناد BX-CS-010 (بطارية 14%) — يُرفض', 'Assign BX-CS-010 (battery 14%) — blocked'), run(api, c) { return api.exec('usr_ops', 'dispatch.assign', { shipmentId: c.id, courierId: 'cou_01', boxId: 'box_010' }); } },
@@ -69,7 +69,7 @@ export const SCENARIOS: Scenario[] = [
     id: 'S07', title: L('شحنة مفقودة ثم مستردة', 'Lost then recovered'), uat: ['UAT-009'], proves: L('الاعتماد المشترك إلزامي، والاسترداد لا يمحو الإعلان', 'Joint approval required; recovery keeps the declaration'),
     steps: [
       { as: 'usr_ops', title: L('العمليات تعتمد الإعلان', 'Operations approve the declaration'), run(api, c) { const s = api.db().shipments.find((x) => x.lostState === 'suspected')!; c.id = s.id; return api.exec<Shipment>('usr_ops', 'lost.approve', { shipment: s.id, decision: 'approve' }).lostState; } },
-      { as: 'usr_quality', title: L('الجودة تعتمد ← معلنة مفقودة', 'Quality approves → declared lost'), run(api, c) { return api.exec<Shipment>('usr_quality', 'lost.approve', { shipment: c.id, decision: 'approve' }).lostState; } },
+      { as: 'usr_quality', title: L('الجودة تعتمد ← أُعلن فقدان الشحنة', 'Quality approves → declared lost'), run(api, c) { return api.exec<Shipment>('usr_quality', 'lost.approve', { shipment: c.id, decision: 'approve' }).lostState; } },
       { as: 'usr_ops', title: L('تسجيل الاسترداد', 'Record recovery'), run(api, c) { return api.exec<Shipment>('usr_ops', 'lost.recover', { shipment: c.id, note: 'وُجدت في نقطة تسليم الدمام', signedBy: 'أ. عمر الجهني' }).lostState; } },
       { as: 'usr_ops', title: L('سجل الإعلان ما زال محفوظاً', 'Declaration record is still there'), run(api, c) { return api.db().statusEvents.filter((e) => e.shipmentId === c.id && /فقدان/.test(e.reason)).map((e) => e.reason); } },
     ],
@@ -78,9 +78,9 @@ export const SCENARIOS: Scenario[] = [
     id: 'S08', title: L('فاتورة ودفع إلكتروني', 'Invoice and online payment'), uat: ['UAT-011'], proves: L('الفاتورة تظهر للعميل والدفع يرحّل قيداً متوازناً', 'Invoice reaches the customer; payment posts a balanced entry'),
     steps: [
       { as: 'usr_finance', title: L('توليد مسودة من الشحنات المسلّمة', 'Draft from delivered shipments'), run(api, c) { const inv = api.exec<any>('usr_finance', 'invoice.generate', { organizationId: 'org_nkh', periodFrom: new Date(api.now() - 3 * 24 * H).toISOString(), periodTo: new Date(api.now() + H).toISOString() }); c.inv = inv.id; return { invoiceNo: inv.invoiceNo, totalSAR: inv.total / 100 }; } },
-      { as: 'usr_finance', title: L('إصدار (ZATCA محاكاة) وترحيل القيد', 'Issue (ZATCA simulated) and post'), run(api, c) { return api.exec<any>('usr_finance', 'invoice.issue', { id: c.inv }).zatcaStatus; } },
+      { as: 'usr_finance', title: L('إصدار الفاتورة (ربط ZATCA محاكى) وترحيل القيد', 'Issue (ZATCA simulated) and post'), run(api, c) { return api.exec<any>('usr_finance', 'invoice.issue', { id: c.inv }).zatcaStatus; } },
       { as: 'usr_corp_finance', title: L('مالية العميل تدفع (مزود محاكى)', 'Customer finance pays (simulated provider)'), run(api, c) { return api.exec<any>('usr_corp_finance', 'customer.payInvoice', { invoiceId: c.inv, method: 'card_simulated' }).invoice.status; } },
-      { as: 'usr_finance', title: L('ميزان المراجعة متوازن والذمم مطابقة', 'Trial balance balanced, AR reconciled'), run(api) { const tb = api.query<any>('usr_finance', 'ledger.trialBalance', {}); return { balanced: tb.balanced, arReconciled: tb.arReconciled }; } },
+      { as: 'usr_finance', title: L('ميزان المراجعة متوازن وأرصدة الذمم المدينة مطابقة', 'Trial balance balanced, AR reconciled'), run(api) { const tb = api.query<any>('usr_finance', 'ledger.trialBalance', {}); return { balanced: tb.balanced, arReconciled: tb.arReconciled }; } },
     ],
   },
   {
@@ -93,10 +93,10 @@ export const SCENARIOS: Scenario[] = [
     ],
   },
   {
-    id: 'S10', title: L('محاكاة تسعير', 'Pricing simulation'), uat: ['UAT-012'], proves: L('لا أثر على الأسعار أو الفواتير الحية', 'No effect on live prices or invoices'),
+    id: 'S10', title: L('محاكاة تسعير', 'Pricing simulation'), uat: ['UAT-012'], proves: L('لا أثر على الأسعار أو الفواتير الفعلية', 'No effect on live prices or invoices'),
     steps: [
       { as: 'usr_finance', title: L('محاكاة +8% على المجمّد', 'Simulate +8% on frozen'), run(api, c) { c.before = JSON.stringify([api.db().ratePlans, api.db().invoices.length, api.db().journals.length]); const s = api.exec<any>('usr_finance', 'simulation.run', { name: 'مجمّد +8%', adjustments: [{ thermalClass: 'frozen', pct: 8 }] }); return { currentSAR: s.result.currentRevenue / 100, proposedSAR: s.result.proposedRevenue / 100, liveChangesApplied: s.liveChangesApplied }; } },
-      { as: 'usr_finance', title: L('التحقق: الحالة الحية لم تتغير', 'Check: live state unchanged'), run(api, c) { return { unchanged: c.before === JSON.stringify([api.db().ratePlans, api.db().invoices.length, api.db().journals.length]) }; } },
+      { as: 'usr_finance', title: L('التحقق: البيانات الفعلية لم تتغير', 'Check: live state unchanged'), run(api, c) { return { unchanged: c.before === JSON.stringify([api.db().ratePlans, api.db().invoices.length, api.db().journals.length]) }; } },
     ],
   },
   {

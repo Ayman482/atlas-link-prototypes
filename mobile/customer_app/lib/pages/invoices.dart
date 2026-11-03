@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:atlas_shared/atlas_shared.dart';
 import 'common.dart';
+import 'invoice_document.dart';
 
 /// CM09 الفواتير والدفع (المزود محاكى؛ لا خصم فعلي). يمكن اختبار حالة الرفض.
 class InvoicesPage extends StatelessWidget {
@@ -19,6 +20,7 @@ class InvoicesPage extends StatelessWidget {
             const SizedBox(height: 6),
             Text('${s.t('الإجمالي', 'Total')} ${f.sar(rows[i]['total'])} · ${s.t('المتبقي', 'Due')} ${f.sar((rows[i]['total'] as num) - (rows[i]['paid'] as num))}'),
             Text('${s.t('الاستحقاق', 'Due date')} ${f.dt(rows[i]['dueDate'])}', style: TextStyle(color: c.muted, fontSize: 12)),
+            Padding(padding: const EdgeInsets.only(top: 10), child: OutlinedButton.icon(onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => InvoiceDocumentPage(invoiceId: '${rows[i]['id']}'))), icon: const Icon(Icons.receipt_long_outlined), label: Text(s.t('عرض الفاتورة الضريبية وتنزيلها', 'View & download tax invoice')))),
             if ((rows[i]['total'] as num) > (rows[i]['paid'] as num) && ['issued', 'partially_paid', 'overdue'].contains(rows[i]['status'])) Padding(padding: const EdgeInsets.only(top: 10), child: FilledButton(onPressed: () => _pay(context, st, rows[i]), child: Text(s.t('ادفع الآن', 'Pay now')))),
           ]))))),
         ]),

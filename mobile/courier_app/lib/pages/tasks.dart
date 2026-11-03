@@ -34,7 +34,7 @@ class _TasksPageState extends State<TasksPage> {
               const SizedBox(width: 10),
               Expanded(child: KpiTile(label: s.t('صناديق', 'Boxes'), value: (d['boxesInCustody'] as List).length, icon: Icons.ac_unit)),
             ]),
-            if (conflicts > 0) Padding(padding: const EdgeInsets.only(top: 12), child: Container(padding: const EdgeInsets.all(12), decoration: BoxDecoration(color: c.warningSoft, borderRadius: BorderRadius.circular(14)), child: Text(s.t('لديك $conflicts تعارض مزامنة بانتظار العمليات', 'You have $conflicts sync conflict(s) awaiting operations'), style: TextStyle(color: c.warning)))),
+            if (conflicts > 0) Padding(padding: const EdgeInsets.only(top: 12), child: Container(padding: const EdgeInsets.all(12), decoration: BoxDecoration(color: c.warningSoft, borderRadius: BorderRadius.circular(14)), child: Text(s.t('تعارضات مزامنة بانتظار العمليات: $conflicts', 'You have $conflicts sync conflict(s) awaiting operations'), style: TextStyle(color: c.warning)))),
             const SizedBox(height: 14),
             if (open.isEmpty) EmptyView(text: s.t('لا مهام مفتوحة', 'No open tasks'), icon: Icons.task_alt),
             for (var i = 0; i < open.length; i++) _card(context, open[i], i),

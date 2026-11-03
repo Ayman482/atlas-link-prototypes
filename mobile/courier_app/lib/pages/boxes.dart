@@ -8,7 +8,7 @@ class BoxesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final st = AppScope.of(context); final s = st.s; final f = Fmt(st.lang); final c = AtlasColors.of(context);
     return Scaffold(
-      appBar: AppBar(title: Text(s.t('الصناديق بعهدتي', 'Boxes in my custody'))),
+      appBar: AppBar(title: Text(s.t('الصناديق في حيازتي', 'Boxes in my custody'))),
       body: AsyncView<dynamic>(
         reloadKey: st.tick,
         load: () => st.api.query('courier.tasks', {}),

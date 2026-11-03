@@ -23,7 +23,7 @@ class SyncPage extends StatelessWidget {
           ].join('\n')),
           trailing: TextButton(onPressed: () => q.monitor?.check(), child: Text(s.t('فحص الآن', 'Check now'))))),
         const SizedBox(height: 12),
-        Text('${s.t('الطابور', 'Queue')} (${q.items.length})', style: Theme.of(context).textTheme.titleMedium),
+        Text('${s.t('قائمة الانتظار', 'Queue')} (${q.items.length})', style: Theme.of(context).textTheme.titleMedium),
         if (q.items.isEmpty) EmptyView(text: s.t('لا إجراءات معلّقة', 'Nothing pending'), icon: Icons.done_all),
         for (final a in q.items) Card(margin: const EdgeInsets.only(top: 8), child: ListTile(leading: const Icon(Icons.schedule), title: Text('${a['label']}'), subtitle: Text('${a['clientActionId']} · ${f.dt(a['occurredAt'])}'))),
         const SizedBox(height: 12),

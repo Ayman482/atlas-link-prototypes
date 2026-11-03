@@ -1,0 +1,36 @@
+admin/profiles [ar 1440] «اقتراح ملف حراري» field-overlap:2
+admin/shipments [ar 1440] «تصدير CSV» OK
+admin/shipments/shp_0004 [ar 1440] «تسجيل تعذّر التسليم» OK
+admin/shipments/shp_0004 [ar 1440] «تسليم نيابة عن المندوب» OK
+admin/shipments/shp_0004 [ar 1440] «اشتباه فقدان» OK
+admin/couriers [ar 1440] «إضافة» OK
+admin/boxes/box_002 [ar 1440] «استبدال الجهاز» OK
+admin/boxes/box_002 [ar 1440] «إخراج من الخدمة» OK
+admin/devices/dev_004 [ar 1440] «إدخال قراءة تجريبية» OK
+admin/devices/dev_004 [ar 1440] «تغيير الحالة» OK
+admin/devices/dev_004 [ar 1440] «طلب أمر للجهاز» OK
+admin/incidents/inc_0002 [ar 1440] «تغيير الحالة إلى: بانتظار القرار» OK
+admin/incidents/inc_0002 [ar 1440] «إضافة إجراء تصحيحي/وقائي (CAPA)» OK
+admin/claims [ar 1440] «تسجيل مطالبة نيابة عن عميل» OK
+admin/claims [ar 1440] «بدء التحقيق» OK
+admin/claims [ar 1440] «تقييم» OK
+admin/claims [ar 1440] «إغلاق» OK
+admin/returns [ar 1440] «اتخاذ القرار» OK
+admin/returns [ar 1440] «إتمام الإرجاع» OK
+admin/warehouse/cleaning [ar 1440] «تسجيل التنظيف» OK
+admin/warehouse/cleaning [ar 1440] «تسجيل الفحص» OK
+admin/warehouse/consumables [ar 1440] «حركة» OK
+admin/customers/org_nkh [ar 1440] «فرع جديد» OK
+admin/customers/org_nkh [ar 1440] «دعوة مستخدم» OK
+admin/rate-plans [ar 1440] «مسودة إصدار جديد» OK
+admin/quotes [ar 1440] «عرض سعر جديد» OK
+admin/invoices/inv_0001 [ar 1440] «عرض الفاتورة الضريبية» footer-hidden
+admin/invoices/inv_0001 [ar 1440] «إشعار دائن» OK
+admin/payments [ar 1440] «تسجيل دفعة واردة» OK
+admin/payments [ar 1440] «تصدير CSV» OK
+admin/payments [ar 1440] «مطابقة بنكية» OK
+admin/journals [ar 1440] «قيد يدوي» OK
+admin/costs [ar 1440] «تسجيل تكلفة» OK
+admin/costs [ar 1440] «تشغيل توزيع التكاليف (23)» OK
+admin/costs [ar 1440] «طلب تجاوز» OK
+admin/compliance/blocks [ar 1440] «رفع القيد» OK

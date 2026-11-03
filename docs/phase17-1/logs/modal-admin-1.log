@@ -1,0 +1,108 @@
+admin/approvals [ar 1440] «اعتماد» OK
+admin/approvals [ar 1440] «رفض» OK
+admin/system/integrations [ar 1440] «إضافة» OK
+admin/system/integrations [ar 1440] «إبطال» OK
+admin/system/users [ar 1440] «دعوة موظف» OK
+admin/system/users [ar 1440] «تصدير CSV» OK
+admin/system/users [ar 1440] «تعطيل» OK
+admin/legs [ar 1440] «تصدير CSV» OK
+admin/legs [ar 1440] «إسناد ناقل» OK
+admin/legs [ar 1440] «حدث: غادر» OK
+admin/boxes [ar 1440] «تسجيل صندوق» OK
+admin/boxes [ar 1440] «تصدير CSV» OK
+admin/devices [ar 1440] «تسجيل جهاز» OK
+admin/devices [ar 1440] «تصدير CSV» OK
+admin/devices [ar 1440] «اقتران» OK
+admin/gateway [ar 1440] «محاكاة جهاز مجهول» OK
+admin/gateway [ar 1440] «تصدير CSV» OK
+admin/incidents [ar 1440] «حادثة جديدة» OK
+admin/capa [ar 1440] «إكمال» OK
+admin/warehouse [ar 1440] «تصدير CSV» OK
+admin/warehouse/partner-custody [ar 1440] «تسجيل الإرجاع» OK
+admin/customers [ar 1440] «عميل جديد» OK
+admin/customers [ar 1440] «تصدير CSV» OK
+admin/contracts [ar 1440] «عقد جديد» OK
+admin/simulations [ar 1440] «محاكاة جديدة» OK
+admin/simulations [ar 1440] «تحويل إلى مسودة جدول أسعار» OK
+admin/invoices [ar 1440] «إنشاء فاتورة» OK
+admin/invoices [ar 1440] «تصدير CSV» OK
+admin/settlements [ar 1440] «إنشاء تسوية» OK
+admin/compliance/licenses [ar 1440] «تشغيل فحص الانتهاء» OK
+admin/compliance/licenses [ar 1440] «ترخيص جديد» OK
+admin/compliance/licenses [ar 1440] «تصدير CSV» OK
+admin/compliance/licenses [ar 1440] «تجديد» OK
+admin/compliance/retention [ar 1440] «تشغيل الأرشفة» OK
+admin/compliance/retention [ar 1440] «تعديل» OK
+admin/system/notifications [ar 1440] «تعديل» OK
+admin/system/settings [ar 1440] «اقتراح تغيير» OK
+admin/system/audit [ar 1440] «تصدير CSV» OK
+admin/system/health [ar 1440] «نسخة احتياطية» OK
+admin/system/health [ar 1440] «تمرين استعادة» OK
+admin/approvals [ar 768] «اعتماد» OK
+admin/approvals [ar 768] «رفض» OK
+admin/system/integrations [ar 768] «إضافة» OK
+admin/system/integrations [ar 768] «إبطال» OK
+admin/system/users [ar 768] «دعوة موظف» OK
+admin/system/users [ar 768] «تصدير CSV» OK
+admin/system/users [ar 768] «تعطيل» OK
+admin/legs [ar 768] «تصدير CSV» OK
+admin/legs [ar 768] «إسناد ناقل» OK
+admin/legs [ar 768] «حدث: غادر» OK
+admin/boxes [ar 768] «تسجيل صندوق» OK
+admin/boxes [ar 768] «تصدير CSV» OK
+admin/devices [ar 768] «تسجيل جهاز» OK
+admin/devices [ar 768] «تصدير CSV» OK
+admin/devices [ar 768] «اقتران» OK
+admin/gateway [ar 768] «محاكاة جهاز مجهول» OK
+admin/gateway [ar 768] «تصدير CSV» OK
+admin/incidents [ar 768] «حادثة جديدة» OK
+admin/capa [ar 768] «إكمال» OK
+admin/warehouse [ar 768] «تصدير CSV» OK
+admin/warehouse/partner-custody [ar 768] «تسجيل الإرجاع» OK
+admin/customers [ar 768] «عميل جديد» OK
+admin/customers [ar 768] «تصدير CSV» OK
+admin/contracts [ar 768] «عقد جديد» OK
+admin/simulations [ar 768] «محاكاة جديدة» OK
+admin/simulations [ar 768] «تحويل إلى مسودة جدول أسعار» OK
+admin/invoices [ar 768] «إنشاء فاتورة» OK
+admin/invoices [ar 768] «تصدير CSV» OK
+admin/settlements [ar 768] «إنشاء تسوية» OK
+admin/compliance/licenses [ar 768] «تشغيل فحص الانتهاء» OK
+admin/compliance/licenses [ar 768] «ترخيص جديد» OK
+admin/compliance/licenses [ar 768] «تصدير CSV» OK
+admin/compliance/licenses [ar 768] «تجديد» OK
+admin/compliance/retention [ar 768] «تشغيل الأرشفة» OK
+admin/compliance/retention [ar 768] «تعديل» OK
+admin/system/notifications [ar 768] «تعديل» OK
+admin/system/settings [ar 768] «اقتراح تغيير» OK
+admin/system/audit [ar 768] «تصدير CSV» OK
+admin/system/health [ar 768] «نسخة احتياطية» OK
+admin/system/health [ar 768] «تمرين استعادة» OK
+admin/approvals [ar 390] «اعتماد» OK
+admin/approvals [ar 390] «رفض» OK
+admin/system/integrations [ar 390] «إضافة» OK
+admin/system/integrations [ar 390] «إبطال» OK
+admin/system/users [ar 390] «دعوة موظف» OK
+admin/system/users [ar 390] «تصدير CSV» OK
+admin/system/users [ar 390] «تعطيل» OK
+admin/legs [ar 390] «تصدير CSV» OK
+admin/legs [ar 390] «إسناد ناقل» OK
+admin/legs [ar 390] «حدث: غادر» OK
+admin/boxes [ar 390] «تسجيل صندوق» OK
+admin/boxes [ar 390] «تصدير CSV» OK
+admin/devices [ar 390] «تسجيل جهاز» OK
+admin/devices [ar 390] «تصدير CSV» OK
+admin/devices [ar 390] «اقتران» OK
+admin/gateway [ar 390] «محاكاة جهاز مجهول» OK
+admin/gateway [ar 390] «تصدير CSV» OK
+admin/incidents [ar 390] «حادثة جديدة» OK
+admin/capa [ar 390] «إكمال» OK
+admin/warehouse [ar 390] «تصدير CSV» OK
+admin/warehouse/partner-custody [ar 390] «تسجيل الإرجاع» OK
+admin/customers [ar 390] «عميل جديد» OK
+admin/customers [ar 390] «تصدير CSV» OK
+admin/contracts [ar 390] «عقد جديد» OK
+admin/simulations [ar 390] «محاكاة جديدة» OK
+admin/simulations [ar 390] «تحويل إلى مسودة جدول أسعار» OK
+admin/invoices [ar 390] «إنشاء فاتورة» OK
+admin/invoices [ar 390] «تصدير CSV» OK

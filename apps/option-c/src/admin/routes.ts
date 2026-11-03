@@ -91,7 +91,7 @@ export const NAV: { id: string; label: L; items: { id: string; path: string; lab
   const r = (path: string) => ROUTES.find((x) => x.path === path)!;
   const it = (path: string, label: L) => ({ id: r(path).id, path, label, roles: r(path).roles });
   return [
-    { id: 'partner', label: { ar: 'بوابة الشريك', en: 'Partner portal' }, items: [it('/partner', { ar: 'رحلاتي وتسوياتي', en: 'My legs & settlements' }), it('/profile', { ar: 'الملف الشخصي', en: 'Profile' })] },
+    { id: 'partner', label: { ar: 'بوابة الشريك', en: 'Partner portal' }, items: [it('/partner', { ar: 'مراحل نقلي وتسوياتي', en: 'My legs & settlements' }), it('/profile', { ar: 'الملف الشخصي', en: 'Profile' })] },
     { id: 'ops', label: N.groups.ops, items: [it('/', N.controlTower), it('/map', N.map), it('/shipments', N.shipments), it('/shipments/new', N.newShipment), it('/dispatch', N.dispatch), it('/routes', N.routes), it('/legs', N.legs), it('/couriers', N.couriers), it('/vehicles', N.vehicles), it('/partners', N.partners)] },
     { id: 'assets', label: N.groups.assets, items: [it('/boxes', N.boxes), it('/devices', N.devices), it('/gateway', N.gateway), it('/device-commands', N.commands)] },
     { id: 'quality', label: N.groups.quality, items: [it('/excursions', N.excursions), it('/profiles', N.profiles), it('/incidents', N.incidents), it('/capa', N.capa), it('/claims', N.claims), it('/lost', N.lost), it('/returns', N.returns)] },

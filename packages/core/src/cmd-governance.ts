@@ -4,6 +4,8 @@ import { defineCommand, must, type Ctx } from './engine';
 import { branchGrants, customerOrgIds, has, isStaff } from './access';
 import { applyCreditNote, approveSettlement, postJournal } from './cmd-finance';
 import { ACTIVE } from './domain';
+import { decideProfile } from './cmd-quality';
+import { label, configLabel } from '../../i18n/src/terms';
 import { DAY, HOUR, MIN, iso } from './util';
 
 const L = (ar: string, en: string) => ({ ar, en });
@@ -24,6 +26,7 @@ defineCommand<{ id: string; decision: 'approve' | 'reject'; note?: string }, T.A
     switch (a.kind) {
       case 'credit_note': { const cn = must(ctx, ctx.db.creditNotes.find((c) => c.id === a.subjectId), 'credit note'); if (ok) applyCreditNote(ctx, cn); else cn.status = 'rejected'; break; }
       case 'settlement': { const s = must(ctx, ctx.db.settlements.find((x) => x.id === a.subjectId), 'settlement'); if (ok) approveSettlement(ctx, s); else s.status = 'disputed'; break; }
+      case 'service_profile': decideProfile(ctx, a.subjectId, ok); break;
       case 'rate_plan': { const p = must(ctx, ctx.db.ratePlans.find((x) => x.id === a.subjectId), 'rate plan'); if (ok) { p.status = 'approved'; p.approvedBy = ctx.actor.user.id; } else p.status = 'draft'; break; }
       case 'config': {
         const c = must(ctx, ctx.db.configVersions.find((x) => x.id === a.subjectId), 'config');
@@ -87,7 +90,7 @@ function resolveBlocksFor(ctx: Ctx, l: T.License) {
 }
 /** مهمة دورية: حظر الإسنادات الجديدة للمنتهي، وتصعيد الشحنات النشطة بأمان (E9) */
 defineCommand<Record<string, never>, { newBlocks: number; escalated: number; expiring: number }>({
-  name: 'compliance.runExpiryCheck', guard: ['compliance', 'super_admin'], desc: L('فحص انتهاء التراخيص وتطبيق الحظر', 'Check expiries and apply blocks'),
+  name: 'compliance.runExpiryCheck', guard: ['compliance', 'super_admin'], desc: L('فحص انتهاء التراخيص وتطبيق القيود التشغيلية', 'Check expiries and apply blocks'),
   run(ctx) {
     let newBlocks = 0, escalated = 0, expiring = 0;
     for (const l of ctx.db.licenses) {
@@ -107,14 +110,14 @@ defineCommand<Record<string, never>, { newBlocks: number; escalated: number; exp
       for (const s of affected) {
         if (!ctx.db.delayAlerts.some((d) => d.shipmentId === s.id && !d.resolvedAt && d.ruleVersion === 'CMP-ESC')) { ctx.db.delayAlerts.push({ id: ctx.id('dla'), shipmentId: s.id, ruleVersion: 'CMP-ESC', risk: 'high', reason: L(`طرف غير مؤهل في مرحلة نقل نشطة (${l.licenseNo}) — تصعيد آمن`, `Unqualified party on active leg (${l.licenseNo}) — safe escalation`), raisedAt: ctx.nowIso, resolvedAt: null, escalated: true }); escalated++; }
       }
-      ctx.notify({ audience: 'staff', critical: true, title: L(`حظر تشغيلي: ${l.licenseNo}`, `Operational block: ${l.licenseNo}`), body: L(`${affected.length} شحنات نشطة صُعّدت`, `${affected.length} active shipments escalated`), link: '/compliance/blocks' });
+      ctx.notify({ audience: 'staff', critical: true, title: L(`قيد تشغيلي: ${l.licenseNo}`, `Operational block: ${l.licenseNo}`), body: L(`تم تصعيد الشحنات النشطة المتأثرة: ${affected.length}`, `${affected.length} active shipments escalated`), link: '/compliance/blocks' });
     }
     ctx.audit('compliance.expiry_check', 'compliance', null, `حظر جديد ${newBlocks}، تصعيد ${escalated}`);
     return { newBlocks, escalated, expiring };
   },
 });
 defineCommand<{ id: string; note: string }, T.OperationalBlock>({
-  name: 'block.resolve', guard: ['compliance'], desc: L('رفع حظر بعد تصحيح السبب', 'Lift block after remediation'),
+  name: 'block.resolve', guard: ['compliance'], desc: L('رفع القيد التشغيلي بعد معالجة السبب', 'Lift block after remediation'),
   run(ctx, { id, note }) {
     const b = must(ctx, ctx.db.blocks.find((x) => x.id === id), 'block');
     const lic = b.licenseId ? ctx.db.licenses.find((l) => l.id === b.licenseId) : ctx.db.licenses.find((l) => l.holderId === b.scopeId);
@@ -124,13 +127,13 @@ defineCommand<{ id: string; note: string }, T.OperationalBlock>({
   },
 });
 defineCommand<{ id: string; applicability: T.Requirement['applicability'] }, T.Requirement>({
-  name: 'requirement.setApplicability', guard: ['compliance'], desc: L('تحديث سجل الانطباق', 'Update applicability register'),
+  name: 'requirement.setApplicability', guard: ['compliance'], desc: L('تحديث سجل انطباق المتطلبات النظامية', 'Update applicability register'),
   run(ctx, { id, applicability }) { const r = must(ctx, ctx.db.requirements.find((x) => x.id === id), 'requirement'); r.applicability = applicability; r.reviewedAt = ctx.nowIso; ctx.audit('requirement.applicability', 'requirement', r.id, applicability); return r; },
 });
 
 // ---------------- الاحتفاظ والتحفظ القانوني (RETN / UAT-015) ----------------
 defineCommand<{ subjectType: string; subjectId: string; reason: string }, T.LegalHold>({
-  name: 'legalHold.apply', guard: ['compliance'], desc: L('فرض حجز قانوني', 'Apply legal hold'),
+  name: 'legalHold.apply', guard: ['compliance'], desc: L('فرض تحفظ قانوني', 'Apply legal hold'),
   run(ctx, i) {
     if (!i.reason?.trim()) ctx.fail('VALIDATION', 'السبب مطلوب', 'Reason required', 422, 'reason');
     if (ctx.db.legalHolds.some((h) => h.subjectId === i.subjectId && !h.releasedAt)) ctx.fail('HOLD_EXISTS', 'يوجد حجز نشط', 'Active hold exists', 409);
@@ -144,7 +147,7 @@ defineCommand<{ id: string; reason: string }, T.LegalHold>({
 });
 /** مهمة الأرشفة: تتخطى أي عنصر تحت حجز قانوني (DB-AT-008) — لا يُحذف شيء فعلياً في المحاكاة */
 defineCommand<{ category: string }, T.ArchiveRun & { heldSubjects: string[] }>({
-  name: 'retention.runArchive', guard: ['compliance', 'super_admin'], desc: L('تشغيل الأرشفة مع احترام الحجز', 'Run archive respecting holds'),
+  name: 'retention.runArchive', guard: ['compliance', 'super_admin'], desc: L('تشغيل الأرشفة مع مراعاة التحفظات القانونية', 'Run archive respecting holds'),
   run(ctx, { category }) {
     const pol = must(ctx, ctx.db.retentionPolicies.find((p) => p.category === category), 'policy');
     if (pol.status !== 'approved') ctx.fail('POLICY_NOT_APPROVED', 'السياسة بانتظار المراجعة القانونية؛ لا يُنفّذ حذف أو أرشفة (OD-009)', 'Policy pending legal review; no archive/delete executed (OD-009)', 422);
@@ -171,7 +174,7 @@ defineCommand<{ key: string; value: unknown; effectiveAt: string }, T.ConfigVers
     if (prev.some((c) => c.status === 'pending_approval')) ctx.fail('PENDING_EXISTS', 'يوجد تغيير معلّق لهذا المفتاح', 'A pending change exists for this key', 409);
     const c: T.ConfigVersion = { id: ctx.id('cfg'), key, version: Math.max(...prev.map((x) => x.version)) + 1, value, status: 'pending_approval', effectiveAt: iso(Date.parse(effectiveAt) || ctx.now), requestedBy: ctx.actor.user.id, approvedBy: null, createdAt: ctx.nowIso };
     ctx.db.configVersions.push(c);
-    ctx.db.approvalRequests.push({ id: ctx.id('apr'), kind: 'config', subjectId: c.id, title: L(`تغيير ${key} إلى ${JSON.stringify(value)}`, `Change ${key} to ${JSON.stringify(value)}`), requestedBy: ctx.actor.user.id, requiredRole: 'super_admin', status: 'pending', decidedBy: null, decidedAt: null, note: '', createdAt: ctx.nowIso });
+    ctx.db.approvalRequests.push({ id: ctx.id('apr'), kind: 'config', subjectId: c.id, title: L(`تغيير ${configLabel('ar', key)} إلى ${JSON.stringify(value)}`, `Change ${configLabel('en', key)} to ${JSON.stringify(value)}`), requestedBy: ctx.actor.user.id, requiredRole: 'super_admin', status: 'pending', decidedBy: null, decidedAt: null, note: '', createdAt: ctx.nowIso });
     ctx.audit('config.propose', 'config', c.id, `${key} v${c.version}`); return c;
   },
 });
@@ -249,7 +252,7 @@ defineCommand<{ organizationId: string; nameAr: string; nameEn: string; code: st
     const c = must(ctx, ctx.db.cities.find((x) => x.code === i.cityCode), 'city');
     const b: T.Branch = { id: ctx.id('br'), organizationId: i.organizationId, code: i.code, name: L(i.nameAr, i.nameEn || i.nameAr), cityCode: i.cityCode, status: 'active', createdAt: ctx.nowIso };
     ctx.db.branches.push(b);
-    ctx.db.addresses.push({ id: ctx.id('adr'), organizationId: i.organizationId, branchId: b.id, label: L(`${i.nameAr} — استلام العينات`, `${i.nameEn || i.nameAr} — Sample desk`), cityCode: i.cityCode, district: b.name, lat: i.lat ?? c.lat, lng: i.lng ?? c.lng, contactName: i.contactName, contactPhone: i.contactPhone, authorized: true });
+    ctx.db.addresses.push({ id: ctx.id('adr'), organizationId: i.organizationId, branchId: b.id, label: L(`${i.nameAr} — مكتب استلام العينات`, `${i.nameEn || i.nameAr} — Sample desk`), cityCode: i.cityCode, district: b.name, lat: i.lat ?? c.lat, lng: i.lng ?? c.lng, contactName: i.contactName, contactPhone: i.contactPhone, authorized: true });
     ctx.audit('branch.create', 'branch', b.id, b.name.ar, i.organizationId); return b;
   },
 });
@@ -353,14 +356,14 @@ defineCommand<{ id: string; action: 'escalate' | 'resolve'; note?: string }, T.D
   name: 'delay.action', guard: ['ops_controller'], desc: L('تصعيد أو إغلاق تنبيه تأخير', 'Escalate or resolve delay alert'),
   run(ctx, { id, action, note }) {
     const d = must(ctx, ctx.db.delayAlerts.find((x) => x.id === id), 'alert');
-    if (action === 'escalate') { d.escalated = true; ctx.notify({ audience: 'staff', critical: true, title: L('تصعيد تأخير', 'Delay escalated'), body: d.reason, link: `/shipments/${d.shipmentId}` }); } else d.resolvedAt = ctx.nowIso;
+    if (action === 'escalate') { d.escalated = true; ctx.notify({ audience: 'staff', critical: true, title: L('تم تصعيد التأخير', 'Delay escalated'), body: d.reason, link: `/shipments/${d.shipmentId}` }); } else d.resolvedAt = ctx.nowIso;
     ctx.audit('delay.' + action, 'shipment', d.shipmentId, note ?? ''); return d;
   },
 });
 
 // ---------------- النسخ الاحتياطي والاستعادة (SEC-004 / NFR-005) — محاكاة ----------------
 defineCommand<{ kind: 'snapshot' | 'restore_drill' }, T.BackupRun>({
-  name: 'backup.run', guard: ['super_admin'], desc: L('تشغيل نسخة أو تمرين استعادة (محاكاة)', 'Run backup or restore drill (simulated)'),
+  name: 'backup.run', guard: ['super_admin'], desc: L('تشغيل نسخ احتياطي أو تمرين استعادة (محاكاة)', 'Run backup or restore drill (simulated)'),
   run(ctx, { kind }) {
     const b: T.BackupRun = { id: ctx.id('bkp'), kind, at: ctx.nowIso, status: 'success', durationMin: kind === 'snapshot' ? 9 : 88, rpoMin: kind === 'restore_drill' ? 11 : null, rtoMin: kind === 'restore_drill' ? 88 : null, simulated: true };
     ctx.db.backups.push(b); ctx.audit('backup.' + kind, 'backup', b.id, 'محاكاة'); return b;

@@ -58,7 +58,7 @@ class TrackPage extends StatelessWidget {
     final early = ['draft', 'confirmed', 'pickup_scheduled'].contains(status);
     return [
       if (early) OutlinedButton(onPressed: () => _reschedule(context, st, sh), child: Text(s.d('ship.reschedule'))),
-      if (early) OutlinedButton(style: OutlinedButton.styleFrom(foregroundColor: AtlasColors.of(context).critical), onPressed: () => _form(context, st, s.d('ship.cancelShipment'), [s.reason], (v) => st.run('shipment.cancel', {'id': sh['id'], 'reason': v[0], 'version': sh['version']}), note: s.t('لا يمكن الإلغاء قبل أقل من ساعة من الاستلام.', 'Cannot cancel within one hour of pickup.')), child: Text(s.d('ship.cancelShipment'))),
+      if (early) OutlinedButton(style: OutlinedButton.styleFrom(foregroundColor: AtlasColors.of(context).critical), onPressed: () => _form(context, st, s.d('ship.cancelShipment'), [s.reason], (v) => st.run('shipment.cancel', {'id': sh['id'], 'reason': v[0], 'version': sh['version']}), note: s.t('لا يمكن الإلغاء خلال الساعة السابقة لموعد الاستلام.', 'Cannot cancel within one hour of pickup.')), child: Text(s.d('ship.cancelShipment'))),
       if (['failed', 'in_transit', 'at_handover', 'exception'].contains(status)) OutlinedButton(onPressed: () => _form(context, st, s.d('ship.requestReturn'), [s.reason], (v) => st.run('returns.request', {'shipment': sh['id'], 'reasonCode': 'CUSTOMER_REQUEST', 'note': v[0]})), child: Text(s.d('ship.requestReturn'))),
       if (status != 'draft') OutlinedButton(onPressed: () => _claim(context, st, sh), child: Text(s.d('ship.fileClaim'))),
     ];

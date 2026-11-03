@@ -120,9 +120,9 @@ function CriticalBar() {
   const a = crit[0];
   return <div className="alertbar" role="alert">
     <span className="dot" aria-hidden="true" />
-    <b>{lang === 'ar' ? `${crit.length} انحراف حراري مفتوح يتطلب إقراراً` : `${crit.length} open temperature excursion(s) need acknowledgement`}</b>
+    <b>{lang === 'ar' ? `انحرافات حرارية مفتوحة تتطلب الإقرار: ${crit.length}` : `${crit.length} open temperature excursion(s) need acknowledgement`}</b>
     <span>{x(a.title)}</span><span className="grow" />
-    <Btn kind="danger" onClick={() => run('excursion.acknowledge', { id: a.id }, { success: lang === 'ar' ? 'تم الإقرار — انتقل إلى مراجعة الجودة' : 'Acknowledged — moved to quality review' })}>{lang === 'ar' ? 'إقرار الآن' : 'Acknowledge now'}</Btn>
+    <Btn kind="danger" onClick={() => run('excursion.acknowledge', { id: a.id }, { success: lang === 'ar' ? 'تم الإقرار — أُحيل إلى مراجعة الجودة' : 'Acknowledged — moved to quality review' })}>{lang === 'ar' ? 'إقرار الآن' : 'Acknowledge now'}</Btn>
     <a href={'#' + a.link}>{lang === 'ar' ? 'عرض الشحنة' : 'View shipment'}</a>
     {crit.length > 1 && <a href="#/excursions">{lang === 'ar' ? 'كل الانحرافات' : 'All excursions'}</a>}
   </div>;
@@ -134,7 +134,7 @@ function NotificationCenter({ open, onClose, items }: { open: boolean; onClose()
   const q = useQ<any>(open ? 'controlTower.summary' : null, {});
   const list = tab === 'unread' ? items.filter((n) => !n.readAt) : tab === 'critical' ? items.filter((n) => n.critical) : items;
   const alerts = (q.data?.alerts ?? []).filter((a: any) => (a.kind === 'excursion' && a.status === 'open') || a.kind === 'delay').slice(0, 20);
-  const tabs: [typeof tab, string, number][] = [['all', lang === 'ar' ? 'الكل' : 'All', items.length], ['unread', lang === 'ar' ? 'غير المقروء' : 'Unread', items.filter((n) => !n.readAt).length], ['critical', lang === 'ar' ? 'الحرج' : 'Critical', items.filter((n) => n.critical).length], ['ops', lang === 'ar' ? 'تتطلب إجراء' : 'Need action', alerts.length]];
+  const tabs: [typeof tab, string, number][] = [['all', lang === 'ar' ? 'الكل' : 'All', items.length], ['unread', lang === 'ar' ? 'غير المقروءة' : 'Unread', items.filter((n) => !n.readAt).length], ['critical', lang === 'ar' ? 'الحرجة' : 'Critical', items.filter((n) => n.critical).length], ['ops', lang === 'ar' ? 'تتطلب إجراء' : 'Need action', alerts.length]];
   return <Drawer open={open} onClose={onClose} title={t('common.notifications')}>
     <div className="tabs ntf-tabs" role="tablist">{tabs.map(([k, l, c]) => <button key={k} role="tab" aria-selected={tab === k} className={tab === k ? 'on' : ''} onClick={() => setTab(k)}>{l}<span className="count">{c}</span></button>)}</div>
     {tab !== 'ops' && <div className="row" style={{ justifyContent: 'flex-end' }}><Btn kind="ghost" disabled={!items.some((n) => !n.readAt)} onClick={() => run('notification.markAllRead', { ids: items.map((n) => n.id) }, { success: lang === 'ar' ? 'عُلّمت كلها كمقروءة' : 'All marked as read' })}>{t('common.markAllRead')}</Btn></div>}
@@ -158,7 +158,7 @@ function NotificationCenter({ open, onClose, items }: { open: boolean; onClose()
 }
 
 function Forbidden() { const { lang } = useApp(); return <div className="state err">{lang === 'ar' ? 'ليست لديك صلاحية على هذه الشاشة. القائمة الجانبية تعرض الشاشات المتاحة لدورك.' : 'You do not have access to this screen. The side menu shows the screens available to your role.'}</div>; }
-function NotFound() { const { lang } = useApp(); return <div className="state empty"><p>{lang === 'ar' ? 'الصفحة غير موجودة' : 'Page not found'}</p><a className="btn" href="#/">{lang === 'ar' ? 'العودة لبرج التحكم' : 'Back to control tower'}</a></div>; }
+function NotFound() { const { lang } = useApp(); return <div className="state empty"><p>{lang === 'ar' ? 'الصفحة غير موجودة' : 'Page not found'}</p><a className="btn" href="#/">{lang === 'ar' ? 'العودة إلى مركز مراقبة العمليات' : 'Back to control tower'}</a></div>; }
 
 function CommandK({ onClose, can }: { onClose(): void; can(r?: string[]): boolean }) {
   const { x, lang } = useApp();

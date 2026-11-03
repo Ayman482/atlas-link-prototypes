@@ -1,5 +1,6 @@
 'use client';
 // حالة التطبيق: النقل (خادم API أو المحرك المحلي)، الجلسة، اللغة، الإشعارات المنبثقة، وإعادة الجلب عند كل تغيير
+import { Layer } from './overlay';
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { createTransport, type ApiError, type Transport } from '@medlog/client';
 import { dir, type Lang } from '@medlog/i18n';
@@ -69,7 +70,7 @@ export function AppProvider({ app, children }: { app: Ctx['app']; children: Reac
   return (
     <MotionRoot><AppCtx.Provider value={value}>
       {children}
-      <div className="toasts" role="status" aria-live="polite"><AnimatePresence>{toasts.map((x) => <motion.div layout key={x.id} className={'toast ' + x.kind} initial={{ opacity: 0, y: 16, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 8, transition: { duration: DUR.fast } }} transition={{ duration: DUR.base, ease: EASE.emphasized }}>{x.kind === 'success' && <SuccessMark size={20} />}{x.text}</motion.div>)}</AnimatePresence></div>
+      <Layer><div className="toasts" role="status" aria-live="polite"><AnimatePresence>{toasts.map((x) => <motion.div layout key={x.id} className={'toast ' + x.kind} initial={{ opacity: 0, y: 16, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 8, transition: { duration: DUR.fast } }} transition={{ duration: DUR.base, ease: EASE.emphasized }}>{x.kind === 'success' && <SuccessMark size={20} />}{x.text}</motion.div>)}</AnimatePresence></div></Layer>
     </AppCtx.Provider></MotionRoot>
   );
 }

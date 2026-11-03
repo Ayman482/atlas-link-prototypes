@@ -42,7 +42,7 @@ defineCommand<{ organizationId: string; periodFrom: string; periodTo: string; in
     const n = ctx.seq('inv');
     const inv: T.Invoice = { id: `inv_${n}`, invoiceNo: `INV-2026-${n}`, organizationId: org.id, branchId: null, issueDate: null, dueDate: null, periodFrom: iso(from), periodTo: iso(to), subtotal: 0, vat: 0, total: 0, paid: 0, status: 'draft', zatcaStatus: 'not_submitted', journalId: null, createdAt: ctx.nowIso };
     const lines: T.InvoiceLine[] = [];
-    if (i.includeContractFee !== false && contract?.monthlyFee) { const v = pct(contract.monthlyFee, VAT_PCT); lines.push({ id: ctx.id('inl'), invoiceId: inv.id, shipmentId: null, description: L(`رسم العقد ${contract.contractNo}`, `Contract fee ${contract.contractNo}`), qty: 1, unitPrice: contract.monthlyFee, vat: v, lineTotal: contract.monthlyFee + v }); }
+    if (i.includeContractFee !== false && contract?.monthlyFee) { const v = pct(contract.monthlyFee, VAT_PCT); lines.push({ id: ctx.id('inl'), invoiceId: inv.id, shipmentId: null, description: L(`رسوم العقد ${contract.contractNo}`, `Contract fee ${contract.contractNo}`), qty: 1, unitPrice: contract.monthlyFee, vat: v, lineTotal: contract.monthlyFee + v }); }
     for (const s of ships) { const q = ctx.db.quotes.find((x) => x.id === s.quoteId); if (q && q.snapshot.subtotal > 0) lines.push({ id: ctx.id('inl'), invoiceId: inv.id, shipmentId: s.id, description: L(`نقل عينات ${s.trackingNo}`, `Sample transport ${s.trackingNo}`), qty: 1, unitPrice: q.snapshot.subtotal, vat: q.snapshot.vat, lineTotal: q.snapshot.total }); }
     pending.forEach((l) => { l.invoiceId = inv.id; });
     if (!lines.length && !pending.length) ctx.fail('NOTHING_TO_INVOICE', 'لا توجد شحنات أو رسوم غير مفوترة في الفترة', 'No uninvoiced shipments or charges in period', 422);
@@ -55,7 +55,7 @@ defineCommand<{ organizationId: string; periodFrom: string; periodTo: string; in
 });
 
 defineCommand<{ id: string }, T.Invoice>({
-  name: 'invoice.issue', guard: ['finance'], desc: L('إصدار الفاتورة وترحيل القيد (ZATCA محاكاة)', 'Issue invoice and post journal (ZATCA simulated)'),
+  name: 'invoice.issue', guard: ['finance'], desc: L('إصدار الفاتورة وترحيل القيد (ربط ZATCA محاكى)', 'Issue invoice and post journal (ZATCA simulated)'),
   run(ctx, { id }) {
     const inv = must(ctx, ctx.db.invoices.find((x) => x.id === id), 'invoice');
     if (inv.status !== 'draft') ctx.fail('INVOICE_NOT_DRAFT', 'الفاتورة صادرة مسبقاً', 'Invoice already issued', 409);
@@ -82,7 +82,7 @@ defineCommand<{ id: string; reason: string }, T.Invoice>({
 });
 
 defineCommand<{ invoiceId: string; amountSar: number; reason: string }, T.CreditNote>({
-  name: 'creditNote.request', guard: ['finance'], desc: L('طلب إشعار دائن (تصحيح مضبوط)', 'Request credit note (controlled correction)'),
+  name: 'creditNote.request', guard: ['finance'], desc: L('طلب إشعار دائن (تصحيح خاضع للرقابة)', 'Request credit note (controlled correction)'),
   run(ctx, i) {
     const inv = must(ctx, ctx.db.invoices.find((x) => x.id === i.invoiceId), 'invoice');
     if (['draft', 'void'].includes(inv.status)) ctx.fail('INVOICE_NOT_ISSUED', 'الإشعار الدائن للفواتير الصادرة فقط', 'Credit notes apply to issued invoices only', 422);
@@ -214,7 +214,7 @@ defineCommand<{ costType: T.CostRecord['costType']; sourceRef: string; estimated
   },
 });
 defineCommand<Record<string, never>, { allocated: number; records: number; skipped: number }>({
-  name: 'cost.runAllocation', guard: ['finance'], desc: L('تشغيل قواعد التوزيع المعتمدة', 'Run approved allocation rules'),
+  name: 'cost.runAllocation', guard: ['finance'], desc: L('تشغيل قواعد توزيع التكاليف المعتمدة', 'Run approved allocation rules'),
   run(ctx) {
     let allocated = 0, records = 0, skipped = 0;
     const delivered = ctx.db.shipments.filter((s) => s.status === 'delivered' && ctx.now - Date.parse(s.updatedAt) < 31 * DAY);
@@ -234,7 +234,7 @@ defineCommand<Record<string, never>, { allocated: number; records: number; skipp
   },
 });
 defineCommand<{ allocationId: string; amountSar: number; reason: string }, T.ApprovalRequest>({
-  name: 'cost.requestOverride', guard: ['finance'], desc: L('طلب تجاوز توزيع معتمد', 'Request audited allocation override'),
+  name: 'cost.requestOverride', guard: ['finance'], desc: L('طلب تجاوز موثّق لتوزيع التكاليف', 'Request audited allocation override'),
   run(ctx, { allocationId, amountSar, reason }) {
     const a = must(ctx, ctx.db.costAllocations.find((x) => x.id === allocationId), 'allocation');
     if (!reason?.trim()) ctx.fail('VALIDATION', 'السبب مطلوب', 'Reason required', 422, 'reason');
@@ -258,7 +258,7 @@ defineCommand<{ partnerId: string; periodStart: string; periodEnd: string }, T.S
   },
 });
 defineCommand<{ id: string; partnerInvoicedSar: number }, T.Settlement>({
-  name: 'settlement.reconcile', guard: ['finance'], desc: L('مطابقة فاتورة الشريك مع المستحقات', 'Reconcile partner invoice with payables'),
+  name: 'settlement.reconcile', guard: ['finance'], desc: L('مطابقة فاتورة الشريك مع الذمم الدائنة', 'Reconcile partner invoice with payables'),
   run(ctx, { id, partnerInvoicedSar }) {
     const s = must(ctx, ctx.db.settlements.find((x) => x.id === id), 'settlement');
     if (!['draft', 'disputed'].includes(s.status)) ctx.fail('INVALID_STATE', 'التسوية ليست في مرحلة المطابقة', 'Settlement not in reconciliation', 422);
@@ -295,7 +295,7 @@ defineCommand<{ id: string; bankRef: string }, T.Settlement>({
 type Adj = { thermalClass: T.ThermalClass | 'all'; pct: number };
 const adjust = (rules: T.RatePlan['rules'], adj: Adj[]) => rules.map((r) => { const a = adj.find((x) => x.thermalClass === r.thermalClass) ?? adj.find((x) => x.thermalClass === 'all'); if (!a) return { ...r }; const f = (v: number) => v + pct(v, a.pct); return { ...r, sameCity: f(r.sameCity), intercityRoad: f(r.intercityRoad), air: f(r.air) }; });
 defineCommand<{ fromPlanId: string; adjustments: Adj[]; effectiveFrom: string }, T.RatePlan>({
-  name: 'ratePlan.createDraft', guard: ['finance'], desc: L('مسودة إصدار تعرفة جديد', 'Draft new tariff version'),
+  name: 'ratePlan.createDraft', guard: ['finance'], desc: L('مسودة إصدار جديد من جدول الأسعار', 'Draft new tariff version'),
   run(ctx, i) {
     const base = must(ctx, ctx.db.ratePlans.find((p) => p.id === i.fromPlanId), 'rate plan');
     if (!(Date.parse(i.effectiveFrom) > ctx.now)) ctx.fail('VALIDATION', 'تاريخ السريان يجب أن يكون مستقبلاً', 'Effective date must be in the future', 422, 'effectiveFrom');
@@ -314,7 +314,7 @@ defineCommand<{ id: string }, T.RatePlan>({
   },
 });
 defineCommand<{ id: string }, T.RatePlan>({
-  name: 'ratePlan.publish', guard: ['finance', 'finance_approver'], desc: L('نشر تعرفة معتمدة بتاريخ سريان', 'Publish approved tariff with effective date'),
+  name: 'ratePlan.publish', guard: ['finance', 'finance_approver'], desc: L('نشر جدول أسعار معتمد بتاريخ بدء السريان', 'Publish approved tariff with effective date'),
   run(ctx, { id }) {
     const p = must(ctx, ctx.db.ratePlans.find((x) => x.id === id), 'rate plan');
     if (p.status !== 'approved') ctx.fail('NOT_APPROVED', 'لا تُنشر تعرفة قبل الاعتماد (BR-008)', 'Tariff cannot be published before approval (BR-008)', 422);
@@ -346,7 +346,7 @@ defineCommand<{ id: string }, T.Simulation>({
   run(ctx, { id }) { const s = must(ctx, ctx.db.simulations.find((x) => x.id === id), 'simulation'); s.status = 'submitted'; return s; },
 });
 defineCommand<{ simulationId: string; effectiveFrom: string }, T.RatePlan>({
-  name: 'simulation.toDraftPlan', guard: ['finance'], desc: L('تحويل المحاكاة إلى مسودة تعرفة', 'Turn simulation into tariff draft'),
+  name: 'simulation.toDraftPlan', guard: ['finance'], desc: L('تحويل المحاكاة إلى مسودة جدول أسعار', 'Turn simulation into tariff draft'),
   run(ctx, { simulationId, effectiveFrom }) { const s = must(ctx, ctx.db.simulations.find((x) => x.id === simulationId), 'simulation'); return ctx.exec<T.RatePlan>('ratePlan.createDraft', { fromPlanId: s.ratePlanId, adjustments: s.adjustments, effectiveFrom }); },
 });
 

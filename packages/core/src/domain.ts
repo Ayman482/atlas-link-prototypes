@@ -82,8 +82,8 @@ export function partnerEligibility(db: T.Db, p: T.Partner, now: number) {
 export const ELIGIBILITY_TEXT: Record<string, { ar: string; en: string }> = {
   COURIER_NOT_QUALIFIED: { ar: 'تأهيل المندوب منتهٍ', en: 'Courier qualification expired' },
   COURIER_UNAVAILABLE: { ar: 'المندوب غير متاح', en: 'Courier unavailable' },
-  COURIER_BLOCKED: { ar: 'المندوب محظور تشغيلياً', en: 'Courier is blocked' },
-  PARTNER_BLOCKED: { ar: 'الشريك محظور أو غير نشط', en: 'Partner blocked or inactive' },
+  COURIER_BLOCKED: { ar: 'المندوب خاضع لقيد تشغيلي', en: 'Courier is blocked' },
+  PARTNER_BLOCKED: { ar: 'الشريك خاضع لقيد تشغيلي أو غير نشط', en: 'Partner blocked or inactive' },
   PARTNER_LICENSE_EXPIRED: { ar: 'ترخيص الشريك منتهٍ', en: 'Partner license expired' },
   VEHICLE_NOT_QUALIFIED: { ar: 'المركبة غير مؤهلة', en: 'Vehicle not qualified' },
 };
@@ -135,3 +135,20 @@ export const currentCustodian = (db: T.Db, shipmentId: string) => {
   const evs = db.custody.filter((c) => c.shipmentId === shipmentId).sort((a, b) => a.occurredAt.localeCompare(b.occurredAt));
   return evs.length ? { type: evs[evs.length - 1].toType, id: evs[evs.length - 1].toId } : null;
 };
+
+/** Phase 17.1 — اختيار الملف الحراري المعتمد للشحنة (TEMP-001): يُطبَّق فقط ما هو معتمد وساري.
+ *  الأولوية: ملف اتفاقية الخدمة (العقد النشط للعميل) ← ملف نوع العينة (كل عينات الشحنة مشمولة) ← الملف الافتراضي للفئة الحرارية.
+ *  لا يُستبدل الافتراضي إلا بملف معتمد؛ المقترحات (pending_approval) لا تؤثر على أي شحنة. */
+export function resolveProfile(db: T.Db, q: { thermalClass: T.ThermalClass; organizationId?: string | null; sampleTypes?: string[] }, now?: number): T.ServiceProfile {
+  const t = now ?? Date.now();
+  const live = db.serviceProfiles.filter((p) => p.thermalClass === q.thermalClass && p.status === 'active' && p.approved && Date.parse(p.effectiveFrom) <= t && (!p.effectiveTo || Date.parse(p.effectiveTo) > t));
+  const contract = q.organizationId ? db.contracts.find((c) => c.organizationId === q.organizationId && c.status === 'active') : undefined;
+  const byContract = contract ? live.find((p) => p.scope?.contractId === contract.id) : undefined;
+  if (byContract) return byContract;
+  const types = q.sampleTypes ?? [];
+  const bySample = types.length ? live.find((p) => !p.scope?.contractId && p.scope?.sampleTypes?.length && types.every((x) => p.scope!.sampleTypes!.includes(x))) : undefined;
+  if (bySample) return bySample;
+  const def = live.find((p) => !p.scope?.contractId && !p.scope?.sampleTypes?.length) ?? db.serviceProfiles.find((p) => p.thermalClass === q.thermalClass && p.status === 'active');
+  if (!def) throw new Error(`No approved active profile for ${q.thermalClass}`);
+  return def;
+}

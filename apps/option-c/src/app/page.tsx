@@ -1,7 +1,7 @@
 import { IS_DEMO } from '@medlog/client';
 // صفحة الخيار C — تجربة رعاية صحية متميزة: روابط التطبيقات الأربعة
 const APPS = [
-  { href: 'admin/', h: 'linear-gradient(135deg,#087F70,#0B9A87)', ar: 'لوحة الإدارة والعمليات', en: 'Administration & operations', dar: '61 شاشة: برج التحكم، خريطة آخر المواقع المؤكدة، التوزيع والمسارات، الأصول والأجهزة، الجودة، المالية، الامتثال', den: '61 screens: control tower, last-confirmed-position map, dispatch and routes, assets and devices, quality, finance, compliance' },
+  { href: 'admin/', h: 'linear-gradient(135deg,#087F70,#0B9A87)', ar: 'لوحة الإدارة والعمليات', en: 'Administration & operations', dar: '61 شاشة: مركز مراقبة العمليات، خريطة آخر المواقع المؤكدة، التوزيع والمسارات، الأصول والأجهزة، الجودة، المالية، الامتثال', den: '61 screens: control tower, last-confirmed-position map, dispatch and routes, assets and devices, quality, finance, compliance' },
   { href: 'portal/', h: 'linear-gradient(135deg,#E6A65D,#F2C994)', ar: 'بوابة العملاء', en: 'Customer portal', dar: '16 شاشة للمستشفيات والمختبرات والفروع والأفراد ومختبر الاستلام', den: '16 screens for hospitals, labs, branches, individuals and the receiving lab' },
   { href: 'mobile/customer/', h: 'linear-gradient(135deg,#173B4D,#3D6B80)', ar: 'تطبيق العميل (معاينة)', en: 'Customer app (preview)', dar: 'طلب بخطوات، تتبع بآخر موقع مؤكد، تقرير حرارة، دفع (محاكاة)', den: 'Step-by-step request, last-confirmed-position tracking, temperature report, payment (simulated)' },
   { href: 'mobile/courier/', h: 'linear-gradient(135deg,#C98A3E,#E6A65D)', ar: 'تطبيق المندوب (معاينة)', en: 'Courier app (preview)', dar: 'مهام، مسح QR، توقيع، حيازة، عمل دون اتصال', den: 'Tasks, QR scanning, signatures, custody, offline work' },

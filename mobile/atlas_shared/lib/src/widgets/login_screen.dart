@@ -82,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ] else ...[
         Text(s.mfaTitle, style: Theme.of(context).textTheme.titleLarge),
-        Text(kDemoMode ? '${s.mfaHint} — ${s.t('رمز العرض', 'Demo code')} 123456' : s.mfaHint),
+        Text(kDemoMode ? '${s.mfaHint} — ${s.t('رمز تجريبي للعرض', 'Demo code')} 123456' : s.mfaHint),
         const SizedBox(height: 12),
         TextField(controller: _code, keyboardType: TextInputType.number, maxLength: 6, textAlign: TextAlign.center, textDirection: TextDirection.ltr, style: const TextStyle(fontSize: 24, letterSpacing: 10), autofocus: true, onSubmitted: (_) => _verify(st)),
         FilledButton(onPressed: busy ? null : () => _verify(st), child: Text(s.verify)),

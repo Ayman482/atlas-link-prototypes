@@ -29,7 +29,7 @@ class _TaskPageState extends State<TaskPage> {
     try {
       final r = await fn();
       _reset();
-      if (mounted) await showSuccess(context, r == false ? s.t('حُفظ في الطابور وسيُزامن تلقائياً عند عودة الاتصال', 'Saved to queue — will sync automatically when back online') : ok);
+      if (mounted) await showSuccess(context, r == false ? s.t('حُفظ في قائمة الانتظار وسيُزامن تلقائياً عند عودة الاتصال', 'Saved to queue — will sync automatically when back online') : ok);
     } on ApiException catch (e) { if (mounted) setState(() => err = e.message(AppScope.of(context).lang)); }
     finally { if (mounted) setState(() => busy = false); }
   }
@@ -72,7 +72,7 @@ class _TaskPageState extends State<TaskPage> {
             // K06 مسح الصندوق
             if (t['kind'] == 'pickup' && t['box'] == null && shipScanned && !queued.any((x) => x['type'] == 'scanPack')) ScanPanel(
               title: s.d('courier.scanBox'),
-              suggestions: [if (t['plannedBox'] != null) ('${t['plannedBox']}', s.t('الصندوق المسند', 'Assigned box')), for (final b in (d['boxesInCustody'] as List).where((b) => b['code'] != t['plannedBox'] && b['thermalClass'] == t['thermalClass']).take(2)) ('${b['code']}', s.t('صندوق بعهدتك', 'Box in your custody'))],
+              suggestions: [if (t['plannedBox'] != null) ('${t['plannedBox']}', s.t('الصندوق المسند', 'Assigned box')), for (final b in (d['boxesInCustody'] as List).where((b) => b['code'] != t['plannedBox'] && b['thermalClass'] == t['thermalClass']).take(2)) ('${b['code']}', s.t('صندوق في حيازتك', 'Box in your custody'))],
               onScan: (v) async { try { await q.act(st, 'scanPack', 'courier.scanPack', t['shipmentId'], {'boxCode': v}, s.t('تعبئة $v', 'Pack $v')); return null; } on ApiException catch (e) { return e.message(st.lang); } },
             ),
             // K07 الاستلام بالتوقيع
@@ -91,11 +91,11 @@ class _TaskPageState extends State<TaskPage> {
               const SizedBox(height: 10),
               DropdownButtonFormField<String>(initialValue: toId, isExpanded: true, decoration: InputDecoration(labelText: s.t('الطرف المستلم', 'Receiving party')), items: [for (final p in targets) DropdownMenuItem(value: '${p['id']}', child: Text('${(p['name'] as Map?)?[st.lang] ?? p['id']}'))], onChanged: (v) => setState(() => toId = v)),
               const SizedBox(height: 10),
-              TextField(controller: name, decoration: InputDecoration(labelText: s.t('اسم المستلم من الطرف الآخر', 'Receiving person'))),
+              TextField(controller: name, decoration: InputDecoration(labelText: s.t('اسم الشخص المستلم', 'Receiving person'))),
               const SizedBox(height: 10),
               ScanPanel(title: s.t('امسح رمز الطرف المستلم لتأكيد الحيازة', 'Scan the receiving party QR to confirm custody'), suggestions: [if (toId != null) ('HO-${toId!.substring(toId!.length - 6).toUpperCase()}', s.t('رمز الطرف المستلم', 'Receiver code'))], onScan: (_) async {
                 if (toId == null || name.text.trim().isEmpty) return s.t('اختر الطرف المستلم واكتب اسم المستلم أولاً', 'Choose the receiving party and enter the receiver name first');
-                try { await q.act(st, 'handover', 'custody.handover', t['shipmentId'], {'toType': toType, 'toId': toId, 'signedBy': name.text.trim(), 'method': 'qr'}, s.t('نقل حيازة', 'Handover')); Future.delayed(const Duration(milliseconds: 900), _reset); return null; } on ApiException catch (e) { return e.message(st.lang); }
+                try { await q.act(st, 'handover', 'custody.handover', t['shipmentId'], {'toType': toType, 'toId': toId, 'signedBy': name.text.trim(), 'method': 'qr'}, s.t('نقل الحيازة', 'Handover')); Future.delayed(const Duration(milliseconds: 900), _reset); return null; } on ApiException catch (e) { return e.message(st.lang); }
               }),
               if (stage != null) TextButton(onPressed: _reset, child: Text(s.cancel)),
             ]),
@@ -119,7 +119,7 @@ class _TaskPageState extends State<TaskPage> {
               const SizedBox(height: 10),
               TextField(controller: note, maxLines: 2, decoration: InputDecoration(labelText: s.note)),
               const SizedBox(height: 8),
-              Text(s.t('لا تُتلف أي عينة. القرار (إعادة محاولة / وجهة بديلة / حجز / إرجاع) للعمليات.', 'Never destroy samples. Operations decides: retry / alternate / hold / return.'), style: TextStyle(color: c.muted)),
+              Text(s.t('لا تُتلف أي عينة. القرار (إعادة محاولة / وجهة بديلة / احتجاز / إرجاع) للعمليات.', 'Never destroy samples. Operations decides: retry / alternate / hold / return.'), style: TextStyle(color: c.muted)),
               const SizedBox(height: 10),
               FilledButton(style: FilledButton.styleFrom(backgroundColor: c.critical), onPressed: () => _do(() => q.act(st, 'failAttempt', 'courier.failAttempt', t['shipmentId'], {'reasonCode': reason, 'notes': note.text}, s.d('courier.failAttempt')), s.t('سُجلت المحاولة وأُبلغت العمليات', 'Attempt recorded; operations notified')), child: Text(s.t('تسجيل', 'Record'))),
               TextButton(onPressed: _reset, child: Text(s.cancel)),

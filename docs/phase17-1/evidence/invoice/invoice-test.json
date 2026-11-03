@@ -1,0 +1,247 @@
+{
+ "executedAt": "2026-11-03T11:17:12.350Z",
+ "steps": [
+  {
+   "id": "INV-ADM-ar-1440",
+   "step": "الإدارة ← INV-2026-00001 ← عرض الفاتورة (ar، 1440px)",
+   "expected": "معاينة A4 دون عناصر خارج الورقة أو تداخل أو أرقام مقصوصة",
+   "actual": {
+    "sheets": 2,
+    "outside": [],
+    "overlaps": [],
+    "clippedNums": [],
+    "errs": []
+   },
+   "status": "PASS",
+   "evidence": "admin-invoice-viewer_ar_1440.png"
+  },
+  {
+   "id": "INV-LANG-ar",
+   "step": "تبديل لغة المستند",
+   "expected": "اتجاه ltr دون تداخل",
+   "actual": {
+    "dir": "ltr",
+    "sheets": 2,
+    "outside": [],
+    "overlaps": [],
+    "clippedNums": []
+   },
+   "status": "PASS",
+   "evidence": "admin-invoice-viewer_ar-ui_doc-en_1440.png"
+  },
+  {
+   "id": "INV-PDF-ar",
+   "step": "زر «تنزيل PDF»",
+   "expected": "ملف PDF صالح بصفحة A4 واحدة على الأقل",
+   "actual": {
+    "file": "INV-2026-00001_ar-ui.pdf",
+    "bytes": 695332,
+    "header": "%PDF-",
+    "pages": 2,
+    "mediaBoxA4": false
+   },
+   "status": "PASS",
+   "evidence": "INV-2026-00001_ar-ui.pdf"
+  },
+  {
+   "id": "INV-PRINT-ar",
+   "step": "زر «طباعة» (A4)",
+   "expected": "صفحات A4 بعدد أوراق الفاتورة فقط (لا واجهة التطبيق)",
+   "actual": {
+    "file": "print_INV-2026-00001_ar.pdf",
+    "pages": 2,
+    "sheets": 2
+   },
+   "status": "PASS",
+   "evidence": "print_INV-2026-00001_ar.pdf"
+  },
+  {
+   "id": "INV-ESC-ar",
+   "step": "Escape يغلق العارض",
+   "expected": "لا عارض مفتوح",
+   "actual": {
+    "open": 0
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "INV-ADM-ar-768",
+   "step": "الإدارة ← INV-2026-00001 ← عرض الفاتورة (ar، 768px)",
+   "expected": "معاينة A4 دون عناصر خارج الورقة أو تداخل أو أرقام مقصوصة",
+   "actual": {
+    "sheets": 2,
+    "outside": [],
+    "overlaps": [],
+    "clippedNums": [],
+    "errs": []
+   },
+   "status": "PASS",
+   "evidence": "admin-invoice-viewer_ar_768.png"
+  },
+  {
+   "id": "INV-ADM-ar-390",
+   "step": "الإدارة ← INV-2026-00001 ← عرض الفاتورة (ar، 390px)",
+   "expected": "معاينة A4 دون عناصر خارج الورقة أو تداخل أو أرقام مقصوصة",
+   "actual": {
+    "sheets": 2,
+    "outside": [],
+    "overlaps": [],
+    "clippedNums": [],
+    "errs": []
+   },
+   "status": "PASS",
+   "evidence": "admin-invoice-viewer_ar_390.png"
+  },
+  {
+   "id": "INV-ADM-en-1440",
+   "step": "الإدارة ← INV-2026-00001 ← عرض الفاتورة (en، 1440px)",
+   "expected": "معاينة A4 دون عناصر خارج الورقة أو تداخل أو أرقام مقصوصة",
+   "actual": {
+    "sheets": 2,
+    "outside": [],
+    "overlaps": [],
+    "clippedNums": [],
+    "errs": []
+   },
+   "status": "PASS",
+   "evidence": "admin-invoice-viewer_en_1440.png"
+  },
+  {
+   "id": "INV-LANG-en",
+   "step": "تبديل لغة المستند",
+   "expected": "اتجاه rtl دون تداخل",
+   "actual": {
+    "dir": "rtl",
+    "sheets": 2,
+    "outside": [],
+    "overlaps": [],
+    "clippedNums": []
+   },
+   "status": "PASS",
+   "evidence": "admin-invoice-viewer_en-ui_doc-ar_1440.png"
+  },
+  {
+   "id": "INV-PDF-en",
+   "step": "زر «تنزيل PDF»",
+   "expected": "ملف PDF صالح بصفحة A4 واحدة على الأقل",
+   "actual": {
+    "file": "INV-2026-00001_en-ui.pdf",
+    "bytes": 704805,
+    "header": "%PDF-",
+    "pages": 2,
+    "mediaBoxA4": false
+   },
+   "status": "PASS",
+   "evidence": "INV-2026-00001_en-ui.pdf"
+  },
+  {
+   "id": "INV-PRINT-en",
+   "step": "زر «طباعة» (A4)",
+   "expected": "صفحات A4 بعدد أوراق الفاتورة فقط (لا واجهة التطبيق)",
+   "actual": {
+    "file": "print_INV-2026-00001_en.pdf",
+    "pages": 2,
+    "sheets": 2
+   },
+   "status": "PASS",
+   "evidence": "print_INV-2026-00001_en.pdf"
+  },
+  {
+   "id": "INV-ESC-en",
+   "step": "Escape يغلق العارض",
+   "expected": "لا عارض مفتوح",
+   "actual": {
+    "open": 0
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "INV-ADM-en-768",
+   "step": "الإدارة ← INV-2026-00001 ← عرض الفاتورة (en، 768px)",
+   "expected": "معاينة A4 دون عناصر خارج الورقة أو تداخل أو أرقام مقصوصة",
+   "actual": {
+    "sheets": 2,
+    "outside": [],
+    "overlaps": [],
+    "clippedNums": [],
+    "errs": []
+   },
+   "status": "PASS",
+   "evidence": "admin-invoice-viewer_en_768.png"
+  },
+  {
+   "id": "INV-ADM-en-390",
+   "step": "الإدارة ← INV-2026-00001 ← عرض الفاتورة (en، 390px)",
+   "expected": "معاينة A4 دون عناصر خارج الورقة أو تداخل أو أرقام مقصوصة",
+   "actual": {
+    "sheets": 2,
+    "outside": [],
+    "overlaps": [],
+    "clippedNums": [],
+    "errs": []
+   },
+   "status": "PASS",
+   "evidence": "admin-invoice-viewer_en_390.png"
+  },
+  {
+   "id": "INV-PORTAL-ar",
+   "step": "بوابة العميل ← الفاتورة ← عرض الفاتورة الضريبية",
+   "expected": "معاينة سليمة",
+   "actual": {
+    "sheets": 2,
+    "outside": [],
+    "overlaps": [],
+    "clippedNums": [],
+    "errs": []
+   },
+   "status": "PASS",
+   "evidence": "portal-invoice-viewer_ar.png"
+  },
+  {
+   "id": "INV-PORTAL-en",
+   "step": "بوابة العميل ← الفاتورة ← عرض الفاتورة الضريبية",
+   "expected": "معاينة سليمة",
+   "actual": {
+    "sheets": 2,
+    "outside": [],
+    "overlaps": [],
+    "clippedNums": [],
+    "errs": []
+   },
+   "status": "PASS",
+   "evidence": "portal-invoice-viewer_en.png"
+  },
+  {
+   "id": "INV-CM-ar",
+   "step": "جوال العميل ← الفواتير ← عرض الفاتورة ← تنزيل PDF",
+   "expected": "معاينة داخل إطار الجوال وملف PDF صالح",
+   "actual": {
+    "sheets": 2,
+    "outside": [],
+    "overlaps": [],
+    "clippedNums": [],
+    "pdfBytes": 804167,
+    "pdf": "%PDF-",
+    "errs": []
+   },
+   "status": "PASS",
+   "evidence": "customer-mobile-invoice_ar.png"
+  },
+  {
+   "id": "INV-CM-en",
+   "step": "جوال العميل ← الفواتير ← عرض الفاتورة ← تنزيل PDF",
+   "expected": "معاينة داخل إطار الجوال وملف PDF صالح",
+   "actual": {
+    "sheets": 2,
+    "outside": [],
+    "overlaps": [],
+    "clippedNums": [],
+    "pdfBytes": 803352,
+    "pdf": "%PDF-",
+    "errs": []
+   },
+   "status": "PASS",
+   "evidence": "customer-mobile-invoice_en.png"
+  }
+ ]
+}
