@@ -24,7 +24,7 @@ async function audit(p, url, lang) {
   await p.keyboard.press('Tab'); await p.keyboard.press('Tab'); await p.waitForTimeout(450);
   const focus = await p.evaluate(() => { const a = document.activeElement; if (!a || a === document.body) return { ok: false }; const s = getComputedStyle(a); return { ok: true, tag: a.tagName.toLowerCase(), visible: s.outlineStyle !== 'none' || s.boxShadow !== 'none' }; });
   p.off('pageerror', onErr); p.off('console', onCon);
-  return { url: url.replace(B, ''), lang, loadErrors: errs, violations: r, ...meta, keyboard: focus, loaded: meta.text > 30 && !errs.length };
+  return { url: url.replace(B, ''), loadErrors: errs, violations: r, ...meta, requested: lang, langApplied: meta.lang === lang, keyboard: focus, loaded: meta.text > 30 && !errs.length };
 }
 (async () => {
   const b = await chromium.launch(); const results = [];
@@ -32,7 +32,7 @@ async function audit(p, url, lang) {
     const ctx = await b.newContext({ viewport: vp }); const p = await ctx.newPage();
     await login(p, app, email);
     for (const lang of langs) {
-      await p.evaluate((l) => localStorage.setItem('al-lang', l), lang);
+      await p.evaluate((l) => localStorage.setItem('al-lang', l), lang); await p.reload(); await p.waitForTimeout(900); // Phase 17: التنقل بالـhash لا يعيد التحميل، فلا تُطبَّق اللغة دون reload
       for (const r of routes) results.push({ app, ...(await audit(p, `${B}/${app}/#${r}`, lang)) });
     }
     await ctx.close();
@@ -47,6 +47,6 @@ async function audit(p, url, lang) {
   require('fs').writeFileSync(process.argv[2] || 'audit.json', JSON.stringify(results, null, 1));
   const v = results.flatMap((r) => r.violations.map((x) => x.id + ':' + x.impact));
   const by = {}; v.forEach((k) => (by[k] = (by[k] ?? 0) + 1));
-  console.log(JSON.stringify({ screens: results.length, loadFailures: results.filter((r) => !r.loaded).map((r) => r.app + r.url + ' ' + r.lang + ' ' + r.loadErrors.join('|').slice(0, 120)), violationsByRule: by, rtlOk: results.filter((r) => r.lang === 'ar').every((r) => r.dir === 'rtl'), ltrOk: results.filter((r) => r.lang === 'en').every((r) => r.dir === 'ltr'), keyboardFail: results.filter((r) => !r.keyboard.ok || !r.keyboard.visible).map((r) => r.app + r.url) }, null, 1));
+  console.log(JSON.stringify({ screens: results.length, loadFailures: results.filter((r) => !r.loaded).map((r) => r.app + r.url + ' ' + r.lang + ' ' + r.loadErrors.join('|').slice(0, 120)), violationsByRule: by, langMismatch: results.filter((r) => !r.langApplied).length, enScreens: results.filter((r) => r.lang === 'en').length, rtlOk: results.filter((r) => r.lang === 'ar').every((r) => r.dir === 'rtl'), ltrOk: results.some((r) => r.lang === 'en') && results.filter((r) => r.lang === 'en').every((r) => r.dir === 'ltr'), keyboardFail: results.filter((r) => !r.keyboard.ok || !r.keyboard.visible).map((r) => r.app + r.url) }, null, 1));
   await b.close();
 })();

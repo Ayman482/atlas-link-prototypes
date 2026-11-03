@@ -1,5 +1,6 @@
 'use client';
 // معاينة تطبيق المندوب — الخيار A (K01–K14). نفس المحرك والبيانات؛ تطبيق Flutter الفعلي في mobile/courier_app
+import { comma } from '@/lib/l10n';
 import React, { useEffect, useState } from 'react';
 import { AppProvider, useApp, useList, useQ, useRoute, go } from '@/lib/store';
 import { Btn, Empty, ErrorBox, KsaMap, Loading, Mono, Pill, Sim, label, useFmt } from '@/lib/ui';
@@ -147,11 +148,11 @@ function Task({ id }: { id: string }) {
         <b>{KIND[t.kind][lang === 'ar' ? 0 : 1]} — {x(a?.label)}</b>
         <span>{a?.contactName} · <span dir="ltr">{a?.contactPhone}</span></span>
         <span className="muted">{x(t.organization)} · {label(lang, t.thermalClass)} · {label(lang, t.mode)}</span>
-        <span className="muted">{t.items.map((i: any) => `${label(lang, i.descriptionCode)} ×${i.quantity}`).join('، ')}</span>
+        <span className="muted">{t.items.map((i: any) => `${label(lang, i.descriptionCode)} ×${i.quantity}`).join(comma(lang))}</span>
         <span>{lang === 'ar' ? 'الصندوق' : 'Box'}: <Mono>{t.box ?? t.plannedBox ?? '—'}</Mono>{!t.box && t.plannedBox && <span className="muted"> ({lang === 'ar' ? 'مخطط' : 'planned'})</span>}</span>
         {t.lastReading && <span dir="ltr">{t.lastReading.tempC ?? '—'}°C · {f.dt(t.lastReading.deviceTime)} <Sim /></span>}
       </div>
-      {queuedFor.length > 0 && <div className="notice warn">{lang === 'ar' ? 'إجراءات بانتظار المزامنة:' : 'Actions awaiting sync:'} {queuedFor.map((q) => q.label).join('، ')}</div>}
+      {queuedFor.length > 0 && <div className="notice warn">{lang === 'ar' ? 'إجراءات بانتظار المزامنة:' : 'Actions awaiting sync:'} {queuedFor.map((q) => q.label).join(comma(lang))}</div>}
       {err && <div className="state err" role="alert">{err}</div>}
 
       {/* K05–K07 الاستلام */}

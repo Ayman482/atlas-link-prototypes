@@ -1,9 +1,94 @@
-screens 188 distinct raw tokens 4
+screens 188 distinct raw tokens 2
   tracking → admin/system/notifications [ar] «تعذّر تسليم {tracking}»
   invoice → admin/system/notifications [ar] «فاتورة جديدة {invoice}»
-  carrier → admin/system/integrations [ar] «Al-Ufuq carrier events»
-  events → admin/system/integrations [ar] «Al-Ufuq carrier events»
-EN screens with Arabic text: 0
+EN screens with Arabic text: 47 lang not applied: 0
+   admin/shipments/shp_0004 [{"text":"أ. خالد الحربي (Signature)","cls":""}]
+   admin/vehicles [{"text":"أ ب ج 1234","cls":""},{"text":"د هـ و 2345","cls":""},{"text":"ر س ص 3456","cls":""}]
+   admin/boxes/box_002 [{"text":"محمد الدوسري","cls":""}]
+   admin/capa [{"text":"تدريب المندوبين على حد أقصى 10 دقائق لفتح الصندوق","cls":""},{"text":"إضافة تنبيه انتظار في تطبيق المندوب بعد 15 دقيقة","cls":""},{"text":"جعل التوقيع إلزامياً في شاشة نقل الحيازة للناقل الجوي","cls":""}]
+   admin/warehouse [{"text":"خالد البارقي","cls":""},{"text":"حسن القحطاني","cls":""},{"text":"محمد الدوسري","cls":""}]
+   admin/warehouse/partner-custody [{"text":"أ. مازن (مستودعات الحجاز)","cls":""}]
+   admin/customers/org_nkh [{"text":"أ. خالد الحربي","cls":""},{"text":"أ. فهد الدوسري","cls":""}]
+   admin/simulations [{"text":"رفع أسعار الجوي 6% للربع الأول","cls":""}]
+   admin/credit-notes [{"text":"تصحيح احتساب صندوق مخصص مكرر","cls":""},{"text":"تعويض المطالبة CL-2026-0031","cls":""}]
+   admin/compliance/licenses [{"text":"ك ل م 5678","cls":""},{"text":"ي ب ح 7890","cls":""},{"text":"ن هـ و 6789","cls":""}]
+   admin/compliance/blocks [{"text":"ك ل م 5678","cls":""}]
+   admin/compliance/legal-holds [{"text":"تحقيق اشتباه فقدان QI-2026-0141","cls":""},{"text":"مطالبة CL-2026-0031 — حفظ الأدلة","cls":""}]
+   admin/system/integrations [{"text":"نظام المختبر LIS — النخبة","cls":""},{"text":"أحداث ناقل الأفق","cls":""}]
+   admin/profile [{"text":"العربية","cls":"btn default"}]
+   portal/ [{"text":"العربية","cls":"btn ghost"}]
+   portal/shipments [{"text":"العربية","cls":"btn ghost"}]
+   portal/shipments/new [{"text":"العربية","cls":"btn ghost"}]
+   portal/shipments/shp_0002 [{"text":"العربية","cls":"btn ghost"},{"text":"أ. فهد الدوسري (Signature)","cls":""}]
+   portal/recurring [{"text":"العربية","cls":"btn ghost"}]
+   portal/addresses [{"text":"العربية","cls":"btn ghost"},{"text":"أ. خالد الحربي","cls":""},{"text":"أ. فهد الدوسري","cls":""}]
+   portal/branches [{"text":"العربية","cls":"btn ghost"}]
+   portal/users [{"text":"العربية","cls":"btn ghost"}]
+   portal/contracts [{"text":"العربية","cls":"btn ghost"}]
+   portal/invoices [{"text":"العربية","cls":"btn ghost"}]
+   portal/payments [{"text":"العربية","cls":"btn ghost"}]
+   portal/claims [{"text":"العربية","cls":"btn ghost"}]
+   portal/reports [{"text":"العربية","cls":"btn ghost"}]
+   portal/api [{"text":"العربية","cls":"btn ghost"},{"text":"نظام المختبر LIS — النخبة","cls":""}]
+   portal/notifications [{"text":"العربية","cls":"btn ghost"}]
+   portal/profile [{"text":"العربية","cls":"btn default"}]
+   mobile/customer/ [{"text":"العربية","cls":"btn default"}]
+   mobile/customer/shipments [{"text":"العربية","cls":"btn default"}]
+   mobile/customer/new [{"text":"العربية","cls":"btn default"}]
+   mobile/customer/s/shp_0002 [{"text":"العربية","cls":"btn default"}]
+   mobile/customer/s/shp_0002/temp [{"text":"العربية","cls":"btn default"}]
+   mobile/customer/notifications [{"text":"العربية","cls":"btn default"}]
+   mobile/customer/invoices [{"text":"العربية","cls":"btn default"}]
+   mobile/customer/claims [{"text":"العربية","cls":"btn default"}]
+   mobile/customer/addresses [{"text":"أ. خالد الحربي","cls":"muted"},{"text":"أ. فهد الدوسري","cls":"muted"},{"text":"العربية","cls":"btn default"}]
+   mobile/customer/account [{"text":"العربية","cls":"btn default"}]
+   mobile/courier/ [{"text":"العربية","cls":"btn default"}]
+   mobile/courier/map [{"text":"العربية","cls":"btn default"}]
+   mobile/courier/t/shp_0009 [{"text":"أ. خالد الحربي","cls":""},{"text":"العربية","cls":"btn default"}]
+   mobile/courier/t/shp_0002 [{"text":"أ. فهد الدوسري","cls":""},{"text":"العربية","cls":"btn default"}]
+   mobile/courier/boxes [{"text":"العربية","cls":"btn default"}]
+   mobile/courier/sync [{"text":"العربية","cls":"btn default"}]
+   mobile/courier/me [{"text":"العربية","cls":"btn default"},{"text":"أ. فهد الدوسري","cls":"muted"},{"text":"أ. خالد الحربي","cls":"muted"}]
+  admin/shipments/shp_0004 أ. خالد الحربي (Signature)
+  admin/vehicles أ ب ج 1234 | د هـ و 2345 | ر س ص 3456
+  admin/boxes/box_002 محمد الدوسري
+  admin/capa تدريب المندوبين على حد أقصى 10 دقائق لفتح الصندوق | إضافة تنبيه انتظار في تطبيق المندوب بعد 15 دقيقة | جعل التوقيع إلزامياً في شاشة نقل الحيازة للناقل الجوي
+  admin/warehouse خالد البارقي | حسن القحطاني | محمد الدوسري
+  admin/warehouse/partner-custody أ. مازن (مستودعات الحجاز)
+  admin/customers/org_nkh أ. خالد الحربي | أ. فهد الدوسري
+  admin/simulations رفع أسعار الجوي 6% للربع الأول
+  admin/credit-notes تصحيح احتساب صندوق مخصص مكرر | تعويض المطالبة CL-2026-0031
+  admin/compliance/licenses ك ل م 5678 | ي ب ح 7890 | ن هـ و 6789
+  admin/compliance/blocks ك ل م 5678
+  admin/compliance/legal-holds تحقيق اشتباه فقدان QI-2026-0141 | مطالبة CL-2026-0031 — حفظ الأدلة
+  admin/system/integrations نظام المختبر LIS — النخبة | أحداث ناقل الأفق
+  admin/profile العربية
+  portal/ العربية
+  portal/shipments العربية
+  portal/shipments/new العربية
+  portal/shipments/shp_0002 العربية | أ. فهد الدوسري (Signature)
+  portal/recurring العربية
+  portal/addresses العربية | أ. خالد الحربي | أ. فهد الدوسري
+  portal/branches العربية
+  portal/users العربية
+  portal/contracts العربية
+  portal/invoices العربية
+  portal/payments العربية
+  portal/claims العربية
+  portal/reports العربية
+  portal/api العربية | نظام المختبر LIS — النخبة
+  portal/notifications العربية
+  portal/profile العربية
+  mobile/customer/ العربية
+  mobile/customer/shipments العربية
+  mobile/customer/new العربية
+  mobile/customer/s/shp_0002 العربية
+  mobile/customer/s/shp_0002/temp العربية
+  mobile/customer/notifications العربية
+  mobile/customer/invoices العربية
+  mobile/customer/claims العربية
+  mobile/customer/addresses أ. خالد الحربي | أ. فهد الدوسري | العربية
+  mobile/customer/account العربية
 failed-label contexts: admin/returns :: بانتظار قرار 1
+  admin/returns :: Awaiting decision 1
   mobile/courier/t/shp_0002 :: (?)
-l10n rc=0

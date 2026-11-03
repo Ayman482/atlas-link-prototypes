@@ -94,7 +94,7 @@ function Shell() {
             <NotificationCenter open={menu === 'ntf'} onClose={() => setMenu(null)} items={mine} />
           </div>
           <div style={{ position: 'relative' }}>
-            <button className="btn ghost" onClick={() => setMenu(menu === 'user' ? null : 'user')} aria-haspopup="menu" style={{ padding: 4 }}><span className="avatar">{initials}</span><span className="who"><b>{x(me.user.name)}</b><span>{roles.map((r) => t('roles.' + r)).join('، ')}</span></span></button>
+            <button className="btn ghost" onClick={() => setMenu(menu === 'user' ? null : 'user')} aria-haspopup="menu" style={{ padding: 4 }}><span className="avatar">{initials}</span><span className="who"><b>{x(me.user.name)}</b><span>{roles.map((r) => t('roles.' + r)).join(comma(lang))}</span></span></button>
             {menu === 'user' && <div className="menu" role="menu" style={{ width: 240 }}>
               <a className="mi" href="#/profile">{t('common.profile')}</a>
               <a className="mi" href="#/system/security">{t('nav.security')}</a>

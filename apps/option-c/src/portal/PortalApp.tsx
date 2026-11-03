@@ -74,12 +74,12 @@ function Shell() {
       <div className="pmain">
         <header className="topbar">
           <Btn kind="ghost" className="hamb iconbtn" onClick={() => setOpen(!open)} aria-label="menu">☰</Btn>
-          <div className="greet"><b>{greeting(lang)}{comma(lang)}{x(me.user.name).split(' ').slice(0, 2).join(' ')}</b><span>{me.organizations?.map((o: any) => x(o.legalName)).join('، ')}</span></div>
+          <div className="greet"><b>{greeting(lang)}{comma(lang)}{x(me.user.name).split(' ').slice(0, 2).join(' ')}</b><span>{me.organizations?.map((o: any) => x(o.legalName)).join(comma(lang))}</span></div>
           <span className="grow" />
           {IS_DEMO && <span className="sim">{t('app.demoBadge')}</span>}
           <Btn kind="ghost" onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}>{t('common.switchLang')}</Btn>
           <ThemeBtn />
-          <a href="#/profile" className="row" style={{ gap: 8, color: 'inherit', textDecoration: 'none' }}><span className="avatar">{initials}</span><span className="who"><b>{x(me.user.name)}</b><span>{roles.map((r) => t('roles.' + r)).join('، ')}</span></span></a>
+          <a href="#/profile" className="row" style={{ gap: 8, color: 'inherit', textDecoration: 'none' }}><span className="avatar">{initials}</span><span className="who"><b>{x(me.user.name)}</b><span>{roles.map((r) => t('roles.' + r)).join(comma(lang))}</span></span></a>
           <Btn kind="ghost" onClick={signOut}>{t('common.signOut')}</Btn>
         </header>
         <main key={path}>{screen}</main>

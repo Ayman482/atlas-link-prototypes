@@ -26,3 +26,21 @@ test('لا عنوان عمود إنجليزي ثابت دون بديل عربي 
   for (const f of files) { const s = fs.readFileSync(f, 'utf8'); for (const m of s.matchAll(/\{ key: '[a-zA-Z]+', label: '([A-Za-z][A-Za-z ]+)'/g)) if (!/^[A-Z]{2,6}$/.test(m[1])) bad.push(`${f}: ${m[1]}`); }
   assert.deepEqual(bad, []);
 });
+
+test('الفاصلة العربية لا تُفرض في الواجهة الإنجليزية (comma(lang))', () => {
+  const bad = files.filter((f) => fs.readFileSync(f, 'utf8').includes("join('، ')"));
+  assert.deepEqual(bad, []);
+});
+
+test('النصوص السردية التي يولّدها النظام تُترجم في الواجهة الإنجليزية', async () => {
+  const { sysText } = await import('../packages/i18n/src/terms');
+  const cases: [string, string][] = [
+    ['إصدار فاتورة INV-2026-00022', 'Invoice issued INV-2026-00022'],
+    ['تحصيل RCPT-2026-00005', 'Collection RCPT-2026-00005'],
+    ['الشحنة على متن الرحلة؛ لا يُفترض موقع حي', 'Shipment is on board the flight; no live position is assumed'],
+    ['partner blocked: انتهاء ترخيص النقل البري TGA-29004', 'partner blocked: Road transport licence TGA-29004 expired'],
+    ['انتهاء TGA-29004-DEMO', 'TGA-29004-DEMO expired'],
+  ];
+  for (const [ar, en] of cases) { assert.equal(sysText('en', ar), en); assert.equal(sysText('ar', ar), ar); }
+  assert.equal(sysText('en', 'تدريب المندوبين'), 'تدريب المندوبين', 'نص المستخدم يبقى كما أُدخل');
+});

@@ -343,9 +343,7 @@
   "w": 390,
   "pageOverflowX": 0,
   "offscreen": [],
-  "smallTargets": [
-   "a. 102x22 «صندوق الاعتمادات»"
-  ],
+  "smallTargets": [],
   "smallTouch": 13,
   "hiddenFocus": []
  },
@@ -981,9 +979,7 @@
   "w": 768,
   "pageOverflowX": 0,
   "offscreen": [],
-  "smallTargets": [
-   "a. 102x22 «صندوق الاعتمادات»"
-  ],
+  "smallTargets": [],
   "smallTouch": 0,
   "hiddenFocus": []
  },
@@ -1619,9 +1615,7 @@
   "w": 1024,
   "pageOverflowX": 0,
   "offscreen": [],
-  "smallTargets": [
-   "a. 102x22 «صندوق الاعتمادات»"
-  ],
+  "smallTargets": [],
   "smallTouch": 0,
   "hiddenFocus": []
  },
@@ -2257,9 +2251,7 @@
   "w": 1440,
   "pageOverflowX": 0,
   "offscreen": [],
-  "smallTargets": [
-   "a. 102x22 «صندوق الاعتمادات»"
-  ],
+  "smallTargets": [],
   "smallTouch": 0,
   "hiddenFocus": []
  },
@@ -3417,14 +3409,14 @@
   "pageOverflowX": 0,
   "offscreen": [],
   "smallTargets": [
-   "g.[object 14x14 «1. فرع العليا — استل»",
-   "g.[object 14x14 «3. المختبر الرئيسي —»",
-   "g.[object 14x14 «3. فرع الملقا — استل»",
-   "g.[object 14x14 «5. المختبر الرئيسي —»",
-   "g.[object 14x14 «6. فرع الدمام — استل»",
-   "g.[object 14x14 «6. المختبر المركزي —»",
-   "g.[object 14x14 «7. المستشفى الرئيسي »",
-   "g.[object 14x14 «8. المختبر الرئيسي —»"
+   "g.[object 14x14 «2. فرع الدمام — استل»",
+   "g.[object 14x14 «2. المختبر الرئيسي —»",
+   "g.[object 14x14 «4. المختبر الرئيسي —»",
+   "g.[object 14x14 «5. فرع العليا — استل»",
+   "g.[object 14x14 «8. المختبر الرئيسي —»",
+   "g.[object 14x14 «9. فرع الملقا — استل»",
+   "g.[object 14x14 «12. المختبر المركزي »",
+   "g.[object 14x14 «13. المستشفى الرئيسي»"
   ],
   "smallTouch": 18,
   "hiddenFocus": []
@@ -3496,14 +3488,14 @@
   "pageOverflowX": 0,
   "offscreen": [],
   "smallTargets": [
-   "g.[object 14x14 «1. فرع العليا — استل»",
-   "g.[object 14x14 «3. المختبر الرئيسي —»",
-   "g.[object 14x14 «3. فرع الملقا — استل»",
-   "g.[object 14x14 «5. المختبر الرئيسي —»",
-   "g.[object 14x14 «6. فرع الدمام — استل»",
-   "g.[object 14x14 «6. المختبر المركزي —»",
-   "g.[object 14x14 «7. المستشفى الرئيسي »",
-   "g.[object 14x14 «8. المختبر الرئيسي —»"
+   "g.[object 14x14 «2. فرع الدمام — استل»",
+   "g.[object 14x14 «2. المختبر الرئيسي —»",
+   "g.[object 14x14 «4. المختبر الرئيسي —»",
+   "g.[object 14x14 «5. فرع العليا — استل»",
+   "g.[object 14x14 «8. المختبر الرئيسي —»",
+   "g.[object 14x14 «9. فرع الملقا — استل»",
+   "g.[object 14x14 «12. المختبر المركزي »",
+   "g.[object 14x14 «13. المستشفى الرئيسي»"
   ],
   "smallTouch": 0,
   "hiddenFocus": []

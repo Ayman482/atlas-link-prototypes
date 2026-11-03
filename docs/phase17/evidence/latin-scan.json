@@ -91,6 +91,7 @@
    "Ctrl",
    "K",
    "English",
+   "DEMO",
    "XY"
   ]
  },
@@ -159,7 +160,8 @@
    "Ctrl",
    "K",
    "English",
-   "V"
+   "V",
+   "DEMO"
   ]
  },
  {
@@ -171,7 +173,8 @@
    "Ctrl",
    "K",
    "English",
-   "V"
+   "V",
+   "DEMO"
   ]
  },
  {
@@ -637,9 +640,7 @@
    "APNs",
    "HL",
    "Webhooks",
-   "LIS",
-   "Al-Ufuq",
-   "events"
+   "LIS"
   ]
  },
  {
@@ -673,8 +674,7 @@
    "GPT",
    "Ctrl",
    "K",
-   "English",
-   "Request"
+   "English"
   ]
  },
  {
@@ -704,7 +704,6 @@
    "K",
    "English",
    "P",
-   "ms",
    "CPU"
   ]
  },

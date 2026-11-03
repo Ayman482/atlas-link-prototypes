@@ -1,7 +1,7 @@
 // طبقة التوطين للخيار C — واجهة رقيقة فوق المصدر المعتمد الوحيد packages/i18n/src/terms.ts
 // (نفس المصدر يولّد ملف Flutter labels.g.dart؛ لا تُضف تسميات هنا).
 import { TERM_OVERRIDES, LABELS, termEntry } from '@medlog/i18n/src/terms';
-export { label, term, greeting, comma, timelineTitle, timelineDetail } from '@medlog/i18n/src/terms';
+export { label, term, greeting, comma, timelineTitle, timelineDetail, sysText } from '@medlog/i18n/src/terms';
 export const DICT_OVERRIDES = TERM_OVERRIDES;
 export const VALUE_LABELS = LABELS;
 

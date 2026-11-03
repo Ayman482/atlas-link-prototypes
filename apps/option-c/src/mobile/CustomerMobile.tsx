@@ -1,4 +1,5 @@
 'use client';
+import { comma } from '@/lib/l10n';
 import { timelineTitle } from '@/lib/l10n';
 // معاينة تطبيق العميل للجوال — الخيار A (CM01–CM12). نفس المحرك والبيانات؛ تطبيق Flutter الفعلي في mobile/customer_app
 import React, { useEffect, useMemo, useState } from 'react';
@@ -214,7 +215,7 @@ function Account() {
   const { lang, setLang, x, t, me, run, signOut } = useApp(); const p = useList('notificationPrefs');
   return <><MTop title={lang === 'ar' ? 'حسابي' : 'Account'} />
     <div className="mbodyx" tabIndex={0}>
-      <div className="mcard"><b>{x(me.user.name)}</b><span className="mono">{me.user.email}</span><span className="muted">{me.roles.map((r: string) => t('roles.' + r)).join('، ')} · {me.organizations?.map((o: any) => x(o.legalName)).join('، ')}</span></div>
+      <div className="mcard"><b>{x(me.user.name)}</b><span className="mono">{me.user.email}</span><span className="muted">{me.roles.map((r: string) => t('roles.' + r)).join(comma(lang))} · {me.organizations?.map((o: any) => x(o.legalName)).join(comma(lang))}</span></div>
       <div className="mcard"><b>{lang === 'ar' ? 'اللغة' : 'Language'}</b><div className="seg"><button className={lang === 'ar' ? 'on' : ''} onClick={() => setLang('ar')}>العربية</button><button className={lang === 'en' ? 'on' : ''} onClick={() => setLang('en')}>English</button></div></div>
       <div className="mcard"><b>{lang === 'ar' ? 'الإشعارات' : 'Notifications'}</b>{['push', 'sms', 'email'].map((ch) => { const pr = (p.data?.items ?? []).find((y: any) => y.channel === ch); return <label key={ch} className="check"><input type="checkbox" checked={pr?.enabled ?? true} onChange={(e) => run('notification.setPref', { channel: ch, enabled: e.target.checked }, { success: lang === 'ar' ? 'حُفظ التفضيل' : 'Preference saved' })} /> {ch === 'push' ? (lang === 'ar' ? 'إشعارات التطبيق' : 'Push notifications') : ch === 'sms' ? (lang === 'ar' ? 'الرسائل النصية (SMS)' : 'Text messages (SMS)') : (lang === 'ar' ? 'البريد الإلكتروني' : 'Email')}</label>; })}</div>
       <div className="mcard"><b>{lang === 'ar' ? 'التحقق بخطوتين' : 'Two-factor'}</b><label className="check"><input type="checkbox" checked={!!me.user.mfaEnabled} onChange={(e) => run('me.setMfa', { enabled: e.target.checked })} /> MFA</label></div>

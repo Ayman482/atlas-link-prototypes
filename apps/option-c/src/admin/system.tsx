@@ -1,5 +1,6 @@
 'use client';
 // النظام: الإشعارات والقوالب، التكاملات، الإعدادات، الاعتمادات، المستخدمون، التدقيق، الأمن، الصحة، الملف الشخصي، بوابة الشريك (A52–A60)
+import { comma } from '@/lib/l10n';
 import React, { useState } from 'react';
 import { useApp, useList, useQ, transport } from '@/lib/store';
 import { Btn, ConfirmBtn, DataTable, DL, ErrorBox, Kpis, Loading, Mono, Page, Pill, Section, Sim, Tabs, label, useFmt } from '@/lib/ui';
@@ -117,7 +118,7 @@ export function Profile() {
   return (
     <Page title={t('common.profile')}>
       <div className="grid">
-        <Section title={x(me.user.name)}><DL items={[[t('auth.email'), <Mono key="e">{me.user.email}</Mono>], [lang === 'ar' ? 'الأدوار' : 'Roles', me.roles.map((r: string) => t('roles.' + r)).join('، ')], ['MFA', me.user.mfaEnabled ? '✓' : '—'], [lang === 'ar' ? 'المنطقة الزمنية' : 'Time zone', 'Asia/Riyadh']]} /></Section>
+        <Section title={x(me.user.name)}><DL items={[[t('auth.email'), <Mono key="e">{me.user.email}</Mono>], [lang === 'ar' ? 'الأدوار' : 'Roles', me.roles.map((r: string) => t('roles.' + r)).join(comma(lang))], ['MFA', me.user.mfaEnabled ? '✓' : '—'], [lang === 'ar' ? 'المنطقة الزمنية' : 'Time zone', 'Asia/Riyadh']]} /></Section>
         <Section title={t('common.language')}><div className="row"><Btn kind={lang === 'ar' ? 'primary' : 'default'} onClick={() => { setLang('ar'); run('me.setLang', { lang: 'ar' }, { silent: true }); }}>العربية</Btn><Btn kind={lang === 'en' ? 'primary' : 'default'} onClick={() => { setLang('en'); run('me.setLang', { lang: 'en' }, { silent: true }); }}>English</Btn></div></Section>
         <Section title={t('common.notifications')}>{['in_app', 'email', 'sms', 'push'].map((ch) => { const pr = mine.find((y: any) => y.channel === ch); return <label key={ch} className="check"><input type="checkbox" checked={pr?.enabled ?? true} disabled={ch === 'in_app'} onChange={(e) => run('notification.setPref', { channel: ch, enabled: e.target.checked })} /> {label(lang, ch)}{ch === 'in_app' && <span className="muted"> — {lang === 'ar' ? 'لا يمكن إيقافها (التنبيهات الحرجة)' : 'cannot be turned off (critical alerts)'}</span>}</label>; })}</Section>
       </div>

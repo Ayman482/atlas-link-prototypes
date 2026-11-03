@@ -3,7 +3,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { dict, fmtDateTime, fmtRelative, fmtNumber, fmtSAR, fmtTemp, ltr } from '@medlog/i18n';
 import { useApp } from './store';
-import { label as tlabel, timelineTitle, timelineDetail } from './l10n';
+import { label as tlabel, timelineTitle, timelineDetail, sysText } from './l10n'; import { comma } from './l10n';
 import { AnimatePresence, Collapse, DUR, EASE, Tip, fadeUp, motion, staggerParent } from './motion';
 
 export const cx = (...a: (string | false | null | undefined)[]) => a.filter(Boolean).join(' ');
@@ -204,7 +204,7 @@ export function ConfirmBtn({ children, message, onConfirm, kind = 'default', dis
 
 // ---------- الجدول ----------
 /** القيم الرمزية (مثل card_simulated) تُعرض بتسميتها المترجمة إن وُجدت؛ غير ذلك تُعرض كما هي */
-const codeLabel = (lang: 'ar' | 'en', v: unknown) => (typeof v === 'string' && /^[A-Za-z_]+$/.test(v) ? label(lang, v) : String(v ?? '—'));
+const codeLabel = (lang: 'ar' | 'en', v: unknown) => (typeof v === 'string' && /^[A-Za-z_]+$/.test(v) ? label(lang, v) : v == null ? '—' : sysText(lang, String(v)));
 export type Col<R> = { key: string; label: string; render?(r: R): React.ReactNode; sort?(r: R): string | number; num?: boolean; mono?: boolean; hideSm?: boolean };
 export type Filter<R> = { key: string; label: string; options: { value: string; label: string }[]; get(r: R): string | string[] | null | undefined };
 export type BulkAction<R> = { label: string; kind?: 'default' | 'primary' | 'danger'; run(rows: R[]): Promise<unknown> | void };
@@ -400,9 +400,10 @@ export function KsaMap({ points, cities, onPick, height = 380 }: { points: MapPt
 }
 // ---------- مخطط أعمدة بسيط ----------
 export function Bars({ data, height = 180, valueLabel }: { data: { label: string; a: number; b?: number }[]; height?: number; valueLabel?: [string, string?] }) {
+  const { lang } = useApp();
   const max = Math.max(1, ...data.flatMap((d) => [d.a, d.b ?? 0]));
   const W = 760, H = height, pb = 26, pt = 10, bw = (W - 20) / data.length;
-  return <figure className="chart"><svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={data.map((d) => `${d.label}: ${d.a}${d.b != null ? ` / ${d.b}` : ''}`).join('، ')}>
+  return <figure className="chart"><svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={data.map((d) => `${d.label}: ${d.a}${d.b != null ? ` / ${d.b}` : ''}`).join(comma(lang))}>
     <defs><linearGradient id="bga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#0B9A87" /><stop offset="1" stopColor="#087F70" /></linearGradient><linearGradient id="bgb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#F2C994" /><stop offset="1" stopColor="#E6A65D" /></linearGradient></defs>
     {[0, 0.5, 1].map((r) => <line key={r} x1={10} x2={W - 10} y1={pt + (H - pt - pb) * (1 - r)} y2={pt + (H - pt - pb) * (1 - r)} stroke="var(--line)" />)}
     {data.map((d, i) => { const h1 = ((H - pt - pb) * d.a) / max, h2 = ((H - pt - pb) * (d.b ?? 0)) / max; const x = 10 + i * bw; return <g key={i}>

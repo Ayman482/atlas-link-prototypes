@@ -298,3 +298,52 @@ export const GLOSSARY: GlossaryEntry[] = [
   // التحية والتنسيق
   { id: 'good_evening', domain: 'عام', en: 'Good evening', ar: 'مساء الخير', avoidAr: ['مساء النور'], note: '«مساء النور» ردّ لا تحية' },
 ];
+
+/** نصوص سردية يولّدها النظام (أوصاف القيود، أسس التقدير، أسباب الحظر الآلي، رسائل البوابة) مخزنة كنص عربي في النموذج.
+ *  في الواجهة الإنجليزية تُترجم بهذه القواعد. النص الذي يكتبه المستخدم بنفسه يُعرض كما أُدخل.
+ *  الإنتاج: تُخزّن هذه الحقول كرمز + معاملات بدل النص (انظر PRODUCTION_DEVELOPMENT_READINESS). */
+const SYS_EXACT: Record<string, string> = {
+  'الشحنة على متن الرحلة؛ لا يُفترض موقع حي': 'Shipment is on board the flight; no live position is assumed',
+  'الشحنة على متن رحلة؛ يُحدَّث التقدير بعد حدث وصول الناقل': 'Shipment is on a flight; estimate updates after the carrier arrival event',
+  'وصول الرحلة + زمن الاستلام من مكتب الشحن والتوصيل البري': 'Flight arrival + cargo-office release and road delivery time',
+  'قواعد المرحلة 1: زمن المسار المخطط + آخر حدث حيازة': 'Phase 1 rules: planned route time + last custody event',
+  'إعلان فقدان نهائي باعتماد مشترك (العمليات + الجودة)': 'Final loss declaration with joint approval (operations + quality)',
+  'تم الاسترداد': 'Recovered',
+  'الاعتماد ليس دفعاً': 'Approval is not payment',
+  'اقتران أولي': 'Initial pairing',
+  'استبدال جهاز بعد عطل في المستشعر': 'Device replaced after sensor fault',
+  'تكرار بنفس رقم التسلسل — لا أثر تجاري': 'Duplicate sequence number — no business effect',
+  'IMEI غير مسجّل — عزل (SEC-005)': 'Unregistered IMEI — quarantined (SEC-005)',
+  'فشل التحقق من المجموع الاختباري بعد 5 محاولات': 'Checksum validation failed after 5 attempts',
+  'إطار مقطوع (طول غير صالح)': 'Truncated frame (invalid length)',
+  'تهيئة بيانات العرض التجريبية': 'Demo data initialised',
+  'صرف للمسارات': 'Issued to routes',
+  'انتهاء ترخيص النقل البري TGA-29004': 'Road transport licence TGA-29004 expired',
+  'انتهاء تأهيل المركبة المبرّدة': 'Refrigerated vehicle qualification expired',
+  'انتهاء تدريب المواد الحيوية + حظر الشريك': 'Biological materials training expired + partner blocked',
+};
+const SYS_PATTERNS: [RegExp, string][] = [
+  [/^إصدار فاتورة (.+)$/, 'Invoice issued $1'],
+  [/^إشعار دائن (.+)$/, 'Credit note $1'],
+  [/^تحصيل إلكتروني \(محاكاة\) (.+)$/, 'Online collection (simulated) $1'],
+  [/^تحصيل بطاقة \(محاكاة\) (.+)$/, 'Card collection (simulated) $1'],
+  [/^فاتورة فورية (.+)$/, 'Instant invoice $1'],
+  [/^تحصيل (.+)$/, 'Collection $1'],
+  [/^عكس ([^:]+): (.+)$/, 'Reversal of $1: $2'],
+  [/^استحقاق تسوية (.+)$/, 'Settlement accrual $1'],
+  [/^سداد تسوية (.+)$/, 'Settlement payment $1'],
+  [/^قرار المطالبة (.+)$/, 'Claim decision $1'],
+  [/^استبدال: (.+)$/, 'Replacement: $1'],
+  [/^ضريبة (\d+)%$/, 'VAT $1%'],
+  [/^انتهاء (\S+)$/, '$1 expired'],
+  [/^إعادة جدولة إلى (.+)$/, 'Rescheduled to $1'],
+  [/^حدث الناقل: (.+)$/, 'Carrier event: $1'],
+];
+export function sysText(lang: Lang, s: string | null | undefined): string {
+  if (s == null) return '';
+  if (lang === 'ar' || !/[؀-ۿ]/.test(s)) return s;
+  if (SYS_EXACT[s]) return SYS_EXACT[s];
+  for (const [re, en] of SYS_PATTERNS) if (re.test(s)) return s.replace(re, en);
+  const m = s.match(/^([^\u0600-\u06FF:]+): (.+)$/); if (m) return `${m[1]}: ${sysText(lang, m[2])}`; // «partner blocked: <سبب>»
+  return s; // نص أدخله المستخدم: يُعرض كما هو
+}

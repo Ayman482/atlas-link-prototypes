@@ -35,7 +35,7 @@ const scanPage = () => {
     const ctx = await b.newContext({ viewport: { width: 1440, height: 900 } }); const p = await ctx.newPage();
     await login(p, app, email);
     for (const lang of langs) {
-      await p.evaluate((l) => localStorage.setItem('al-lang', l), lang);
+      await p.evaluate((l) => localStorage.setItem('al-lang', l), lang); await p.reload(); await p.waitForTimeout(900); // Phase 17: تطبيق اللغة فعلياً
       for (const r of routes) {
         await p.goto(`${B}/${app}/#${r}`); await p.waitForTimeout(1100);
         const agg = { codes: [], arInEn: [], failedCtx: [] };
@@ -44,7 +44,7 @@ const scanPage = () => {
         const tabs = await p.$$('[role=tab]');
         for (let i = 1; i < tabs.length; i++) { try { await tabs[i].click(); await p.waitForTimeout(350); add(await p.evaluate(scanPage)); } catch { /* */ } }
         const uniq = (arr, key) => [...new Map(arr.map((x) => [key(x), x])).values()];
-        results.push({ app, route: r, lang, codes: uniq(agg.codes, (x) => x.token), arInEn: uniq(agg.arInEn, (x) => x.text), failedCtx: [...new Set(agg.failedCtx)] });
+        results.push({ app, route: r, lang, docLang: await p.evaluate(() => document.documentElement.lang), codes: uniq(agg.codes, (x) => x.token), arInEn: uniq(agg.arInEn, (x) => x.text), failedCtx: [...new Set(agg.failedCtx)] });
       }
     }
     await ctx.close();
@@ -57,7 +57,7 @@ const scanPage = () => {
   const codes = new Map(); for (const r of results) for (const c of r.codes) if (!codes.has(c.token)) codes.set(c.token, `${r.app}${r.route} [${r.lang}] «${c.text}»`);
   console.log('screens', results.length, 'distinct raw tokens', codes.size);
   for (const [k, v] of codes) console.log(' ', k, '→', v);
-  const ar = results.filter((r) => r.arInEn.length); console.log('EN screens with Arabic text:', ar.length);
+  const ar = results.filter((r) => r.arInEn.length); console.log('EN screens with Arabic text:', ar.length, 'lang not applied:', results.filter((r) => r.docLang !== r.lang).length); for (const r of ar) console.log('  ', r.app + r.route, JSON.stringify(r.arInEn.slice(0, 3)).slice(0, 300));
   for (const r of ar.slice(0, 40)) console.log(' ', r.app + r.route, r.arInEn.slice(0, 3).map((x) => x.text).join(' | '));
   console.log('failed-label contexts:', [...new Set(results.flatMap((r) => r.failedCtx.map((c) => r.app + r.route + ' :: ' + c)))].join('\n  '));
   await b.close();

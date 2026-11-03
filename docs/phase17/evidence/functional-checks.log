@@ -1,12 +1,12 @@
 {
  "routes": {
-  "stops": 10,
+  "stops": 13,
   "changedOrBlocked": true,
-  "validationMsg": "لا يمكن تسليم ML-2026-000009 قبل استلامهااسحب المقبض أو ركّز عليه و",
+  "validationMsg": "لا يمكن تحريك غيرها فوقهااسحب المقبض أو ركّز عليه واستخدم السهمين ل",
   "undoRestored": true
  },
  "tempChart": {
-  "live": "6.8 °م · 03 نوفمبر، 03:46 ص",
+  "live": "5.4 °م · 03 نوفمبر، 05:44 ص",
   "ranges": [
    "1 س",
    "6 س",
@@ -34,4 +34,3 @@
   "afterRetryOk": true
  }
 }
-fc rc=0
