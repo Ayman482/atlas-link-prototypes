@@ -1,0 +1,15 @@
+admin/map: 5 clicked, 2 no-visible-effect, 2 errors
+admin/dispatch: 15 clicked, 1 no-visible-effect, 0 errors
+admin/vehicles: 8 clicked, 1 no-visible-effect, 0 errors
+admin/devices: 14 clicked, 0 no-visible-effect, 0 errors
+admin/excursions: 18 clicked, 1 no-visible-effect, 0 errors
+admin/capa: 11 clicked, 1 no-visible-effect, 0 errors
+admin/warehouse: 10 clicked, 0 no-visible-effect, 0 errors
+admin/customers: 12 clicked, 0 no-visible-effect, 0 errors
+admin/simulations: 12 clicked, 1 no-visible-effect, 0 errors
+admin/credit-notes: 11 clicked, 1 no-visible-effect, 0 errors
+admin/aging: 4 clicked, 0 no-visible-effect, 0 errors
+admin/compliance/licenses: 17 clicked, 0 no-visible-effect, 0 errors
+admin/reports/operations: 6 clicked, 0 no-visible-effect, 0 errors
+admin/system/notifications: 20 clicked, 2 no-visible-effect, 0 errors
+admin/system/audit: 10 clicked, 1 no-visible-effect, 0 errors

@@ -16,6 +16,8 @@ export interface Ctx {
   fail(code: string, ar: string, en: string, status?: number, field?: string): never;
   require(...roles: T.RoleCode[]): void;
   exec<R = unknown>(name: string, input: unknown): R;
+  /** نقطة حفظ داخل المعاملة: الدالة المعادة تستعيد البيانات وتحذف الأحداث المضافة بعدها (للتراجع الجزئي مثل courier.sync) */
+  savepoint(): () => void;
 }
 
 export type Guard = 'any' | 'staff' | T.RoleCode[];
@@ -80,17 +82,20 @@ export class Engine {
     const now = this.clock();
     const requestId = `req_${fp.slice(0, 10)}_${now.toString(36)}`;
     const ctx = this.makeCtx(actor, now, requestId, events);
+    let result: R;
     try {
-      const result = cmd.run(ctx, input as never) as R;
+      result = cmd.run(ctx, input as never) as R;
       if (idempotencyKey) this.db.meta.idempotency[`${userId}:${name}:${idempotencyKey}`] = { fingerprint: fp, result: result ?? null, at: iso(now) };
+      // الالتزام: الحفظ الدائم داخل المعاملة — إن فشل يُتراجع عن كل شيء ولا يُبث أي حدث
       this.opts.persist?.(this.db, [name]);
-      const payload = { command: name, events, actorId: userId, at: iso(now) };
-      this.listeners.forEach((l) => l(payload));
-      return result;
     } catch (e) {
-      this.db = snapshot; // تراجع كامل — لا أثر جزئي
+      this.db = snapshot; // تراجع كامل — لا أثر جزئي ولا أحداث
       throw e;
     }
+    // بعد الالتزام فقط: البث للمشتركين (SSE، التبويبات الأخرى). خطأ مشترك لا يُفشل أمراً التزم فعلاً
+    const payload = { command: name, events: [...events], actorId: userId, at: iso(now) };
+    this.listeners.forEach((l) => { try { l(payload); } catch (err) { console.error('listener failed after commit', err); } });
+    return result;
   }
 
   private makeCtx(actor: Actor, now: number, requestId: string, events: T.OutboxEvent[]): Ctx {
@@ -113,6 +118,10 @@ export class Engine {
       },
       fail(code, ar, en, status = 422, field) { throw new DomainError(code, status, { ar, en }, field); },
       require(...roles) { if (!has(actor, ...roles)) throw new DomainError('FORBIDDEN', 403, { ar: 'ليست لديك صلاحية لهذا الإجراء', en: 'You do not have permission for this action' }); },
+      savepoint() {
+        const snap = clone(db()); const n = events.length;
+        return () => { for (const k of Object.keys(snap) as (keyof T.Db)[]) (db() as any)[k] = (snap as any)[k]; events.length = n; };
+      },
       exec(name, input) {
         const cmd = registry.get(name);
         if (!cmd) throw new Error(name);

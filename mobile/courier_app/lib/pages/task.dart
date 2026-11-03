@@ -19,9 +19,19 @@ class _TaskPageState extends State<TaskPage> {
 
   void _reset() => setState(() { stage = null; sig = null; photo = false; err = null; name.clear(); note.clear(); });
 
+  bool busy = false;
+  /// ينفّذ الإجراء مرة واحدة (الضغط المتكرر أثناء الإرسال يُتجاهل)، ورسالة النجاح تعكس النتيجة الفعلية:
+  /// إن حُفظ في الطابور (انقطاع محاكى أو فعلي) تظهر «حُفظ في الطابور» لا «تم».
   Future<void> _do(Future<dynamic> Function() fn, String ok) async {
-    setState(() => err = null);
-    try { await fn(); _reset(); if (mounted) await showSuccess(context, ok); } on ApiException catch (e) { setState(() => err = e.message(AppScope.of(context).lang)); }
+    if (busy) return;
+    setState(() { err = null; busy = true; });
+    final s = AppScope.of(context).s;
+    try {
+      final r = await fn();
+      _reset();
+      if (mounted) await showSuccess(context, r == false ? s.t('حُفظ في الطابور وسيُزامن تلقائياً عند عودة الاتصال', 'Saved to queue — will sync automatically when back online') : ok);
+    } on ApiException catch (e) { if (mounted) setState(() => err = e.message(AppScope.of(context).lang)); }
+    finally { if (mounted) setState(() => busy = false); }
   }
 
   @override
@@ -69,7 +79,7 @@ class _TaskPageState extends State<TaskPage> {
             if (t['kind'] == 'pickup' && (t['box'] != null || queued.any((x) => x['type'] == 'scanPack'))) _section(context, s.d('courier.confirmPickup'), [
               TextField(controller: name, decoration: InputDecoration(labelText: s.t('اسم المُسلِّم', 'Handed over by'))), const SizedBox(height: 10),
               Text(s.d('courier.signHere')), SignaturePad(onChanged: (v) => sig = v),
-              FilledButton(onPressed: () { if (name.text.trim().isEmpty || sig == null) { setState(() => err = s.t('الاسم والتوقيع مطلوبان', 'Name and signature are required')); return; } _do(() => q.act(st, 'pickup', 'courier.pickup', t['shipmentId'], {'signedBy': name.text.trim(), 'method': 'signature'}, s.t('استلام', 'Pickup')), q.offline ? s.t('حُفظ في الطابور', 'Saved to queue') : s.t('تم الاستلام — الحيازة لديك', 'Collected — custody is yours')); }, child: Text(s.d('courier.confirmPickup'))),
+              FilledButton(onPressed: () { if (name.text.trim().isEmpty || sig == null) { setState(() => err = s.t('الاسم والتوقيع مطلوبان', 'Name and signature are required')); return; } _do(() => q.act(st, 'pickup', 'courier.pickup', t['shipmentId'], {'signedBy': name.text.trim(), 'method': 'signature'}, s.t('استلام', 'Pickup')), s.t('تم الاستلام — الحيازة لديك', 'Collected — custody is yours')); }, child: Text(s.d('courier.confirmPickup'))),
             ]),
             // K08 بدء النقل والوصول (تتطلب اتصالاً)
             if (mine && status == 'collected' && stage == null) FilledButton.icon(onPressed: q.offline ? null : () => _do(() => st.run('courier.startTransit', {'shipment': t['shipmentId']}), s.d('courier.startTransit')), icon: const Icon(Icons.play_arrow), label: Text(s.d('courier.startTransit'))),
@@ -101,7 +111,7 @@ class _TaskPageState extends State<TaskPage> {
               Text(s.d('courier.signHere')), SignaturePad(onChanged: (v) => sig = v),
               SwitchListTile(contentPadding: EdgeInsets.zero, value: photo, onChanged: (v) => setState(() => photo = v), title: Text(s.d('courier.photo')), secondary: const SimBadge()),
               TextField(controller: note, decoration: InputDecoration(labelText: s.note)), const SizedBox(height: 10),
-              FilledButton(onPressed: () { if (name.text.trim().isEmpty || sig == null) { setState(() => err = s.t('اسم المستلم والتوقيع مطلوبان', 'Recipient name and signature are required')); return; } _do(() => q.act(st, 'deliver', 'courier.deliver', t['shipmentId'], {'recipientName': name.text.trim(), 'signature': sig, 'photoRef': photo ? 'photo-sim-${DateTime.now().millisecondsSinceEpoch}' : null, 'notes': note.text}, s.d('courier.deliver')), q.offline ? s.t('حُفظ في الطابور', 'Saved to queue') : s.t('تم التسليم مع الإثبات', 'Delivered with proof')); }, child: Text(s.t('تأكيد التسليم', 'Confirm delivery'))),
+              FilledButton(onPressed: () { if (name.text.trim().isEmpty || sig == null) { setState(() => err = s.t('اسم المستلم والتوقيع مطلوبان', 'Recipient name and signature are required')); return; } _do(() => q.act(st, 'deliver', 'courier.deliver', t['shipmentId'], {'recipientName': name.text.trim(), 'signature': sig, 'photoRef': photo ? 'photo-sim-${DateTime.now().millisecondsSinceEpoch}' : null, 'notes': note.text}, s.d('courier.deliver')), s.t('تم التسليم مع الإثبات', 'Delivered with proof')); }, child: Text(s.t('تأكيد التسليم', 'Confirm delivery'))),
               TextButton(onPressed: _reset, child: Text(s.cancel)),
             ]),
             if (stage == 'fail') _section(context, s.d('courier.failAttempt'), [

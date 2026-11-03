@@ -74,3 +74,13 @@ test('عناوين وتفاصيل الخط الزمني تُبنى من الرم
   assert.equal(timelineTitle('ar', { kind: 'status', title: { ar: 'جُدول الاستلام', en: '' }, codes: { status: 'pickup_scheduled' } }), 'الاستلام مجدول');
   assert.equal(timelineTitle('ar', { kind: 'carrier', title: { ar: 'الناقل: loaded', en: '' }, codes: { eventType: 'loaded' } }), 'الناقل: تم التحميل على الطائرة');
 });
+
+test('لا مفاتيح ترجمة مفقودة: كل t(\'…\') في الويب وكل s.d(\'…\') في Flutter له مدخل', async () => {
+  const { termEntry } = await import('../packages/i18n/src/terms');
+  const glob = (dir: string, ext: RegExp): string[] => fs.readdirSync(dir, { withFileTypes: true }).flatMap((d) => d.isDirectory() ? glob(`${dir}/${d.name}`, ext) : ext.test(d.name) ? [`${dir}/${d.name}`] : []);
+  const missing: string[] = []; let n = 0;
+  for (const f of glob('apps/option-c/src', /\.tsx?$/)) for (const m of fs.readFileSync(f, 'utf8').matchAll(/\bt\('([a-zA-Z][\w]*\.[\w.]+)'/g)) { n++; if (!termEntry(m[1])) missing.push(`${f}: ${m[1]}`); }
+  for (const f of ['mobile/atlas_shared/lib', 'mobile/customer_app/lib', 'mobile/courier_app/lib'].flatMap((d) => glob(d, /\.dart$/))) for (const m of fs.readFileSync(f, 'utf8').matchAll(/\.d\('([a-zA-Z][\w]*\.[\w.]+)'\)/g)) { n++; if (!termEntry(m[1])) missing.push(`${f}: ${m[1]}`); }
+  assert.ok(n > 100, `مفاتيح مفحوصة: ${n}`);
+  assert.deepEqual(missing, []);
+});

@@ -9,8 +9,9 @@ class Fmt {
   String dt(String? iso) {
     final d = _riyadh(iso); if (d == null) return '—';
     final h12 = d.hour % 12 == 0 ? 12 : d.hour % 12;
-    final ampm = lang == 'ar' ? (d.hour < 12 ? 'ص' : 'م') : (d.hour < 12 ? 'AM' : 'PM');
-    return lang == 'ar' ? '${_two(d.day)} ${_arMonths[d.month - 1]}، ${_two(h12)}:${_two(d.minute)} $ampm' : '${_two(d.day)} ${_enMonths[d.month - 1]}, ${_two(h12)}:${_two(d.minute)} $ampm';
+    final ampm = d.hour < 12 ? 'ص' : 'م';
+    // مطابق للويب (fmtDateTime): العربية بنظام 12 ساعة (ص/م)، والإنجليزية بنظام 24 ساعة
+    return lang == 'ar' ? '${_two(d.day)} ${_arMonths[d.month - 1]}، ${_two(h12)}:${_two(d.minute)} $ampm' : '${_two(d.day)} ${_enMonths[d.month - 1]}, ${_two(d.hour)}:${_two(d.minute)}';
   }
   String time(String? iso) { final d = _riyadh(iso); if (d == null) return '—'; return '${_two(d.hour)}:${_two(d.minute)}'; }
   String sar(num? halala) {
@@ -18,7 +19,7 @@ class Fmt {
     final v = (halala / 100).toStringAsFixed(2);
     final parts = v.split('.');
     final whole = parts[0].replaceAllMapped(RegExp(r'\B(?=(\d{3})+(?!\d))'), (_) => ',');
-    return lang == 'ar' ? '$whole.${parts[1]} ر.س' : 'SAR $whole.${parts[1]}';
+    return '$whole.${parts[1]} ${lang == 'ar' ? 'ر.س' : 'SAR'}'; // مطابق للويب (fmtSAR)
   }
   /// الحرارة والأرقام اللاتينية تُعزل اتجاهياً (LRI…PDI) كي لا تنقلب داخل النص العربي
   /// الوحدة كما في الويب (fmtTemp): «°م» بالعربية و«°C» بالإنجليزية، مع عزل الاتجاه للقيم السالبة

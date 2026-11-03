@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../mode.dart';
 import '../app_state.dart';
 import '../api/api_client.dart';
 import '../theme/atlas_theme.dart';
@@ -47,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final st = AppScope.of(context); final s = st.s; final c = AtlasColors.of(context); final cs = Theme.of(context).colorScheme;
     return Scaffold(body: SafeArea(child: ListView(padding: const EdgeInsets.all(20), children: [
-      Row(children: [SimBadge(text: s.demoBadge), const Spacer(), TextButton(onPressed: () => st.setLang(st.lang == 'ar' ? 'en' : 'ar'), child: Text(st.lang == 'ar' ? 'English' : 'العربية'))]),
+      Row(children: [if (kDemoMode) SimBadge(text: s.demoBadge), const Spacer(), TextButton(onPressed: () => st.setLang(st.lang == 'ar' ? 'en' : 'ar'), child: Text(st.lang == 'ar' ? 'English' : 'العربية'))]),
       const SizedBox(height: 12),
       FadeSlideIn(child: Container(
         padding: const EdgeInsets.all(22),
@@ -67,6 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
         TextField(controller: _pw, obscureText: true, textDirection: TextDirection.ltr, decoration: InputDecoration(labelText: s.password)),
         const SizedBox(height: 14),
         FilledButton(onPressed: busy ? null : () => _login(st), child: Text(s.signIn)),
+        if (kDemoMode) ...[
         const SizedBox(height: 22),
         Text(s.demoAccounts, style: Theme.of(context).textTheme.titleMedium),
         const SizedBox(height: 8),
@@ -77,9 +79,10 @@ class _LoginScreenState extends State<LoginScreen> {
           subtitle: Text('${s.d('roles.${widget.accounts[i].role}')} · ${Fmt.ltr(widget.accounts[i].email)}'),
           onTap: busy ? null : () { _email.text = widget.accounts[i].email; _pw.text = 'Demo@2026'; _login(st, widget.accounts[i].email, 'Demo@2026'); },
         )))),
+        ],
       ] else ...[
         Text(s.mfaTitle, style: Theme.of(context).textTheme.titleLarge),
-        Text('${s.mfaHint} — ${s.t('رمز العرض', 'Demo code')} 123456'),
+        Text(kDemoMode ? '${s.mfaHint} — ${s.t('رمز العرض', 'Demo code')} 123456' : s.mfaHint),
         const SizedBox(height: 12),
         TextField(controller: _code, keyboardType: TextInputType.number, maxLength: 6, textAlign: TextAlign.center, textDirection: TextDirection.ltr, style: const TextStyle(fontSize: 24, letterSpacing: 10), autofocus: true, onSubmitted: (_) => _verify(st)),
         FilledButton(onPressed: busy ? null : () => _verify(st), child: Text(s.verify)),

@@ -159,6 +159,8 @@ export function label(lang: Lang, v: string | null | undefined, domain?: string)
 export function termEntry(key: string): Entry | null {
   if (TERM_OVERRIDES[key]) return TERM_OVERRIDES[key];
   if (TERMS_C[key]) return TERMS_C[key];
+  // مفاتيح القواميس التعدادية (مثل freshness.stale) تتبع تسميات القيم المعتمدة حتى لا يختلف المصطلح بين t() وlabel()
+  const [d, code] = key.split('.'); if (code && (BASE_ENUMS as readonly string[]).includes(d) && LABELS[code]) return LABELS[code];
   const v = key.split('.').reduce<any>((o, k) => (o == null ? o : o[k]), dict);
   return v && typeof v === 'object' && typeof v.ar === 'string' ? (v as Entry) : null;
 }
@@ -213,7 +215,135 @@ export function allLabels(): Record<string, Entry> {
 /** القاموس المسطّح بعد التصحيحات (للمولّد) */
 export function allTerms(): Record<string, Entry> {
   const flat: Record<string, Entry> = {};
-  const walk = (o: any, p: string) => { for (const [k, v] of Object.entries(o)) { const key = p ? `${p}.${k}` : k; if (v && typeof v === 'object' && typeof (v as any).ar === 'string') flat[key] = TERM_OVERRIDES[key] ?? (v as Entry); else if (v && typeof v === 'object') walk(v, key); } };
+  const walk = (o: any, p: string) => { for (const [k, v] of Object.entries(o)) { const key = p ? `${p}.${k}` : k; if (v && typeof v === 'object' && typeof (v as any).ar === 'string') flat[key] = termEntry(key) ?? (v as Entry); else if (v && typeof v === 'object') walk(v, key); } };
   walk(dict, '');
   return { ...flat, ...TERMS_C };
+}
+
+/* ===================== المسرد المعتمد (Design Freeze V1.0) =====================
+ * المرجع الوحيد للمصطلحات الأساسية في الويب وFlutter والمحرك. كل مصطلح: الصيغة العربية والإنجليزية المعتمدتان،
+ * والصيغ المرفوضة (avoid). اختبار tests/glossary.test.ts يفحص كل نص مضمّن في الواجهات وتطبيقات Flutter والمحرك
+ * ويفشل إن ظهرت صيغة مرفوضة. التوثيق: docs/phase17/AR_EN_LOCALIZATION_AUDIT.md (مولّد من هنا). */
+export interface GlossaryEntry { id: string; domain: string; en: string; ar: string; avoidAr?: string[]; avoidEn?: string[]; note?: string }
+export const GLOSSARY: GlossaryEntry[] = [
+  // الشحنة ودورتها
+  { id: 'shipment', domain: 'الشحنة', en: 'Shipment', ar: 'شحنة', avoidAr: ['إرسالية', 'بوليصة', 'شحنه'], note: 'الشحنة = طلب نقل عينات واحد برقم تتبع' },
+  { id: 'tracking_no', domain: 'الشحنة', en: 'Tracking no.', ar: 'رقم التتبع', avoidAr: ['رقم البوليصة'] },
+  { id: 'pickup', domain: 'الشحنة', en: 'Pickup', ar: 'الاستلام', avoidAr: ['الالتقاط'], avoidEn: ['Pick-up', 'Collection'], note: 'استلام المندوب من المرسل' },
+  { id: 'pickup_window', domain: 'الشحنة', en: 'Pickup window', ar: 'فترة الاستلام', avoidAr: ['نافذة الاستلام'] },
+  { id: 'pickup_scheduled', domain: 'الشحنة', en: 'Pickup scheduled', ar: 'الاستلام مجدول', avoidAr: ['جُدول الاستلام'] },
+  { id: 'deliver_by', domain: 'الشحنة', en: 'Deliver by', ar: 'التسليم قبل', note: 'الموعد الأقصى للتسليم' },
+  { id: 'delivery_failed', domain: 'الشحنة', en: 'Delivery failed', ar: 'تعذّر التسليم', avoidAr: ['تسليم فاشل', 'فشل التسليم'] },
+  { id: 'failed_attempt', domain: 'الشحنة', en: 'Failed delivery attempt', ar: 'محاولة تسليم فاشلة' },
+  { id: 'pod', domain: 'الشحنة', en: 'Proof of delivery', ar: 'إثبات التسليم', avoidAr: ['إيصال التسليم'] },
+  { id: 'receiving_institution', domain: 'الشحنة', en: 'Receiving institution', ar: 'الجهة المستلمة', note: 'القرار السريري لها وحدها' },
+  { id: 'stat', domain: 'الشحنة', en: 'STAT', ar: 'طارئ (STAT)', avoidAr: ['عاجل STAT'] },
+  // النقل والحيازة
+  { id: 'courier', domain: 'النقل', en: 'Courier', ar: 'مندوب', avoidAr: ['سائق', 'موصل'], avoidEn: ['Driver'] },
+  { id: 'leg', domain: 'النقل', en: 'Transport leg', ar: 'مرحلة نقل', avoidAr: ['رجل نقل', 'أرجل النقل', 'لرجل', 'في رجل'] },
+  { id: 'custody', domain: 'النقل', en: 'Custody', ar: 'الحيازة', avoidAr: ['العهدة الحيازية', 'حيازه'] },
+  { id: 'handover', domain: 'النقل', en: 'Custody transfer / Hand over', ar: 'نقل الحيازة', note: '«تسليم لشريك» فقط لحركة الصناديق المخزنية' },
+  { id: 'air_carrier', domain: 'النقل', en: 'Air carrier', ar: 'الناقل الجوي' },
+  { id: 'partner', domain: 'النقل', en: 'Carrier partner', ar: 'الشريك الناقل' },
+  { id: 'in_air', domain: 'النقل', en: 'In air transit', ar: 'في رحلة جوية', avoidAr: ['على متن رحلة'] },
+  { id: 'route', domain: 'النقل', en: 'Route', ar: 'مسار' },
+  { id: 'dispatch', domain: 'النقل', en: 'Dispatch', ar: 'التوزيع' },
+  // التتبع والأجهزة
+  { id: 'box', domain: 'الأصول', en: 'Box', ar: 'صندوق', avoidAr: ['الصندوق الذكي', 'حاوية'], note: 'صندوق التبريد القابل لإعادة الاستخدام' },
+  { id: 'tracker', domain: 'الأصول', en: 'Tracker (GPT45-M)', ar: 'جهاز التتبع', avoidAr: ['الجهاز الذكي'] },
+  { id: 'gateway_console', domain: 'الأصول', en: 'Device gateway console', ar: 'لوحة بوابة الأجهزة', avoidAr: ['كونسول'] },
+  { id: 'firmware', domain: 'الأصول', en: 'Firmware', ar: 'البرنامج الثابت' },
+  { id: 'last_confirmed', domain: 'التتبع', en: 'Last confirmed position', ar: 'آخر موقع مؤكد', note: 'لا «موقع حالي» إلا إذا كان مباشراً فعلاً' },
+  { id: 'live', domain: 'التتبع', en: 'Live', ar: 'مباشر' },
+  { id: 'delayed', domain: 'التتبع', en: 'Delayed', ar: 'متأخر' },
+  { id: 'stale', domain: 'التتبع', en: 'Stale', ar: 'بيانات قديمة', avoidAr: ['قديم'] },
+  { id: 'inferred', domain: 'التتبع', en: 'Inferred', ar: 'مستنتج' },
+  { id: 'backfilled', domain: 'التتبع', en: 'Backfilled reading', ar: 'قراءة مخزنة', avoidAr: ['مُستكمَلة لاحقاً', 'قراءات متأخرة'] },
+  { id: 'simulated', domain: 'التتبع', en: 'Simulated', ar: 'محاكاة', note: 'كل قراءة أو موقع أو دفع غير حقيقي' },
+  { id: 'demo_data', domain: 'التتبع', en: 'Demo data', ar: 'بيانات عرض' },
+  // سلسلة التبريد والجودة
+  { id: 'excursion', domain: 'الجودة', en: 'Temperature excursion', ar: 'انحراف حراري', avoidAr: ['انحراف حرارة', 'خارج النطاق الحراري'], avoidEn: ['Temperature deviation'] },
+  { id: 'thermal_profile', domain: 'الجودة', en: 'Thermal profile', ar: 'الملف الحراري' },
+  { id: 'ambient', domain: 'الجودة', en: 'Ambient', ar: 'حرارة الغرفة', avoidAr: ['محيط'] },
+  { id: 'chilled', domain: 'الجودة', en: 'Chilled', ar: 'مبرّد' },
+  { id: 'frozen', domain: 'الجودة', en: 'Frozen', ar: 'مجمّد' },
+  { id: 'acknowledge', domain: 'الجودة', en: 'Acknowledge', ar: 'إقرار' },
+  { id: 'capa', domain: 'الجودة', en: 'CAPA', ar: 'الإجراءات التصحيحية والوقائية' },
+  { id: 'incident', domain: 'الجودة', en: 'Quality incident', ar: 'حادثة جودة' },
+  { id: 'claim', domain: 'الجودة', en: 'Claim', ar: 'مطالبة' },
+  { id: 'data_gap', domain: 'الجودة', en: 'Data gap', ar: 'فجوة بيانات', note: 'لا تعني الالتزام بالنطاق' },
+  // المالية
+  { id: 'invoice', domain: 'المالية', en: 'Invoice', ar: 'فاتورة' },
+  { id: 'credit_note', domain: 'المالية', en: 'Credit note', ar: 'إشعار دائن' },
+  { id: 'vat', domain: 'المالية', en: 'VAT', ar: 'ضريبة القيمة المضافة' },
+  { id: 'settlement', domain: 'المالية', en: 'Partner settlement', ar: 'تسوية شريك' },
+  { id: 'journal', domain: 'المالية', en: 'Journal entry', ar: 'قيد يومية' },
+  { id: 'tariff', domain: 'المالية', en: 'Tariff', ar: 'جدول الأسعار', avoidAr: ['التعرفة'] },
+  { id: 'quote', domain: 'المالية', en: 'Quote', ar: 'عرض سعر' },
+  { id: 'sar', domain: 'المالية', en: 'SAR', ar: 'ر.س', note: 'المبالغ بالهللة داخلياً وتُعرض بخانتين عشريتين' },
+  // الامتثال والنظام
+  { id: 'legal_hold', domain: 'الامتثال', en: 'Legal hold', ar: 'التحفظ القانوني', avoidAr: ['الحجز القانوني'] },
+  { id: 'operational_block', domain: 'الامتثال', en: 'Operational block', ar: 'قيد تشغيلي', avoidAr: ['الحظر التشغيلي'] },
+  { id: 'license', domain: 'الامتثال', en: 'License', ar: 'ترخيص' },
+  { id: 'retention', domain: 'الامتثال', en: 'Retention', ar: 'الاحتفاظ' },
+  { id: 'audit_log', domain: 'النظام', en: 'Audit log', ar: 'سجل التدقيق' },
+  { id: 'two_step', domain: 'النظام', en: 'Two-step verification', ar: 'التحقق بخطوتين', avoidAr: ['التحقق الثنائي'] },
+  { id: 'dead_letter', domain: 'النظام', en: 'Dead-letter', ar: 'رسائل متعذرة المعالجة', avoidAr: ['Dead-letter'] },
+  { id: 'session', domain: 'النظام', en: 'Session', ar: 'جلسة' },
+  { id: 'approvals', domain: 'النظام', en: 'Approvals', ar: 'صندوق الاعتمادات' },
+  // العملاء
+  { id: 'branch', domain: 'العملاء', en: 'Branch', ar: 'فرع' },
+  { id: 'corp_admin', domain: 'العملاء', en: 'Corporate admin', ar: 'مدير المؤسسة' },
+  { id: 'receiving_lab', domain: 'العملاء', en: 'Receiving laboratory', ar: 'مختبر الاستلام' },
+  // التحية والتنسيق
+  { id: 'good_evening', domain: 'عام', en: 'Good evening', ar: 'مساء الخير', avoidAr: ['مساء النور'], note: '«مساء النور» ردّ لا تحية' },
+];
+
+/** نصوص سردية يولّدها النظام (أوصاف القيود، أسس التقدير، أسباب الحظر الآلي، رسائل البوابة) مخزنة كنص عربي في النموذج.
+ *  في الواجهة الإنجليزية تُترجم بهذه القواعد. النص الذي يكتبه المستخدم بنفسه يُعرض كما أُدخل.
+ *  الإنتاج: تُخزّن هذه الحقول كرمز + معاملات بدل النص (انظر PRODUCTION_DEVELOPMENT_READINESS). */
+const SYS_EXACT: Record<string, string> = {
+  'الشحنة على متن الرحلة؛ لا يُفترض موقع حي': 'Shipment is on board the flight; no live position is assumed',
+  'الشحنة على متن رحلة؛ يُحدَّث التقدير بعد حدث وصول الناقل': 'Shipment is on a flight; estimate updates after the carrier arrival event',
+  'وصول الرحلة + زمن الاستلام من مكتب الشحن والتوصيل البري': 'Flight arrival + cargo-office release and road delivery time',
+  'قواعد المرحلة 1: زمن المسار المخطط + آخر حدث حيازة': 'Phase 1 rules: planned route time + last custody event',
+  'إعلان فقدان نهائي باعتماد مشترك (العمليات + الجودة)': 'Final loss declaration with joint approval (operations + quality)',
+  'تم الاسترداد': 'Recovered',
+  'الاعتماد ليس دفعاً': 'Approval is not payment',
+  'اقتران أولي': 'Initial pairing',
+  'استبدال جهاز بعد عطل في المستشعر': 'Device replaced after sensor fault',
+  'تكرار بنفس رقم التسلسل — لا أثر تجاري': 'Duplicate sequence number — no business effect',
+  'IMEI غير مسجّل — عزل (SEC-005)': 'Unregistered IMEI — quarantined (SEC-005)',
+  'فشل التحقق من المجموع الاختباري بعد 5 محاولات': 'Checksum validation failed after 5 attempts',
+  'إطار مقطوع (طول غير صالح)': 'Truncated frame (invalid length)',
+  'تهيئة بيانات العرض التجريبية': 'Demo data initialised',
+  'صرف للمسارات': 'Issued to routes',
+  'انتهاء ترخيص النقل البري TGA-29004': 'Road transport licence TGA-29004 expired',
+  'انتهاء تأهيل المركبة المبرّدة': 'Refrigerated vehicle qualification expired',
+  'انتهاء تدريب المواد الحيوية + حظر الشريك': 'Biological materials training expired + partner blocked',
+};
+const SYS_PATTERNS: [RegExp, string][] = [
+  [/^إصدار فاتورة (.+)$/, 'Invoice issued $1'],
+  [/^إشعار دائن (.+)$/, 'Credit note $1'],
+  [/^تحصيل إلكتروني \(محاكاة\) (.+)$/, 'Online collection (simulated) $1'],
+  [/^تحصيل بطاقة \(محاكاة\) (.+)$/, 'Card collection (simulated) $1'],
+  [/^فاتورة فورية (.+)$/, 'Instant invoice $1'],
+  [/^تحصيل (.+)$/, 'Collection $1'],
+  [/^عكس ([^:]+): (.+)$/, 'Reversal of $1: $2'],
+  [/^استحقاق تسوية (.+)$/, 'Settlement accrual $1'],
+  [/^سداد تسوية (.+)$/, 'Settlement payment $1'],
+  [/^قرار المطالبة (.+)$/, 'Claim decision $1'],
+  [/^استبدال: (.+)$/, 'Replacement: $1'],
+  [/^ضريبة (\d+)%$/, 'VAT $1%'],
+  [/^انتهاء (\S+)$/, '$1 expired'],
+  [/^إعادة جدولة إلى (.+)$/, 'Rescheduled to $1'],
+  [/^حدث الناقل: (.+)$/, 'Carrier event: $1'],
+];
+export function sysText(lang: Lang, s: string | null | undefined): string {
+  if (s == null) return '';
+  if (lang === 'ar' || !/[؀-ۿ]/.test(s)) return s;
+  if (SYS_EXACT[s]) return SYS_EXACT[s];
+  for (const [re, en] of SYS_PATTERNS) if (re.test(s)) return s.replace(re, en);
+  const m = s.match(/^([^\u0600-\u06FF:]+): (.+)$/); if (m) return `${m[1]}: ${sysText(lang, m[2])}`; // «partner blocked: <سبب>»
+  return s; // نص أدخله المستخدم: يُعرض كما هو
 }

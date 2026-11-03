@@ -191,7 +191,7 @@ export function seed(nowMs = Date.now(), seedNo = 2026): T.Db {
     db.boxes.push(box);
     db.boxQualifications.push({ id: id('bq'), boxId: box.id, qualificationType: 'thermal_mapping', result: 'pass', effectiveAt: t(-24 * 140), expiresAt: box.qualificationExpiry, by: U.quality.id });
     db.boxQualifications.push({ id: id('bq'), boxId: box.id, qualificationType: 'cleaning', result: 'pass', effectiveAt: t(-24 * (2 + (n % 6))), expiresAt: null, by: U.warehouse.id });
-    const dev: T.Device = { id: `dev_${pad(n, 3)}`, imei: `86${pad(Math.floor(rnd() * 1e9), 9)}${pad(n, 4)}`, model: 'GPT45-M', firmware: n % 4 === 0 ? 'GPT45M_V2.1.6 (تجريبي)' : 'GPT45M_V2.1.8 (تجريبي)', simIccidMasked: `8996601••••••${pad(n, 4)}`, state: 'ready', lastSeenAt: t(-between(0.02, 0.2)), batteryPct: Math.round(between(55, 98)), lastTempC: null, lastFix: { lat: 24.5714 + between(-0.01, 0.01), lng: 46.8325 + between(-0.01, 0.01), at: t(-0.2) }, createdAt: t(-24 * 300) };
+    const dev: T.Device = { id: `dev_${pad(n, 3)}`, imei: `86${pad(Math.floor(rnd() * 1e9), 9)}${pad(n, 4)}`, model: 'GPT45-M', firmware: n % 4 === 0 ? 'GPT45M_V2.1.6-DEMO' : 'GPT45M_V2.1.8-DEMO', simIccidMasked: `8996601••••••${pad(n, 4)}`, state: 'ready', lastSeenAt: t(-between(0.02, 0.2)), batteryPct: Math.round(between(55, 98)), lastTempC: null, lastFix: { lat: 24.5714 + between(-0.01, 0.01), lng: 46.8325 + between(-0.01, 0.01), at: t(-0.2) }, createdAt: t(-24 * 300) };
     db.devices.push(dev);
     // سجل اقتران: اقتران سابق منتهي لبعض الصناديق لإظهار التاريخ غير القابل للتعديل
     if (n === 3) {
@@ -201,9 +201,9 @@ export function seed(nowMs = Date.now(), seedNo = 2026): T.Db {
   });
   // أجهزة احتياطية غير مقترنة + جهاز متقاعد
   db.devices.push(
-    { id: 'dev_031', imei: '861234567890031', model: 'GPT45-M', firmware: 'GPT45M_V2.1.2 (تجريبي)', simIccidMasked: '8996601••••••0031', state: 'retired', lastSeenAt: t(-24 * 45), batteryPct: null, lastTempC: null, lastFix: null, createdAt: t(-24 * 300) },
-    { id: 'dev_032', imei: '861234567890032', model: 'GPT45-M', firmware: 'GPT45M_V2.1.8 (تجريبي)', simIccidMasked: '8996601••••••0032', state: 'ready', lastSeenAt: t(-0.1), batteryPct: 100, lastTempC: 22.1, lastFix: null, createdAt: t(-24 * 20) },
-    { id: 'dev_033', imei: '861234567890033', model: 'GPT45-M', firmware: 'GPT45M_V2.1.8 (تجريبي)', simIccidMasked: '8996601••••••0033', state: 'ready', lastSeenAt: t(-0.1), batteryPct: 97, lastTempC: 21.8, lastFix: null, createdAt: t(-24 * 20) },
+    { id: 'dev_031', imei: '861234567890031', model: 'GPT45-M', firmware: 'GPT45M_V2.1.2-DEMO', simIccidMasked: '8996601••••••0031', state: 'retired', lastSeenAt: t(-24 * 45), batteryPct: null, lastTempC: null, lastFix: null, createdAt: t(-24 * 300) },
+    { id: 'dev_032', imei: '861234567890032', model: 'GPT45-M', firmware: 'GPT45M_V2.1.8-DEMO', simIccidMasked: '8996601••••••0032', state: 'ready', lastSeenAt: t(-0.1), batteryPct: 100, lastTempC: 22.1, lastFix: null, createdAt: t(-24 * 20) },
+    { id: 'dev_033', imei: '861234567890033', model: 'GPT45-M', firmware: 'GPT45M_V2.1.8-DEMO', simIccidMasked: '8996601••••••0033', state: 'ready', lastSeenAt: t(-0.1), batteryPct: 97, lastTempC: 21.8, lastFix: null, createdAt: t(-24 * 20) },
   );
   const devOfBox = (boxId: string) => db.devices.find((d) => d.id === db.pairings.find((p) => p.boxId === boxId && !p.unpairedAt)!.deviceId)!;
   const boxById = (bid: string) => db.boxes.find((b) => b.id === bid)!;
@@ -314,7 +314,7 @@ export function seed(nowMs = Date.now(), seedNo = 2026): T.Db {
       const legs: T.TransportLeg[] = [];
       const mkLeg = (l: Omit<T.TransportLeg, 'id'>) => { const x = { id: id('leg'), ...l }; db.legs.push(x); legs.push(x); return x; };
       if (sh.mode === 'road_air') {
-        const flight = `${pick(['XY', 'SV', 'F3'])}${100 + Math.floor(rnd() * 800)} (تجريبي)`;
+        const flight = `${pick(['XY', 'SV', 'F3'])}${100 + Math.floor(rnd() * 800)}-DEMO`;
         mkLeg({ routeId: route.id, mode: 'road', partnerId: null, courierId: courier.id, vehicleId: courier.vehicleId, originCity: sh.originCity, destCity: sh.originCity, flightNo: null, scheduledDeparture: iso(tCollect), scheduledArrival: iso(tDepart), actualDeparture: reached('collected') ? iso(tCollect) : null, actualArrival: reached('in_transit') ? iso(tDepart + 40 * MIN) : null, status: reached('in_transit') ? 'arrived' : reached('collected') ? 'departed' : 'planned' });
         const airDep = tDepart + 100 * MIN, airArr = airDep + 110 * MIN;
         mkLeg({ routeId: null, mode: 'air', partnerId: P.ufuq.id, courierId: null, vehicleId: null, originCity: sh.originCity, destCity: sh.destCity, flightNo: flight, scheduledDeparture: iso(airDep), scheduledArrival: iso(airArr), actualDeparture: airDep < now && reached('in_transit') ? iso(airDep + 8 * MIN) : null, actualArrival: airArr < now && reached('in_transit') ? iso(airArr + 5 * MIN) : null, status: airArr < now && reached('in_transit') ? 'arrived' : airDep < now && reached('in_transit') ? 'departed' : 'planned' });
@@ -661,9 +661,9 @@ export function seed(nowMs = Date.now(), seedNo = 2026): T.Db {
     const s: T.License['status'] = status ?? (toDays < 0 ? 'expired' : toDays < 30 ? 'expiring' : 'valid');
     db.licenses.push({ id: id('lic'), holderType, holderId, requirementId: req, licenseNo: no, validFrom: t(-24 * 300), validTo: t(24 * toDays), status: s, verifiedBy: s === 'pending_verification' ? null : U.compliance.id });
   };
-  lic('company', 'company', 'req_01', 'MOH-TL-77812 (تجريبي)', 210); lic('company', 'company', 'req_02', 'TGA-55120 (تجريبي)', 180);
-  lic('partner', P.sahra.id, 'req_02', 'TGA-33019 (تجريبي)', 95); lic('partner', P.ufuq.id, 'req_03', 'GACA-DG-4410 (تجريبي)', 18);
-  lic('partner', P.sahil.id, 'req_02', 'TGA-29004 (تجريبي)', -10); lic('partner', P.hejaz.id, 'req_02', 'TGA-WH-1182 (تجريبي)', 140);
+  lic('company', 'company', 'req_01', 'MOH-TL-77812-DEMO', 210); lic('company', 'company', 'req_02', 'TGA-55120-DEMO', 180);
+  lic('partner', P.sahra.id, 'req_02', 'TGA-33019-DEMO', 95); lic('partner', P.ufuq.id, 'req_03', 'GACA-DG-4410-DEMO', 18);
+  lic('partner', P.sahil.id, 'req_02', 'TGA-29004-DEMO', -10); lic('partner', P.hejaz.id, 'req_02', 'TGA-WH-1182-DEMO', 140);
   db.vehicles.forEach((v) => lic('vehicle', v.id, 'req_04', `REEF-${v.id.slice(-2)}`, Math.round((Date.parse(v.qualificationExpiry) - now) / DAY)));
   db.couriers.forEach((c) => lic('courier', c.id, 'req_05', `BIO-TR-${c.id.slice(-2)}`, Math.round((Date.parse(c.qualificationExpiry) - now) / DAY)));
   lic('company', 'company', 'req_06', 'PDPL-REVIEW-01', 365, 'pending_verification');
@@ -753,7 +753,7 @@ export function seed(nowMs = Date.now(), seedNo = 2026): T.Db {
   db.webhooks.push({ id: id('whk'), organizationId: NKH.id, url: 'https://lis.nukhba.demo/hooks/medlog', events: ['shipment.delivered', 'cold_chain.excursion_detected'], secretMasked: 'whsec_••••3f9a', status: 'active', lastDeliveryAt: t(-2), failures: 0, simulated: true });
   db.apiClients.push(
     { id: id('api'), organizationId: NKH.id, partnerId: null, name: 'نظام المختبر LIS — النخبة', keyPrefix: 'mlk_live_7Q2', scopes: ['shipments:read', 'shipments:write'], status: 'active', createdAt: t(-24 * 40) },
-    { id: id('api'), organizationId: null, partnerId: P.ufuq.id, name: 'Al-Ufuq carrier events', keyPrefix: 'mlk_ptr_U8f', scopes: ['carrier-events:write'], status: 'active', createdAt: t(-24 * 90) },
+    { id: id('api'), organizationId: null, partnerId: P.ufuq.id, name: 'أحداث ناقل الأفق', keyPrefix: 'mlk_ptr_U8f', scopes: ['carrier-events:write'], status: 'active', createdAt: t(-24 * 90) },
   );
 
   // التقارير والتنبؤ بالتأخير وبطاقات الأداء والنسخ الاحتياطي

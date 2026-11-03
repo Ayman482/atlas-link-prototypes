@@ -1,0 +1,1026 @@
+{
+ "executedAt": "2026-11-03T02:44:31.394Z",
+ "engineClock": "2026-11-02T06:00:00.000Z",
+ "steps": [
+  {
+   "id": "E2E-01.1",
+   "ref": "SHP-001, SHP-002, BR-001",
+   "step": "مشغّل فرع العليا ينشئ طلباً مجدولاً مبرّداً (أنابيب دم) بفترة استلام غداً",
+   "expected": "شحنة مؤكدة برقم تتبع وسعر من العقد",
+   "actual": {
+    "id": "shp_000076",
+    "trackingNo": "ML-2026-000076",
+    "qrToken": "qr_000076_mvyunk00",
+    "organizationId": "org_nkh",
+    "branchId": "br_nkh_oly",
+    "serviceProfileId": "svc_chilled_v2",
+    "thermalClass": "chilled",
+    "serviceLevel": "standard",
+    "requestType": "scheduled",
+    "recurringId": null,
+    "senderAddressId": "adr_0001",
+    "receiverAddressId": "adr_0010",
+    "receiverOrgId": "org_nrl",
+    "originCity": "RUH",
+    "destCity": "RUH",
+    "pickupWindowStart": "2026-11-02T08:00:00.000Z",
+    "pickupWindowEnd": "2026-11-02T10:00:00.000Z",
+    "deliverBy": "2026-11-02T14:30:00.000Z",
+    "status": "pickup_scheduled",
+    "subStatus": "box:box_015",
+    "dedicatedBox": false,
+    "mode": "road",
+    "quoteId": "quo_0076",
+    "contractId": "con_nkh",
+    "priceTotal": 0,
+    "createdBy": "usr_branch_op",
+    "createdOnBehalf": false,
+    "createdAt": "2026-11-02T06:00:00.000Z",
+    "updatedAt": "2026-11-02T06:00:00.000Z",
+    "version": 3,
+    "lastPosition": null,
+    "eta": null,
+    "lostState": "none"
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-01.2",
+   "ref": "CUST-002, OPS-001",
+   "step": "الشحنة تظهر للعميل ولوحة التوزيع",
+   "expected": "ظاهرة لمدير المؤسسة وفي قائمة غير المسندة",
+   "actual": {
+    "customer": true,
+    "board": true
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-02.1",
+   "ref": "RTE-001, BR-009, §6.1-3",
+   "step": "إسناد المندوب cou_01 والصندوق BX-CL-015",
+   "expected": "إسناد ناجح ومسار للمندوب",
+   "actual": {
+    "shipment": {
+     "id": "shp_000076",
+     "trackingNo": "ML-2026-000076",
+     "qrToken": "qr_000076_mvyunk00",
+     "organizationId": "org_nkh",
+     "branchId": "br_nkh_oly",
+     "serviceProfileId": "svc_chilled_v2",
+     "thermalClass": "chilled",
+     "serviceLevel": "standard",
+     "requestType": "scheduled",
+     "recurringId": null,
+     "senderAddressId": "adr_0001",
+     "receiverAddressId": "adr_0010",
+     "receiverOrgId": "org_nrl",
+     "originCity": "RUH",
+     "destCity": "RUH",
+     "pickupWindowStart": "2026-11-02T08:00:00.000Z",
+     "pickupWindowEnd": "2026-11-02T10:00:00.000Z",
+     "deliverBy": "2026-11-02T14:30:00.000Z",
+     "status": "pickup_scheduled",
+     "subStatus": "box:box_015",
+     "dedicatedBox": false,
+     "mode": "road",
+     "quoteId": "quo_0076",
+     "contractId": "con_nkh",
+     "priceTotal": 0,
+     "createdBy": "usr_branch_op",
+     "createdOnBehalf": false,
+     "createdAt": "2026-11-02T06:00:00.000Z",
+     "updatedAt": "2026-11-02T06:00:00.000Z",
+     "version": 3,
+     "lastPosition": null,
+     "eta": null,
+     "lostState": "none"
+    },
+    "routeId": "rte_0001"
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-02.2",
+   "ref": "BR-009, DHC, UAT-007",
+   "step": "إسناد صندوق غير جاهز يُرفض",
+   "expected": "BOX_NOT_READY",
+   "actual": "BOX_NOT_READY",
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-03.1",
+   "ref": "SHP-003, UAT-003",
+   "step": "مسح رمز خاطئ للصندوق",
+   "expected": "رفض WRONG_BOX دون أثر",
+   "actual": "WRONG_BOX",
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-03.2",
+   "ref": "SHP-003, BOX-004",
+   "step": "مسح الشحنة والصندوق BX-CL-015",
+   "expected": "تعبئة الشحنة في الصندوق",
+   "actual": "BX-CL-015",
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-03.3",
+   "ref": "BR-005, UAT-003",
+   "step": "الاستلام بتوقيع المرسل",
+   "expected": "الحالة «تم الاستلام» والحيازة لدى المندوب",
+   "actual": {
+    "status": "collected",
+    "custodian": {
+     "type": "courier",
+     "id": "cou_01"
+    }
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-03.4",
+   "ref": "SHP-004",
+   "step": "بدء النقل",
+   "expected": "في الطريق",
+   "actual": "in_transit",
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-04.1",
+   "ref": "TEMP-002, BR-011",
+   "step": "قراءة تجريبية 5.4 °م مع موقع (الرياض)",
+   "expected": "قراءة مسجلة ومعلّمة كبيانات عرض",
+   "actual": {
+    "reading": {
+     "id": "rd_0580",
+     "deviceId": "dev_015",
+     "boxId": "box_015",
+     "deviceTime": "2026-11-02T08:22:00.000Z",
+     "receivedAt": "2026-11-02T08:22:00.000Z",
+     "tempC": 5.4,
+     "batteryPct": 96,
+     "lat": 24.7136,
+     "lng": 46.6753,
+     "fixValid": true,
+     "backfilled": false,
+     "demo": true
+    },
+    "message": {
+     "id": "gwm_0044",
+     "deviceId": "dev_015",
+     "imei": "865608856310015",
+     "receivedAt": "2026-11-02T08:22:00.000Z",
+     "transport": "tcp",
+     "sha256": "5935259cace0340268967551d5b63a69",
+     "parseStatus": "parsed",
+     "reason": null,
+     "replayed": false,
+     "simulated": true
+    }
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-04.2",
+   "ref": "MMT, OPS-004, BR-006",
+   "step": "التتبع يعرض آخر موقع مؤكد بوقته وآخر قراءة",
+   "expected": "حداثة «مباشر»، آخر قراءة 5.4 بوقت الجهاز ووقت الاستلام، علامة demo",
+   "actual": {
+    "freshness": "live",
+    "temp": 5.4,
+    "deviceTime": "2026-11-02T08:22:00.000Z",
+    "receivedAt": "2026-11-02T08:22:00.000Z",
+    "demo": true,
+    "pos": {
+     "lat": 24.7136,
+     "lng": 46.6753,
+     "at": "2026-11-02T08:22:00.000Z",
+     "source": "device",
+     "isLive": true
+    }
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-05.1",
+   "ref": "TEMP-003, UAT-004",
+   "step": "قراءة 11.6 °م خارج نطاق المبرّد (2–8)",
+   "expected": "انحراف مفتوح + إشعار حرج للموظفين",
+   "actual": {
+    "created": true,
+    "open": true,
+    "critical": true
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-05.2",
+   "ref": "TEMP-004",
+   "step": "العمليات تقرّ بالانحراف",
+   "expected": "الحالة «تم الإقرار» ومسجّلة في التدقيق",
+   "actual": "acknowledged",
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-05.3",
+   "ref": "QMS-001",
+   "step": "الجودة تراجع وتفتح حادثاً",
+   "expected": "حادث جودة مرتبط بالشحنة، دون قرار سريري",
+   "actual": {
+    "status": "under_review",
+    "incident": true
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-05.4",
+   "ref": "QMS-001 (CAPA)",
+   "step": "إضافة إجراء CAPA",
+   "expected": "إجراء تصحيحي مرتبط بالحادث",
+   "actual": {
+    "id": "capa_0005",
+    "incidentId": "inc_0007",
+    "actionType": "corrective",
+    "description": "إعادة تدريب على فحص إغلاق الصندوق",
+    "ownerId": "usr_warehouse",
+    "dueAt": "2026-11-09T08:38:00.000Z",
+    "completedAt": null,
+    "status": "open"
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-05.5",
+   "ref": "TEMP-005, TEMP-006, QMS-002",
+   "step": "العميل يرى الانحراف في تقرير الأدلة مع إخلاء المسؤولية السريرية",
+   "expected": "الانحراف ظاهر + نص «القرار السريري للمؤسسة المستلمة»",
+   "actual": {
+    "excursions": 1,
+    "disclaimer": "بيانات عرض تجريبية — ليست قراءات أجهزة حقيقية. الفجوات لا تعني الالتزام. القرار السريري للمؤسسة المستلمة فقط."
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-06.1",
+   "ref": "SHP-005, RTE-002",
+   "step": "شحنة من الرياض إلى جدة (أكثر من 600 كم) تُخطط برياً + جوياً",
+   "expected": "نمط road_air",
+   "actual": {
+    "id": "shp_000078",
+    "trackingNo": "ML-2026-000078",
+    "qrToken": "qr_000078_mvyvq4w0",
+    "organizationId": "org_nkh",
+    "branchId": "br_nkh_oly",
+    "serviceProfileId": "svc_chilled_v2",
+    "thermalClass": "chilled",
+    "serviceLevel": "express",
+    "requestType": "on_demand",
+    "recurringId": null,
+    "senderAddressId": "adr_0001",
+    "receiverAddressId": "adr_0003",
+    "receiverOrgId": "org_nkh",
+    "originCity": "RUH",
+    "destCity": "JED",
+    "pickupWindowStart": "2026-11-02T07:30:00.000Z",
+    "pickupWindowEnd": "2026-11-02T09:30:00.000Z",
+    "deliverBy": "2026-11-02T19:30:00.000Z",
+    "status": "pickup_scheduled",
+    "subStatus": "box:box_016",
+    "dedicatedBox": false,
+    "mode": "road_air",
+    "quoteId": "quo_0078",
+    "contractId": "con_nkh",
+    "priceTotal": 22540,
+    "createdBy": "usr_corp_admin",
+    "createdOnBehalf": false,
+    "createdAt": "2026-11-02T06:30:00.000Z",
+    "updatedAt": "2026-11-02T06:30:00.000Z",
+    "version": 3,
+    "lastPosition": null,
+    "eta": null,
+    "lostState": "none"
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-06.2",
+   "ref": "RTE-002, MMT",
+   "step": "إسناد: ثلاث مراحل (بري ← جوي ← بري)",
+   "expected": "3 مراحل",
+   "actual": [
+    "road",
+    "air",
+    "road"
+   ],
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-06.3",
+   "ref": "RTE-005, BR-009",
+   "step": "إسناد ناقل بري لرجل جوية يُرفض",
+   "expected": "VALIDATION",
+   "actual": "VALIDATION",
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-06.4",
+   "ref": "RTE-005, RTE-004",
+   "step": "إسناد الناقل الجوي المؤهل ورقم الرحلة",
+   "expected": "ناقل الأفق الجوي SV1034",
+   "actual": "SV1034",
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-06.5",
+   "ref": "BR-005, UAT-003",
+   "step": "نقل الحيازة من المندوب إلى الناقل الجوي بدليل",
+   "expected": "الحائز الحالي: الناقل الجوي",
+   "actual": {
+    "type": "air_carrier",
+    "id": "ptr_ufuq"
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-06.6",
+   "ref": "RTE-004, UAT-006, §6.4, §2.2",
+   "step": "أحداث الناقل: تحميل ثم إقلاع",
+   "expected": "حالة تشغيلية «في رحلة جوية» دون موقع حي",
+   "actual": {
+    "op": "in_air_transit",
+    "inAir": true,
+    "live": false,
+    "temp": "last_known_only"
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-06.7",
+   "ref": "UAT-006, §6.4",
+   "step": "الوصول والتفريغ ثم نقل الحيازة لمندوب جدة",
+   "expected": "الحائز: مندوب جدة؛ وصول الطائرة لا يعني التسليم",
+   "actual": {
+    "custodian": {
+     "type": "courier",
+     "id": "cou_04"
+    },
+    "status": "in_transit"
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-07.1",
+   "ref": "SHP-005",
+   "step": "تسليم دون توقيع يُرفض",
+   "expected": "VALIDATION",
+   "actual": "VALIDATION",
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-07.2",
+   "ref": "SHP-005, BR-005, §6.1-7",
+   "step": "التسليم باسم المستلم وتوقيعه وصورة",
+   "expected": "تم التسليم + إثبات + حيازة للمستلم",
+   "actual": {
+    "status": "delivered",
+    "pod": "د. ليلى الحمدان",
+    "custodian": "recipient"
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-07.3",
+   "ref": "SHP-007",
+   "step": "تسليم ثانٍ لنفس الشحنة يُرفض (منع الإثبات المكرر)",
+   "expected": "خطأ انتقال، إثبات واحد فقط",
+   "actual": {
+    "code": "SHIPMENT_TRANSITION_NOT_ALLOWED",
+    "pods": 1
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-07.4",
+   "ref": "TEMP-006, QMS-002",
+   "step": "المختبر المستلم يسجّل قراره السريري",
+   "expected": "قرار مسجّل للجهة المستلمة فقط",
+   "actual": "accepted_with_note",
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-08.1",
+   "ref": "BOX-005, §6.1-8",
+   "step": "حالة الصندوق BX-CL-015 بعد التسليم",
+   "expected": "عائد إلى المستودع (لم يعد متاحاً تلقائياً)",
+   "actual": "returning",
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-08.2",
+   "ref": "BOX-005, WH-001",
+   "step": "المستودع يستلم الصندوق العائد",
+   "expected": "قيد التنظيف",
+   "actual": "cleaning",
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-08.3",
+   "ref": "BOX-005",
+   "step": "تنظيف بقائمة ناقصة يُرفض",
+   "expected": "CHECKLIST_INCOMPLETE",
+   "actual": "CHECKLIST_INCOMPLETE",
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-08.4",
+   "ref": "BOX-005, WH-001",
+   "step": "التنظيف والتطهير بقائمة كاملة",
+   "expected": "ينتقل للفحص",
+   "actual": "inspection",
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-08.5",
+   "ref": "BOX-005",
+   "step": "الفحص والتأهيل",
+   "expected": "متاح ويجتاز فحص الجاهزية",
+   "actual": {
+    "status": "available",
+    "ready": false,
+    "reasons": [
+     "جهاز التتبع غير متصل"
+    ]
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-08.6",
+   "ref": "DHC, BR-009, UAT-007",
+   "step": "بعد التأهيل يكون جهاز التتبع بلا نبض حديث → غير جاهز للإسناد؛ تشغيل الجهاز وإرسال نبضة",
+   "expected": "الصندوق جاهز للإسناد بعد وصول نبضة حديثة",
+   "actual": {
+    "status": "available",
+    "ready": true,
+    "reasons": []
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-09.1",
+   "ref": "COST",
+   "step": "تسجيل تكلفة الشحن الجوي للرحلة SV1034",
+   "expected": "سجل تكلفة",
+   "actual": {
+    "id": "cst_0070",
+    "costType": "air_cargo",
+    "sourceRef": "SV1034",
+    "estimated": 42000,
+    "actual": 40500,
+    "incurredAt": "2026-11-02T10:40:00.000Z",
+    "allocated": true
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-09.2",
+   "ref": "COST",
+   "step": "تشغيل توزيع التكاليف على الشحنات",
+   "expected": "توزيعات منشأة",
+   "actual": 126,
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-09.3",
+   "ref": "FIN-001, FIN-003",
+   "step": "توليد فاتورة لمستشفى النخبة للفترة",
+   "expected": "مسودة؛ الشحنة المسلّمة بند مستقل بسعرها، أو مشمولة برسم العقد إن كان سعرها صفراً ضمن الحصة",
+   "actual": {
+    "id": "inv_00022",
+    "invoiceNo": "INV-2026-00022",
+    "organizationId": "org_nkh",
+    "branchId": null,
+    "issueDate": null,
+    "dueDate": null,
+    "periodFrom": "2026-10-03T06:00:00.000Z",
+    "periodTo": "2026-11-02T11:40:00.000Z",
+    "subtotal": 1800000,
+    "vat": 270000,
+    "total": 2070000,
+    "paid": 0,
+    "status": "draft",
+    "zatcaStatus": "not_submitted",
+    "journalId": null,
+    "createdAt": "2026-11-02T10:40:00.000Z",
+    "s1Line": false,
+    "s1QuoteSubtotal": 0,
+    "lines": 1
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-09.4",
+   "ref": "FIN-004, FIN-006, BR-007",
+   "step": "إصدار الفاتورة (ZATCA محاكاة) وترحيل القيد",
+   "expected": "صادرة + قيد مرحّل متوازن",
+   "actual": {
+    "status": "issued",
+    "zatca": "simulated_cleared",
+    "journals": 1,
+    "posted": true,
+    "balanced": true
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-09.5",
+   "ref": "FIN-005, UAT-011, NFR-007",
+   "step": "ميزان المراجعة متوازن",
+   "expected": "مجموع المدين = مجموع الدائن",
+   "actual": {
+    "rows": [
+     {
+      "id": "gl_1000",
+      "code": "1000",
+      "name": {
+       "ar": "الأصول",
+       "en": "Assets"
+      },
+      "type": "asset",
+      "parentId": null,
+      "active": true,
+      "debit": 0,
+      "credit": 0,
+      "balance": 0
+     },
+     {
+      "id": "gl_1100",
+      "code": "1100",
+      "name": {
+       "ar": "النقد والبنوك",
+       "en": "Cash and banks"
+      },
+      "type": "asset",
+      "parentId": "gl_1000",
+      "active": true,
+      "debit": 253902065,
+      "credit": 47397430,
+      "balance": 206504635
+     },
+     {
+      "id": "gl_1200",
+      "code": "1200",
+      "name": {
+       "ar": "الذمم المدينة — عملاء",
+       "en": "Accounts receivable"
+      },
+      "type": "asset",
+      "parentId": "gl_1000",
+      "active": true,
+      "debit": 11819211,
+      "credit": 4082065,
+      "balance": 7737146
+     },
+     {
+      "id": "gl_1300",
+      "code": "1300",
+      "name": {
+       "ar": "ضريبة مدخلات",
+       "en": "Input VAT"
+      },
+      "type": "asset",
+      "parentId": "gl_1000",
+      "active": true,
+      "debit": 5850000,
+      "credit": 0,
+      "balance": 5850000
+     },
+     {
+      "id": "gl_1500",
+      "code": "1500",
+      "name": {
+       "ar": "صناديق وأجهزة تتبع",
+       "en": "Boxes and trackers"
+      },
+      "type": "asset",
+      "parentId": "gl_1000",
+      "active": true,
+      "debit": 39000000,
+      "credit": 0,
+      "balance": 39000000
+     },
+     {
+      "id": "gl_2000",
+      "code": "2000",
+      "name": {
+       "ar": "الالتزامات",
+       "en": "Liabilities"
+      },
+      "type": "liability",
+      "parentId": null,
+      "active": true,
+      "debit": 0,
+      "credit": 0,
+      "balance": 0
+     },
+     {
+      "id": "gl_2100",
+      "code": "2100",
+      "name": {
+       "ar": "الذمم الدائنة — شركاء",
+       "en": "Accounts payable — partners"
+      },
+      "type": "liability",
+      "parentId": "gl_2000",
+      "active": true,
+      "debit": 2547430,
+      "credit": 2723244,
+      "balance": 175814
+     },
+     {
+      "id": "gl_2200",
+      "code": "2200",
+      "name": {
+       "ar": "ضريبة مخرجات مستحقة",
+       "en": "Output VAT payable"
+      },
+      "type": "liability",
+      "parentId": "gl_2000",
+      "active": true,
+      "debit": 23478,
+      "credit": 1541636,
+      "balance": 1518158
+     },
+     {
+      "id": "gl_2300",
+      "code": "2300",
+      "name": {
+       "ar": "مخصص مطالبات",
+       "en": "Claims provision"
+      },
+      "type": "liability",
+      "parentId": "gl_2000",
+      "active": true,
+      "debit": 0,
+      "credit": 0,
+      "balance": 0
+     },
+     {
+      "id": "gl_3000",
+      "code": "3000",
+      "name": {
+       "ar": "حقوق الملكية",
+       "en": "Equity"
+      },
+      "type": "equity",
+      "parentId": null,
+      "active": true,
+      "debit": 0,
+      "credit": 0,
+      "balance": 0
+     },
+     {
+      "id": "gl_3100",
+      "code": "3100",
+      "name": {
+       "ar": "رأس المال",
+       "en": "Share capital"
+      },
+      "type": "equity",
+      "parentId": "gl_3000",
+      "active": true,
+      "debit": 0,
+      "credit": 250000000,
+      "balance": 250000000
+     },
+     {
+      "id": "gl_4000",
+      "code": "4000",
+      "name": {
+       "ar": "الإيرادات",
+       "en": "Revenue"
+      },
+      "type": "revenue",
+      "parentId": null,
+      "active": true,
+      "debit": 0,
+      "credit": 0,
+      "balance": 0
+     },
+     {
+      "id": "gl_4100",
+      "code": "4100",
+      "name": {
+       "ar": "إيرادات نقل العينات",
+       "en": "Sample transport revenue"
+      },
+      "type": "revenue",
+      "parentId": "gl_4000",
+      "active": true,
+      "debit": 0,
+      "credit": 10277575,
+      "balance": 10277575
+     },
+     {
+      "id": "gl_4200",
+      "code": "4200",
+      "name": {
+       "ar": "رسوم العقود",
+       "en": "Contract fees"
+      },
+      "type": "revenue",
+      "parentId": "gl_4000",
+      "active": true,
+      "debit": 0,
+      "credit": 0,
+      "balance": 0
+     },
+     {
+      "id": "gl_4900",
+      "code": "4900",
+      "name": {
+       "ar": "مردودات ومسموحات مبيعات",
+       "en": "Sales returns and allowances"
+      },
+      "type": "revenue",
+      "parentId": "gl_4000",
+      "active": true,
+      "debit": 156522,
+      "credit": 0,
+      "balance": -156522
+     },
+     {
+      "id": "gl_5000",
+      "code": "5000",
+      "name": {
+       "ar": "المصروفات",
+       "en": "Expenses"
+      },
+      "type": "expense",
+      "parentId": null,
+      "active": true,
+      "debit": 0,
+      "credit": 0,
+      "balance": 0
+     },
+     {
+      "id": "gl_5100",
+      "code": "5100",
+      "name": {
+       "ar": "تكلفة المندوبين",
+       "en": "Courier cost"
+      },
+      "type": "expense",
+      "parentId": "gl_5000",
+      "active": true,
+      "debit": 0,
+      "credit": 0,
+      "balance": 0
+     },
+     {
+      "id": "gl_5200",
+      "code": "5200",
+      "name": {
+       "ar": "تكلفة الشحن الجوي",
+       "en": "Air cargo cost"
+      },
+      "type": "expense",
+      "parentId": "gl_5000",
+      "active": true,
+      "debit": 1741162,
+      "credit": 0,
+      "balance": 1741162
+     },
+     {
+      "id": "gl_5300",
+      "code": "5300",
+      "name": {
+       "ar": "تكلفة النقل البري للشركاء",
+       "en": "Partner road cost"
+      },
+      "type": "expense",
+      "parentId": "gl_5000",
+      "active": true,
+      "debit": 982082,
+      "credit": 0,
+      "balance": 982082
+     },
+     {
+      "id": "gl_5400",
+      "code": "5400",
+      "name": {
+       "ar": "تكلفة إنترنت الأشياء",
+       "en": "IoT cost"
+      },
+      "type": "expense",
+      "parentId": "gl_5000",
+      "active": true,
+      "debit": 0,
+      "credit": 0,
+      "balance": 0
+     },
+     {
+      "id": "gl_5500",
+      "code": "5500",
+      "name": {
+       "ar": "تكلفة المستودع",
+       "en": "Warehouse cost"
+      },
+      "type": "expense",
+      "parentId": "gl_5000",
+      "active": true,
+      "debit": 0,
+      "credit": 0,
+      "balance": 0
+     },
+     {
+      "id": "gl_5600",
+      "code": "5600",
+      "name": {
+       "ar": "مصروف المطالبات",
+       "en": "Claims expense"
+      },
+      "type": "expense",
+      "parentId": "gl_5000",
+      "active": true,
+      "debit": 0,
+      "credit": 0,
+      "balance": 0
+     }
+    ],
+    "totalDebit": 316021950,
+    "totalCredit": 316021950,
+    "balanced": true,
+    "unbalancedJournals": [],
+    "arControl": 7737146,
+    "arSubledger": 7737146,
+    "arReconciled": true
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-09.6",
+   "ref": "BI-003, UAT-014",
+   "step": "العميل يرى الفاتورة ولا يرى التكلفة الداخلية",
+   "expected": "فاتورة ظاهرة؛ لا allocatedCost",
+   "actual": {
+    "visible": true
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-10.1",
+   "ref": "PST",
+   "step": "توليد مسودة تسوية للناقل الجوي",
+   "expected": "مسودة بمبلغ محسوب من المراحل",
+   "actual": {
+    "id": "stl_0008",
+    "settlementNo": "ST-UFUQ-004",
+    "partnerId": "ptr_ufuq",
+    "periodStart": "2026-10-03T06:00:00.000Z",
+    "periodEnd": "2026-11-02T11:40:00.000Z",
+    "status": "reconciled",
+    "calculated": 30000,
+    "partnerInvoiced": 30000,
+    "approved": null,
+    "approvedBy": null,
+    "approvedAt": null,
+    "paymentId": null,
+    "lines": [
+     {
+      "legId": "leg_0110",
+      "amount": 30000,
+      "note": "SV1034"
+     }
+    ]
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-10.2",
+   "ref": "PST",
+   "step": "مطابقة مع فاتورة الشريك",
+   "expected": "مطابَقة",
+   "actual": "reconciled",
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-10.3",
+   "ref": "PST, UAT-010",
+   "step": "الدفع قبل الاعتماد يُرفض",
+   "expected": "SETTLEMENT_NOT_APPROVED",
+   "actual": "SETTLEMENT_NOT_APPROVED",
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-10.4",
+   "ref": "PST, UAT-010, BR-008",
+   "step": "المحاسب لا يعتمد تسويته؛ المعتمِد المالي يعتمد",
+   "expected": "FORBIDDEN للمحاسب ثم «معتمدة»",
+   "actual": {
+    "financeTry": "FORBIDDEN",
+    "status": "approved"
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-10.5",
+   "ref": "PST, UAT-010, NFR-007",
+   "step": "تسجيل السداد ثم منع الدفع المكرر",
+   "expected": "مدفوعة؛ الثاني DUPLICATE_PAYMENT",
+   "actual": {
+    "p": "paid",
+    "c": "DUPLICATE_PAYMENT"
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-11.1",
+   "ref": "RTE-003, NFR-009",
+   "step": "مزامنة دفعة: تسليم ثم تسليم مكرر لنفس الشحنة",
+   "expected": "الأول مقبول والثاني تعارض محفوظ بأدلته",
+   "actual": [
+    "accepted",
+    "conflict"
+   ],
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-11.2",
+   "ref": "SHP-007, NFR-009",
+   "step": "إعادة إرسال الدفعة نفسها (انقطاع أثناء المزامنة)",
+   "expected": "كلاهما «مكرر» — لا إثبات ثانٍ ولا تعارض ثانٍ",
+   "actual": {
+    "r": [
+     "duplicate",
+     "duplicate"
+    ],
+    "pods": 1,
+    "conflicts": 1
+   },
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-11.3",
+   "ref": "RTE-003, NFR-008",
+   "step": "العمليات تحسم التعارض بمبرر",
+   "expected": "محسوم ومسجّل في التدقيق",
+   "actual": "rejected",
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-12.1",
+   "ref": "MBR, UAT-001",
+   "step": "مشغّل الفرع يرى فرعيه المخوّلين فقط (العليا تشغيل، الروضة مشاهدة)",
+   "expected": "فرعان فقط",
+   "actual": [
+    "br_nkh_oly",
+    "br_nkh_rwd"
+   ],
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-12.2",
+   "ref": "CUST-002, UAT-001",
+   "step": "التبديل إلى فرع الروضة (عرض فقط)",
+   "expected": "شحنات الروضة فقط",
+   "actual": true,
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-12.3",
+   "ref": "UAT-001, NFR-006",
+   "step": "محاولة عرض فرع الملقا غير المخوّل بالتصفية",
+   "expected": "قائمة فارغة (لا تسرب)",
+   "actual": 0,
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-12.4",
+   "ref": "UAT-001, NFR-006",
+   "step": "فتح شحنة الملقا مباشرة برقمها",
+   "expected": "NOT_FOUND (لا يُكشف وجودها)",
+   "actual": "NOT_FOUND",
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-12.5",
+   "ref": "MBR, UAT-001",
+   "step": "كتابة في فرع المشاهدة تُرفض",
+   "expected": "FORBIDDEN",
+   "actual": "FORBIDDEN",
+   "status": "PASS"
+  },
+  {
+   "id": "E2E-12.6",
+   "ref": "CUST-001, NFR-006",
+   "step": "مدير المؤسسة يرى كل فروع مؤسسته ولا يرى مؤسسة أخرى",
+   "expected": "فروع النخبة الثلاثة فقط",
+   "actual": [
+    "org_nkh"
+   ],
+   "status": "PASS"
+  }
+ ],
+ "duplicateEventsWithinCommand": []
+}

@@ -1,0 +1,33 @@
+{
+ "admin": {
+  "demoAccounts": false,
+  "demoPwd": false,
+  "demoBadge": false,
+  "localDb": [],
+  "hasLoginForm": true
+ },
+ "portal": {
+  "demoAccounts": false,
+  "demoPwd": false,
+  "demoBadge": false,
+  "localDb": [],
+  "hasLoginForm": true
+ },
+ "mobile/courier": {
+  "demoAccounts": false,
+  "demoPwd": false,
+  "demoBadge": false,
+  "localDb": [],
+  "hasLoginForm": true
+ },
+ "mobile/customer": {
+  "demoAccounts": false,
+  "demoPwd": false,
+  "demoBadge": false,
+  "localDb": [],
+  "hasLoginForm": true
+ },
+ "landing": {
+  "demoPwd": false
+ }
+} errors: []

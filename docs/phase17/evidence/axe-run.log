@@ -1,0 +1,10 @@
+{
+ "screens": 195,
+ "loadFailures": [],
+ "violationsByRule": {},
+ "langMismatch": 0,
+ "enScreens": 94,
+ "rtlOk": true,
+ "ltrOk": true,
+ "keyboardFail": []
+}

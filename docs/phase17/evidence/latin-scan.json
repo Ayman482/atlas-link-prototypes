@@ -1,0 +1,994 @@
+[
+ {
+  "app": "admin",
+  "route": "/",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "RUH",
+   "JED",
+   "DMM"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/map",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/shipments",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "STAT"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/shipments/new",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/shipments/shp_0004",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "v"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/dispatch",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "STAT"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/routes",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/legs",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "DEMO",
+   "XY"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/couriers",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/vehicles",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/partners",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "PPS"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/boxes",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/boxes/box_002",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/devices",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "V",
+   "DEMO"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/devices/dev_004",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "V",
+   "DEMO"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/gateway",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "P"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/device-commands",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "IOT"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/excursions",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/profiles",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "v"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/incidents",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/incidents/inc_0002",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/capa",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "V"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/claims",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/lost",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "LDM"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/returns",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "DMM",
+   "AHB",
+   "RUH",
+   "MED"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/cleaning",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/partner-custody",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/consumables",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "UN"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/customers",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/customers/org_nkh",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "NKH"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/contracts",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/rate-plans",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "v"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/simulations",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/quotes",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "v"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/invoices",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/invoices/inv_0001",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/credit-notes",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/payments",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/accounts",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/journals",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/aging",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/costs",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "COST",
+   "v"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/settlements",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "PST"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/requirements",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "UN"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/licenses",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/blocks",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "E"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/retention",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/legal-holds",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/reports/operations",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/reports/finance",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/delays",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "PDA"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/approvals",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/system/notifications",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "tracking",
+   "invoice"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/system/integrations",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "FCM",
+   "APNs",
+   "HL",
+   "Webhooks",
+   "LIS"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/system/settings",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "v"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/system/users",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/system/audit",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/system/security",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "Edge",
+   "Windows",
+   "Chrome",
+   "macOS",
+   "Safari",
+   "iPadOS"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/system/health",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "P",
+   "CPU"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/profile",
+  "words": [
+   "A",
+   "GPT",
+   "Ctrl",
+   "K",
+   "English",
+   "Asia",
+   "Riyadh"
+  ]
+ },
+ {
+  "app": "portal",
+  "route": "/",
+  "words": [
+   "English"
+  ]
+ },
+ {
+  "app": "portal",
+  "route": "/shipments",
+  "words": [
+   "English"
+  ]
+ },
+ {
+  "app": "portal",
+  "route": "/shipments/new",
+  "words": [
+   "English"
+  ]
+ },
+ {
+  "app": "portal",
+  "route": "/shipments/shp_0002",
+  "words": [
+   "English",
+   "v"
+  ]
+ },
+ {
+  "app": "portal",
+  "route": "/recurring",
+  "words": [
+   "English"
+  ]
+ },
+ {
+  "app": "portal",
+  "route": "/addresses",
+  "words": [
+   "English"
+  ]
+ },
+ {
+  "app": "portal",
+  "route": "/branches",
+  "words": [
+   "English"
+  ]
+ },
+ {
+  "app": "portal",
+  "route": "/users",
+  "words": [
+   "English",
+   "MBR"
+  ]
+ },
+ {
+  "app": "portal",
+  "route": "/contracts",
+  "words": [
+   "English"
+  ]
+ },
+ {
+  "app": "portal",
+  "route": "/invoices",
+  "words": [
+   "English"
+  ]
+ },
+ {
+  "app": "portal",
+  "route": "/payments",
+  "words": [
+   "English"
+  ]
+ },
+ {
+  "app": "portal",
+  "route": "/claims",
+  "words": [
+   "English"
+  ]
+ },
+ {
+  "app": "portal",
+  "route": "/reports",
+  "words": [
+   "English"
+  ]
+ },
+ {
+  "app": "portal",
+  "route": "/api",
+  "words": [
+   "English",
+   "Webhooks",
+   "LIS"
+  ]
+ },
+ {
+  "app": "portal",
+  "route": "/notifications",
+  "words": [
+   "English"
+  ]
+ },
+ {
+  "app": "portal",
+  "route": "/profile",
+  "words": [
+   "English"
+  ]
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/",
+  "words": [
+   "Android",
+   "iOS",
+   "English"
+  ]
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/shipments",
+  "words": [
+   "Android",
+   "iOS",
+   "English"
+  ]
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/new",
+  "words": [
+   "Android",
+   "iOS",
+   "English"
+  ]
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/s/shp_0002",
+  "words": [
+   "Android",
+   "iOS",
+   "English"
+  ]
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/s/shp_0002/temp",
+  "words": [
+   "Android",
+   "iOS",
+   "English"
+  ]
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/notifications",
+  "words": [
+   "Android",
+   "iOS",
+   "English"
+  ]
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/invoices",
+  "words": [
+   "Android",
+   "iOS",
+   "English"
+  ]
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/claims",
+  "words": [
+   "Android",
+   "iOS",
+   "English"
+  ]
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/addresses",
+  "words": [
+   "Android",
+   "iOS",
+   "English"
+  ]
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/account",
+  "words": [
+   "English",
+   "Android",
+   "iOS"
+  ]
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/",
+  "words": [
+   "STAT",
+   "Android",
+   "iOS",
+   "English"
+  ]
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/map",
+  "words": [
+   "Android",
+   "iOS",
+   "English"
+  ]
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/t/shp_0009",
+  "words": [
+   "Android",
+   "iOS",
+   "English"
+  ]
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/t/shp_0002",
+  "words": [
+   "Android",
+   "iOS",
+   "English"
+  ]
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/boxes",
+  "words": [
+   "GPT",
+   "Android",
+   "iOS",
+   "English"
+  ]
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/sync",
+  "words": [
+   "Android",
+   "iOS",
+   "English"
+  ]
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/me",
+  "words": [
+   "English",
+   "Android",
+   "iOS"
+  ]
+ }
+]

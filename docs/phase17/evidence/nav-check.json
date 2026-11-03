@@ -1,0 +1,476 @@
+[
+ {
+  "app": "admin",
+  "href": "#/",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/map",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/shipments",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/shipments/new",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/dispatch",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/routes",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/legs",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/couriers",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/vehicles",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/partners",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/boxes",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/devices",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/gateway",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/device-commands",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/excursions",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/profiles",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/incidents",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/capa",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/claims",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/lost",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/returns",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/warehouse",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/warehouse/cleaning",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/warehouse/partner-custody",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/warehouse/consumables",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/customers",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/contracts",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/rate-plans",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/simulations",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/quotes",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/invoices",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/credit-notes",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/payments",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/accounts",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/journals",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/aging",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/costs",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/settlements",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/compliance/requirements",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/compliance/licenses",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/compliance/blocks",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/compliance/retention",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/compliance/legal-holds",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/reports/operations",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/reports/finance",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/delays",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/approvals",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/system/notifications",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/system/integrations",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/system/settings",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/system/users",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/system/audit",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/system/security",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/system/health",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/shipments",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/shipments/new",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/recurring",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/addresses",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/branches",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/users",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/contracts",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/invoices",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/payments",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/claims",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/reports",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/api",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/notifications",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/profile",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "mobile/customer",
+  "href": "#/",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "mobile/customer",
+  "href": "#/shipments",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "mobile/customer",
+  "href": "#/new",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "mobile/customer",
+  "href": "#/notifications",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "mobile/customer",
+  "href": "#/account",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "mobile/courier",
+  "href": "#/",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "mobile/courier",
+  "href": "#/map",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "mobile/courier",
+  "href": "#/boxes",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "mobile/courier",
+  "href": "#/sync",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "mobile/courier",
+  "href": "#/me",
+  "ok": true,
+  "note": ""
+ }
+]

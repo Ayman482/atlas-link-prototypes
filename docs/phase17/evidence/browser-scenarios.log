@@ -1,0 +1,7 @@
+E2E-11-WEB.1 PASS {"banner":1,"task":"ML-2026-000004"}
+E2E-11-WEB.2 PASS {"first":"submitted","second":"submitted","occurrencesInQueue":1,"errs":[]}
+E2E-11-WEB.3 PASS {"offbarAfter":0,"stillQueued":0,"stillOpenTask":false,"errs":[]}
+E2E-12-WEB.1 PASS {"options":["كل الفروع","فرع العليا","فرع جدة — الروضة"]}
+E2E-12-WEB.2 PASS {"rawdahRows":["فرع جدة — الروضة","فرع جدة — الروضة"],"olayaRows":["فرع العليا","فرع العليا","فرع العليا","فرع العليا","فرع العليا","فرع العليا"],"mlqLeak":fals
+E2E-12-WEB.3 PASS {"excerpt":"حدث خطأ غير موجود"}
+E2E-06-WEB.1 PASS {"airListed":false,"card":"ML-2026-000001 × في الطريق تنبيه مفتوح نوع الموقع مستنتج من أحداث الناقل (رحلة جوية بلا GPS) وقت آخر موقع مؤكد 03 نوفمبر، 04:11 ص مصد

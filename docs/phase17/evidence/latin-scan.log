@@ -1,0 +1,44 @@
+English                94 admin/ admin/map admin/shipments admin/shipments/new
+GPT                    62 admin/ admin/map admin/shipments admin/shipments/new
+A                      61 admin/ admin/map admin/shipments admin/shipments/new
+Ctrl                   61 admin/ admin/map admin/shipments admin/shipments/new
+K                      61 admin/ admin/map admin/shipments admin/shipments/new
+Android                17 mobile/customer/ mobile/customer/shipments mobile/customer/new mobile/customer/s/shp_0002
+iOS                    17 mobile/customer/ mobile/customer/shipments mobile/customer/new mobile/customer/s/shp_0002
+v                      7 admin/shipments/shp_0004 admin/profiles admin/rate-plans admin/quotes
+STAT                   3 admin/shipments admin/dispatch mobile/courier/
+DEMO                   3 admin/legs admin/devices admin/devices/dev_004
+V                      3 admin/devices admin/devices/dev_004 admin/capa
+RUH                    2 admin/ admin/warehouse
+DMM                    2 admin/ admin/warehouse
+P                      2 admin/gateway admin/system/health
+UN                     2 admin/warehouse/consumables admin/compliance/requirements
+Webhooks               2 admin/system/integrations portal/api
+LIS                    2 admin/system/integrations portal/api
+JED                    1 admin/
+XY                     1 admin/legs
+PPS                    1 admin/partners
+IOT                    1 admin/device-commands
+LDM                    1 admin/lost
+AHB                    1 admin/warehouse
+MED                    1 admin/warehouse
+NKH                    1 admin/customers/org_nkh
+COST                   1 admin/costs
+PST                    1 admin/settlements
+E                      1 admin/compliance/blocks
+PDA                    1 admin/delays
+tracking               1 admin/system/notifications
+invoice                1 admin/system/notifications
+FCM                    1 admin/system/integrations
+APNs                   1 admin/system/integrations
+HL                     1 admin/system/integrations
+Edge                   1 admin/system/security
+Windows                1 admin/system/security
+Chrome                 1 admin/system/security
+macOS                  1 admin/system/security
+Safari                 1 admin/system/security
+iPadOS                 1 admin/system/security
+CPU                    1 admin/system/health
+Asia                   1 admin/profile
+Riyadh                 1 admin/profile
+MBR                    1 portal/users

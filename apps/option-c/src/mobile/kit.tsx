@@ -2,6 +2,7 @@
 // عناصر مشتركة لمعاينات الجوال — الخيار B بتدرجات وحركة في المتصفح (للمراجعة التصميمية فقط — تطبيقات Flutter الحقيقية في مجلد mobile/)
 import React, { useEffect, useRef, useState } from 'react';
 import { DEMO_MFA, DEMO_PASSWORD } from '@medlog/core';
+import { IS_DEMO } from '@medlog/client';
 import { useApp, transport, useRoute } from '@/lib/store';
 import { Btn, cx } from '@/lib/ui';
 import type { DemoAcct } from '@/lib/login';
@@ -51,7 +52,7 @@ export function MobileLogin({ accounts, allowed, title }: { accounts: DemoAcct[]
   const verify = async () => { setErr(null); if (!/^\d{6}$/.test(code)) { setErr(lang === 'ar' ? 'أدخل 6 أرقام' : 'Enter 6 digits'); return; } setBusy(true); try { const r = await transport().verifyMfa(ch!, code); await finish(r.token!); } catch (x: any) { setErr(x.message?.[lang] ?? String(x)); } finally { setBusy(false); } };
   return (
     <div className="mbodyx" style={{ justifyContent: 'center' }}>
-      <div className="row" style={{ justifyContent: 'space-between' }}><span className="sim">{t('app.demoBadge')}</span><Btn kind="ghost" onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}>{t('common.switchLang')}</Btn></div>
+      <div className="row" style={{ justifyContent: 'space-between' }}>{IS_DEMO ? <span className="sim">{t('app.demoBadge')}</span> : <span />}<Btn kind="ghost" onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}>{t('common.switchLang')}</Btn></div>
       <h2 style={{ margin: 0 }}>{title}</h2>
       {err && <div className="state err" role="alert">{err}</div>}
       {!ch ? <>
@@ -59,9 +60,9 @@ export function MobileLogin({ accounts, allowed, title }: { accounts: DemoAcct[]
         <label className="field"><span>{t('auth.password')}</span><input type="password" dir="ltr" value={pw} onChange={(e) => setPw(e.target.value)} /></label>
         <Btn kind="primary" className="bigbtn" disabled={busy} onClick={() => login()}>{t('auth.signIn')}</Btn>
         <b style={{ marginTop: 8 }}>{t('auth.demoAccounts')}</b>
-        {accounts.map((a) => <button key={a.email} className="mcard" style={{ textAlign: 'start', cursor: 'pointer' }} onClick={() => { setEmail(a.email); setPw(DEMO_PASSWORD); login(a.email, DEMO_PASSWORD); }}><b>{a.name[lang]}</b><span className="muted">{t('roles.' + a.role)} · <span className="mono">{a.email}</span></span></button>)}
+        {IS_DEMO && accounts.map((a) => <button key={a.email} className="mcard" style={{ textAlign: 'start', cursor: 'pointer' }} onClick={() => { setEmail(a.email); setPw(DEMO_PASSWORD); login(a.email, DEMO_PASSWORD); }}><b>{a.name[lang]}</b><span className="muted">{t('roles.' + a.role)} · <span className="mono">{a.email}</span></span></button>)}
       </> : <>
-        <p>{t('auth.mfaHint')} — {lang === 'ar' ? 'رمز العرض' : 'Demo code'} <span className="mono">{DEMO_MFA}</span></p>
+        <p>{t('auth.mfaHint')}{IS_DEMO && <> — {lang === 'ar' ? 'رمز العرض' : 'Demo code'} <span className="mono">{DEMO_MFA}</span></>}</p>
         <input inputMode="numeric" dir="ltr" maxLength={6} value={code} onChange={(e) => setCode(e.target.value.replace(/\D/g, ''))} aria-label="MFA" style={{ fontSize: '1.4rem', letterSpacing: '.4em', textAlign: 'center' }} />
         <Btn kind="primary" className="bigbtn" disabled={busy} onClick={verify}>{t('auth.verify')}</Btn>
         <Btn kind="ghost" onClick={() => { setCh(null); setCode(''); }}>{t('common.back')}</Btn>

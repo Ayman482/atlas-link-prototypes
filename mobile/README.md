@@ -21,6 +21,17 @@ flutter run --dart-define=API_BASE=http://localhost:4000/api/v1    # محاكي 
 flutter run --dart-define=API_BASE=http://<IP-الحاسوب>:4000/api/v1 # جهاز فعلي على نفس الشبكة
 ```
 
+### وضع العرض ووضع الإنتاج (Phase 17)
+
+```bash
+flutter run   --dart-define=DEMO_MODE=false --dart-define=API_BASE=https://api.example/api/v1   # بناء إنتاجي: لا حسابات عرض ولا رمز MFA تجريبي ولا شارة «بيانات عرض»
+flutter build apk --dart-define=DEMO_MODE=false --dart-define=API_BASE=https://api.example/api/v1
+```
+
+`DEMO_MODE` ثابت وقت الترجمة (`kDemoMode` في `atlas_shared`)، ولا يمكن تفعيله أثناء التشغيل. الافتراضي `true` للنماذج فقط.
+
+خادم المحاكاة بوضع الإنتاج المحمي: `NODE_ENV=production MEDLOG_SECRET=<32+ حرفاً> CORS_ORIGIN=https://app.example npm run api` — يرفض البدء دون المتغيرين، ويعطّل كل مصادقة العرض (501) وإعادة الضبط والأصل المحلي. لا يوجد مزوّد هوية إنتاجي في النموذج.
+
 ### إعدادات خادم المحاكاة (أمن)
 
 | المتغير | الافتراضي | الوصف |
@@ -38,15 +49,19 @@ flutter run --dart-define=API_BASE=http://<IP-الحاسوب>:4000/api/v1 # جه
 - أي إجراء يفشل بسبب الشبكة يُحفظ تلقائياً بنفس معرّفه، وهو أيضاً مفتاح Idempotency.
 - فتح التطبيق دون شبكة يُبقي المندوب داخله بآخر ملف محفوظ.
 - انتهاء الجلسة يعيده لشاشة الدخول دون حذف الطابور.
+- مراقبة الاتصال (`ConnectivityMonitor`): نبضة `/health` كل 30 ثانية متصلاً و5 ثوانٍ منقطعاً، وأي خطأ شبكة يحوّل الوضع فوراً؛ عند العودة تُزامن الطابور تلقائياً مرة واحدة.
+- إجراء معلّق واحد لكل شحنة لكل نوع (مسح/استلام/تسليم/تعذّر/تسليم لطرف)، وحارس ضد الضغط المزدوج.
+- الشريط يميّز «انقطاع فعلي» عن «محاكاة».
 
 ملاحظة Android: الاتصال بخادم HTTP محلي يتطلب السماح بحركة غير مشفرة في بناء التطوير (`android:usesCleartextTraffic="true"` في `AndroidManifest.xml` للتصحيح فقط)، أو تشغيل الخادم خلف HTTPS.
 
 ## الاختبار
 
 ```bash
-cd mobile/atlas_shared && flutter test     # 7 اختبارات: التنسيق، التوطين، عقد عميل API والأخطاء
+cd mobile/atlas_shared && flutter test     # 10 اختبارات: التنسيق وتطابقه مع الويب، التوطين، عقد API، وضع الإنتاج
+cd mobile/atlas_shared && flutter test --dart-define=DEMO_MODE=false test/prod_mode_test.dart   # بناء إنتاجي بلا عناصر عرض
 cd mobile/customer_app && flutter test     # الدخول بحساب عرض ← الرئيسية بالعربية RTL، تبديل LTR، تقليل الحركة
-cd mobile/courier_app && flutter test      # المهام ← مسح رمز خاطئ (فشل + إعادة محاولة)، الطابور دون اتصال والمزامنة
+cd mobile/courier_app && flutter test      # 12 اختباراً: المهام، رمز خاطئ، الطابور، مراقبة الاتصال، المزامنة التلقائية، منع التكرار
 # اختبار عقد حي لرحلة مندوب كاملة مقابل الخادم الحقيقي:
 npm run api:reset && cd mobile/courier_app && LIVE_API=http://localhost:4000/api/v1 flutter test test/live_api_test.dart
 ```
@@ -54,5 +69,5 @@ npm run api:reset && cd mobile/courier_app && LIVE_API=http://localhost:4000/api
 ## ما تم التحقق منه وما لم يُتحقق منه
 
 - تم: `flutter analyze` بلا ملاحظات للمشاريع الثلاثة، كل الاختبارات أعلاه ناجحة، بناء الويب `flutter build web --release` للتطبيقين، وتشغيله مقابل خادم المحاكاة مع لقطات شاشة (الدخول، الرئيسية، التتبع، المهام، تفاصيل المهمة).
-- لم يتم في بيئة التسليم: بناء ملفات APK/AAB (لا توجد أدوات Android SDK) أو IPA (يتطلب macOS وXcode). المشروعان يحتويان مجلدي `android/` و`ios/` القياسيين من `flutter create` ولا يستخدمان أي إضافات أصلية غير `shared_preferences`، لذا يُتوقع أن يُبنيا مباشرة على جهاز مطوّر مثبّت عليه الأدوات.
+- لم يتم في بيئة التسليم (Phase 17 أيضاً): اختبار على أجهزة أو محاكيات Android/iOS؛ بناء ملفات APK/AAB (لا توجد أدوات Android SDK) أو IPA (يتطلب macOS وXcode). المشروعان يحتويان مجلدي `android/` و`ios/` القياسيين من `flutter create` ولا يستخدمان أي إضافات أصلية غير `shared_preferences`، لذا يُتوقع أن يُبنيا مباشرة على جهاز مطوّر مثبّت عليه الأدوات.
 - الكاميرا لمسح QR محاكاة (اختيار رمز أو إدخال يدوي). لتفعيل كاميرا حقيقية تُضاف حزمة مسح (مثل `mobile_scanner`) مع أذونات الكاميرا في `AndroidManifest.xml` و`Info.plist`، وتبقى حالات النجاح/الفشل/إعادة المحاولة في `ScanPanel` كما هي.

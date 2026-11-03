@@ -1,0 +1,186 @@
+{
+ "app": "admin",
+ "base": "http://127.0.0.1:5057",
+ "executedAt": "2026-11-03T02:00:50.263Z",
+ "results": [
+  {
+   "route": "/shipments/new",
+   "interactive": 8,
+   "disabled": 0,
+   "clicked": 6,
+   "noEffect": [
+    "a «عرض الشحنة»",
+    "select «— جود الحربي سلطان الشهري أمل البقمي ترك»",
+    "select «—»",
+    "select «—»",
+    "select «— فرع العليا — استلام العينات — الرياض ف»"
+   ],
+   "errors": [
+    "button «رجوع»: click failed locator.click: Timeout 2500ms exceeded.",
+    "button «التالي»: click failed locator.click: Timeout 2500ms exceeded."
+   ],
+   "skipped": []
+  },
+  {
+   "route": "/legs",
+   "interactive": 20,
+   "disabled": 1,
+   "clicked": 17,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [
+    "button «إسناد ناقل»: click failed locator.click: Timeout 2500ms exceeded.",
+    "button «الصفحة التالية»: click failed locator.click: Timeout 2500ms exceeded."
+   ],
+   "skipped": []
+  },
+  {
+   "route": "/boxes",
+   "interactive": 15,
+   "disabled": 1,
+   "clicked": 14,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/gateway",
+   "interactive": 11,
+   "disabled": 1,
+   "clicked": 10,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/incidents",
+   "interactive": 12,
+   "disabled": 2,
+   "clicked": 10,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/lost",
+   "interactive": 13,
+   "disabled": 2,
+   "clicked": 10,
+   "noEffect": [
+    "button «رفض»",
+    "select «12 25 50»"
+   ],
+   "errors": [
+    "button «تسجيل استرداد»: click failed locator.click: Timeout 2500ms exceeded."
+   ],
+   "skipped": []
+  },
+  {
+   "route": "/warehouse/partner-custody",
+   "interactive": 13,
+   "disabled": 2,
+   "clicked": 11,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/contracts",
+   "interactive": 17,
+   "disabled": 2,
+   "clicked": 13,
+   "noEffect": [
+    "button «تعليق»",
+    "select «12 25 50»"
+   ],
+   "errors": [
+    "button «تعليق»: click failed locator.click: Timeout 2500ms exceeded.",
+    "button «تفعيل»: click failed locator.click: Timeout 2500ms exceeded."
+   ],
+   "skipped": []
+  },
+  {
+   "route": "/invoices",
+   "interactive": 14,
+   "disabled": 1,
+   "clicked": 13,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/accounts",
+   "interactive": 9,
+   "disabled": 2,
+   "clicked": 7,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/settlements",
+   "interactive": 10,
+   "disabled": 2,
+   "clicked": 8,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/compliance/retention",
+   "interactive": 29,
+   "disabled": 4,
+   "clicked": 25,
+   "noEffect": [
+    "select «12 25 50»",
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/delays",
+   "interactive": 23,
+   "disabled": 2,
+   "clicked": 18,
+   "noEffect": [
+    "button «إغلاق»",
+    "select «12 25 50»"
+   ],
+   "errors": [
+    "a «ML-2026-000004»: click failed locator.click: Timeout 2500ms exceeded.",
+    "button «تصعيد»: click failed locator.click: Timeout 2500ms exceeded.",
+    "button «إغلاق»: click failed locator.click: Timeout 2500ms exceeded."
+   ],
+   "skipped": []
+  },
+  {
+   "route": "/system/settings",
+   "interactive": 30,
+   "disabled": 4,
+   "clicked": 26,
+   "noEffect": [
+    "select «12 25 50»",
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/system/health",
+   "interactive": 8,
+   "disabled": 1,
+   "clicked": 7,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  }
+ ]
+}

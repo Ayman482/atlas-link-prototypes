@@ -1,0 +1,8 @@
+   Woah! You appear to be trying to run flutter as root.
+   We strongly recommend running the flutter tool without superuser privileges.
+  /
+📎
+00:00 +0: loading /home/claude/medlog/mobile/atlas_shared/test/prod_mode_test.dart
+00:00 +0: بناء الإنتاج: لا حسابات عرض ولا رمز عرض ولا شارة عرض في شاشة الدخول
+00:01 +1: All tests passed!
+rc=0

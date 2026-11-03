@@ -1,5 +1,6 @@
 'use client';
-import { greeting, comma } from '@/lib/l10n';
+import { IS_DEMO } from '@medlog/client';
+import { greeting, comma, label } from '@/lib/l10n';
 // لوحة الإدارة — الخيار C: قائمة جانبية عائمة بأقسام قابلة للطي، تحية بحسب الوقت، بحث، تبديل المظهر
 import React, { useEffect, useMemo, useState } from 'react';
 import { AppProvider, useApp, useQ, useRoute, go, transport } from '@/lib/store';
@@ -17,7 +18,7 @@ function Gate() {
   const { userId, me, t, x, signOut } = useApp();
   useEffect(() => { if (me && !me.roles.some((r: string) => !NON_STAFF.includes(r))) signOut(); }, [me, signOut]);
   if (!userId) return <Login title={t('app.admin')} subtitle={t('app.name')} accounts={ADMIN_ACCOUNTS} allowed={(r) => r.some((x) => !NON_STAFF.includes(x))} />;
-  if (!me) return null;
+  if (!me || !me.roles.some((r: string) => !NON_STAFF.includes(r))) return null; // لا يُعرض الهيكل لدور غير مخوّل ولو لعملية عرض واحدة
   void x;
   return <Shell />;
 }
@@ -85,7 +86,7 @@ function Shell() {
           <Greeting />
           <span className="grow" />
           <button className="search" onClick={() => setCmdk(true)} aria-keyshortcuts="Control+K"><Ico size={16} d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.3-4.3" /><span>{lang === 'ar' ? 'بحث…' : 'Search…'}</span><span className="grow" /><kbd>Ctrl K</kbd></button>
-          <span className="sim" title="demo">{t('app.demoBadge')}</span>
+          {IS_DEMO && <span className="sim" title="demo">{t('app.demoBadge')}</span>}
           <Btn kind="ghost" className="langbtn" lang={lang === 'ar' ? 'en' : 'ar'} onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}>{t('common.switchLang')}</Btn>
           <ThemeBtn />
           <div style={{ position: 'relative' }}>
@@ -93,7 +94,7 @@ function Shell() {
             <NotificationCenter open={menu === 'ntf'} onClose={() => setMenu(null)} items={mine} />
           </div>
           <div style={{ position: 'relative' }}>
-            <button className="btn ghost" onClick={() => setMenu(menu === 'user' ? null : 'user')} aria-haspopup="menu" style={{ padding: 4 }}><span className="avatar">{initials}</span><span className="who"><b>{x(me.user.name)}</b><span>{roles.map((r) => t('roles.' + r)).join('، ')}</span></span></button>
+            <button className="btn ghost" onClick={() => setMenu(menu === 'user' ? null : 'user')} aria-haspopup="menu" style={{ padding: 4 }}><span className="avatar">{initials}</span><span className="who"><b>{x(me.user.name)}</b><span>{roles.map((r) => t('roles.' + r)).join(comma(lang))}</span></span></button>
             {menu === 'user' && <div className="menu" role="menu" style={{ width: 240 }}>
               <a className="mi" href="#/profile">{t('common.profile')}</a>
               <a className="mi" href="#/system/security">{t('nav.security')}</a>
@@ -169,7 +170,7 @@ function CommandK({ onClose, can }: { onClose(): void; can(r?: string[]): boolea
     <Modal title={lang === 'ar' ? 'بحث وانتقال سريع' : 'Search & jump'} onClose={onClose} wide>
       <input autoFocus type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={lang === 'ar' ? 'رقم تتبع (ML-2026-…)، رمز صندوق (BX-…)، IMEI، عميل، أو اسم شاشة' : 'Tracking no. (ML-2026-…), box (BX-…), IMEI, customer or screen name'} style={{ width: '100%', fontSize: '1rem' }} />
       <div className="alerts">
-        {(res.data?.shipments ?? []).map((s: any) => <li key={s.id}><span className="pill info">{lang === 'ar' ? 'شحنة' : 'Shipment'}</span><a href={'#/shipments/' + s.id} onClick={onClose} className="mono">{s.trackingNo}</a><span className="muted">{s.status}</span></li>)}
+        {(res.data?.shipments ?? []).map((s: any) => <li key={s.id}><span className="pill info">{lang === 'ar' ? 'شحنة' : 'Shipment'}</span><a href={'#/shipments/' + s.id} onClick={onClose} className="mono">{s.trackingNo}</a><span className="muted">{label(lang, s.status)}</span></li>)}
         {(res.data?.boxes ?? []).map((b: any) => <li key={b.id}><span className="pill mute">{lang === 'ar' ? 'صندوق' : 'Box'}</span><a href={'#/boxes/' + b.id} onClick={onClose} className="mono">{b.code}</a><span /></li>)}
         {(res.data?.devices ?? []).map((d: any) => <li key={d.id}><span className="pill mute">IMEI</span><a href={'#/devices/' + d.id} onClick={onClose} className="mono">{d.imei}</a><span /></li>)}
         {(res.data?.organizations ?? []).map((o: any) => <li key={o.id}><span className="pill mute">{lang === 'ar' ? 'عميل' : 'Customer'}</span><a href={'#/customers/' + o.id} onClick={onClose}>{x(o.legalName)}</a><span /></li>)}

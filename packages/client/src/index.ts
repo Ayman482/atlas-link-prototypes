@@ -1,5 +1,7 @@
 // عميل موحّد للتطبيقات: نفس الواجهة فوق خادم API الدائم (HTTP) أو المحرك داخل المتصفح (للمعاينات المستضافة)
 import { Engine, DomainError, DEMO_MFA, DEMO_PASSWORD, type Db } from '@medlog/core';
+import { IS_DEMO, MEDLOG_MODE } from './mode';
+export { IS_DEMO, MEDLOG_MODE } from './mode';
 
 export interface ApiError { code: string; status: number; message: { ar: string; en: string }; field?: string }
 export type ChangeEvent = { command?: string; at: string; events: { type: string; aggregateType: string; aggregateId: string }[] };
@@ -82,16 +84,39 @@ export class HttpTransport implements Transport {
   private keep(res: LoginResult) { if (res.token) { this.token = res.token; try { sessionStorage.setItem('medlog-token', res.token); } catch { /* */ } this.connect(); } return res; }
   async login(email: string, password: string) { return this.keep(await this.req('POST', '/auth/login', { email, password })); }
   async verifyMfa(challengeId: string, code: string) { return this.keep(await this.req('POST', '/auth/mfa/verify', { challengeId, code })); }
-  async demoLogin(email: string) { return this.keep(await this.req('POST', '/auth/demo-login', { email })); }
+  async demoLogin(email: string) {
+    if (!IS_DEMO) throw { code: 'FORBIDDEN', status: 403, message: { ar: 'الدخول السريع غير متاح في بناء الإنتاج', en: 'Quick demo login is not available in production builds' } } as ApiError;
+    return this.keep(await this.req('POST', '/auth/demo-login', { email }));
+  }
   async logout() { try { await this.req('POST', '/auth/logout'); } catch { /* */ } this.token = null; this.es?.close(); try { sessionStorage.removeItem('medlog-token'); } catch { /* */ } }
   async exec<R>(command: string, input: unknown = {}, key?: string): Promise<R> { return (await this.req('POST', `/commands/${command}`, input, key)).data; }
   async query<R>(name: string, params: unknown = {}): Promise<R> { return (await this.req('GET', `/queries/${name}?p=${encodeURIComponent(JSON.stringify(params))}`)).data; }
-  private connect() { if (!this.token || typeof EventSource === 'undefined') return; this.es?.close(); this.es = new EventSource(`${this.base}/events?access_token=${encodeURIComponent(this.token)}`); this.es.addEventListener('change', (m: MessageEvent) => { const d = JSON.parse(m.data); this.listeners.forEach((l) => l(d)); }); }
+  private opened = false;
+  private seen = new Set<string>();
+  private connect() {
+    if (!this.token || typeof EventSource === 'undefined') return;
+    this.es?.close(); this.opened = false;
+    this.es = new EventSource(`${this.base}/events?access_token=${encodeURIComponent(this.token)}`);
+    // إعادة الاتصال: المتصفح يرسل Last-Event-ID فيُستكمل ما فات؛ ومع ذلك نطلب تحديثاً كاملاً للشاشات احتياطاً
+    this.es.addEventListener('open', () => { if (this.opened) this.listeners.forEach((l) => l({ command: 'reconnect', at: new Date().toISOString(), events: [] })); this.opened = true; });
+    this.es.addEventListener('change', (m: MessageEvent) => {
+      const d = JSON.parse(m.data);
+      // منع التكرار: حدث وصل مرتين (بث مباشر ثم استكمال) لا يُمرر مرتين
+      d.events = (d.events ?? []).filter((e: any) => !e.id || (this.seen.has(e.id) ? false : (this.seen.add(e.id), true)));
+      if (this.seen.size > 5000) this.seen = new Set([...this.seen].slice(-2000));
+      if (d.events.length || d.command === 'replay' || d.command === 'system.reset') this.listeners.forEach((l) => l(d));
+    });
+  }
   subscribe(fn: (e: ChangeEvent) => void) { this.listeners.add(fn); if (!this.es) this.connect(); return () => { this.listeners.delete(fn); }; }
   async reset() { await this.req('POST', '/admin/reset'); }
 }
 
 /** يختار النقل: NEXT_PUBLIC_MEDLOG_API لخادم دائم، وإلا المحرك المحلي */
 export function createTransport(apiBase?: string | null, lang?: () => 'ar' | 'en'): Transport {
+  if (MEDLOG_MODE === 'production') {
+    // بناء الإنتاج: خادم حقيقي إلزامي، ولا محرك محلي (هويته = معرّف المستخدم، أي قابل للانتحال)
+    if (!apiBase) throw new Error('NEXT_PUBLIC_MEDLOG_API is required in production builds');
+    return new HttpTransport(apiBase, lang);
+  }
   return apiBase ? new HttpTransport(apiBase, lang) : new LocalTransport();
 }

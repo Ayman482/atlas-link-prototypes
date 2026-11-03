@@ -58,7 +58,7 @@ export const SCENARIOS: Scenario[] = [
     ],
   },
   {
-    id: 'S06', title: L('تسليم فاشل وإرجاع', 'Failed delivery and return'), uat: ['UAT-008'], proves: L('قرار مخوّل وتحميل التكلفة للطرف المسؤول واستمرار الحيازة', 'Authorized decision, cost to responsible party, custody continuity'),
+    id: 'S06', title: L('تعذّر التسليم والإرجاع', 'Failed delivery and return'), uat: ['UAT-008'], proves: L('قرار مخوّل وتحميل التكلفة للطرف المسؤول واستمرار الحيازة', 'Authorized decision, cost to responsible party, custody continuity'),
     steps: [
       { as: 'usr_ops', title: L('قرار الإرجاع على حساب العميل', 'Return decision billed to the customer'), run(api, c) { const f = api.db().shipments.find((s) => s.status === 'failed')!; c.id = f.id; c.ret = api.exec<any>('usr_ops', 'returns.authorize', { shipment: f.id, decision: 'return_to_sender', responsibleParty: 'customer' }).id; return f.trackingNo; } },
       { as: 'usr_ops', title: L('إتمام الإرجاع بتوقيع', 'Complete the return with signature'), run(api, c) { return api.exec<any>('usr_ops', 'returns.complete', { returnId: c.ret, signedBy: 'مكتب الاستقبال' }).status; } },

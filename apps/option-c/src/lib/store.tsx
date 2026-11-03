@@ -39,6 +39,8 @@ export function AppProvider({ app, children }: { app: Ctx['app']; children: Reac
     setReady(true);
     return tr.subscribe(() => setTick((x) => x + 1));
   }, []);
+  // أخطاء الأوامر التي عُرضت للمستخدم كرسالة لا تُعاد كرفض غير معالج في وحدة التحكم (المعالجات المباشرة onChange={() => run(...)})
+  useEffect(() => { const h = (e: PromiseRejectionEvent) => { if ((e.reason as any)?.__shown) e.preventDefault(); }; window.addEventListener('unhandledrejection', h); return () => window.removeEventListener('unhandledrejection', h); }, []);
   useEffect(() => { currentLang = lang; document.documentElement.lang = lang; document.documentElement.dir = dir(lang); try { localStorage.setItem('al-lang', lang); } catch { /* */ } }, [lang]);
   // عند تغيّر الحساب: يُمسح ملف المستخدم السابق فوراً حتى لا تُعرض أدواره أو بياناته للحساب الجديد
   const meOwner = useRef<string | null>(null);
@@ -60,7 +62,7 @@ export function AppProvider({ app, children }: { app: Ctx['app']; children: Reac
     tick, toast, app,
     async run(cmd, input, opts) {
       try { const r = await transport().exec(cmd, input ?? {}); setTick((x) => x + 1); if (!opts?.silent) toast(opts?.success ?? (lang === 'ar' ? 'تم بنجاح' : 'Done')); return r; }
-      catch (e: any) { const err = e as ApiError; if (!opts?.silent) toast(err.message?.[lang] ?? String(e), 'error'); throw err; }
+      catch (e: any) { const err = e as ApiError; if (!opts?.silent) { toast(err.message?.[lang] ?? String(e), 'error'); try { Object.defineProperty(err, '__shown', { value: true }); } catch { /* */ } } throw err; }
     },
   }), [lang, userId, me, tick, toast, app]);
   if (!ready) return null;

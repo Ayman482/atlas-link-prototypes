@@ -1,0 +1,168 @@
+{
+ "app": "admin",
+ "base": "http://127.0.0.1:5057",
+ "executedAt": "2026-11-03T02:01:02.020Z",
+ "results": [
+  {
+   "route": "/shipments",
+   "interactive": 44,
+   "disabled": 1,
+   "clicked": 30,
+   "noEffect": [
+    "a «عرض الشحنة»",
+    "select «العميل»",
+    "select «مستوى الخدمة»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/routes",
+   "interactive": 10,
+   "disabled": 1,
+   "clicked": 9,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/partners",
+   "interactive": 10,
+   "disabled": 2,
+   "clicked": 8,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/devices/dev_004",
+   "interactive": 17,
+   "disabled": 1,
+   "clicked": 16,
+   "noEffect": [
+    "button «القراءات 36»",
+    "button «الكل»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/profiles",
+   "interactive": 10,
+   "disabled": 2,
+   "clicked": 8,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/claims",
+   "interactive": 22,
+   "disabled": 2,
+   "clicked": 20,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/warehouse/cleaning",
+   "interactive": 18,
+   "disabled": 3,
+   "clicked": 15,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/customers/org_nkh",
+   "interactive": 16,
+   "disabled": 2,
+   "clicked": 14,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/quotes",
+   "interactive": 23,
+   "disabled": 1,
+   "clicked": 22,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/payments",
+   "interactive": 16,
+   "disabled": 1,
+   "clicked": 15,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/costs",
+   "interactive": 42,
+   "disabled": 4,
+   "clicked": 27,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/compliance/blocks",
+   "interactive": 13,
+   "disabled": 2,
+   "clicked": 11,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/reports/finance",
+   "interactive": 15,
+   "disabled": 4,
+   "clicked": 11,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/system/integrations",
+   "interactive": 24,
+   "disabled": 4,
+   "clicked": 20,
+   "noEffect": [
+    "select «12 25 50»",
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/system/security",
+   "interactive": 14,
+   "disabled": 2,
+   "clicked": 11,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [
+    "button «إلغاء»: click failed locator.click: Timeout 2500ms exceeded."
+   ],
+   "skipped": []
+  }
+ ]
+}

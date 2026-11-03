@@ -1,0 +1,19 @@
+   Woah! You appear to be trying to run flutter as root.
+   We strongly recommend running the flutter tool without superuser privileges.
+  /
+📎
+00:00 +0: loading /home/claude/medlog/mobile/atlas_shared/test/format_parity_test.dart
+00:00 +0: /home/claude/medlog/mobile/atlas_shared/test/format_parity_test.dart: التاريخ والعملة والحرارة مطابقة للويب
+00:00 +1: loading /home/claude/medlog/mobile/atlas_shared/test/prod_mode_test.dart
+00:01 +1: /home/claude/medlog/mobile/atlas_shared/test/prod_mode_test.dart: بناء الإنتاج: لا حسابات عرض ولا رمز عرض ولا شارة عرض في شاشة الدخول
+00:03 +2: loading /home/claude/medlog/mobile/atlas_shared/test/shared_test.dart
+00:04 +2: /home/claude/medlog/mobile/atlas_shared/test/shared_test.dart: Fmt الريال من الهللات مع فواصل الآلاف
+00:04 +3: /home/claude/medlog/mobile/atlas_shared/test/shared_test.dart: Fmt التاريخ بتوقيت الرياض (UTC+3)
+00:04 +4: /home/claude/medlog/mobile/atlas_shared/test/shared_test.dart: S (التوطين) تسميات الحالات من نفس مصدر الويب، والرموز التقنية مترجمة
+00:04 +5: /home/claude/medlog/mobile/atlas_shared/test/shared_test.dart: S (التوطين) تصحيحات القاموس للخيار C
+00:04 +6: /home/claude/medlog/mobile/atlas_shared/test/shared_test.dart: ApiClient الدخول مع تحقق بخطوتين ثم أمر برمز الجلسة
+00:05 +7: /home/claude/medlog/mobile/atlas_shared/test/shared_test.dart: ApiClient أخطاء المجال تُعاد برمزها ورسالتيها والحقل المعني
+00:05 +8: /home/claude/medlog/mobile/atlas_shared/test/shared_test.dart: ApiClient انقطاع الشبكة يُعاد كخطأ NETWORK مفهوم
+00:05 +9: /home/claude/medlog/mobile/atlas_shared/test/shared_test.dart: التوطين من المصدر المعتمد: السياق، التحية، والخط الزمني (مطابق للويب)
+00:05 +10: All tests passed!
+test rc=0

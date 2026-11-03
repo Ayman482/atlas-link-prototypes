@@ -1,4 +1,5 @@
 'use client';
+import { IS_DEMO } from '@medlog/client';
 import { greeting, comma } from '@/lib/l10n';
 // بوابة العملاء — الخيار C (قائمة جانبية عائمة بأيقونات ناعمة وتحية شخصية) (C01–C20): المؤسسات والفروع والأفراد ومختبر الاستلام، بلا أي تكلفة داخلية (BI-003)
 import React, { useEffect, useMemo, useState } from 'react';
@@ -16,7 +17,7 @@ function Gate() {
   const { userId, me, t, signOut } = useApp();
   useEffect(() => { if (me && !me.roles.some((r: string) => CUST.includes(r))) signOut(); }, [me, signOut]);
   if (!userId) return <Login title={t('app.portal')} subtitle={t('app.name')} accounts={PORTAL_ACCOUNTS} allowed={(r) => r.some((x) => CUST.includes(x))} />;
-  if (!me) return null;
+  if (!me || !me.roles.some((r: string) => CUST.includes(r))) return null;
   return <Shell />;
 }
 
@@ -73,12 +74,12 @@ function Shell() {
       <div className="pmain">
         <header className="topbar">
           <Btn kind="ghost" className="hamb iconbtn" onClick={() => setOpen(!open)} aria-label="menu">☰</Btn>
-          <div className="greet"><b>{greeting(lang)}{comma(lang)}{x(me.user.name).split(' ').slice(0, 2).join(' ')}</b><span>{me.organizations?.map((o: any) => x(o.legalName)).join('، ')}</span></div>
+          <div className="greet"><b>{greeting(lang)}{comma(lang)}{x(me.user.name).split(' ').slice(0, 2).join(' ')}</b><span>{me.organizations?.map((o: any) => x(o.legalName)).join(comma(lang))}</span></div>
           <span className="grow" />
-          <span className="sim">{t('app.demoBadge')}</span>
+          {IS_DEMO && <span className="sim">{t('app.demoBadge')}</span>}
           <Btn kind="ghost" onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}>{t('common.switchLang')}</Btn>
           <ThemeBtn />
-          <a href="#/profile" className="row" style={{ gap: 8, color: 'inherit', textDecoration: 'none' }}><span className="avatar">{initials}</span><span className="who"><b>{x(me.user.name)}</b><span>{roles.map((r) => t('roles.' + r)).join('، ')}</span></span></a>
+          <a href="#/profile" className="row" style={{ gap: 8, color: 'inherit', textDecoration: 'none' }}><span className="avatar">{initials}</span><span className="who"><b>{x(me.user.name)}</b><span>{roles.map((r) => t('roles.' + r)).join(comma(lang))}</span></span></a>
           <Btn kind="ghost" onClick={signOut}>{t('common.signOut')}</Btn>
         </header>
         <main key={path}>{screen}</main>
@@ -135,7 +136,7 @@ function Inbound() {
   const { lang } = useApp(); const f = useFmt(); const L = useLookups(); const s = useList('shipments', { sort: 'deliverBy', dir: 'desc' }); const d = useList('dispositions');
   const rows = (s.data?.items ?? []);
   return <Page title={lang === 'ar' ? 'الشحنات الواردة' : 'Inbound shipments'} sub={lang === 'ar' ? 'تسجيل القرار السريري حق حصري لمؤسستكم (QMS-002)' : 'Recording the clinical decision is your institution’s exclusive right (QMS-002)'}>
-    <Section flush><DataTable rows={s.data ? rows : null} onRow={(r: any) => go('/inbound/' + r.id)} filters={[{ key: 'st', label: lang === 'ar' ? 'الحالة' : 'Status', options: ['in_transit', 'at_handover', 'delivered'].map((v) => ({ value: v, label: label(lang, v) })), get: (r: any) => r.status }]} cols={[{ key: 'trackingNo', label: lang === 'ar' ? 'رقم التتبع' : 'Tracking', mono: true }, { key: 'from', label: lang === 'ar' ? 'من' : 'From', render: (r: any) => L.org(r.organizationId) }, { key: 'thermalClass', label: lang === 'ar' ? 'الفئة' : 'Class', render: (r: any) => label(lang, r.thermalClass) }, { key: 'status', label: lang === 'ar' ? 'الحالة' : 'Status', render: (r: any) => <Pill v={r.status} /> }, { key: 'deliverBy', label: lang === 'ar' ? 'متوقع' : 'Expected', render: (r: any) => f.dt(r.deliverBy) }, { key: 'disp', label: lang === 'ar' ? 'القرار' : 'Decision', render: (r: any) => { const y = (d.data?.items ?? []).find((z: any) => z.shipmentId === r.id); return y ? <Pill tone={y.decision === 'rejected' ? 'crit' : 'good'}>{y.decision}</Pill> : r.status === 'delivered' ? <Pill tone="warn">{lang === 'ar' ? 'بانتظار قراركم' : 'Awaiting your decision'}</Pill> : '—'; } }]} /></Section>
+    <Section flush><DataTable rows={s.data ? rows : null} onRow={(r: any) => go('/inbound/' + r.id)} filters={[{ key: 'st', label: lang === 'ar' ? 'الحالة' : 'Status', options: ['in_transit', 'at_handover', 'delivered'].map((v) => ({ value: v, label: label(lang, v) })), get: (r: any) => r.status }]} cols={[{ key: 'trackingNo', label: lang === 'ar' ? 'رقم التتبع' : 'Tracking', mono: true }, { key: 'from', label: lang === 'ar' ? 'من' : 'From', render: (r: any) => L.org(r.organizationId) }, { key: 'thermalClass', label: lang === 'ar' ? 'الفئة' : 'Class', render: (r: any) => label(lang, r.thermalClass) }, { key: 'status', label: lang === 'ar' ? 'الحالة' : 'Status', render: (r: any) => <Pill v={r.status} /> }, { key: 'deliverBy', label: lang === 'ar' ? 'متوقع' : 'Expected', render: (r: any) => f.dt(r.deliverBy) }, { key: 'disp', label: lang === 'ar' ? 'القرار' : 'Decision', render: (r: any) => { const y = (d.data?.items ?? []).find((z: any) => z.shipmentId === r.id); return y ? <Pill tone={y.decision === 'rejected' ? 'crit' : 'good'}>{label(lang, y.decision)}</Pill> : r.status === 'delivered' ? <Pill tone="warn">{lang === 'ar' ? 'بانتظار قراركم' : 'Awaiting your decision'}</Pill> : '—'; } }]} /></Section>
   </Page>;
 }
 
@@ -202,7 +203,7 @@ function Reports() {
   if (!d.data) return <Loading />;
   return <Page title={lang === 'ar' ? 'التقارير والتصدير' : 'Reports & export'} sub={lang === 'ar' ? 'التصدير مدقق ويُظهر بيانات فروعك فقط' : 'Exports are audited and include only your branches'}>
     <Section title={lang === 'ar' ? 'أداء الفروع' : 'Branch performance'} flush><DataTable rows={d.data.byBranch.map((b: any) => ({ id: b.branchId, ...b }))} cols={[{ key: 'name', label: lang === 'ar' ? 'الفرع' : 'Branch', render: (b: any) => x(b.name) }, { key: 'shipments', label: lang === 'ar' ? 'شحنات' : 'Shipments', num: true }, { key: 'onTimePct', label: lang === 'ar' ? 'في الوقت %' : 'On time %', num: true, render: (b: any) => b.onTimePct ?? '—' }]} /></Section>
-    <Section title={lang === 'ar' ? 'سجل الشحنات للتصدير' : 'Shipment register for export'} flush><DataTable rows={s.data?.items ?? null} csvName="shipments-export" cols={[{ key: 'trackingNo', label: 'Tracking', mono: true }, { key: 'status', label: 'Status', render: (r: any) => label(lang, r.status) }, { key: 'thermalClass', label: 'Class', render: (r: any) => label(lang, r.thermalClass) }, { key: 'createdAt', label: 'Created', render: (r: any) => f.dt(r.createdAt) }, { key: 'deliverBy', label: 'Deliver by', render: (r: any) => f.dt(r.deliverBy) }, { key: 'priceTotal', label: 'Price', num: true, render: (r: any) => f.sar(r.priceTotal) }]} /></Section>
+    <Section title={lang === 'ar' ? 'سجل الشحنات للتصدير' : 'Shipment register for export'} flush><DataTable rows={s.data?.items ?? null} csvName="shipments-export" cols={[{ key: 'trackingNo', label: lang === 'ar' ? 'رقم التتبع' : 'Tracking', mono: true }, { key: 'status', label: lang === 'ar' ? 'الحالة' : 'Status', render: (r: any) => label(lang, r.status) }, { key: 'thermalClass', label: lang === 'ar' ? 'الفئة' : 'Class', render: (r: any) => label(lang, r.thermalClass) }, { key: 'createdAt', label: lang === 'ar' ? 'تاريخ الإنشاء' : 'Created', render: (r: any) => f.dt(r.createdAt) }, { key: 'deliverBy', label: lang === 'ar' ? 'التسليم قبل' : 'Deliver by', render: (r: any) => f.dt(r.deliverBy) }, { key: 'priceTotal', label: lang === 'ar' ? 'السعر' : 'Price', num: true, render: (r: any) => f.sar(r.priceTotal) }]} /></Section>
   </Page>;
 }
 

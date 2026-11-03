@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useApp, useList, useQ, go } from '@/lib/store';
 import { Btn, ConfirmBtn, DataTable, DL, ErrorBox, Kpis, Loading, Mono, Page, Pill, Section, Sim, Bars, label, useFmt } from '@/lib/ui';
 import { ActionForm, ShipLink, localDate, opts, useLookups } from './common';
+import { sysText } from '@/lib/l10n';
 
 export function Invoices() {
   const { t, lang, x } = useApp(); const f = useFmt(); const L = useLookups(); const inv = useList('invoices', { sort: 'createdAt', dir: 'desc' });
@@ -89,7 +90,7 @@ export function Journals() {
       <div className="grid wide-narrow">
         <Section flush><DataTable rows={j.data?.items ?? null} onRow={(r: any) => setOpen(r.id)} search={(r: any) => r.journalNo + r.description} filters={[{ key: 's', label: t('common.status'), options: [{ value: 'draft', label: label(lang, 'draft') }, { value: 'posted', label: lang === 'ar' ? 'مرحّل' : 'Posted' }], get: (r: any) => r.status }, { key: 'src', label: lang === 'ar' ? 'المصدر' : 'Source', options: ['invoice', 'payment', 'credit_note', 'settlement', 'partner_payment', 'claim', 'manual', 'reversal'].map((s) => ({ value: s, label: s })), get: (r: any) => r.sourceType }]} cols={[{ key: 'journalNo', label: lang === 'ar' ? 'القيد' : 'Journal', mono: true }, { key: 'entryDate', label: t('common.date'), render: (r: any) => f.dt(r.entryDate) }, { key: 'description', label: lang === 'ar' ? 'الوصف' : 'Description' }, { key: 'sourceType', label: lang === 'ar' ? 'المصدر' : 'Source', hideSm: true }, { key: 'amt', label: t('common.amount'), num: true, render: (r: any) => f.sar(r.lines.reduce((a: number, l: any) => a + l.debit, 0)) }, { key: 'status', label: t('common.status'), render: (r: any) => <>{r.status === 'posted' ? <Pill tone="good">{lang === 'ar' ? 'مرحّل' : 'Posted'}</Pill> : <Pill v="draft" />}{r.reversedById && <Pill tone="mute">{lang === 'ar' ? 'معكوس' : 'Reversed'}</Pill>}</> }]} /></Section>
         <Section title={cur ? <Mono>{cur.journalNo}</Mono> : (lang === 'ar' ? 'اختر قيداً' : 'Select a journal')} actions={cur && <>{cur.status === 'draft' && <Btn kind="primary" onClick={() => run('journal.post', { id: cur.id })}>{lang === 'ar' ? 'ترحيل' : 'Post'}</Btn>}{cur.status === 'posted' && !cur.reversedById && <ActionForm kind="danger" label={lang === 'ar' ? 'عكس' : 'Reverse'} title={lang === 'ar' ? 'قيد عكسي' : 'Reversal'} cmd="journal.reverse" fields={[{ name: 'reason', label: t('common.reason'), required: true }]} map={(v) => ({ id: cur.id, ...v })} />}</>}>
-          {cur && <><p>{cur.description}</p>
+          {cur && <><p>{sysText(lang, cur.description)}</p>
             <DataTable rows={cur.lines.map((l: any, i: number) => ({ id: String(i), ...l }))} cols={[{ key: 'accountId', label: lang === 'ar' ? 'الحساب' : 'Account', render: (l: any) => accName(l.accountId) }, { key: 'debit', label: lang === 'ar' ? 'مدين' : 'Dr', num: true, render: (l: any) => (l.debit ? f.sar(l.debit) : '') }, { key: 'credit', label: lang === 'ar' ? 'دائن' : 'Cr', num: true, render: (l: any) => (l.credit ? f.sar(l.credit) : '') }]} />
             {cur.reversalOfId && <p className="muted">{lang === 'ar' ? 'يعكس' : 'Reverses'} {cur.reversalOfId}</p>}</>}
         </Section>

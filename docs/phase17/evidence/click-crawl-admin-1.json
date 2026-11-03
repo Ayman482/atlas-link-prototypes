@@ -1,0 +1,165 @@
+{
+ "app": "admin",
+ "base": "http://127.0.0.1:5057",
+ "executedAt": "2026-11-03T01:59:20.959Z",
+ "results": [
+  {
+   "route": "/map",
+   "interactive": 8,
+   "disabled": 1,
+   "clicked": 5,
+   "noEffect": [
+    "button «البيانات»",
+    "select «12 25 50»"
+   ],
+   "errors": [
+    "button «الوقت»: click failed locator.click: Timeout 2500ms exceeded.",
+    "button «الصفحة التالية»: click failed locator.click: Timeout 2500ms exceeded."
+   ],
+   "skipped": []
+  },
+  {
+   "route": "/dispatch",
+   "interactive": 18,
+   "disabled": 3,
+   "clicked": 15,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/vehicles",
+   "interactive": 10,
+   "disabled": 2,
+   "clicked": 8,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/devices",
+   "interactive": 15,
+   "disabled": 1,
+   "clicked": 14,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/excursions",
+   "interactive": 20,
+   "disabled": 2,
+   "clicked": 18,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/capa",
+   "interactive": 13,
+   "disabled": 2,
+   "clicked": 11,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/warehouse",
+   "interactive": 11,
+   "disabled": 1,
+   "clicked": 10,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/customers",
+   "interactive": 13,
+   "disabled": 1,
+   "clicked": 12,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/simulations",
+   "interactive": 14,
+   "disabled": 2,
+   "clicked": 12,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/credit-notes",
+   "interactive": 13,
+   "disabled": 2,
+   "clicked": 11,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/aging",
+   "interactive": 6,
+   "disabled": 2,
+   "clicked": 4,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/compliance/licenses",
+   "interactive": 18,
+   "disabled": 1,
+   "clicked": 17,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/reports/operations",
+   "interactive": 7,
+   "disabled": 1,
+   "clicked": 6,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/system/notifications",
+   "interactive": 22,
+   "disabled": 2,
+   "clicked": 20,
+   "noEffect": [
+    "button «القوالب»",
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/system/audit",
+   "interactive": 12,
+   "disabled": 2,
+   "clicked": 10,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  }
+ ]
+}

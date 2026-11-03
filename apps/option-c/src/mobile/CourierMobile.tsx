@@ -1,5 +1,6 @@
 'use client';
 // معاينة تطبيق المندوب — الخيار A (K01–K14). نفس المحرك والبيانات؛ تطبيق Flutter الفعلي في mobile/courier_app
+import { comma } from '@/lib/l10n';
 import React, { useEffect, useState } from 'react';
 import { AppProvider, useApp, useList, useQ, useRoute, go } from '@/lib/store';
 import { Btn, Empty, ErrorBox, KsaMap, Loading, Mono, Pill, Sim, label, useFmt } from '@/lib/ui';
@@ -21,7 +22,7 @@ function Gate() {
   const { userId, me, lang, signOut } = useApp();
   useEffect(() => { if (me && !me.roles.includes('courier')) signOut(); }, [me, signOut]);
   if (!userId) return <MobileLogin title={lang === 'ar' ? 'أطلس لينك — المندوب' : 'Atlas Link — Courier'} accounts={COURIER_ACCOUNTS} allowed={(r) => r.includes('courier')} />;
-  if (!me) return <Loading />;
+  if (!me || !me.roles.includes('courier')) return <Loading />;
   return <App />;
 }
 
@@ -30,11 +31,30 @@ type QAction = { clientActionId: string; type: 'scanPack' | 'pickup' | 'handover
 const qKey = (u: string) => 'al-courier-queue:' + u;
 const loadQ = (u: string): QAction[] => { try { return JSON.parse(localStorage.getItem(qKey(u)) || '[]'); } catch { return []; } };
 const saveQ = (u: string, q: QAction[]) => { try { localStorage.setItem(qKey(u), JSON.stringify(q)); } catch { /* */ } };
-let offlineFlag = false;
+let offlineFlag = false; let offlineSource: 'simulated' | 'network' = 'simulated';
 function useOffline() {
-  const { userId } = useApp(); const [off, setOff] = useState(offlineFlag); const [q, setQ] = useState<QAction[]>(() => loadQ(userId!));
-  useEffect(() => { const h = () => { setOff(offlineFlag); setQ(loadQ(userId!)); }; window.addEventListener('al-offline', h); return () => window.removeEventListener('al-offline', h); }, [userId]);
-  return { off, q, toggle: () => { offlineFlag = !offlineFlag; window.dispatchEvent(new Event('al-offline')); }, push: (a: Omit<QAction, 'clientActionId' | 'occurredAt'>) => { const n = [...loadQ(userId!), { ...a, clientActionId: 'ca-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), occurredAt: new Date().toISOString() }]; saveQ(userId!, n); window.dispatchEvent(new Event('al-offline')); }, clear: (ids?: string[]) => { saveQ(userId!, ids ? loadQ(userId!).filter((a) => !ids.includes(a.clientActionId)) : []); window.dispatchEvent(new Event('al-offline')); } };
+  const { userId } = useApp(); const [off, setOff] = useState(offlineFlag); const [src, setSrc] = useState(offlineSource); const [q, setQ] = useState<QAction[]>(() => loadQ(userId!));
+  useEffect(() => { const h = () => { setOff(offlineFlag); setSrc(offlineSource); setQ(loadQ(userId!)); }; window.addEventListener('al-offline', h); return () => window.removeEventListener('al-offline', h); }, [userId]);
+  return { off, src, q, toggle: () => { offlineFlag = !offlineFlag; offlineSource = 'simulated'; window.dispatchEvent(new Event('al-offline')); }, push: (a: Omit<QAction, 'clientActionId' | 'occurredAt'>) => { if (loadQ(userId!).some((x) => x.type === a.type && x.shipment === a.shipment)) return; /* منع التكرار لنفس الشحنة */ const n = [...loadQ(userId!), { ...a, clientActionId: 'ca-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), occurredAt: new Date().toISOString() }]; saveQ(userId!, n); window.dispatchEvent(new Event('al-offline')); }, clear: (ids?: string[]) => { saveQ(userId!, ids ? loadQ(userId!).filter((a) => !ids.includes(a.clientActionId)) : []); window.dispatchEvent(new Event('al-offline')); } };
+}
+/** مراقبة الاتصال في المعاينة: أحداث المتصفح online/offline تبدّل الوضع، والعودة تطلق مزامنة تلقائية للطابور (مرة واحدة) */
+function useAutoSync(o: ReturnType<typeof useOffline>) {
+  const { run, lang, toast } = useApp(); const busy = React.useRef(false);
+  useEffect(() => {
+    const goOff = () => { if (!offlineFlag) { offlineFlag = true; offlineSource = 'network'; window.dispatchEvent(new Event('al-offline')); } };
+    const goOn = () => { if (offlineFlag) { offlineFlag = false; window.dispatchEvent(new Event('al-offline')); } };
+    window.addEventListener('offline', goOff); window.addEventListener('online', goOn);
+    return () => { window.removeEventListener('offline', goOff); window.removeEventListener('online', goOn); };
+  }, []);
+  useEffect(() => {
+    if (o.off || !o.q.length || busy.current) return;
+    busy.current = true; const batch = o.q;
+    run<any>('courier.sync', { actions: batch.map(({ label: _l, ...a }) => a) }, { silent: true })
+      .then((r) => { o.clear(r.results.map((y: any) => y.clientActionId)); toast(lang === 'ar' ? `عاد الاتصال — زُومنت ${r.results.length} إجراءات تلقائياً` : `Back online — ${r.results.length} actions synced automatically`, 'info'); })
+      .catch(() => { /* يبقى الطابور؛ تُعاد المحاولة عند التغيير التالي */ })
+      .finally(() => { busy.current = false; });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [o.off]);
 }
 /** ينفذ الإجراء مباشرة أو يضيفه للطابور عند انقطاع الاتصال */
 function useAct() {
@@ -47,6 +67,7 @@ function useAct() {
 
 function App() {
   const { parts, path } = useRoute(); const o = useOffline(); const { lang } = useApp();
+  useAutoSync(o);
   let s: React.ReactNode;
   if (parts[0] === 't' && parts[1]) s = <Task id={parts[1]} />;
   else if (path === '/map') s = <RouteMap />;
@@ -55,7 +76,7 @@ function App() {
   else if (path === '/me') s = <Me />;
   else s = <Tasks />;
   return <>
-    {o.off && <div className="offbar" role="status">{lang === 'ar' ? 'وضع دون اتصال (محاكاة) — ' : 'Offline mode (simulated) — '}{o.q.length} {lang === 'ar' ? 'في الطابور' : 'queued'}</div>}
+    {o.off && <div className="offbar" role="status">{o.src === 'network' ? (lang === 'ar' ? 'لا يوجد اتصال بالشبكة — ' : 'No network connection — ') : (lang === 'ar' ? 'وضع دون اتصال (محاكاة) — ' : 'Offline mode (simulated) — ')}{o.q.length} {lang === 'ar' ? 'في الطابور' : 'queued'}</div>}
     {s}
     <MTabs items={[{ path: '/', ar: 'المهام', en: 'Tasks', icon: ICONS.list }, { path: '/map', ar: 'المسار', en: 'Route', icon: ICONS.map }, { path: '/boxes', ar: 'الصناديق', en: 'Boxes', icon: ICONS.box }, { path: '/sync', ar: 'المزامنة', en: 'Sync', icon: ICONS.sync, badge: o.q.length }, { path: '/me', ar: 'حسابي', en: 'Me', icon: ICONS.user }]} />
   </>;
@@ -127,11 +148,11 @@ function Task({ id }: { id: string }) {
         <b>{KIND[t.kind][lang === 'ar' ? 0 : 1]} — {x(a?.label)}</b>
         <span>{a?.contactName} · <span dir="ltr">{a?.contactPhone}</span></span>
         <span className="muted">{x(t.organization)} · {label(lang, t.thermalClass)} · {label(lang, t.mode)}</span>
-        <span className="muted">{t.items.map((i: any) => `${label(lang, i.descriptionCode)} ×${i.quantity}`).join('، ')}</span>
+        <span className="muted">{t.items.map((i: any) => `${label(lang, i.descriptionCode)} ×${i.quantity}`).join(comma(lang))}</span>
         <span>{lang === 'ar' ? 'الصندوق' : 'Box'}: <Mono>{t.box ?? t.plannedBox ?? '—'}</Mono>{!t.box && t.plannedBox && <span className="muted"> ({lang === 'ar' ? 'مخطط' : 'planned'})</span>}</span>
         {t.lastReading && <span dir="ltr">{t.lastReading.tempC ?? '—'}°C · {f.dt(t.lastReading.deviceTime)} <Sim /></span>}
       </div>
-      {queuedFor.length > 0 && <div className="notice warn">{lang === 'ar' ? 'إجراءات بانتظار المزامنة:' : 'Actions awaiting sync:'} {queuedFor.map((q) => q.label).join('، ')}</div>}
+      {queuedFor.length > 0 && <div className="notice warn">{lang === 'ar' ? 'إجراءات بانتظار المزامنة:' : 'Actions awaiting sync:'} {queuedFor.map((q) => q.label).join(comma(lang))}</div>}
       {err && <div className="state err" role="alert">{err}</div>}
 
       {/* K05–K07 الاستلام */}
@@ -205,11 +226,11 @@ function Sync() {
   };
   return <><MTop title={lang === 'ar' ? 'دون اتصال والمزامنة' : 'Offline & sync'} />
     <div className="mbodyx" tabIndex={0}>
-      <div className="mcard"><b>{lang === 'ar' ? 'حالة الشبكة' : 'Network'}: {o.off ? (lang === 'ar' ? 'دون اتصال' : 'Offline') : (lang === 'ar' ? 'متصل' : 'Online')} <Sim /></b><span className="muted">{lang === 'ar' ? 'محاكاة انقطاع الشبكة لاختبار العمل الميداني. تُخزّن الإجراءات محلياً بمعرف فريد وتُزامن دون تكرار.' : 'Simulates network loss for field testing. Actions are stored locally with unique IDs and synced idempotently.'}</span><Btn onClick={o.toggle}>{o.off ? (lang === 'ar' ? 'استعادة الاتصال' : 'Go online') : (lang === 'ar' ? 'قطع الاتصال' : 'Go offline')}</Btn></div>
+      <div className="mcard"><b>{lang === 'ar' ? 'حالة الشبكة' : 'Network'}: {o.off ? (lang === 'ar' ? 'دون اتصال' : 'Offline') : (lang === 'ar' ? 'متصل' : 'Online')} {o.off && o.src === 'network' ? <span className="pill warn">{lang === 'ar' ? 'انقطاع فعلي' : 'Real outage'}</span> : <Sim />}</b><span className="muted">{lang === 'ar' ? 'محاكاة انقطاع الشبكة لاختبار العمل الميداني. تُخزّن الإجراءات محلياً بمعرف فريد وتُزامن دون تكرار.' : 'Simulates network loss for field testing. Actions are stored locally with unique IDs and synced idempotently.'}</span><Btn onClick={o.toggle}>{o.off ? (lang === 'ar' ? 'استعادة الاتصال' : 'Go online') : (lang === 'ar' ? 'قطع الاتصال' : 'Go offline')}</Btn></div>
       <b>{lang === 'ar' ? 'الطابور' : 'Queue'} ({o.q.length})</b>
-      {o.q.length ? o.q.map((q) => <div key={q.clientActionId} className="mcard"><b>{q.label}</b><span className="muted"><Mono>{q.clientActionId}</Mono> · {f.dt(q.occurredAt)}</span></div>) : <Empty text={lang === 'ar' ? 'لا إجراءات معلّقة' : 'Nothing pending'} />}
+      {o.q.length ? o.q.map((q) => <div key={q.clientActionId} className="mcard"><b>{q.label} · <Mono>{(d.data?.tasks ?? []).find((t: any) => t.shipmentId === q.shipment || t.trackingNo === q.shipment)?.trackingNo ?? q.shipment}</Mono></b><span className="muted"><Mono>{q.clientActionId}</Mono> · {f.dt(q.occurredAt)}</span></div>) : <Empty text={lang === 'ar' ? 'لا إجراءات معلّقة' : 'Nothing pending'} />}
       <Btn kind="primary" className="bigbtn" disabled={!o.q.length || o.off || busy} aria-busy={busy} onClick={sync}>{lang === 'ar' ? 'مزامنة الآن' : 'Sync now'}</Btn>
-      {res && res.map((r) => <div key={r.clientActionId} className="mcard"><div className="row" style={{ justifyContent: 'space-between' }}><b>{r.label}</b><Pill tone={r.status === 'accepted' ? 'good' : r.status === 'duplicate' ? 'mute' : 'crit'}>{r.status}</Pill></div><span>{x(r.message)}</span></div>)}
+      {res && res.map((r) => <div key={r.clientActionId} className="mcard"><div className="row" style={{ justifyContent: 'space-between' }}><b>{r.label}</b><Pill tone={r.status === 'accepted' ? 'good' : r.status === 'duplicate' ? 'mute' : 'crit'}>{({ accepted: ['مقبول', 'Accepted'], duplicate: ['مكرر — سبق تنفيذه', 'Duplicate — already applied'], conflict: ['تعارض — بانتظار العمليات', 'Conflict — awaiting ops'], rejected: ['مرفوض', 'Rejected'] } as Record<string, string[]>)[r.status]?.[lang === 'ar' ? 0 : 1] ?? r.status}</Pill></div><span>{x(r.message)}</span></div>)}
       {(d.data?.conflicts ?? []).length > 0 && <><b>{lang === 'ar' ? 'سجل التعارضات' : 'Conflict log'}</b>{d.data.conflicts.map((c: any) => <div key={c.id} className="mcard"><div className="row" style={{ justifyContent: 'space-between' }}><span>{label(lang, c.action)}</span><Pill v={c.resolution} /></div><span className="muted">{lang === 'en' && c.reasonEn ? c.reasonEn : c.reason}</span><span className="muted">{f.dt(c.occurredAt)}</span></div>)}</>}
     </div></>;
 }

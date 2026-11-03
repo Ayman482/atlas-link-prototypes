@@ -1,5 +1,5 @@
 'use client';
-// الامتثال: المتطلبات، التراخيص، الحظر، الاحتفاظ، الحجز القانوني (A44–A48)
+// الامتثال: المتطلبات، التراخيص، الحظر، الاحتفاظ، التحفظ القانوني (A44–A48)
 import React from 'react';
 import { useApp, useList } from '@/lib/store';
 import { Btn, ConfirmBtn, DataTable, Kpis, Page, Pill, Section, label, useFmt } from '@/lib/ui';

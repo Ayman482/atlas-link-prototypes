@@ -1,0 +1,177 @@
+{
+ "app": "portal",
+ "base": "http://127.0.0.1:5057",
+ "executedAt": "2026-11-03T01:56:54.145Z",
+ "results": [
+  {
+   "route": "/",
+   "interactive": 9,
+   "disabled": 2,
+   "clicked": 7,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/shipments",
+   "interactive": 13,
+   "disabled": 1,
+   "clicked": 12,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/shipments/new",
+   "interactive": 5,
+   "disabled": 0,
+   "clicked": 5,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/shipments/shp_0002",
+   "interactive": 7,
+   "disabled": 0,
+   "clicked": 7,
+   "noEffect": [
+    "button «نظرة عامة»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/recurring",
+   "interactive": 11,
+   "disabled": 2,
+   "clicked": 9,
+   "noEffect": [
+    "button «توليد الطلب التالي الآن»",
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/addresses",
+   "interactive": 8,
+   "disabled": 2,
+   "clicked": 6,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/branches",
+   "interactive": 11,
+   "disabled": 2,
+   "clicked": 9,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/users",
+   "interactive": 12,
+   "disabled": 2,
+   "clicked": 10,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/contracts",
+   "interactive": 0,
+   "disabled": 0,
+   "clicked": 0,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/invoices",
+   "interactive": 11,
+   "disabled": 2,
+   "clicked": 9,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/payments",
+   "interactive": 8,
+   "disabled": 2,
+   "clicked": 6,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/claims",
+   "interactive": 0,
+   "disabled": 0,
+   "clicked": 0,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/reports",
+   "interactive": 16,
+   "disabled": 3,
+   "clicked": 13,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/api",
+   "interactive": 17,
+   "disabled": 4,
+   "clicked": 13,
+   "noEffect": [
+    "select «12 25 50»",
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/notifications",
+   "interactive": 6,
+   "disabled": 2,
+   "clicked": 4,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/profile",
+   "interactive": 7,
+   "disabled": 1,
+   "clicked": 6,
+   "noEffect": [
+    "button «العربية»"
+   ],
+   "errors": [
+    "button «English»: toggle did not restore (ar|rtl|| → en|ltr||)"
+   ],
+   "skipped": []
+  }
+ ]
+}

@@ -1,6 +1,7 @@
 'use client';
+import { comma } from '@/lib/l10n';
 import { ELIGIBILITY_TEXT } from '@medlog/core';
-import { timelineTitle, timelineDetail } from '@/lib/l10n';
+import { timelineTitle, timelineDetail, sysText } from '@/lib/l10n';
 // العمليات: برج التحكم، الخريطة، الشحنات، الإنشاء، التفاصيل، التوزيع، المسارات، الأرجل، المندوبون، المركبات، الشركاء (A02–A12)
 import React, { useEffect, useMemo, useState } from 'react';
 import { useApp, useQ, useList, go, transport } from '@/lib/store';
@@ -57,7 +58,7 @@ export function ControlTower() {
           {q.data.alerts.length === 0 ? <Empty text={lang === 'ar' ? 'لا تنبيهات مفتوحة' : 'No open alerts'} /> : <ul className="alerts" style={{ maxHeight: 440, overflow: 'auto' }}>
             {q.data.alerts.slice(0, 40).map((a: any) => <li key={a.id}>
               <Pill v={a.severity} />
-              <a href={'#' + a.link}>{x(a.title)}<div className="muted" style={{ fontSize: '.78rem' }}>{f.dt(a.at)}</div></a>
+              <a href={'#' + a.link}>{sysText(lang, x(a.title))}<div className="muted" style={{ fontSize: '.78rem' }}>{f.dt(a.at)}</div></a>
               {a.kind === 'excursion' && a.status === 'open' ? <Btn onClick={() => run('excursion.acknowledge', { id: a.id }, { success: lang === 'ar' ? 'تم الإقرار' : 'Acknowledged' })}>{lang === 'ar' ? 'إقرار' : 'Acknowledge'}</Btn>
                 : a.kind === 'delay' ? <Btn kind="ghost" onClick={() => run('delay.action', { id: a.id, action: 'escalate' }, { success: lang === 'ar' ? 'تم التصعيد' : 'Escalated' })}>{lang === 'ar' ? 'تصعيد' : 'Escalate'}</Btn> : <span />}
             </li>)}
@@ -113,7 +114,7 @@ export function ShipmentsList() {
           bulk={[{ label: lang === 'ar' ? 'نسخ أرقام التتبع' : 'Copy tracking numbers', run: async (sel: any[]) => { try { await navigator.clipboard.writeText(sel.map((r) => r.trackingNo).join('\n')); } catch { /* المتصفح قد يمنع الحافظة */ } } }]}
           expand={(s: any) => <dl className="tldetail">
             <div><dt>{lang === 'ar' ? 'المسار' : 'Route'}</dt><dd>{L.city(s.originCity)} {lang === 'ar' ? '←' : '→'} {L.city(s.destCity)} · {label(lang, s.mode)}</dd></div>
-            <div><dt>{lang === 'ar' ? 'نافذة الاستلام' : 'Pickup window'}</dt><dd>{f.dt(s.pickupWindowStart)} – {f.dt(s.pickupWindowEnd)}</dd></div>
+            <div><dt>{lang === 'ar' ? 'فترة الاستلام' : 'Pickup window'}</dt><dd>{f.dt(s.pickupWindowStart)} – {f.dt(s.pickupWindowEnd)}</dd></div>
             <div><dt>{lang === 'ar' ? 'التسليم قبل' : 'Deliver by'}</dt><dd>{f.dt(s.deliverBy)}</dd></div>
             <div><dt>{lang === 'ar' ? 'الوصول المتوقع' : 'ETA'}</dt><dd>{s.eta?.at ? <>{f.dt(s.eta.at)} <Pill v={s.eta.confidence} /></> : '—'}</dd></div>
             <div><dt>{lang === 'ar' ? 'آخر موقع مؤكد' : 'Last confirmed fix'}</dt><dd>{s.lastPosition ? <>{f.dt(s.lastPosition.at)} · {label(lang, s.lastPosition.source)}</> : (lang === 'ar' ? 'لا يوجد بعد' : 'None yet')}</dd></div>
@@ -170,8 +171,8 @@ export function ShipmentCreate({ portal }: { params?: any; portal?: { orgId: str
     ],
     [
       { name: 'requestType', label: lang === 'ar' ? 'نوع الطلب' : 'Request type', type: 'select', required: true, options: ['on_demand', 'scheduled'].map((s) => ({ value: s, label: label(lang, s) })) },
-      { name: 'pickupWindowStart', label: lang === 'ar' ? 'بداية نافذة الاستلام' : 'Pickup window start', type: 'datetime', required: true },
-      { name: 'pickupWindowEnd', label: lang === 'ar' ? 'نهاية نافذة الاستلام' : 'Pickup window end', type: 'datetime', required: true },
+      { name: 'pickupWindowStart', label: lang === 'ar' ? 'بداية فترة الاستلام' : 'Pickup window start', type: 'datetime', required: true },
+      { name: 'pickupWindowEnd', label: lang === 'ar' ? 'نهاية فترة الاستلام' : 'Pickup window end', type: 'datetime', required: true },
     ],
   ];
   const weight = (v.items ?? []).reduce((a: number, i: any) => a + (Number(i.weightKg) || 0), 0);
@@ -221,7 +222,7 @@ export function ShipmentCreate({ portal }: { params?: any; portal?: { orgId: str
               <span>{t('ship.dedicatedBox')}</span><span className="num">{f.sar(quote.snapshot.dedicatedBox)}</span>
               <span>{t('ship.vat')}</span><span className="num">{f.sar(quote.snapshot.vat)}</span>
               <b>{t('common.total')}</b><b className="num">{f.sar(quote.total)}</b>
-              <span className="muted" style={{ gridColumn: '1/-1' }}>{lang === 'ar' ? `التعرفة الإصدار ${quote.snapshot.ratePlanVersion} · صالح 24 ساعة` : `Tariff v${quote.snapshot.ratePlanVersion} · valid 24 hours`}</span>
+              <span className="muted" style={{ gridColumn: '1/-1' }}>{lang === 'ar' ? `جدول الأسعار — الإصدار ${quote.snapshot.ratePlanVersion} · صالح 24 ساعة` : `Tariff v${quote.snapshot.ratePlanVersion} · valid 24 hours`}</span>
             </div>}
           </div>
         </div>}
@@ -262,7 +263,7 @@ export function ShipmentDetail({ params, portal }: { params: Record<string, stri
     {s.status === 'draft' && <Btn kind="primary" onClick={() => run('shipment.submit', { id: s.id })}>{t('common.submit')}</Btn>}
     {['draft', 'confirmed', 'pickup_scheduled'].includes(s.status) && <ActionForm label={t('ship.reschedule')} title={t('ship.reschedule')} cmd="shipment.reschedule" initial={{ pickupWindowStart: localNow(2), pickupWindowEnd: localNow(4) }} fields={[{ name: 'pickupWindowStart', label: lang === 'ar' ? 'البداية' : 'Start', type: 'datetime', required: true }, { name: 'pickupWindowEnd', label: lang === 'ar' ? 'النهاية' : 'End', type: 'datetime', required: true }]} map={(v) => ({ id: s.id, ...v })} />}
     {['draft', 'confirmed', 'pickup_scheduled'].includes(s.status) && <ActionForm label={t('ship.cancelShipment')} kind="danger" danger title={t('ship.cancelShipment')} cmd="shipment.cancel" fields={[{ name: 'reason', label: t('common.reason'), type: 'textarea', required: true }]} map={(v) => ({ id: s.id, reason: v.reason, version: s.version })} />}
-    {['in_transit', 'at_handover'].includes(s.status) && ops && <ActionForm label={lang === 'ar' ? 'تسجيل تسليم فاشل' : 'Record failed delivery'} title={lang === 'ar' ? 'محاولة تسليم فاشلة' : 'Failed attempt'} cmd="courier.failAttempt" fields={[{ name: 'reasonCode', label: t('common.reason'), type: 'select', required: true, options: opts(lang, reasons) }, { name: 'notes', label: t('common.note'), type: 'textarea' }]} map={(v) => ({ shipment: s.id, ...v })} />}
+    {['in_transit', 'at_handover'].includes(s.status) && ops && <ActionForm label={lang === 'ar' ? 'تسجيل تعذّر التسليم' : 'Record failed delivery'} title={lang === 'ar' ? 'محاولة تسليم فاشلة' : 'Failed attempt'} cmd="courier.failAttempt" fields={[{ name: 'reasonCode', label: t('common.reason'), type: 'select', required: true, options: opts(lang, reasons) }, { name: 'notes', label: t('common.note'), type: 'textarea' }]} map={(v) => ({ shipment: s.id, ...v })} />}
     {['in_transit', 'at_handover', 'exception'].includes(s.status) && ops && d.data.custodian?.type === 'courier' && <ActionForm label={lang === 'ar' ? 'تسليم نيابة عن المندوب' : 'Deliver on courier’s behalf'} title={t('ship.pod')} cmd="courier.deliver" fields={[{ name: 'recipientName', label: t('courier.recipientName'), required: true }, { name: 'signature', label: lang === 'ar' ? 'مرجع التوقيع' : 'Signature reference', required: true }, { name: 'notes', label: t('common.note'), type: 'textarea' }]} map={(v) => ({ shipment: s.id, ...v })} />}
     {s.status === 'failed' && ops && <a className="btn primary" href="#/returns">{lang === 'ar' ? 'اتخاذ القرار' : 'Decide'}</a>}
     {['in_transit', 'at_handover', 'collected'].includes(s.status) && (ops || qual) && s.lostState === 'none' && <ActionForm label={lang === 'ar' ? 'اشتباه فقدان' : 'Suspect loss'} kind="danger" title={lang === 'ar' ? 'فتح اشتباه فقدان' : 'Open suspected loss'} cmd="lost.suspect" intro={lang === 'ar' ? 'صمت GPS وحده لا يكفي (LDM).' : 'GPS silence alone is not sufficient (LDM).'} fields={[{ name: 'basis', label: lang === 'ar' ? 'الأساس' : 'Basis', type: 'multi', required: true, options: opts(lang, [{ value: 'custody_gap', ar: 'فجوة حيازة', en: 'Custody gap' }, { value: 'gps_silence', ar: 'صمت GPS', en: 'GPS silence' }, { value: 'partner_report', ar: 'بلاغ شريك', en: 'Partner report' }, { value: 'customer_report', ar: 'بلاغ عميل', en: 'Customer report' }]) }, { name: 'note', label: t('common.note'), type: 'textarea', required: true }]} map={(v) => ({ shipment: s.id, ...v })} />}
@@ -285,7 +286,7 @@ export function ShipmentDetail({ params, portal }: { params: Record<string, stri
             [t('ship.sender'), <>{x(d.data.sender?.label)}<div className="muted">{L.city(s.originCity)}</div></>], [t('ship.receiver'), <>{x(d.data.receiver?.label)}<div className="muted">{L.city(s.destCity)}{d.data.receiverOrg && ` · ${x(d.data.receiverOrg)}`}</div></>],
             [t('ship.pickupWindow'), `${f.dt(s.pickupWindowStart)} – ${f.dt(s.pickupWindowEnd)}`], [t('ship.deliverBy'), f.dt(s.deliverBy)],
             [lang === 'ar' ? 'نوع الطلب' : 'Request type', label(lang, s.requestType)], [t('ship.dedicatedBox'), s.dedicatedBox ? t('common.yes') : t('common.no')],
-            [t('ship.items'), d.data.items.map((i: any) => `${label(lang, i.descriptionCode)} ×${i.quantity}`).join('، ')], [lang === 'ar' ? 'الملف الحراري' : 'Thermal profile', <>{x(d.data.profile?.name)} <span className="muted">v{d.data.profile?.version}</span></>],
+            [t('ship.items'), d.data.items.map((i: any) => `${label(lang, i.descriptionCode)} ×${i.quantity}`).join(comma(lang))], [lang === 'ar' ? 'الملف الحراري' : 'Thermal profile', <>{x(d.data.profile?.name)} <span className="muted">v{d.data.profile?.version}</span></>],
             [lang === 'ar' ? 'الحيازة الحالية' : 'Current custodian', d.data.custodian ? <>{label(lang, d.data.custodian.type, 'custodian')} · {d.data.custodianName ? x(d.data.custodianName) : d.data.custodian.type === 'courier' ? L.courier(d.data.custodian.id) : d.data.custodian.type.includes('partner') || d.data.custodian.type === 'air_carrier' ? L.partner(d.data.custodian.id) : d.data.custodian.id}</> : '—'],
             [lang === 'ar' ? 'الإصدار' : 'Version', s.version],
           ]} />
@@ -301,7 +302,7 @@ export function ShipmentDetail({ params, portal }: { params: Record<string, stri
               [lang === 'ar' ? 'عرض الحرارة' : 'Temperature view', tr.temperatureVisibility === 'current' ? (lang === 'ar' ? 'حالية' : 'Current') : (lang === 'ar' ? 'آخر قيمة معروفة فقط' : 'Last known value only')],
               [lang === 'ar' ? 'اتصال الجهاز' : 'Device connectivity', label(lang, tr.deviceConnectivity)], [t('ship.eta'), s.eta ? (s.eta.at ? <>{f.dt(s.eta.at)} <Pill tone="info">{lang === 'ar' ? 'ثقة' : 'confidence'}: {label(lang, s.eta.confidence)}</Pill></> : <Pill tone="mute">{t('ship.etaUnavailable')}</Pill>) : '—'],
             ]} />
-            {s.eta?.basis && <p className="muted" style={{ fontSize: '.82rem' }}>{s.eta.basis}</p>}
+            {s.eta?.basis && <p className="muted" style={{ fontSize: '.82rem' }}>{sysText(lang, typeof s.eta.basis === 'string' ? s.eta.basis : x(s.eta.basis))}</p>}
           </Section>
           <Section title={lang === 'ar' ? 'الصندوق' : 'Box'}>
             {!d.data.box ? <Empty text={lang === 'ar' ? 'لم تُعبأ بعد' : 'Not packed yet'} /> : <DL items={[
@@ -317,7 +318,7 @@ export function ShipmentDetail({ params, portal }: { params: Record<string, stri
       {tab === 'temp' && <Section title={t('ship.temperature')} actions={<Sim />}>
         {rep.data ? <>
           <TempChart report={rep.data} />
-          <Kpis items={[{ label: lang === 'ar' ? 'القراءات' : 'Readings', value: f.num(rep.data.summary.count) }, { label: t('ship.inRange') + ' %', value: rep.data.summary.inRangePct ?? '—', tone: rep.data.summary.inRangePct != null && rep.data.summary.inRangePct < 100 ? 'warn' : 'good' }, { label: lang === 'ar' ? 'دقائق الفجوات' : 'Gap minutes', value: f.num(rep.data.summary.gapMinutes), tone: rep.data.summary.gapMinutes ? 'warn' : undefined }, { label: lang === 'ar' ? 'قراءات متأخرة' : 'Backfilled', value: f.num(rep.data.summary.backfilled) }, { label: lang === 'ar' ? 'أدنى/أعلى' : 'Min/Max', value: `${f.temp(rep.data.summary.minC)} / ${f.temp(rep.data.summary.maxC)}` }]} />
+          <Kpis items={[{ label: lang === 'ar' ? 'القراءات' : 'Readings', value: f.num(rep.data.summary.count) }, { label: t('ship.inRange') + ' %', value: rep.data.summary.inRangePct ?? '—', tone: rep.data.summary.inRangePct != null && rep.data.summary.inRangePct < 100 ? 'warn' : 'good' }, { label: lang === 'ar' ? 'دقائق الفجوات' : 'Gap minutes', value: f.num(rep.data.summary.gapMinutes), tone: rep.data.summary.gapMinutes ? 'warn' : undefined }, { label: lang === 'ar' ? 'قراءات مخزنة' : 'Backfilled', value: f.num(rep.data.summary.backfilled) }, { label: lang === 'ar' ? 'أدنى/أعلى' : 'Min/Max', value: `${f.temp(rep.data.summary.minC)} / ${f.temp(rep.data.summary.maxC)}` }]} />
           {rep.data.gaps.length > 0 && <DataTable rows={rep.data.gaps.map((g: any, i: number) => ({ id: String(i), ...g }))} pageSize={5} cols={[{ key: 'from', label: t('common.from'), render: (g: any) => f.dt(g.from) }, { key: 'to', label: t('common.to'), render: (g: any) => f.dt(g.to) }, { key: 'minutes', label: lang === 'ar' ? 'الدقائق' : 'Minutes', num: true }, { key: 'reason', label: t('common.reason'), render: (g: any) => x(g.reason) }]} />}
           {d.data.excursions.map((e: any) => <div key={e.id} className="notice crit">{lang === 'ar' ? 'انحراف' : 'Excursion'} · {lang === 'ar' ? 'ذروة' : 'peak'} {f.temp(e.peakC)} · {f.dt(e.startedAt)} {lang === 'ar' ? '←' : '→'} {e.endedAt ? f.dt(e.endedAt) : (lang === 'ar' ? 'مستمر' : 'ongoing')} · <Pill v={e.status} /> {!portal && <a href="#/excursions">{t('common.open')}</a>}</div>)}
           <p className="muted">{x(rep.data.disclaimer)}</p>
@@ -337,7 +338,7 @@ export function ShipmentDetail({ params, portal }: { params: Record<string, stri
       {tab === 'quality' && <div className="grid">
         <Section title={t('nav.incidents')}>{d.data.incidents.length ? d.data.incidents.map((i: any) => <div key={i.id} className="row"><a href={'#/incidents/' + i.id} className="mono">{i.code}</a> {x(i.title)} <Pill v={i.status} /></div>) : <Empty />}</Section>
         <Section title={t('nav.claims')}>{d.data.claims.length ? d.data.claims.map((c: any) => <div key={c.id} className="row"><Mono>{c.code}</Mono> {f.sar(c.claimedAmount)} <Pill v={c.status} /></div>) : <Empty />}</Section>
-        {d.data.lostApprovals?.length > 0 && <Section title={lang === 'ar' ? 'اعتمادات الفقدان' : 'Loss approvals'}>{d.data.lostApprovals.map((a: any) => <div key={a.id}>{t('roles.' + a.approvalRole)} · {a.decision} · {f.dt(a.decidedAt)}</div>)}</Section>}
+        {d.data.lostApprovals?.length > 0 && <Section title={lang === 'ar' ? 'اعتمادات الفقدان' : 'Loss approvals'}>{d.data.lostApprovals.map((a: any) => <div key={a.id}>{t('roles.' + a.approvalRole)} · {label(lang, a.decision)} · {f.dt(a.decidedAt)}</div>)}</Section>}
       </div>}
     </Page>
   );
@@ -383,7 +384,7 @@ export function Dispatch() {
               <select id="dc" value={courier} onChange={(e) => setCourier(e.target.value)}><option value="">—</option>{b.data.couriers.map((c: any) => <option key={c.id} value={c.id} disabled={c.blockers.length > 0}>{x(c.name)} · {L.city(c.cityCode)} · {c.blockers.length ? '⛔ ' + c.blockers.map((b: string) => ELIGIBILITY_TEXT[b]?.[lang] ?? label(lang, b)).join(lang === 'ar' ? '، ' : ', ') : `${lang === 'ar' ? 'حمولة' : 'load'} ${c.load}`}</option>)}</select>
               <span className="hint">{lang === 'ar' ? 'غير المؤهلين معطّلون مع سبب الحظر' : 'Ineligible couriers are disabled with the blocking reason'}</span></div>
             <div className="field"><label htmlFor="db">{lang === 'ar' ? 'الصندوق' : 'Box'}</label>
-              <select id="db" value={box} onChange={(e) => { setBox(e.target.value); setApr(''); }}><option value="">{lang === 'ar' ? 'بدون (يُمسح عند الاستلام)' : 'None (scan at pickup)'}</option>{boxes.map((bx: any) => <option key={bx.id} value={bx.id}>{bx.code} · {bx.size} · {bx.readiness.ready ? '✓' : '⚠ ' + bx.readiness.reasons.map((r: any) => r[lang]).join('، ')}</option>)}</select></div>
+              <select id="db" value={box} onChange={(e) => { setBox(e.target.value); setApr(''); }}><option value="">{lang === 'ar' ? 'بدون (يُمسح عند الاستلام)' : 'None (scan at pickup)'}</option>{boxes.map((bx: any) => <option key={bx.id} value={bx.id}>{bx.code} · {bx.size} · {bx.readiness.ready ? '✓' : '⚠ ' + bx.readiness.reasons.map((r: any) => r[lang]).join(comma(lang))}</option>)}</select></div>
             {chosenBox && !chosenBox.readiness.ready && <div className={'notice ' + (chosenBox.readiness.reasons.some((r: any) => !r.overridable) ? 'crit' : 'warn')}>
               <div className="page" style={{ gap: 6 }}>
                 <b>{lang === 'ar' ? 'الصندوق غير جاهز' : 'Box not ready'}</b>
@@ -531,7 +532,7 @@ export function Partners() {
     <Page title={t('nav.partners')} sub={lang === 'ar' ? 'بطاقات الأداء توصي ولا تُسند تلقائياً (PPS)' : 'Scorecards recommend; they never auto-assign (PPS)'}>
       <div className="grid wide-narrow">
         <Section flush><DataTable rows={b.data?.partners ?? null} onRow={(r: any) => setOpen(r.id)} cols={[
-          { key: 'name', label: lang === 'ar' ? 'الشريك' : 'Partner', render: (r: any) => x(r.name) }, { key: 'partnerType', label: lang === 'ar' ? 'النوع' : 'Type', render: (r: any) => label(lang, r.partnerType === 'warehouse' ? 'warehouse' : r.partnerType) }, { key: 'cities', label: lang === 'ar' ? 'المدن' : 'Cities', render: (r: any) => r.cities.map((c: string) => L.city(c)).join('، ') },
+          { key: 'name', label: lang === 'ar' ? 'الشريك' : 'Partner', render: (r: any) => x(r.name) }, { key: 'partnerType', label: lang === 'ar' ? 'النوع' : 'Type', render: (r: any) => label(lang, r.partnerType === 'warehouse' ? 'warehouse' : r.partnerType) }, { key: 'cities', label: lang === 'ar' ? 'المدن' : 'Cities', render: (r: any) => r.cities.map((c: string) => L.city(c)).join(comma(lang)) },
           { key: 'score', label: lang === 'ar' ? 'الدرجة' : 'Score', num: true }, { key: 'status', label: t('common.status'), render: (r: any) => <Pill v={r.status} /> }, { key: 'b', label: lang === 'ar' ? 'الأهلية' : 'Eligibility', render: (r: any) => (r.blockers.length ? <Pill tone="crit">{r.blockers.map((b: string) => ELIGIBILITY_TEXT[b]?.[lang] ?? label(lang, b)).join(lang === 'ar' ? '، ' : ', ')}</Pill> : <Pill tone="good">{lang === 'ar' ? 'مؤهَّل' : 'Eligible'}</Pill>) }, { key: 'settlementCycle', label: lang === 'ar' ? 'دورة التسوية' : 'Settlement', render: (r: any) => label(lang, r.settlementCycle) },
         ]} /></Section>
         <Section title={p ? x(p.name) : (lang === 'ar' ? 'اختر شريكاً' : 'Select a partner')}>

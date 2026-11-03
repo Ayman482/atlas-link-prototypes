@@ -13,17 +13,22 @@ const PORT = Number(process.env.PORT ?? 4000);
 const DATA_DIR = path.resolve(process.env.MEDLOG_DATA_DIR ?? path.join(process.cwd(), 'data'));
 const DB_FILE = path.join(DATA_DIR, 'demo-db.json');
 // المفتاح السري لتوقيع الرموز: إن لم يُضبط يُولَّد عشوائياً لكل تشغيل (لا مفتاح افتراضي معروف يسمح بتزوير الرموز)
+// إعدادات الإنتاج صارمة: لا تشغيل دون مفتاح سري وقائمة أصول صريحة، والدخول السريع وإعادة الضبط معطّلان مهما كانت المتغيرات
+const PROD = process.env.NODE_ENV === 'production';
+if (PROD && (!process.env.MEDLOG_SECRET || process.env.MEDLOG_SECRET.length < 32 || !process.env.CORS_ORIGIN)) {
+  console.error('✖ NODE_ENV=production يتطلب MEDLOG_SECRET (32 حرفاً على الأقل) وCORS_ORIGIN صريحاً'); process.exit(1);
+}
 const SECRET = process.env.MEDLOG_SECRET || crypto.randomBytes(32).toString('hex');
 if (!process.env.MEDLOG_SECRET) console.warn('⚠ MEDLOG_SECRET غير مضبوط — استُخدم مفتاح عشوائي؛ ستنتهي الجلسات عند إعادة التشغيل');
 // اختصار الدخول السريع لحسابات العرض: معطّل افتراضياً ويتطلب تفعيلاً صريحاً، ولا يشمل الحسابات المحمية بالتحقق بخطوتين
-const DEMO_LOGIN = process.env.MEDLOG_ENABLE_DEMO_LOGIN === '1';
+const DEMO_LOGIN = !PROD && process.env.MEDLOG_ENABLE_DEMO_LOGIN === '1';
 // مدة الجلسة: خمول 12 ساعة، وحد أقصى مطلق 7 أيام (قابلة للضبط للاختبار)
 const IDLE_MS = Number(process.env.MEDLOG_SESSION_IDLE_MIN ?? 720) * 60_000;
 const ABS_MS = Number(process.env.MEDLOG_SESSION_MAX_MIN ?? 7 * 24 * 60) * 60_000;
 const MFA_MAX_ATTEMPTS = 5;
 // CORS: قائمة سماح صريحة (CORS_ORIGIN مفصولة بفواصل)؛ الافتراضي أصول التطوير المحلية فقط — لا "*"
 const CORS_ALLOW = (process.env.CORS_ORIGIN ?? '').split(',').map((x) => x.trim()).filter(Boolean);
-const LOCAL_ORIGIN = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/;
+const LOCAL_ORIGIN = PROD ? /^$/ : /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/;
 const RESET = process.argv.includes('--reset');
 
 fs.mkdirSync(DATA_DIR, { recursive: true });
@@ -42,7 +47,14 @@ function load(): Db | null {
   if (RESET || !fs.existsSync(DB_FILE)) return null;
   try { return JSON.parse(fs.readFileSync(DB_FILE, 'utf8')); } catch { console.warn('⚠ تعذّر قراءة قاعدة البيانات؛ سيُعاد التوليد'); return null; }
 }
-const engine = new Engine(load(), { persist: (db) => persist(db) });
+/** الحفظ المتزامن للأوامر: الكتابة الذرّية جزء من المعاملة — إن فشلت يتراجع المحرك ولا يُبث أي حدث (commit-then-emit) */
+function persistNow(db: Db) {
+  if (writeTimer) { clearTimeout(writeTimer); writeTimer = null; }
+  const tmp = DB_FILE + '.tmp';
+  fs.writeFileSync(tmp, JSON.stringify(db));
+  fs.renameSync(tmp, DB_FILE);
+}
+const engine = new Engine(load(), { persist: (db) => persistNow(db) });
 if (RESET || !fs.existsSync(DB_FILE)) persist(engine.db);
 
 // ---------- الرموز (Tokens) — HMAC بلا حالة فوق سجل الجلسات ----------
@@ -74,6 +86,14 @@ function newSession(userId: string, ua: string, ip: string) {
 const challenges = new Map<string, { userId: string; exp: number; attempts: number }>();
 
 // ---------- SSE ----------
+const evSeq = (id: string) => Number(String(id).replace(/\D/g, '')) || 0;
+const lastSeq = () => engine.db.outbox.reduce((m, e) => Math.max(m, evSeq(e.id)), 0);
+/** الأحداث المرئية للمستخدم بعد رقم تسلسلي (لاستكمال ما فات عند إعادة الاتصال) */
+function visibleSince(userId: string, after: number) {
+  const a = actorFor(engine.db, userId); if (!a) return [];
+  const orgs = new Set(a.memberships.map((m) => m.organizationId).filter(Boolean));
+  return engine.db.outbox.filter((e) => evSeq(e.id) > after && (isStaff(a) || (e.organizationId && orgs.has(e.organizationId))));
+}
 const clients = new Set<{ res: http.ServerResponse; userId: string }>();
 engine.subscribe(({ command, events, at }) => {
   for (const c of clients) {
@@ -83,7 +103,9 @@ engine.subscribe(({ command, events, at }) => {
     // لا يُرسل للعميل إلا ما يخص مؤسسته (API-SEC-01 على قنوات WebSocket/SSE)
     const visible = isStaff(a) ? events : events.filter((e: OutboxEvent) => e.organizationId && orgs.has(e.organizationId));
     if (!isStaff(a) && !visible.length && command !== 'system.reset') continue;
-    c.res.write(`event: change\ndata: ${JSON.stringify({ command: isStaff(a) ? command : undefined, at, events: visible.map((e) => ({ type: e.eventType, aggregateType: e.aggregateType, aggregateId: e.aggregateId })) })}\n\n`);
+    // id = أعلى رقم تسلسلي لحدث outbox في الرسالة؛ المتصفح يرسله في Last-Event-ID عند إعادة الاتصال لاستكمال ما فاته
+    const seq = Math.max(lastSeq(), ...events.map((e) => evSeq(e.id)));
+    c.res.write(`id: ${seq}\nevent: change\ndata: ${JSON.stringify({ command: isStaff(a) ? command : undefined, at, events: visible.map((e) => ({ id: e.id, type: e.eventType, aggregateType: e.aggregateType, aggregateId: e.aggregateId })) })}\n\n`);
   }
 });
 setInterval(() => clients.forEach((c) => c.res.write(`: ping\n\n`)), 25_000);
@@ -127,12 +149,14 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'OPTIONS') return send(res, 204, undefined);
   const p = url.pathname.replace(/\/+$/, '');
   try {
-    if (p === '' || p === '/api/v1') return send(res, 200, { name: 'MedLog demo API', version: 'v1', simulated: true, productionReady: false, demoLogin: DEMO_LOGIN, docs: '/api/v1/openapi.json', note: 'خادم محاكاة للنماذج فقط — ليس تكاملاً إنتاجياً؛ القراءات والمواقع والدفع والرسائل محاكاة' });
+    if (p === '' || p === '/api/v1') return send(res, 200, { name: 'MedLog demo API', version: 'v1', simulated: true, productionReady: false, mode: PROD ? 'production-guarded' : 'demo', demoLogin: DEMO_LOGIN, docs: '/api/v1/openapi.json', note: 'خادم محاكاة للنماذج فقط — ليس تكاملاً إنتاجياً؛ القراءات والمواقع والدفع والرسائل محاكاة' });
     if (p === '/api/v1/health') return send(res, 200, { ok: true, seededAt: engine.db.meta.seededAt, shipments: engine.db.shipments.length });
     if (p === '/api/v1/openapi.json') return send(res, 200, openapi());
     if (p === '/api/v1/meta/commands') return send(res, 200, { commands: listCommands(), queries: listQueries() });
 
-    // المصادقة
+    // المصادقة — مزوّد العرض فقط (كلمة مرور ورمز تحقق مشتركان لحسابات العرض). في وضع الإنتاج لا يُقبل أي منهما:
+    // مزوّد الهوية الحقيقي (SSO/OIDC + MFA فعلي) جزء من مرحلة التطوير الإنتاجي ولا يوجد هنا.
+    if (PROD && p.startsWith('/api/v1/auth/') && p !== '/api/v1/auth/logout') throw new DomainError('AUTH_PROVIDER_NOT_CONFIGURED', 501, { ar: 'مزوّد الهوية الإنتاجي غير مهيأ؛ مصادقة العرض معطّلة في وضع الإنتاج', en: 'Production identity provider not configured; demo authentication is disabled in production mode' });
     if (p === '/api/v1/auth/login' && req.method === 'POST') {
       if (limited(`login:${req.socket.remoteAddress}`, 30)) throw new DomainError('RATE_LIMITED', 429, { ar: 'محاولات كثيرة؛ انتظر دقيقة', en: 'Too many attempts; wait a minute' });
       const { email, password } = await readBody(req);
@@ -176,10 +200,18 @@ const server = http.createServer(async (req, res) => {
     if (p === '/api/v1/auth/logout' && req.method === 'POST') { session.revokedAt = new Date().toISOString(); persist(engine.db); return send(res, 204, undefined); }
     if (p === '/api/v1/events') {
       res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache', Connection: 'keep-alive', ...corsFor(req.headers.origin) });
-      res.write(`event: hello\ndata: {"ok":true}\n\n`);
+      res.write(`retry: 3000\nevent: hello\ndata: {"ok":true,"lastEventId":${lastSeq()}}\n\n`);
+      // استكمال بعد إعادة الاتصال: Last-Event-ID (من المتصفح تلقائياً) أو ?lastEventId=
+      const since = Number(req.headers['last-event-id'] ?? url.searchParams.get('lastEventId') ?? NaN);
+      if (Number.isFinite(since)) {
+        const missed = visibleSince(userId, since);
+        const oldest = engine.db.outbox.length ? Math.min(...engine.db.outbox.map((e) => evSeq(e.id))) : 0;
+        res.write(`id: ${lastSeq()}\nevent: change\ndata: ${JSON.stringify({ command: 'replay', at: new Date().toISOString(), replay: true, gap: since < oldest - 1, events: missed.map((e) => ({ id: e.id, type: e.eventType, aggregateType: e.aggregateType, aggregateId: e.aggregateId })) })}\n\n`);
+      }
       const c = { res, userId }; clients.add(c); req.on('close', () => clients.delete(c)); return;
     }
     if (p === '/api/v1/admin/reset' && req.method === 'POST') {
+      if (PROD) throw new DomainError('NOT_FOUND', 404, { ar: 'المسار غير موجود', en: 'Route not found' });
       const a = actorFor(engine.db, userId);
       if (!a?.roles.includes('super_admin')) throw new DomainError('FORBIDDEN', 403, { ar: 'لمدير المنصة فقط', en: 'Super admin only' });
       engine.reset(); return send(res, 200, { ok: true, seededAt: engine.db.meta.seededAt });

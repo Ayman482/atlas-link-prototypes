@@ -1,0 +1,111 @@
+{
+ "app": "mobile/customer",
+ "base": "http://127.0.0.1:5057",
+ "executedAt": "2026-11-03T01:54:12.217Z",
+ "results": [
+  {
+   "route": "/",
+   "interactive": 10,
+   "disabled": 0,
+   "clicked": 10,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/shipments",
+   "interactive": 10,
+   "disabled": 0,
+   "clicked": 10,
+   "noEffect": [
+    "button «نشطة»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/new",
+   "interactive": 4,
+   "disabled": 0,
+   "clicked": 4,
+   "noEffect": [
+    "select «— فرع العليا فرع الملقا فرع جدة — الروضة»",
+    "select «— فرع العليا — استلام العينات — الرياض ف»",
+    "select «— فرع العليا — استلام العينات — الرياض ف»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/s/shp_0002",
+   "interactive": 3,
+   "disabled": 0,
+   "clicked": 3,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/s/shp_0002/temp",
+   "interactive": 4,
+   "disabled": 0,
+   "clicked": 4,
+   "noEffect": [
+    "button «الكل»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/notifications",
+   "interactive": 1,
+   "disabled": 0,
+   "clicked": 1,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/invoices",
+   "interactive": 1,
+   "disabled": 0,
+   "clicked": 1,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/claims",
+   "interactive": 0,
+   "disabled": 0,
+   "clicked": 0,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/addresses",
+   "interactive": 0,
+   "disabled": 0,
+   "clicked": 0,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/account",
+   "interactive": 7,
+   "disabled": 0,
+   "clicked": 6,
+   "noEffect": [
+    "button «العربية»"
+   ],
+   "errors": [
+    "button «English»: toggle did not restore (ar|rtl|| → en|ltr||)"
+   ],
+   "skipped": [
+    "تسجيل الخروج"
+   ]
+  }
+ ]
+}

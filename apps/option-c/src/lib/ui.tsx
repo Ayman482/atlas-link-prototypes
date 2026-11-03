@@ -3,7 +3,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { dict, fmtDateTime, fmtRelative, fmtNumber, fmtSAR, fmtTemp, ltr } from '@medlog/i18n';
 import { useApp } from './store';
-import { label as tlabel, timelineTitle, timelineDetail } from './l10n';
+import { label as tlabel, timelineTitle, timelineDetail, sysText } from './l10n'; import { comma } from './l10n';
 import { AnimatePresence, Collapse, DUR, EASE, Tip, fadeUp, motion, staggerParent } from './motion';
 
 export const cx = (...a: (string | false | null | undefined)[]) => a.filter(Boolean).join(' ');
@@ -93,7 +93,17 @@ export function ripple(e: React.MouseEvent<HTMLElement>) {
   const el = document.createElement('span'); el.className = 'rip'; el.style.cssText = `width:${s}px;height:${s}px;left:${e.clientX - r.left - s / 2}px;top:${e.clientY - r.top - s / 2}px`;
   b.appendChild(el); setTimeout(() => el.remove(), 600);
 }
-export const Btn = ({ kind = 'default', onClick, ...p }: React.ButtonHTMLAttributes<HTMLButtonElement> & { kind?: 'default' | 'primary' | 'danger' | 'ghost' }) => <button type="button" {...p} onClick={(e) => { ripple(e); onClick?.(e); }} className={cx('btn', kind, p.className)} />;
+/** زر موحّد: إن أعاد onClick وعداً (أمر خادم) يُعطَّل الزر حتى ينتهي الطلب لمنع الإرسال المكرر، ويُلتقط الرفض
+ *  لأن run() يعرض رسالة الخطأ للمستخدم مسبقاً (لا رفض غير معالج في وحدة التحكم). */
+export function Btn({ kind = 'default', onClick, disabled, ...p }: React.ButtonHTMLAttributes<HTMLButtonElement> & { kind?: 'default' | 'primary' | 'danger' | 'ghost' }) {
+  const [busy, setBusy] = useState(false); const live = useRef(true);
+  useEffect(() => () => { live.current = false; }, []);
+  return <button type="button" {...p} disabled={disabled || busy} aria-busy={busy || undefined} onClick={(e) => {
+    if (busy) return; ripple(e);
+    const r: any = (onClick as any)?.(e);
+    if (r && typeof r.then === 'function') { setBusy(true); r.catch(() => {}).finally(() => { if (live.current) setBusy(false); }); }
+  }} className={cx('btn', kind, p.className)} />;
+}
 
 // ---------- الحوار ----------
 // ---------- الحوار ----------
@@ -194,7 +204,7 @@ export function ConfirmBtn({ children, message, onConfirm, kind = 'default', dis
 
 // ---------- الجدول ----------
 /** القيم الرمزية (مثل card_simulated) تُعرض بتسميتها المترجمة إن وُجدت؛ غير ذلك تُعرض كما هي */
-const codeLabel = (lang: 'ar' | 'en', v: unknown) => (typeof v === 'string' && /^[A-Za-z_]+$/.test(v) ? label(lang, v) : String(v ?? '—'));
+const codeLabel = (lang: 'ar' | 'en', v: unknown) => (typeof v === 'string' && /^[A-Za-z_]+$/.test(v) ? label(lang, v) : v == null ? '—' : sysText(lang, String(v)));
 export type Col<R> = { key: string; label: string; render?(r: R): React.ReactNode; sort?(r: R): string | number; num?: boolean; mono?: boolean; hideSm?: boolean };
 export type Filter<R> = { key: string; label: string; options: { value: string; label: string }[]; get(r: R): string | string[] | null | undefined };
 export type BulkAction<R> = { label: string; kind?: 'default' | 'primary' | 'danger'; run(rows: R[]): Promise<unknown> | void };
@@ -321,7 +331,7 @@ export function TempChart({ report, height = 240 }: { report: any; height?: numb
     <figure className="chart tchart">
       <div className="row" style={{ justifyContent: 'space-between' }}>
         <div className="seg" role="group" aria-label={lang === 'ar' ? 'النطاق الزمني' : 'Time range'}>{(['1h', '6h', '24h', 'all'] as const).map((r) => <button key={r} className={range === r ? 'on' : ''} aria-pressed={range === r} onClick={() => { setRange(r); setIdx(null); }}>{r === 'all' ? (lang === 'ar' ? 'الكل' : 'All') : lang === 'ar' ? r.replace('h', ' س') : r}</button>)}</div>
-        <span className="muted" aria-live="polite">{sel ? <><b dir="ltr" style={{ color: out(sel.c) ? 'var(--crit)' : 'var(--fg)' }}>{f.temp(sel.c)}</b> · {f.dt(sel.t)}{sel.backfilled && <> · {lang === 'ar' ? 'مُستكمَلة لاحقاً' : 'backfilled'}</>}{out(sel.c) && <> · <b style={{ color: 'var(--crit)' }}>{lang === 'ar' ? 'خارج النطاق' : 'Out of range'}</b></>}</> : (lang === 'ar' ? 'مرّر المؤشر أو استخدم الأسهم لقراءة كل نقطة' : 'Hover or use arrow keys to read each point')}</span>
+        <span className="muted" aria-live="polite">{sel ? <><b dir="ltr" style={{ color: out(sel.c) ? 'var(--crit)' : 'var(--fg)' }}>{f.temp(sel.c)}</b> · {f.dt(sel.t)}{sel.backfilled && <> · {lang === 'ar' ? 'قراءة مخزنة' : 'backfilled'}</>}{out(sel.c) && <> · <b style={{ color: 'var(--crit)' }}>{lang === 'ar' ? 'خارج النطاق' : 'Out of range'}</b></>}</> : (lang === 'ar' ? 'مرّر المؤشر أو استخدم الأسهم لقراءة كل نقطة' : 'Hover or use arrow keys to read each point')}</span>
       </div>
       <div className="chartscroll"><svg ref={ref} viewBox={`0 0 ${W} ${H}`} role="img" tabIndex={0} aria-label={lang === 'ar' ? `منحنى الحرارة: ${pts.length} قراءة، النطاق المسموح ${f.num(report.profile.minC, 1)} إلى ${f.num(report.profile.maxC, 1)} درجة` : `Temperature chart: ${pts.length} readings, allowed range ${f.num(report.profile.minC, 1)} to ${f.num(report.profile.maxC, 1)} °C`} onPointerMove={onMove} onPointerLeave={() => setIdx(null)} onKeyDown={onKey}>
         <defs><linearGradient id="tline" x1="0" x2="1"><stop offset="0" stopColor="var(--primary)" /><stop offset="1" stopColor="var(--navy)" /></linearGradient><linearGradient id="tarea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="var(--primary)" stopOpacity=".22" /><stop offset="1" stopColor="var(--primary)" stopOpacity="0" /></linearGradient><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="var(--muted)" strokeWidth="1" opacity="0.4" /></pattern></defs>
@@ -350,7 +360,7 @@ export function TempChart({ report, height = 240 }: { report: any; height?: numb
 const KSA = 'M200,40 L262,30 L330,62 L392,58 L440,96 L470,150 L520,170 L560,210 L600,236 L640,300 L612,330 L560,350 L510,420 L470,470 L410,500 L350,530 L300,560 L262,590 L226,560 L200,500 L170,440 L140,380 L118,330 L92,290 L60,250 L50,200 L90,150 L130,110 L170,70 Z';
 export const project = (lat: number, lng: number) => ({ x: 40 + ((lng - 34.5) / (56 - 34.5)) * 600, y: 30 + ((32.2 - lat) / (32.2 - 16)) * 560 });
 type MapPt = { id: string; lat: number; lng: number; kind: string; label: string; alert?: boolean; meta?: { trackingNo?: string; status?: string; at?: string; origin?: string; dest?: string; source?: string; thermalClass?: string } };
-const FRESH: Record<string, { ar: string; en: string }> = { live: { ar: 'مباشر: آخر قراءة خلال 15 دقيقة', en: 'Live: last reading within 15 min' }, delayed: { ar: 'متأخر: آخر قراءة قبل 15–60 دقيقة', en: 'Delayed: last reading 15–60 min ago' }, stale: { ar: 'قديم أو غير متصل: لا قراءة منذ أكثر من ساعة', en: 'Stale/offline: no reading for over an hour' }, inferred: { ar: 'مستنتج من أحداث الناقل (رحلة جوية بلا GPS)', en: 'Inferred from carrier events (air leg, no GPS)' }, planned: { ar: 'مخطط: موقع الاستلام، لا يوجد موقع مؤكد بعد', en: 'Planned: pickup address, no confirmed fix yet' }, pickup: { ar: 'عنوان استلام مسند (ليس موقعاً لحظياً)', en: 'Assigned pickup address (not a live position)' }, delivery: { ar: 'عنوان تسليم مسند (ليس موقعاً لحظياً)', en: 'Assigned delivery address (not a live position)' } };
+const FRESH: Record<string, { ar: string; en: string }> = { live: { ar: 'مباشر: آخر قراءة خلال 15 دقيقة', en: 'Live: last reading within 15 min' }, delayed: { ar: 'متأخر: آخر قراءة قبل 15–60 دقيقة', en: 'Delayed: last reading 15–60 min ago' }, stale: { ar: 'بيانات قديمة أو جهاز غير متصل: لا قراءة منذ أكثر من ساعة', en: 'Stale/offline: no reading for over an hour' }, inferred: { ar: 'مستنتج من أحداث الناقل (رحلة جوية بلا GPS)', en: 'Inferred from carrier events (air leg, no GPS)' }, planned: { ar: 'مخطط: موقع الاستلام، لا يوجد موقع مؤكد بعد', en: 'Planned: pickup address, no confirmed fix yet' }, pickup: { ar: 'عنوان استلام مسند (ليس موقعاً لحظياً)', en: 'Assigned pickup address (not a live position)' }, delivery: { ar: 'عنوان تسليم مسند (ليس موقعاً لحظياً)', en: 'Assigned delivery address (not a live position)' } };
 /** خريطة: العلامة تُظهر آخر موقع مؤكد ووقته ومصدره — لا تحريك لموقع محاكى. الضغط يفتح بطاقة التفاصيل ومسار المدينتين */
 export function KsaMap({ points, cities, onPick, height = 380 }: { points: MapPt[]; cities: { code: string; name: { ar: string; en: string }; lat: number; lng: number }[]; onPick?(id: string): void; height?: number }) {
   const { lang } = useApp(); const f = useFmt();
@@ -376,7 +386,7 @@ export function KsaMap({ points, cities, onPick, height = 380 }: { points: MapPt
           {sel.meta?.status && <span><Pill v={sel.meta.status} /> {sel.alert && <Pill tone="crit">{lang === 'ar' ? 'تنبيه مفتوح' : 'Open alert'}</Pill>}</span>}
           <dl className="tldetail">
             <div><dt>{lang === 'ar' ? 'نوع الموقع' : 'Location type'}</dt><dd><i className={'sw mk ' + sel.kind} />{FRESH[sel.kind]?.[lang] ?? sel.kind}</dd></div>
-            <div><dt>{sel.kind === 'planned' || sel.kind === 'pickup' ? (lang === 'ar' ? 'بداية نافذة الاستلام' : 'Pickup window start') : sel.kind === 'delivery' ? (lang === 'ar' ? 'التسليم قبل' : 'Deliver by') : (lang === 'ar' ? 'وقت آخر موقع مؤكد' : 'Last confirmed fix')}</dt><dd>{f.dt(sel.meta?.at)}</dd></div>
+            <div><dt>{sel.kind === 'planned' || sel.kind === 'pickup' ? (lang === 'ar' ? 'بداية فترة الاستلام' : 'Pickup window start') : sel.kind === 'delivery' ? (lang === 'ar' ? 'التسليم قبل' : 'Deliver by') : (lang === 'ar' ? 'وقت آخر موقع مؤكد' : 'Last confirmed fix')}</dt><dd>{f.dt(sel.meta?.at)}</dd></div>
             {sel.meta?.source && <div><dt>{lang === 'ar' ? 'مصدر الموقع' : 'Position source'}</dt><dd>{label(lang, sel.meta.source)}</dd></div>}
             {o && d && <div><dt>{lang === 'ar' ? 'المسار' : 'Route'}</dt><dd>{o.name[lang]} {lang === 'ar' ? '←' : '→'} {d.name[lang]}</dd></div>}
           </dl>
@@ -390,9 +400,10 @@ export function KsaMap({ points, cities, onPick, height = 380 }: { points: MapPt
 }
 // ---------- مخطط أعمدة بسيط ----------
 export function Bars({ data, height = 180, valueLabel }: { data: { label: string; a: number; b?: number }[]; height?: number; valueLabel?: [string, string?] }) {
+  const { lang } = useApp();
   const max = Math.max(1, ...data.flatMap((d) => [d.a, d.b ?? 0]));
   const W = 760, H = height, pb = 26, pt = 10, bw = (W - 20) / data.length;
-  return <figure className="chart"><svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={data.map((d) => `${d.label}: ${d.a}${d.b != null ? ` / ${d.b}` : ''}`).join('، ')}>
+  return <figure className="chart"><svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={data.map((d) => `${d.label}: ${d.a}${d.b != null ? ` / ${d.b}` : ''}`).join(comma(lang))}>
     <defs><linearGradient id="bga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#0B9A87" /><stop offset="1" stopColor="#087F70" /></linearGradient><linearGradient id="bgb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#F2C994" /><stop offset="1" stopColor="#E6A65D" /></linearGradient></defs>
     {[0, 0.5, 1].map((r) => <line key={r} x1={10} x2={W - 10} y1={pt + (H - pt - pb) * (1 - r)} y2={pt + (H - pt - pb) * (1 - r)} stroke="var(--line)" />)}
     {data.map((d, i) => { const h1 = ((H - pt - pb) * d.a) / max, h2 = ((H - pt - pb) * (d.b ?? 0)) / max; const x = 10 + i * bw; return <g key={i}>

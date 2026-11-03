@@ -1,0 +1,2086 @@
+[
+ {
+  "app": "admin",
+  "route": "/",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/map",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments/new",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments/shp_0004",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/dispatch",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/routes",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/legs",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/couriers",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/vehicles",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/partners",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/boxes",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/boxes/box_002",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/devices",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/devices/dev_004",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/gateway",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/device-commands",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/excursions",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/profiles",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/incidents",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/incidents/inc_0002",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/capa",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/claims",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/lost",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/returns",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": [
+   "بانتظار قرار 1"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/cleaning",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/partner-custody",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/consumables",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/customers",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/customers/org_nkh",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/contracts",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/rate-plans",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/simulations",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/quotes",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/invoices",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/invoices/inv_0001",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/credit-notes",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/payments",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/accounts",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/journals",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/aging",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/costs",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/settlements",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/requirements",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/licenses",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/blocks",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/retention",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/legal-holds",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/reports/operations",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/reports/finance",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/delays",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/approvals",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/notifications",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [
+   {
+    "token": "tracking",
+    "text": "تعذّر تسليم {tracking}",
+    "cls": ""
+   },
+   {
+    "token": "invoice",
+    "text": "فاتورة جديدة {invoice}",
+    "cls": ""
+   }
+  ],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/integrations",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/settings",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/users",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/audit",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/security",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/health",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/profile",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/map",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments/new",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments/shp_0004",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "أ. خالد الحربي (Signature)",
+    "cls": ""
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/dispatch",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/routes",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/legs",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/couriers",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/vehicles",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "أ ب ج 1234",
+    "cls": ""
+   },
+   {
+    "text": "د هـ و 2345",
+    "cls": ""
+   },
+   {
+    "text": "ر س ص 3456",
+    "cls": ""
+   },
+   {
+    "text": "ط ع ق 4567",
+    "cls": ""
+   },
+   {
+    "text": "ك ل م 5678",
+    "cls": ""
+   },
+   {
+    "text": "ن هـ و 6789",
+    "cls": ""
+   },
+   {
+    "text": "ي ب ح 7890",
+    "cls": ""
+   },
+   {
+    "text": "س ع د 8901",
+    "cls": ""
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/partners",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/boxes",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/boxes/box_002",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "محمد الدوسري",
+    "cls": ""
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/devices",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/devices/dev_004",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/gateway",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/device-commands",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/excursions",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/profiles",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/incidents",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/incidents/inc_0002",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/capa",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "تدريب المندوبين على حد أقصى 10 دقائق لفتح الصندوق",
+    "cls": ""
+   },
+   {
+    "text": "إضافة تنبيه انتظار في تطبيق المندوب بعد 15 دقيقة",
+    "cls": ""
+   },
+   {
+    "text": "جعل التوقيع إلزامياً في شاشة نقل الحيازة للناقل الجوي",
+    "cls": ""
+   },
+   {
+    "text": "إرجاع الجهاز للمورد وفحص دفعة البرامج الثابتة V2.1.6",
+    "cls": ""
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/claims",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/lost",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/returns",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": [
+   "Awaiting decision 1"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "خالد البارقي",
+    "cls": ""
+   },
+   {
+    "text": "حسن القحطاني",
+    "cls": ""
+   },
+   {
+    "text": "محمد الدوسري",
+    "cls": ""
+   },
+   {
+    "text": "مشعل الرويلي",
+    "cls": ""
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/cleaning",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/partner-custody",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "أ. مازن (مستودعات الحجاز)",
+    "cls": ""
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/consumables",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/customers",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/customers/org_nkh",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "أ. خالد الحربي",
+    "cls": ""
+   },
+   {
+    "text": "أ. فهد الدوسري",
+    "cls": ""
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/contracts",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/rate-plans",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/simulations",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "رفع أسعار الجوي 6% للربع الأول",
+    "cls": ""
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/quotes",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/invoices",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/invoices/inv_0001",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/credit-notes",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "تصحيح احتساب صندوق مخصص مكرر",
+    "cls": ""
+   },
+   {
+    "text": "تعويض المطالبة CL-2026-0031",
+    "cls": ""
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/payments",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/accounts",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/journals",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/aging",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/costs",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/settlements",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/requirements",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/licenses",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "ك ل م 5678",
+    "cls": ""
+   },
+   {
+    "text": "ي ب ح 7890",
+    "cls": ""
+   },
+   {
+    "text": "ن هـ و 6789",
+    "cls": ""
+   },
+   {
+    "text": "ر س ص 3456",
+    "cls": ""
+   },
+   {
+    "text": "ط ع ق 4567",
+    "cls": ""
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/blocks",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "ك ل م 5678",
+    "cls": ""
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/retention",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/legal-holds",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "تحقيق اشتباه فقدان QI-2026-0141",
+    "cls": ""
+   },
+   {
+    "text": "مطالبة CL-2026-0031 — حفظ الأدلة",
+    "cls": ""
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/reports/operations",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/reports/finance",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/delays",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/approvals",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/notifications",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/integrations",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "نظام المختبر LIS — النخبة",
+    "cls": ""
+   },
+   {
+    "text": "أحداث ناقل الأفق",
+    "cls": ""
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/settings",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/users",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/audit",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/security",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/health",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/profile",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn default"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/shipments",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/shipments/new",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/shipments/shp_0002",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/recurring",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/addresses",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/branches",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/users",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/contracts",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/invoices",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/payments",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/claims",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/reports",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/api",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/notifications",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/profile",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn ghost"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/shipments",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn ghost"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/shipments/new",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn ghost"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/shipments/shp_0002",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn ghost"
+   },
+   {
+    "text": "أ. فهد الدوسري (Signature)",
+    "cls": ""
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/recurring",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn ghost"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/addresses",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn ghost"
+   },
+   {
+    "text": "أ. خالد الحربي",
+    "cls": ""
+   },
+   {
+    "text": "أ. فهد الدوسري",
+    "cls": ""
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/branches",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn ghost"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/users",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn ghost"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/contracts",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn ghost"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/invoices",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn ghost"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/payments",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn ghost"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/claims",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn ghost"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/reports",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn ghost"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/api",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn ghost"
+   },
+   {
+    "text": "نظام المختبر LIS — النخبة",
+    "cls": ""
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/notifications",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn ghost"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/profile",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn default"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/shipments",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/new",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/s/shp_0002",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/s/shp_0002/temp",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/notifications",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/invoices",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/claims",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/addresses",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/account",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn default"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/shipments",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn default"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/new",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn default"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/s/shp_0002",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn default"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/s/shp_0002/temp",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn default"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/notifications",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn default"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/invoices",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn default"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/claims",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn default"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/addresses",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "أ. خالد الحربي",
+    "cls": "muted"
+   },
+   {
+    "text": "أ. فهد الدوسري",
+    "cls": "muted"
+   },
+   {
+    "text": "العربية",
+    "cls": "btn default"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/account",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn default"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/map",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/t/shp_0009",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/t/shp_0002",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": [
+   "(?)"
+  ]
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/boxes",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/sync",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/me",
+  "lang": "ar",
+  "docLang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn default"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/map",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn default"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/t/shp_0009",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "أ. خالد الحربي",
+    "cls": ""
+   },
+   {
+    "text": "العربية",
+    "cls": "btn default"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/t/shp_0002",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "أ. فهد الدوسري",
+    "cls": ""
+   },
+   {
+    "text": "العربية",
+    "cls": "btn default"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/boxes",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn default"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/sync",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn default"
+   }
+  ],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/me",
+  "lang": "en",
+  "docLang": "en",
+  "codes": [],
+  "arInEn": [
+   {
+    "text": "العربية",
+    "cls": "btn default"
+   },
+   {
+    "text": "أ. فهد الدوسري",
+    "cls": "muted"
+   },
+   {
+    "text": "أ. خالد الحربي",
+    "cls": "muted"
+   },
+   {
+    "text": "مكتب الشحن — الأفق",
+    "cls": "muted"
+   },
+   {
+    "text": "م. سارة العتيبي",
+    "cls": "muted"
+   },
+   {
+    "text": "محمد الدوسري",
+    "cls": "muted"
+   },
+   {
+    "text": "هيا السبيعي",
+    "cls": "muted"
+   }
+  ],
+  "failedCtx": []
+ }
+]
