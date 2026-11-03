@@ -1,6 +1,6 @@
 'use client';
 import { IS_DEMO } from '@medlog/client';
-import { greeting, comma } from '@/lib/l10n';
+import { greeting, comma, label } from '@/lib/l10n';
 // لوحة الإدارة — الخيار C: قائمة جانبية عائمة بأقسام قابلة للطي، تحية بحسب الوقت، بحث، تبديل المظهر
 import React, { useEffect, useMemo, useState } from 'react';
 import { AppProvider, useApp, useQ, useRoute, go, transport } from '@/lib/store';
@@ -170,7 +170,7 @@ function CommandK({ onClose, can }: { onClose(): void; can(r?: string[]): boolea
     <Modal title={lang === 'ar' ? 'بحث وانتقال سريع' : 'Search & jump'} onClose={onClose} wide>
       <input autoFocus type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={lang === 'ar' ? 'رقم تتبع (ML-2026-…)، رمز صندوق (BX-…)، IMEI، عميل، أو اسم شاشة' : 'Tracking no. (ML-2026-…), box (BX-…), IMEI, customer or screen name'} style={{ width: '100%', fontSize: '1rem' }} />
       <div className="alerts">
-        {(res.data?.shipments ?? []).map((s: any) => <li key={s.id}><span className="pill info">{lang === 'ar' ? 'شحنة' : 'Shipment'}</span><a href={'#/shipments/' + s.id} onClick={onClose} className="mono">{s.trackingNo}</a><span className="muted">{s.status}</span></li>)}
+        {(res.data?.shipments ?? []).map((s: any) => <li key={s.id}><span className="pill info">{lang === 'ar' ? 'شحنة' : 'Shipment'}</span><a href={'#/shipments/' + s.id} onClick={onClose} className="mono">{s.trackingNo}</a><span className="muted">{label(lang, s.status)}</span></li>)}
         {(res.data?.boxes ?? []).map((b: any) => <li key={b.id}><span className="pill mute">{lang === 'ar' ? 'صندوق' : 'Box'}</span><a href={'#/boxes/' + b.id} onClick={onClose} className="mono">{b.code}</a><span /></li>)}
         {(res.data?.devices ?? []).map((d: any) => <li key={d.id}><span className="pill mute">IMEI</span><a href={'#/devices/' + d.id} onClick={onClose} className="mono">{d.imei}</a><span /></li>)}
         {(res.data?.organizations ?? []).map((o: any) => <li key={o.id}><span className="pill mute">{lang === 'ar' ? 'عميل' : 'Customer'}</span><a href={'#/customers/' + o.id} onClick={onClose}>{x(o.legalName)}</a><span /></li>)}

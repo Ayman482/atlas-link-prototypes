@@ -1,0 +1,3561 @@
+[
+ {
+  "app": "admin",
+  "route": "/",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [
+   "g.[object 12x12 «ML-2026-000001 · في »",
+   "g.[object 12x12 «ML-2026-000002 · في »",
+   "g.[object 12x12 «ML-2026-000003 · في »",
+   "g.[object 12x12 «ML-2026-000004 · في »",
+   "g.[object 12x12 «ML-2026-000005 · في »",
+   "g.[object 12x12 «ML-2026-000006 · في »",
+   "g.[object 12x12 «ML-2026-000007 · تعذ»",
+   "g.[object 12x12 «ML-2026-000008 · حال»"
+  ],
+  "smallTouch": 41,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/map",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [
+   "g.[object 18x18 «ML-2026-000001 · مست»",
+   "g.[object 18x18 «ML-2026-000002 · مبا»",
+   "g.[object 18x18 «ML-2026-000003 · مبا»",
+   "g.[object 18x18 «ML-2026-000004 · مبا»",
+   "g.[object 12x12 «ML-2026-000005 · مبا»",
+   "g.[object 12x12 «ML-2026-000006 · بيا»",
+   "g.[object 18x18 «ML-2026-000007 · مبا»",
+   "g.[object 18x18 «ML-2026-000008 · مبا»"
+  ],
+  "smallTouch": 40,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 13,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments/new",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 5,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments/shp_0004",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 5,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/dispatch",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 19,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/routes",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 13,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/legs",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 14,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/couriers",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 15,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/vehicles",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 14,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/partners",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 14,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/boxes",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 14,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/boxes/box_002",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 13,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/devices",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 14,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/devices/dev_004",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 16,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/gateway",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 13,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/device-commands",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 13,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/excursions",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 15,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/profiles",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 14,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/incidents",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 13,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/incidents/inc_0002",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 5,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/capa",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 13,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/claims",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 16,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/lost",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 13,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/returns",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 21,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 13,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/cleaning",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 18,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/partner-custody",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 14,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/consumables",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 21,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/customers",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 14,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/customers/org_nkh",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 12,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/contracts",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 15,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/rate-plans",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [
+   "a. 102x22 «صندوق الاعتمادات»"
+  ],
+  "smallTouch": 13,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/simulations",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 16,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/quotes",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 14,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/invoices",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 12,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/invoices/inv_0001",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 17,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/credit-notes",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 15,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/payments",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 15,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/accounts",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 13,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/journals",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 12,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/aging",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 10,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/costs",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 27,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/settlements",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 13,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/requirements",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 12,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/licenses",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 13,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/blocks",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 13,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/retention",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 20,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/legal-holds",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 13,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/reports/operations",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 11,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/reports/finance",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 17,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/delays",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 14,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/approvals",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 15,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/notifications",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 12,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/integrations",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 22,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/settings",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 27,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/users",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 13,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/audit",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 11,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/security",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 14,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/health",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 12,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/profile",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 9,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "(cmdk+drawer)",
+  "w": 390,
+  "modal": {
+   "fits": true,
+   "w": 358,
+   "h": 552,
+   "vh": 844
+  },
+  "drawer": {
+   "fits": true,
+   "w": 390,
+   "bodyScrolls": "auto",
+   "focusInside": true
+  }
+ },
+ {
+  "app": "admin",
+  "route": "/",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [
+   "g.[object 19x19 «ML-2026-000001 · في »",
+   "g.[object 19x19 «ML-2026-000002 · في »",
+   "g.[object 19x19 «ML-2026-000003 · في »",
+   "g.[object 19x19 «ML-2026-000004 · في »",
+   "g.[object 19x19 «ML-2026-000005 · في »",
+   "g.[object 19x19 «ML-2026-000006 · في »",
+   "g.[object 19x19 «ML-2026-000007 · تعذ»",
+   "g.[object 19x19 «ML-2026-000008 · حال»"
+  ],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/map",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments/new",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments/shp_0004",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/dispatch",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/routes",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/legs",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/couriers",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/vehicles",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/partners",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/boxes",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/boxes/box_002",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/devices",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/devices/dev_004",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/gateway",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/device-commands",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/excursions",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/profiles",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/incidents",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/incidents/inc_0002",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/capa",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/claims",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/lost",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/returns",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/cleaning",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/partner-custody",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/consumables",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/customers",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/customers/org_nkh",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/contracts",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/rate-plans",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [
+   "a. 102x22 «صندوق الاعتمادات»"
+  ],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/simulations",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/quotes",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/invoices",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/invoices/inv_0001",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/credit-notes",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/payments",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/accounts",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/journals",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/aging",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/costs",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/settlements",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/requirements",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/licenses",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/blocks",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/retention",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/legal-holds",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/reports/operations",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/reports/finance",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/delays",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/approvals",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/notifications",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/integrations",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/settings",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/users",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/audit",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/security",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/health",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/profile",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "(cmdk+drawer)",
+  "w": 768,
+  "modal": {
+   "fits": true,
+   "w": 736,
+   "h": 552,
+   "vh": 900
+  },
+  "drawer": {
+   "fits": true,
+   "w": 420,
+   "bodyScrolls": "auto",
+   "focusInside": true
+  }
+ },
+ {
+  "app": "admin",
+  "route": "/",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [
+   "g.[object 19x19 «ML-2026-000001 · في »",
+   "g.[object 19x19 «ML-2026-000002 · في »",
+   "g.[object 19x19 «ML-2026-000003 · في »",
+   "g.[object 19x19 «ML-2026-000004 · في »",
+   "g.[object 19x19 «ML-2026-000005 · في »",
+   "g.[object 19x19 «ML-2026-000006 · في »",
+   "g.[object 19x19 «ML-2026-000007 · تعذ»",
+   "g.[object 19x19 «ML-2026-000008 · حال»"
+  ],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/map",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments/new",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments/shp_0004",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/dispatch",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/routes",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/legs",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/couriers",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/vehicles",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/partners",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/boxes",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/boxes/box_002",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/devices",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/devices/dev_004",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/gateway",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/device-commands",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/excursions",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/profiles",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/incidents",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/incidents/inc_0002",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/capa",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/claims",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/lost",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/returns",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/cleaning",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/partner-custody",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/consumables",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/customers",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/customers/org_nkh",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/contracts",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/rate-plans",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [
+   "a. 102x22 «صندوق الاعتمادات»"
+  ],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/simulations",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/quotes",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/invoices",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/invoices/inv_0001",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/credit-notes",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/payments",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/accounts",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/journals",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/aging",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/costs",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/settlements",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/requirements",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/licenses",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/blocks",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/retention",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/legal-holds",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/reports/operations",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/reports/finance",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/delays",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/approvals",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/notifications",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/integrations",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/settings",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/users",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/audit",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/security",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/health",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/profile",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "(cmdk+drawer)",
+  "w": 1024,
+  "modal": {
+   "fits": true,
+   "w": 920,
+   "h": 552,
+   "vh": 900
+  },
+  "drawer": {
+   "fits": true,
+   "w": 420,
+   "bodyScrolls": "auto",
+   "focusInside": true
+  }
+ },
+ {
+  "app": "admin",
+  "route": "/",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [
+   "g.[object 19x19 «ML-2026-000001 · في »",
+   "g.[object 19x19 «ML-2026-000002 · في »",
+   "g.[object 19x19 «ML-2026-000003 · في »",
+   "g.[object 19x19 «ML-2026-000004 · في »",
+   "g.[object 19x19 «ML-2026-000005 · في »",
+   "g.[object 19x19 «ML-2026-000006 · في »",
+   "g.[object 19x19 «ML-2026-000007 · تعذ»",
+   "g.[object 19x19 «ML-2026-000008 · حال»"
+  ],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/map",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments/new",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments/shp_0004",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/dispatch",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/routes",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/legs",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/couriers",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/vehicles",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/partners",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/boxes",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/boxes/box_002",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/devices",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/devices/dev_004",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/gateway",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/device-commands",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/excursions",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/profiles",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/incidents",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/incidents/inc_0002",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/capa",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/claims",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/lost",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/returns",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/cleaning",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/partner-custody",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/consumables",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/customers",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/customers/org_nkh",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/contracts",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/rate-plans",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [
+   "a. 102x22 «صندوق الاعتمادات»"
+  ],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/simulations",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/quotes",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/invoices",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/invoices/inv_0001",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/credit-notes",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/payments",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/accounts",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/journals",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/aging",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/costs",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/settlements",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/requirements",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/licenses",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/blocks",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/retention",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/legal-holds",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/reports/operations",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/reports/finance",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/delays",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/approvals",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/notifications",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/integrations",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/settings",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/users",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/audit",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/security",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/health",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "/profile",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "admin",
+  "route": "(cmdk+drawer)",
+  "w": 1440,
+  "modal": {
+   "fits": true,
+   "w": 920,
+   "h": 552,
+   "vh": 900
+  },
+  "drawer": {
+   "fits": true,
+   "w": 420,
+   "bodyScrolls": "auto",
+   "focusInside": true
+  }
+ },
+ {
+  "app": "portal",
+  "route": "/",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 10,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/shipments",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 12,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/shipments/new",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 3,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/shipments/shp_0002",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 3,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/recurring",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 11,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/addresses",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 10,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/branches",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 10,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/users",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 11,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/contracts",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 3,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/invoices",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 11,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/payments",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 10,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/claims",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 3,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/reports",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 16,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/api",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 15,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/notifications",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 8,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/profile",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 7,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/shipments",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/shipments/new",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/shipments/shp_0002",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/recurring",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/addresses",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/branches",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/users",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/contracts",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/invoices",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/payments",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/claims",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/reports",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/api",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/notifications",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/profile",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/shipments",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/shipments/new",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/shipments/shp_0002",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/recurring",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/addresses",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/branches",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/users",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/contracts",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/invoices",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/payments",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/claims",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/reports",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/api",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/notifications",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/profile",
+  "w": 1024,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/shipments",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/shipments/new",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/shipments/shp_0002",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/recurring",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/addresses",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/branches",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/users",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/contracts",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/invoices",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/payments",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/claims",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/reports",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/api",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/notifications",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "portal",
+  "route": "/profile",
+  "w": 1440,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/shipments",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/new",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/s/shp_0002",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/s/shp_0002/temp",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 4,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/notifications",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/invoices",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/claims",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/addresses",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/account",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 4,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/shipments",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/new",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/s/shp_0002",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/s/shp_0002/temp",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/notifications",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/invoices",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/claims",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/addresses",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/account",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/map",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [
+   "g.[object 14x14 «1. فرع العليا — استل»",
+   "g.[object 14x14 «3. المختبر الرئيسي —»",
+   "g.[object 14x14 «3. فرع الملقا — استل»",
+   "g.[object 14x14 «5. المختبر الرئيسي —»",
+   "g.[object 14x14 «6. فرع الدمام — استل»",
+   "g.[object 14x14 «6. المختبر المركزي —»",
+   "g.[object 14x14 «7. المستشفى الرئيسي »",
+   "g.[object 14x14 «8. المختبر الرئيسي —»"
+  ],
+  "smallTouch": 18,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/t/shp_0009",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/t/shp_0002",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/boxes",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/sync",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/me",
+  "w": 390,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/map",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [
+   "g.[object 14x14 «1. فرع العليا — استل»",
+   "g.[object 14x14 «3. المختبر الرئيسي —»",
+   "g.[object 14x14 «3. فرع الملقا — استل»",
+   "g.[object 14x14 «5. المختبر الرئيسي —»",
+   "g.[object 14x14 «6. فرع الدمام — استل»",
+   "g.[object 14x14 «6. المختبر المركزي —»",
+   "g.[object 14x14 «7. المستشفى الرئيسي »",
+   "g.[object 14x14 «8. المختبر الرئيسي —»"
+  ],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/t/shp_0009",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/t/shp_0002",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/boxes",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/sync",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/me",
+  "w": 768,
+  "pageOverflowX": 0,
+  "offscreen": [],
+  "smallTargets": [],
+  "smallTouch": 0,
+  "hiddenFocus": []
+ }
+]

@@ -1,0 +1,9 @@
+screens 188 distinct raw tokens 4
+  tracking → admin/system/notifications [ar] «تعذّر تسليم {tracking}»
+  invoice → admin/system/notifications [ar] «فاتورة جديدة {invoice}»
+  carrier → admin/system/integrations [ar] «Al-Ufuq carrier events»
+  events → admin/system/integrations [ar] «Al-Ufuq carrier events»
+EN screens with Arabic text: 0
+failed-label contexts: admin/returns :: بانتظار قرار 1
+  mobile/courier/t/shp_0002 :: (?)
+l10n rc=0

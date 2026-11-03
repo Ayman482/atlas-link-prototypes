@@ -1,0 +1,3122 @@
+[
+ {
+  "app": "admin",
+  "url": "/admin/#/",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 2067,
+  "focusables": 144,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/map",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 958,
+  "focusables": 128,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/shipments",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 2133,
+  "focusables": 127,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/shipments/new",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1098,
+  "focusables": 79,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/shipments/shp_0004",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1107,
+  "focusables": 86,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/dispatch",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1367,
+  "focusables": 101,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/routes",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 986,
+  "focusables": 94,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/legs",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1096,
+  "focusables": 92,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/couriers",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1375,
+  "focusables": 96,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/vehicles",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 634,
+  "focusables": 81,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/partners",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 523,
+  "focusables": 84,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/boxes",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1161,
+  "focusables": 100,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/boxes/box_002",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 636,
+  "focusables": 90,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/devices",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1370,
+  "focusables": 100,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/devices/dev_004",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1355,
+  "focusables": 93,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/gateway",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1023,
+  "focusables": 84,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/device-commands",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 441,
+  "focusables": 80,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/excursions",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 465,
+  "focusables": 90,
+  "keyboard": {
+   "ok": true,
+   "tag": "select",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/profiles",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 602,
+  "focusables": 80,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/incidents",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 877,
+  "focusables": 90,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/incidents/inc_0002",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 312,
+  "focusables": 77,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/capa",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 573,
+  "focusables": 83,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/claims",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 731,
+  "focusables": 94,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/lost",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 364,
+  "focusables": 83,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/returns",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 477,
+  "focusables": 91,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/warehouse",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1095,
+  "focusables": 83,
+  "keyboard": {
+   "ok": true,
+   "tag": "select",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/warehouse/cleaning",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1155,
+  "focusables": 87,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/warehouse/partner-custody",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 434,
+  "focusables": 83,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/warehouse/consumables",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1444,
+  "focusables": 92,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/customers",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 765,
+  "focusables": 98,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/customers/org_nkh",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 392,
+  "focusables": 90,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/contracts",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1109,
+  "focusables": 88,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/rate-plans",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 409,
+  "focusables": 84,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/simulations",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 409,
+  "focusables": 85,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/quotes",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1255,
+  "focusables": 96,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/invoices",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 2018,
+  "focusables": 99,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/invoices/inv_0001",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 673,
+  "focusables": 85,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/credit-notes",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 439,
+  "focusables": 83,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/payments",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1638,
+  "focusables": 89,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/accounts",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1283,
+  "focusables": 79,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/journals",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1350,
+  "focusables": 96,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/aging",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 445,
+  "focusables": 76,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/costs",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1564,
+  "focusables": 112,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/settlements",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 960,
+  "focusables": 88,
+  "keyboard": {
+   "ok": true,
+   "tag": "select",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/compliance/requirements",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 762,
+  "focusables": 84,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/compliance/licenses",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1234,
+  "focusables": 92,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/compliance/blocks",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 483,
+  "focusables": 83,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/compliance/retention",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 825,
+  "focusables": 97,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/compliance/legal-holds",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 309,
+  "focusables": 84,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/reports/operations",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 754,
+  "focusables": 80,
+  "keyboard": {
+   "ok": true,
+   "tag": "select",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/reports/finance",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1103,
+  "focusables": 84,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/delays",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 759,
+  "focusables": 94,
+  "keyboard": {
+   "ok": true,
+   "tag": "select",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/approvals",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 787,
+  "focusables": 94,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/system/notifications",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 703,
+  "focusables": 92,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/system/integrations",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1149,
+  "focusables": 94,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/system/settings",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1286,
+  "focusables": 98,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/system/users",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1095,
+  "focusables": 96,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/system/audit",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 555,
+  "focusables": 83,
+  "keyboard": {
+   "ok": true,
+   "tag": "select",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/system/security",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 481,
+  "focusables": 84,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/system/health",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1124,
+  "focusables": 81,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/profile",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 241,
+  "focusables": 78,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 2067,
+  "focusables": 144,
+  "keyboard": {
+   "ok": true,
+   "tag": "select",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/map",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 958,
+  "focusables": 128,
+  "keyboard": {
+   "ok": true,
+   "tag": "g",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/shipments",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 2133,
+  "focusables": 127,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/shipments/new",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1098,
+  "focusables": 79,
+  "keyboard": {
+   "ok": true,
+   "tag": "select",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/shipments/shp_0004",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1107,
+  "focusables": 86,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/dispatch",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1367,
+  "focusables": 101,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/routes",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 986,
+  "focusables": 94,
+  "keyboard": {
+   "ok": true,
+   "tag": "select",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/legs",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1096,
+  "focusables": 92,
+  "keyboard": {
+   "ok": true,
+   "tag": "select",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/couriers",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1375,
+  "focusables": 96,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/vehicles",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 634,
+  "focusables": 81,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/partners",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 523,
+  "focusables": 84,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/boxes",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1161,
+  "focusables": 100,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/boxes/box_002",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 636,
+  "focusables": 90,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/devices",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1370,
+  "focusables": 100,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/devices/dev_004",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1355,
+  "focusables": 93,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/gateway",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1023,
+  "focusables": 84,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/device-commands",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 441,
+  "focusables": 80,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/excursions",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 465,
+  "focusables": 90,
+  "keyboard": {
+   "ok": true,
+   "tag": "select",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/profiles",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 602,
+  "focusables": 80,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/incidents",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 877,
+  "focusables": 90,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/incidents/inc_0002",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 312,
+  "focusables": 77,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/capa",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 573,
+  "focusables": 83,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/claims",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 731,
+  "focusables": 94,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/lost",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 364,
+  "focusables": 83,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/returns",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 477,
+  "focusables": 91,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/warehouse",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1095,
+  "focusables": 83,
+  "keyboard": {
+   "ok": true,
+   "tag": "select",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/warehouse/cleaning",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1155,
+  "focusables": 87,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/warehouse/partner-custody",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 434,
+  "focusables": 83,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/warehouse/consumables",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1444,
+  "focusables": 92,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/customers",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 765,
+  "focusables": 98,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/customers/org_nkh",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 392,
+  "focusables": 90,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/contracts",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1109,
+  "focusables": 88,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/rate-plans",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 409,
+  "focusables": 84,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/simulations",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 409,
+  "focusables": 85,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/quotes",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1255,
+  "focusables": 96,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/invoices",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 2018,
+  "focusables": 99,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/invoices/inv_0001",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 673,
+  "focusables": 85,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/credit-notes",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 439,
+  "focusables": 83,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/payments",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1638,
+  "focusables": 89,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/accounts",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1283,
+  "focusables": 79,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/journals",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1350,
+  "focusables": 96,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/aging",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 445,
+  "focusables": 76,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/costs",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1564,
+  "focusables": 112,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/settlements",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 960,
+  "focusables": 88,
+  "keyboard": {
+   "ok": true,
+   "tag": "select",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/compliance/requirements",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 762,
+  "focusables": 84,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/compliance/licenses",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1234,
+  "focusables": 92,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/compliance/blocks",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 483,
+  "focusables": 83,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/compliance/retention",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 825,
+  "focusables": 97,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/compliance/legal-holds",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 309,
+  "focusables": 84,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/reports/operations",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 754,
+  "focusables": 80,
+  "keyboard": {
+   "ok": true,
+   "tag": "select",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/reports/finance",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1103,
+  "focusables": 84,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/delays",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 759,
+  "focusables": 94,
+  "keyboard": {
+   "ok": true,
+   "tag": "select",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/approvals",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 787,
+  "focusables": 94,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/system/notifications",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 703,
+  "focusables": 92,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/system/integrations",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1149,
+  "focusables": 94,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/system/settings",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1286,
+  "focusables": 98,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/system/users",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1095,
+  "focusables": 96,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/system/audit",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 555,
+  "focusables": 83,
+  "keyboard": {
+   "ok": true,
+   "tag": "select",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/system/security",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 481,
+  "focusables": 84,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/system/health",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1124,
+  "focusables": 81,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/profile",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 241,
+  "focusables": 78,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 848,
+  "focusables": 37,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/shipments",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1404,
+  "focusables": 46,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/shipments/new",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 624,
+  "focusables": 26,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/shipments/shp_0002",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 928,
+  "focusables": 30,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/recurring",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 197,
+  "focusables": 30,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/addresses",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 356,
+  "focusables": 27,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/branches",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 204,
+  "focusables": 30,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/users",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 500,
+  "focusables": 31,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/contracts",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 190,
+  "focusables": 20,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/invoices",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 499,
+  "focusables": 32,
+  "keyboard": {
+   "ok": true,
+   "tag": "select",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/payments",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 255,
+  "focusables": 26,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/claims",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 53,
+  "focusables": 20,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/reports",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1317,
+  "focusables": 33,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/api",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 529,
+  "focusables": 35,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/notifications",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 205,
+  "focusables": 26,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/profile",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 195,
+  "focusables": 27,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 848,
+  "focusables": 37,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/shipments",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1404,
+  "focusables": 46,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/shipments/new",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 624,
+  "focusables": 26,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/shipments/shp_0002",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 928,
+  "focusables": 30,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/recurring",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 197,
+  "focusables": 30,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/addresses",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 356,
+  "focusables": 27,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/branches",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 204,
+  "focusables": 30,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/users",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 500,
+  "focusables": 31,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/contracts",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 190,
+  "focusables": 20,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/invoices",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 499,
+  "focusables": 32,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/payments",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 255,
+  "focusables": 26,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/claims",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 53,
+  "focusables": 20,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/reports",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1317,
+  "focusables": 33,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/api",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 529,
+  "focusables": 35,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/notifications",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 205,
+  "focusables": 26,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/profile",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 195,
+  "focusables": 27,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/customer",
+  "url": "/mobile/customer/#/",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1061,
+  "focusables": 18,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/customer",
+  "url": "/mobile/customer/#/shipments",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1149,
+  "focusables": 19,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/customer",
+  "url": "/mobile/customer/#/new",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1162,
+  "focusables": 13,
+  "keyboard": {
+   "ok": true,
+   "tag": "div",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/customer",
+  "url": "/mobile/customer/#/s/shp_0002",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1179,
+  "focusables": 12,
+  "keyboard": {
+   "ok": true,
+   "tag": "div",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/customer",
+  "url": "/mobile/customer/#/s/shp_0002/temp",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1017,
+  "focusables": 14,
+  "keyboard": {
+   "ok": true,
+   "tag": "div",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/customer",
+  "url": "/mobile/customer/#/notifications",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 666,
+  "focusables": 10,
+  "keyboard": {
+   "ok": true,
+   "tag": "div",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/customer",
+  "url": "/mobile/customer/#/invoices",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 854,
+  "focusables": 10,
+  "keyboard": {
+   "ok": true,
+   "tag": "div",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/customer",
+  "url": "/mobile/customer/#/claims",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 625,
+  "focusables": 9,
+  "keyboard": {
+   "ok": true,
+   "tag": "div",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/customer",
+  "url": "/mobile/customer/#/addresses",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 805,
+  "focusables": 10,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/customer",
+  "url": "/mobile/customer/#/account",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 715,
+  "focusables": 15,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/customer",
+  "url": "/mobile/customer/#/",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1061,
+  "focusables": 18,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/customer",
+  "url": "/mobile/customer/#/shipments",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1149,
+  "focusables": 19,
+  "keyboard": {
+   "ok": true,
+   "tag": "input",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/customer",
+  "url": "/mobile/customer/#/new",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1162,
+  "focusables": 13,
+  "keyboard": {
+   "ok": true,
+   "tag": "div",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/customer",
+  "url": "/mobile/customer/#/s/shp_0002",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1179,
+  "focusables": 12,
+  "keyboard": {
+   "ok": true,
+   "tag": "div",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/customer",
+  "url": "/mobile/customer/#/s/shp_0002/temp",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1017,
+  "focusables": 14,
+  "keyboard": {
+   "ok": true,
+   "tag": "div",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/customer",
+  "url": "/mobile/customer/#/notifications",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 666,
+  "focusables": 10,
+  "keyboard": {
+   "ok": true,
+   "tag": "div",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/customer",
+  "url": "/mobile/customer/#/invoices",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 854,
+  "focusables": 10,
+  "keyboard": {
+   "ok": true,
+   "tag": "div",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/customer",
+  "url": "/mobile/customer/#/claims",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 625,
+  "focusables": 9,
+  "keyboard": {
+   "ok": true,
+   "tag": "div",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/customer",
+  "url": "/mobile/customer/#/addresses",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 805,
+  "focusables": 10,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/customer",
+  "url": "/mobile/customer/#/account",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 715,
+  "focusables": 15,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/courier",
+  "url": "/mobile/courier/#/",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 2062,
+  "focusables": 21,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/courier",
+  "url": "/mobile/courier/#/map",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1520,
+  "focusables": 37,
+  "keyboard": {
+   "ok": true,
+   "tag": "g",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/courier",
+  "url": "/mobile/courier/#/t/shp_0009",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 883,
+  "focusables": 12,
+  "keyboard": {
+   "ok": true,
+   "tag": "div",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/courier",
+  "url": "/mobile/courier/#/t/shp_0002",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 862,
+  "focusables": 13,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/courier",
+  "url": "/mobile/courier/#/boxes",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1201,
+  "focusables": 8,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/courier",
+  "url": "/mobile/courier/#/sync",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 790,
+  "focusables": 9,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/courier",
+  "url": "/mobile/courier/#/me",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1635,
+  "focusables": 12,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/courier",
+  "url": "/mobile/courier/#/",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 2062,
+  "focusables": 21,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/courier",
+  "url": "/mobile/courier/#/map",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1520,
+  "focusables": 37,
+  "keyboard": {
+   "ok": true,
+   "tag": "div",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/courier",
+  "url": "/mobile/courier/#/t/shp_0009",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 883,
+  "focusables": 12,
+  "keyboard": {
+   "ok": true,
+   "tag": "div",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/courier",
+  "url": "/mobile/courier/#/t/shp_0002",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 862,
+  "focusables": 13,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/courier",
+  "url": "/mobile/courier/#/boxes",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1201,
+  "focusables": 8,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/courier",
+  "url": "/mobile/courier/#/sync",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 790,
+  "focusables": 9,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "mobile/courier",
+  "url": "/mobile/courier/#/me",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1635,
+  "focusables": 12,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1943,
+  "focusables": 117,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/shipments",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1568,
+  "focusables": 100,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/shipments/shp_0004",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1107,
+  "focusables": 59,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "admin",
+  "url": "/admin/#/routes",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 987,
+  "focusables": 67,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 718,
+  "focusables": 30,
+  "keyboard": {
+   "ok": true,
+   "tag": "button",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/shipments",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 1025,
+  "focusables": 35,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ },
+ {
+  "app": "portal",
+  "url": "/portal/#/shipments/new",
+  "lang": "ar",
+  "loadErrors": [],
+  "violations": [],
+  "dir": "rtl",
+  "text": 544,
+  "focusables": 20,
+  "keyboard": {
+   "ok": true,
+   "tag": "a",
+   "visible": true
+  },
+  "loaded": true
+ }
+]

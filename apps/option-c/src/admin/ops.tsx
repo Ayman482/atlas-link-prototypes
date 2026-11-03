@@ -337,7 +337,7 @@ export function ShipmentDetail({ params, portal }: { params: Record<string, stri
       {tab === 'quality' && <div className="grid">
         <Section title={t('nav.incidents')}>{d.data.incidents.length ? d.data.incidents.map((i: any) => <div key={i.id} className="row"><a href={'#/incidents/' + i.id} className="mono">{i.code}</a> {x(i.title)} <Pill v={i.status} /></div>) : <Empty />}</Section>
         <Section title={t('nav.claims')}>{d.data.claims.length ? d.data.claims.map((c: any) => <div key={c.id} className="row"><Mono>{c.code}</Mono> {f.sar(c.claimedAmount)} <Pill v={c.status} /></div>) : <Empty />}</Section>
-        {d.data.lostApprovals?.length > 0 && <Section title={lang === 'ar' ? 'اعتمادات الفقدان' : 'Loss approvals'}>{d.data.lostApprovals.map((a: any) => <div key={a.id}>{t('roles.' + a.approvalRole)} · {a.decision} · {f.dt(a.decidedAt)}</div>)}</Section>}
+        {d.data.lostApprovals?.length > 0 && <Section title={lang === 'ar' ? 'اعتمادات الفقدان' : 'Loss approvals'}>{d.data.lostApprovals.map((a: any) => <div key={a.id}>{t('roles.' + a.approvalRole)} · {label(lang, a.decision)} · {f.dt(a.decidedAt)}</div>)}</Section>}
       </div>}
     </Page>
   );

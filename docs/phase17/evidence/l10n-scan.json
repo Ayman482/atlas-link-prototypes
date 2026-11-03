@@ -1,0 +1,1558 @@
+[
+ {
+  "app": "admin",
+  "route": "/",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/map",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments/new",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments/shp_0004",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/dispatch",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/routes",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/legs",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/couriers",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/vehicles",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/partners",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/boxes",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/boxes/box_002",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/devices",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/devices/dev_004",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/gateway",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/device-commands",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/excursions",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/profiles",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/incidents",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/incidents/inc_0002",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/capa",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/claims",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/lost",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/returns",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": [
+   "بانتظار قرار 1"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/cleaning",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/partner-custody",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/consumables",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/customers",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/customers/org_nkh",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/contracts",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/rate-plans",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/simulations",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/quotes",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/invoices",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/invoices/inv_0001",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/credit-notes",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/payments",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/accounts",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/journals",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/aging",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/costs",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/settlements",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/requirements",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/licenses",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/blocks",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/retention",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/legal-holds",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/reports/operations",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/reports/finance",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/delays",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/approvals",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/notifications",
+  "lang": "ar",
+  "codes": [
+   {
+    "token": "tracking",
+    "text": "تعذّر تسليم {tracking}",
+    "cls": ""
+   },
+   {
+    "token": "invoice",
+    "text": "فاتورة جديدة {invoice}",
+    "cls": ""
+   }
+  ],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/integrations",
+  "lang": "ar",
+  "codes": [
+   {
+    "token": "carrier",
+    "text": "Al-Ufuq carrier events",
+    "cls": ""
+   },
+   {
+    "token": "events",
+    "text": "Al-Ufuq carrier events",
+    "cls": ""
+   }
+  ],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/settings",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/users",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/audit",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/security",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/health",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/profile",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/map",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments/new",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/shipments/shp_0004",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/dispatch",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/routes",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/legs",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/couriers",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/vehicles",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/partners",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/boxes",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/boxes/box_002",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/devices",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/devices/dev_004",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/gateway",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/device-commands",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/excursions",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/profiles",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/incidents",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/incidents/inc_0002",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/capa",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/claims",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/lost",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/returns",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": [
+   "بانتظار قرار 1"
+  ]
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/cleaning",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/partner-custody",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/warehouse/consumables",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/customers",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/customers/org_nkh",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/contracts",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/rate-plans",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/simulations",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/quotes",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/invoices",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/invoices/inv_0001",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/credit-notes",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/payments",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/accounts",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/journals",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/aging",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/costs",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/settlements",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/requirements",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/licenses",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/blocks",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/retention",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/compliance/legal-holds",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/reports/operations",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/reports/finance",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/delays",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/approvals",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/notifications",
+  "lang": "en",
+  "codes": [
+   {
+    "token": "tracking",
+    "text": "تعذّر تسليم {tracking}",
+    "cls": ""
+   },
+   {
+    "token": "invoice",
+    "text": "فاتورة جديدة {invoice}",
+    "cls": ""
+   }
+  ],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/integrations",
+  "lang": "en",
+  "codes": [
+   {
+    "token": "carrier",
+    "text": "Al-Ufuq carrier events",
+    "cls": ""
+   },
+   {
+    "token": "events",
+    "text": "Al-Ufuq carrier events",
+    "cls": ""
+   }
+  ],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/settings",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/users",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/audit",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/security",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/system/health",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "admin",
+  "route": "/profile",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/shipments",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/shipments/new",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/shipments/shp_0002",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/recurring",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/addresses",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/branches",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/users",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/contracts",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/invoices",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/payments",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/claims",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/reports",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/api",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/notifications",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/profile",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/shipments",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/shipments/new",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/shipments/shp_0002",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/recurring",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/addresses",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/branches",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/users",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/contracts",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/invoices",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/payments",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/claims",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/reports",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/api",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/notifications",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "portal",
+  "route": "/profile",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/shipments",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/new",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/s/shp_0002",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/s/shp_0002/temp",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/notifications",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/invoices",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/claims",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/addresses",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/account",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/shipments",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/new",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/s/shp_0002",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/s/shp_0002/temp",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/notifications",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/invoices",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/claims",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/addresses",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/account",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/map",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/t/shp_0009",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/t/shp_0002",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": [
+   "(?)"
+  ]
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/boxes",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/sync",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/me",
+  "lang": "ar",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/map",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/t/shp_0009",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/t/shp_0002",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": [
+   "(?)"
+  ]
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/boxes",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/sync",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ },
+ {
+  "app": "mobile/courier",
+  "route": "/me",
+  "lang": "en",
+  "codes": [],
+  "arInEn": [],
+  "failedCtx": []
+ }
+]

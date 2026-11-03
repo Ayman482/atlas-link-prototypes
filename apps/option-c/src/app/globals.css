@@ -346,3 +346,5 @@ h1 .mono, h1 bdi { white-space: nowrap }
 
 .check input[type=checkbox] { width: 24px; height: 24px }
 input[type=checkbox], input[type=radio] { width: 24px; height: 24px; accent-color: var(--primary); flex-shrink: 0 }
+/* Phase 17 — WCAG 2.5.8: روابط الإجراءات داخل الجداول بحد أدنى 24px */
+td .row > a, td > a[href^="#/approvals"] { display: inline-flex; align-items: center; min-height: 24px; padding-block: 2px }

@@ -93,7 +93,17 @@ export function ripple(e: React.MouseEvent<HTMLElement>) {
   const el = document.createElement('span'); el.className = 'rip'; el.style.cssText = `width:${s}px;height:${s}px;left:${e.clientX - r.left - s / 2}px;top:${e.clientY - r.top - s / 2}px`;
   b.appendChild(el); setTimeout(() => el.remove(), 600);
 }
-export const Btn = ({ kind = 'default', onClick, ...p }: React.ButtonHTMLAttributes<HTMLButtonElement> & { kind?: 'default' | 'primary' | 'danger' | 'ghost' }) => <button type="button" {...p} onClick={(e) => { ripple(e); onClick?.(e); }} className={cx('btn', kind, p.className)} />;
+/** زر موحّد: إن أعاد onClick وعداً (أمر خادم) يُعطَّل الزر حتى ينتهي الطلب لمنع الإرسال المكرر، ويُلتقط الرفض
+ *  لأن run() يعرض رسالة الخطأ للمستخدم مسبقاً (لا رفض غير معالج في وحدة التحكم). */
+export function Btn({ kind = 'default', onClick, disabled, ...p }: React.ButtonHTMLAttributes<HTMLButtonElement> & { kind?: 'default' | 'primary' | 'danger' | 'ghost' }) {
+  const [busy, setBusy] = useState(false); const live = useRef(true);
+  useEffect(() => () => { live.current = false; }, []);
+  return <button type="button" {...p} disabled={disabled || busy} aria-busy={busy || undefined} onClick={(e) => {
+    if (busy) return; ripple(e);
+    const r: any = (onClick as any)?.(e);
+    if (r && typeof r.then === 'function') { setBusy(true); r.catch(() => {}).finally(() => { if (live.current) setBusy(false); }); }
+  }} className={cx('btn', kind, p.className)} />;
+}
 
 // ---------- الحوار ----------
 // ---------- الحوار ----------

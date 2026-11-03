@@ -1,0 +1,9 @@
+{
+ "screens": 195,
+ "loadFailures": [],
+ "violationsByRule": {},
+ "rtlOk": true,
+ "ltrOk": true,
+ "keyboardFail": []
+}
+axe rc=0
