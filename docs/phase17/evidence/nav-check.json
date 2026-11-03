@@ -1,0 +1,476 @@
+[
+ {
+  "app": "admin",
+  "href": "#/",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/map",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/shipments",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/shipments/new",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/dispatch",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/routes",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/legs",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/couriers",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/vehicles",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/partners",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "admin",
+  "href": "#/boxes",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/devices",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/gateway",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/device-commands",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/excursions",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/profiles",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/incidents",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/capa",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/claims",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/lost",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/returns",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/warehouse",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/warehouse/cleaning",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/warehouse/partner-custody",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/warehouse/consumables",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/customers",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/contracts",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/rate-plans",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/simulations",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/quotes",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/invoices",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/credit-notes",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/payments",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/accounts",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/journals",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/aging",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/costs",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/settlements",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/compliance/requirements",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/compliance/licenses",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/compliance/blocks",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/compliance/retention",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/compliance/legal-holds",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/reports/operations",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/reports/finance",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/delays",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/approvals",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/system/notifications",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/system/integrations",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/system/settings",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/system/users",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/system/audit",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/system/security",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "admin",
+  "href": "#/system/health",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "portal",
+  "href": "#/",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/shipments",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/shipments/new",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/recurring",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/addresses",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/branches",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/users",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/contracts",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/invoices",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/payments",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/claims",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/reports",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/api",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "portal",
+  "href": "#/notifications",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "portal",
+  "href": "#/profile",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "mobile/customer",
+  "href": "#/",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "mobile/customer",
+  "href": "#/shipments",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "mobile/customer",
+  "href": "#/new",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "mobile/customer",
+  "href": "#/notifications",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "mobile/customer",
+  "href": "#/account",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "mobile/courier",
+  "href": "#/",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "mobile/courier",
+  "href": "#/map",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "mobile/courier",
+  "href": "#/boxes",
+  "ok": false,
+  "note": "click: locator.click: Timeout 3000ms exceeded."
+ },
+ {
+  "app": "mobile/courier",
+  "href": "#/sync",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "app": "mobile/courier",
+  "href": "#/me",
+  "ok": true,
+  "note": ""
+ }
+]

@@ -348,3 +348,6 @@ h1 .mono, h1 bdi { white-space: nowrap }
 input[type=checkbox], input[type=radio] { width: 24px; height: 24px; accent-color: var(--primary); flex-shrink: 0 }
 /* Phase 17 — WCAG 2.5.8: روابط الإجراءات داخل الجداول بحد أدنى 24px */
 td .row > a, td > a[href^="#/approvals"] { display: inline-flex; align-items: center; min-height: 24px; padding-block: 2px }
+/* Phase 17 — الرسائل المؤقتة لا تحجب التنقل: لا تلتقط النقر، وترتفع فوق شريط التبويب السفلي في تطبيقي الجوال */
+.toasts { pointer-events: none }
+body:has(.mtabs) .toasts { bottom: calc(88px + env(safe-area-inset-bottom, 0px)) }

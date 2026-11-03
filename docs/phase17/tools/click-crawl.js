@@ -17,7 +17,7 @@ const SEL = 'button, a[href], [role=tab], [role=menuitem], [role=switch], summar
 (async () => {
   const [email, allRoutes] = SETS[APP];
   // SLICE=k/n يقسم الشاشات على عمليات متوازية
-  const [k, n] = (process.env.SLICE || '0/1').split('/').map(Number); const routes = allRoutes.filter((_, i) => i % n === k);
+  const [k, n] = (process.env.SLICE || '0/1').split('/').map(Number); const routes = process.env.ONLY ? process.env.ONLY.split(',') : allRoutes.filter((_, i) => i % n === k);
   const b = await chromium.launch();
   const ctx = await b.newContext({ viewport: { width: 1360, height: 900 } });
   const p = await ctx.newPage();
@@ -37,7 +37,7 @@ const SEL = 'button, a[href], [role=tab], [role=menuitem], [role=switch], summar
   const results = [];
   for (const r of routes) {
     const url = `${B}/${APP}/#${r}`;
-    await p.goto(url); await p.waitForTimeout(900);
+    await p.goto(url); await p.reload(); await p.waitForTimeout(1500);
     const n = Math.min(await p.locator(SEL).count(), 400);
     const items = [];
     for (let i = 0; i < n; i++) {
@@ -45,7 +45,7 @@ const SEL = 'button, a[href], [role=tab], [role=menuitem], [role=switch], summar
       const info = await el.evaluate((e) => {
         const b = e.getBoundingClientRect(); const cs = getComputedStyle(e);
         const visible = b.width > 0 && b.height > 0 && cs.visibility !== 'hidden' && !e.closest('[hidden],[aria-hidden=true],nav.side:not(.open) .slinks[inert]');
-        return { tag: e.tagName.toLowerCase(), label: (e.getAttribute('aria-label') || e.innerText || e.value || e.title || '').trim().replace(/\s+/g, ' ').slice(0, 40), disabled: e.disabled || e.getAttribute('aria-disabled') === 'true', visible, inSidebar: !!e.closest('nav, .side, .sidebar, header, .mtabs, .topbar'), href: e.getAttribute('href') };
+        return { tag: e.tagName.toLowerCase(), label: (e.getAttribute('aria-label') || e.innerText || e.value || e.title || '').trim().replace(/\s+/g, ' ').slice(0, 40), disabled: e.disabled || e.getAttribute('aria-disabled') === 'true', visible, inSidebar: !!e.closest('nav, aside, .side, .sidebar, .sidecard, .slinks, header, .mtabs, .topbar'), href: e.getAttribute('href') };
       }).catch(() => null);
       if (!info || !info.visible || info.inSidebar) continue; // عناصر التنقل العام تُختبر مرة واحدة عبر قائمة المسارات
       items.push({ i, ...info });
@@ -55,7 +55,8 @@ const SEL = 'button, a[href], [role=tab], [role=menuitem], [role=switch], summar
       if (it.disabled) continue;
       if (SKIP.test(it.label)) { page.skipped.push(it.label); continue; }
       if (it.href && /^(https?:|mailto:|tel:)/.test(it.href)) { page.skipped.push('external:' + it.href.slice(0, 40)); continue; }
-      await p.goto(url); await p.waitForTimeout(650);
+      // إعادة تحميل كاملة: التنقل بنفس الـhash لا يغلق النوافذ والأدراج المفتوحة في تطبيق الصفحة الواحدة
+      await p.goto(url); await p.reload(); await p.waitForTimeout(900);
       errs = [];
       const before = await snap();
       const el = p.locator(SEL).nth(it.i);

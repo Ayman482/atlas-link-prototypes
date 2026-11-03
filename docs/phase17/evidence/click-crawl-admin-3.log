@@ -1,0 +1,15 @@
+admin/shipments/new: 6 clicked, 5 no-visible-effect, 2 errors
+admin/legs: 17 clicked, 1 no-visible-effect, 2 errors
+admin/boxes: 14 clicked, 0 no-visible-effect, 0 errors
+admin/gateway: 10 clicked, 0 no-visible-effect, 0 errors
+admin/incidents: 10 clicked, 1 no-visible-effect, 0 errors
+admin/lost: 10 clicked, 2 no-visible-effect, 1 errors
+admin/warehouse/partner-custody: 11 clicked, 1 no-visible-effect, 0 errors
+admin/contracts: 13 clicked, 2 no-visible-effect, 2 errors
+admin/invoices: 13 clicked, 0 no-visible-effect, 0 errors
+admin/accounts: 7 clicked, 0 no-visible-effect, 0 errors
+admin/settlements: 8 clicked, 1 no-visible-effect, 0 errors
+admin/compliance/retention: 25 clicked, 2 no-visible-effect, 0 errors
+admin/delays: 18 clicked, 2 no-visible-effect, 3 errors
+admin/system/settings: 26 clicked, 2 no-visible-effect, 0 errors
+admin/system/health: 7 clicked, 0 no-visible-effect, 0 errors

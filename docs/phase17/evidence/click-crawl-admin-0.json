@@ -1,0 +1,181 @@
+{
+ "app": "admin",
+ "base": "http://127.0.0.1:5057",
+ "executedAt": "2026-11-03T02:00:57.544Z",
+ "results": [
+  {
+   "route": "/",
+   "interactive": 35,
+   "disabled": 1,
+   "clicked": 30,
+   "noEffect": [
+    "a «عرض الشحنة»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/shipments/shp_0004",
+   "interactive": 10,
+   "disabled": 0,
+   "clicked": 10,
+   "noEffect": [
+    "button «نظرة عامة»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/couriers",
+   "interactive": 24,
+   "disabled": 2,
+   "clicked": 22,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/boxes/box_002",
+   "interactive": 16,
+   "disabled": 2,
+   "clicked": 14,
+   "noEffect": [
+    "button «التعبئات 2»",
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/device-commands",
+   "interactive": 10,
+   "disabled": 2,
+   "clicked": 8,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/incidents/inc_0002",
+   "interactive": 2,
+   "disabled": 0,
+   "clicked": 2,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/returns",
+   "interactive": 23,
+   "disabled": 4,
+   "clicked": 19,
+   "noEffect": [
+    "select «12 25 50»",
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/warehouse/consumables",
+   "interactive": 24,
+   "disabled": 4,
+   "clicked": 20,
+   "noEffect": [
+    "select «12 25 50»",
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/rate-plans",
+   "interactive": 10,
+   "disabled": 2,
+   "clicked": 8,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/invoices/inv_0001",
+   "interactive": 15,
+   "disabled": 4,
+   "clicked": 11,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/journals",
+   "interactive": 11,
+   "disabled": 1,
+   "clicked": 10,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/compliance/requirements",
+   "interactive": 14,
+   "disabled": 2,
+   "clicked": 12,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/compliance/legal-holds",
+   "interactive": 13,
+   "disabled": 2,
+   "clicked": 11,
+   "noEffect": [
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/approvals",
+   "interactive": 24,
+   "disabled": 2,
+   "clicked": 22,
+   "noEffect": [
+    "button «بانتظاري 5»",
+    "select «12 25 50»"
+   ],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/system/users",
+   "interactive": 23,
+   "disabled": 1,
+   "clicked": 22,
+   "noEffect": [],
+   "errors": [],
+   "skipped": []
+  },
+  {
+   "route": "/profile",
+   "interactive": 6,
+   "disabled": 1,
+   "clicked": 5,
+   "noEffect": [
+    "button «العربية»"
+   ],
+   "errors": [
+    "button «English»: toggle did not restore (ar|rtl|| → en|ltr||)"
+   ],
+   "skipped": []
+  }
+ ]
+}

@@ -1,0 +1,16 @@
+portal/: 7 clicked, 1 no-visible-effect, 0 errors
+portal/shipments: 12 clicked, 0 no-visible-effect, 0 errors
+portal/shipments/new: 5 clicked, 0 no-visible-effect, 0 errors
+portal/shipments/shp_0002: 7 clicked, 1 no-visible-effect, 0 errors
+portal/recurring: 9 clicked, 2 no-visible-effect, 0 errors
+portal/addresses: 6 clicked, 1 no-visible-effect, 0 errors
+portal/branches: 9 clicked, 1 no-visible-effect, 0 errors
+portal/users: 10 clicked, 1 no-visible-effect, 0 errors
+portal/contracts: 0 clicked, 0 no-visible-effect, 0 errors
+portal/invoices: 9 clicked, 0 no-visible-effect, 0 errors
+portal/payments: 6 clicked, 1 no-visible-effect, 0 errors
+portal/claims: 0 clicked, 0 no-visible-effect, 0 errors
+portal/reports: 13 clicked, 1 no-visible-effect, 0 errors
+portal/api: 13 clicked, 2 no-visible-effect, 0 errors
+portal/notifications: 4 clicked, 1 no-visible-effect, 0 errors
+portal/profile: 6 clicked, 1 no-visible-effect, 1 errors

@@ -1,0 +1,10 @@
+mobile/customer/: 10 clicked, 0 no-visible-effect, 0 errors
+mobile/customer/shipments: 10 clicked, 1 no-visible-effect, 0 errors
+mobile/customer/new: 4 clicked, 3 no-visible-effect, 0 errors
+mobile/customer/s/shp_0002: 3 clicked, 0 no-visible-effect, 0 errors
+mobile/customer/s/shp_0002/temp: 4 clicked, 1 no-visible-effect, 0 errors
+mobile/customer/notifications: 1 clicked, 0 no-visible-effect, 0 errors
+mobile/customer/invoices: 1 clicked, 0 no-visible-effect, 0 errors
+mobile/customer/claims: 0 clicked, 0 no-visible-effect, 0 errors
+mobile/customer/addresses: 0 clicked, 0 no-visible-effect, 0 errors
+mobile/customer/account: 6 clicked, 1 no-visible-effect, 1 errors

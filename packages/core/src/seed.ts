@@ -753,7 +753,7 @@ export function seed(nowMs = Date.now(), seedNo = 2026): T.Db {
   db.webhooks.push({ id: id('whk'), organizationId: NKH.id, url: 'https://lis.nukhba.demo/hooks/medlog', events: ['shipment.delivered', 'cold_chain.excursion_detected'], secretMasked: 'whsec_••••3f9a', status: 'active', lastDeliveryAt: t(-2), failures: 0, simulated: true });
   db.apiClients.push(
     { id: id('api'), organizationId: NKH.id, partnerId: null, name: 'نظام المختبر LIS — النخبة', keyPrefix: 'mlk_live_7Q2', scopes: ['shipments:read', 'shipments:write'], status: 'active', createdAt: t(-24 * 40) },
-    { id: id('api'), organizationId: null, partnerId: P.ufuq.id, name: 'أحداث ناقل الأفق — Al-Ufuq events', keyPrefix: 'mlk_ptr_U8f', scopes: ['carrier-events:write'], status: 'active', createdAt: t(-24 * 90) },
+    { id: id('api'), organizationId: null, partnerId: P.ufuq.id, name: 'أحداث ناقل الأفق', keyPrefix: 'mlk_ptr_U8f', scopes: ['carrier-events:write'], status: 'active', createdAt: t(-24 * 90) },
   );
 
   // التقارير والتنبؤ بالتأخير وبطاقات الأداء والنسخ الاحتياطي

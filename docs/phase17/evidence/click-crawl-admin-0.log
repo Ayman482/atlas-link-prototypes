@@ -1,0 +1,16 @@
+admin/: 30 clicked, 1 no-visible-effect, 0 errors
+admin/shipments/shp_0004: 10 clicked, 1 no-visible-effect, 0 errors
+admin/couriers: 22 clicked, 1 no-visible-effect, 0 errors
+admin/boxes/box_002: 14 clicked, 2 no-visible-effect, 0 errors
+admin/device-commands: 8 clicked, 1 no-visible-effect, 0 errors
+admin/incidents/inc_0002: 2 clicked, 0 no-visible-effect, 0 errors
+admin/returns: 19 clicked, 2 no-visible-effect, 0 errors
+admin/warehouse/consumables: 20 clicked, 2 no-visible-effect, 0 errors
+admin/rate-plans: 8 clicked, 1 no-visible-effect, 0 errors
+admin/invoices/inv_0001: 11 clicked, 0 no-visible-effect, 0 errors
+admin/journals: 10 clicked, 0 no-visible-effect, 0 errors
+admin/compliance/requirements: 12 clicked, 1 no-visible-effect, 0 errors
+admin/compliance/legal-holds: 11 clicked, 1 no-visible-effect, 0 errors
+admin/approvals: 22 clicked, 2 no-visible-effect, 0 errors
+admin/system/users: 22 clicked, 0 no-visible-effect, 0 errors
+admin/profile: 5 clicked, 1 no-visible-effect, 1 errors

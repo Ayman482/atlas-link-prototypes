@@ -1,0 +1,15 @@
+admin/shipments: 30 clicked, 3 no-visible-effect, 0 errors
+admin/routes: 9 clicked, 0 no-visible-effect, 0 errors
+admin/partners: 8 clicked, 1 no-visible-effect, 0 errors
+admin/devices/dev_004: 16 clicked, 2 no-visible-effect, 0 errors
+admin/profiles: 8 clicked, 1 no-visible-effect, 0 errors
+admin/claims: 20 clicked, 1 no-visible-effect, 0 errors
+admin/warehouse/cleaning: 15 clicked, 1 no-visible-effect, 0 errors
+admin/customers/org_nkh: 14 clicked, 0 no-visible-effect, 0 errors
+admin/quotes: 22 clicked, 0 no-visible-effect, 0 errors
+admin/payments: 15 clicked, 0 no-visible-effect, 0 errors
+admin/costs: 27 clicked, 1 no-visible-effect, 0 errors
+admin/compliance/blocks: 11 clicked, 1 no-visible-effect, 0 errors
+admin/reports/finance: 11 clicked, 0 no-visible-effect, 0 errors
+admin/system/integrations: 20 clicked, 2 no-visible-effect, 0 errors
+admin/system/security: 11 clicked, 1 no-visible-effect, 1 errors
