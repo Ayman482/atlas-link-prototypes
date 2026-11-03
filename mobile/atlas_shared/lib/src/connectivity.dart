@@ -30,7 +30,7 @@ class ConnectivityMonitor extends ChangeNotifier {
   Future<bool> check() async {
     if (_checking) return online;
     _checking = true;
-    try { await api.ping(); _set(true); } on ApiException catch (e) { if (e.isNetwork) _set(false); else _set(true); } catch (_) { _set(false); } finally { _checking = false; lastCheckAt = DateTime.now(); }
+    try { await api.ping(); _set(true); } on ApiException catch (e) { _set(!e.isNetwork); } catch (_) { _set(false); } finally { _checking = false; lastCheckAt = DateTime.now(); }
     return online;
   }
 

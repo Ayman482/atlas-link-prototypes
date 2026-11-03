@@ -113,7 +113,7 @@ export function ShipmentsList() {
           bulk={[{ label: lang === 'ar' ? 'نسخ أرقام التتبع' : 'Copy tracking numbers', run: async (sel: any[]) => { try { await navigator.clipboard.writeText(sel.map((r) => r.trackingNo).join('\n')); } catch { /* المتصفح قد يمنع الحافظة */ } } }]}
           expand={(s: any) => <dl className="tldetail">
             <div><dt>{lang === 'ar' ? 'المسار' : 'Route'}</dt><dd>{L.city(s.originCity)} {lang === 'ar' ? '←' : '→'} {L.city(s.destCity)} · {label(lang, s.mode)}</dd></div>
-            <div><dt>{lang === 'ar' ? 'نافذة الاستلام' : 'Pickup window'}</dt><dd>{f.dt(s.pickupWindowStart)} – {f.dt(s.pickupWindowEnd)}</dd></div>
+            <div><dt>{lang === 'ar' ? 'فترة الاستلام' : 'Pickup window'}</dt><dd>{f.dt(s.pickupWindowStart)} – {f.dt(s.pickupWindowEnd)}</dd></div>
             <div><dt>{lang === 'ar' ? 'التسليم قبل' : 'Deliver by'}</dt><dd>{f.dt(s.deliverBy)}</dd></div>
             <div><dt>{lang === 'ar' ? 'الوصول المتوقع' : 'ETA'}</dt><dd>{s.eta?.at ? <>{f.dt(s.eta.at)} <Pill v={s.eta.confidence} /></> : '—'}</dd></div>
             <div><dt>{lang === 'ar' ? 'آخر موقع مؤكد' : 'Last confirmed fix'}</dt><dd>{s.lastPosition ? <>{f.dt(s.lastPosition.at)} · {label(lang, s.lastPosition.source)}</> : (lang === 'ar' ? 'لا يوجد بعد' : 'None yet')}</dd></div>
@@ -170,8 +170,8 @@ export function ShipmentCreate({ portal }: { params?: any; portal?: { orgId: str
     ],
     [
       { name: 'requestType', label: lang === 'ar' ? 'نوع الطلب' : 'Request type', type: 'select', required: true, options: ['on_demand', 'scheduled'].map((s) => ({ value: s, label: label(lang, s) })) },
-      { name: 'pickupWindowStart', label: lang === 'ar' ? 'بداية نافذة الاستلام' : 'Pickup window start', type: 'datetime', required: true },
-      { name: 'pickupWindowEnd', label: lang === 'ar' ? 'نهاية نافذة الاستلام' : 'Pickup window end', type: 'datetime', required: true },
+      { name: 'pickupWindowStart', label: lang === 'ar' ? 'بداية فترة الاستلام' : 'Pickup window start', type: 'datetime', required: true },
+      { name: 'pickupWindowEnd', label: lang === 'ar' ? 'نهاية فترة الاستلام' : 'Pickup window end', type: 'datetime', required: true },
     ],
   ];
   const weight = (v.items ?? []).reduce((a: number, i: any) => a + (Number(i.weightKg) || 0), 0);
@@ -221,7 +221,7 @@ export function ShipmentCreate({ portal }: { params?: any; portal?: { orgId: str
               <span>{t('ship.dedicatedBox')}</span><span className="num">{f.sar(quote.snapshot.dedicatedBox)}</span>
               <span>{t('ship.vat')}</span><span className="num">{f.sar(quote.snapshot.vat)}</span>
               <b>{t('common.total')}</b><b className="num">{f.sar(quote.total)}</b>
-              <span className="muted" style={{ gridColumn: '1/-1' }}>{lang === 'ar' ? `التعرفة الإصدار ${quote.snapshot.ratePlanVersion} · صالح 24 ساعة` : `Tariff v${quote.snapshot.ratePlanVersion} · valid 24 hours`}</span>
+              <span className="muted" style={{ gridColumn: '1/-1' }}>{lang === 'ar' ? `جدول الأسعار — الإصدار ${quote.snapshot.ratePlanVersion} · صالح 24 ساعة` : `Tariff v${quote.snapshot.ratePlanVersion} · valid 24 hours`}</span>
             </div>}
           </div>
         </div>}
@@ -262,7 +262,7 @@ export function ShipmentDetail({ params, portal }: { params: Record<string, stri
     {s.status === 'draft' && <Btn kind="primary" onClick={() => run('shipment.submit', { id: s.id })}>{t('common.submit')}</Btn>}
     {['draft', 'confirmed', 'pickup_scheduled'].includes(s.status) && <ActionForm label={t('ship.reschedule')} title={t('ship.reschedule')} cmd="shipment.reschedule" initial={{ pickupWindowStart: localNow(2), pickupWindowEnd: localNow(4) }} fields={[{ name: 'pickupWindowStart', label: lang === 'ar' ? 'البداية' : 'Start', type: 'datetime', required: true }, { name: 'pickupWindowEnd', label: lang === 'ar' ? 'النهاية' : 'End', type: 'datetime', required: true }]} map={(v) => ({ id: s.id, ...v })} />}
     {['draft', 'confirmed', 'pickup_scheduled'].includes(s.status) && <ActionForm label={t('ship.cancelShipment')} kind="danger" danger title={t('ship.cancelShipment')} cmd="shipment.cancel" fields={[{ name: 'reason', label: t('common.reason'), type: 'textarea', required: true }]} map={(v) => ({ id: s.id, reason: v.reason, version: s.version })} />}
-    {['in_transit', 'at_handover'].includes(s.status) && ops && <ActionForm label={lang === 'ar' ? 'تسجيل تسليم فاشل' : 'Record failed delivery'} title={lang === 'ar' ? 'محاولة تسليم فاشلة' : 'Failed attempt'} cmd="courier.failAttempt" fields={[{ name: 'reasonCode', label: t('common.reason'), type: 'select', required: true, options: opts(lang, reasons) }, { name: 'notes', label: t('common.note'), type: 'textarea' }]} map={(v) => ({ shipment: s.id, ...v })} />}
+    {['in_transit', 'at_handover'].includes(s.status) && ops && <ActionForm label={lang === 'ar' ? 'تسجيل تعذّر التسليم' : 'Record failed delivery'} title={lang === 'ar' ? 'محاولة تسليم فاشلة' : 'Failed attempt'} cmd="courier.failAttempt" fields={[{ name: 'reasonCode', label: t('common.reason'), type: 'select', required: true, options: opts(lang, reasons) }, { name: 'notes', label: t('common.note'), type: 'textarea' }]} map={(v) => ({ shipment: s.id, ...v })} />}
     {['in_transit', 'at_handover', 'exception'].includes(s.status) && ops && d.data.custodian?.type === 'courier' && <ActionForm label={lang === 'ar' ? 'تسليم نيابة عن المندوب' : 'Deliver on courier’s behalf'} title={t('ship.pod')} cmd="courier.deliver" fields={[{ name: 'recipientName', label: t('courier.recipientName'), required: true }, { name: 'signature', label: lang === 'ar' ? 'مرجع التوقيع' : 'Signature reference', required: true }, { name: 'notes', label: t('common.note'), type: 'textarea' }]} map={(v) => ({ shipment: s.id, ...v })} />}
     {s.status === 'failed' && ops && <a className="btn primary" href="#/returns">{lang === 'ar' ? 'اتخاذ القرار' : 'Decide'}</a>}
     {['in_transit', 'at_handover', 'collected'].includes(s.status) && (ops || qual) && s.lostState === 'none' && <ActionForm label={lang === 'ar' ? 'اشتباه فقدان' : 'Suspect loss'} kind="danger" title={lang === 'ar' ? 'فتح اشتباه فقدان' : 'Open suspected loss'} cmd="lost.suspect" intro={lang === 'ar' ? 'صمت GPS وحده لا يكفي (LDM).' : 'GPS silence alone is not sufficient (LDM).'} fields={[{ name: 'basis', label: lang === 'ar' ? 'الأساس' : 'Basis', type: 'multi', required: true, options: opts(lang, [{ value: 'custody_gap', ar: 'فجوة حيازة', en: 'Custody gap' }, { value: 'gps_silence', ar: 'صمت GPS', en: 'GPS silence' }, { value: 'partner_report', ar: 'بلاغ شريك', en: 'Partner report' }, { value: 'customer_report', ar: 'بلاغ عميل', en: 'Customer report' }]) }, { name: 'note', label: t('common.note'), type: 'textarea', required: true }]} map={(v) => ({ shipment: s.id, ...v })} />}
@@ -317,7 +317,7 @@ export function ShipmentDetail({ params, portal }: { params: Record<string, stri
       {tab === 'temp' && <Section title={t('ship.temperature')} actions={<Sim />}>
         {rep.data ? <>
           <TempChart report={rep.data} />
-          <Kpis items={[{ label: lang === 'ar' ? 'القراءات' : 'Readings', value: f.num(rep.data.summary.count) }, { label: t('ship.inRange') + ' %', value: rep.data.summary.inRangePct ?? '—', tone: rep.data.summary.inRangePct != null && rep.data.summary.inRangePct < 100 ? 'warn' : 'good' }, { label: lang === 'ar' ? 'دقائق الفجوات' : 'Gap minutes', value: f.num(rep.data.summary.gapMinutes), tone: rep.data.summary.gapMinutes ? 'warn' : undefined }, { label: lang === 'ar' ? 'قراءات متأخرة' : 'Backfilled', value: f.num(rep.data.summary.backfilled) }, { label: lang === 'ar' ? 'أدنى/أعلى' : 'Min/Max', value: `${f.temp(rep.data.summary.minC)} / ${f.temp(rep.data.summary.maxC)}` }]} />
+          <Kpis items={[{ label: lang === 'ar' ? 'القراءات' : 'Readings', value: f.num(rep.data.summary.count) }, { label: t('ship.inRange') + ' %', value: rep.data.summary.inRangePct ?? '—', tone: rep.data.summary.inRangePct != null && rep.data.summary.inRangePct < 100 ? 'warn' : 'good' }, { label: lang === 'ar' ? 'دقائق الفجوات' : 'Gap minutes', value: f.num(rep.data.summary.gapMinutes), tone: rep.data.summary.gapMinutes ? 'warn' : undefined }, { label: lang === 'ar' ? 'قراءات مخزنة' : 'Backfilled', value: f.num(rep.data.summary.backfilled) }, { label: lang === 'ar' ? 'أدنى/أعلى' : 'Min/Max', value: `${f.temp(rep.data.summary.minC)} / ${f.temp(rep.data.summary.maxC)}` }]} />
           {rep.data.gaps.length > 0 && <DataTable rows={rep.data.gaps.map((g: any, i: number) => ({ id: String(i), ...g }))} pageSize={5} cols={[{ key: 'from', label: t('common.from'), render: (g: any) => f.dt(g.from) }, { key: 'to', label: t('common.to'), render: (g: any) => f.dt(g.to) }, { key: 'minutes', label: lang === 'ar' ? 'الدقائق' : 'Minutes', num: true }, { key: 'reason', label: t('common.reason'), render: (g: any) => x(g.reason) }]} />}
           {d.data.excursions.map((e: any) => <div key={e.id} className="notice crit">{lang === 'ar' ? 'انحراف' : 'Excursion'} · {lang === 'ar' ? 'ذروة' : 'peak'} {f.temp(e.peakC)} · {f.dt(e.startedAt)} {lang === 'ar' ? '←' : '→'} {e.endedAt ? f.dt(e.endedAt) : (lang === 'ar' ? 'مستمر' : 'ongoing')} · <Pill v={e.status} /> {!portal && <a href="#/excursions">{t('common.open')}</a>}</div>)}
           <p className="muted">{x(rep.data.disclaimer)}</p>

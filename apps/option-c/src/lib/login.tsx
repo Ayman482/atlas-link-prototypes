@@ -1,5 +1,5 @@
 'use client';
-// شاشة الدخول + التحقق الثنائي (A01 / C01) مع قائمة حسابات العرض حسب التطبيق
+// شاشة الدخول + التحقق بخطوتين (A01 / C01) مع قائمة حسابات العرض حسب التطبيق
 import React, { useState } from 'react';
 import { DEMO_MFA, DEMO_PASSWORD } from '@medlog/core';
 import { useApp, transport } from './store';
@@ -61,7 +61,7 @@ export function Login({ title, subtitle, accounts, allowed }: { title: string; s
         <Hero />
         {IS_DEMO && accounts.length > 0 && <>
         <h2>{t('auth.demoAccounts')}</h2>
-        <p>{lang === 'ar' ? 'اختر حساباً لتعبئة البيانات، ثم أكمل الدخول والتحقق الثنائي.' : 'Pick an account to fill the form, then complete sign-in and verification.'}</p>
+        <p>{lang === 'ar' ? 'اختر حساباً لتعبئة البيانات، ثم أكمل الدخول والتحقق بخطوتين.' : 'Pick an account to fill the form, then complete sign-in and verification.'}</p>
         <div className="accts">{accounts.map((a, i) => <button key={a.email} className="acct" style={{ '--i': i, '--ah': AH[i % AH.length] } as React.CSSProperties} onClick={() => { setV({ email: a.email, password: DEMO_PASSWORD }); submit(undefined, { email: a.email, password: DEMO_PASSWORD }); }}><span className="avatar">{a.name[lang].replace(/^(د\.|م\.|أ\.|Dr\.|Eng\.)\s*/, '').split(' ').filter((w) => /\p{L}/u.test(w[0] ?? '')).map((w) => w[0]).slice(0, 2).join('')}</span><b>{a.name[lang]}</b><span>{t('roles.' + a.role)}</span><code>{a.email}</code></button>)}</div>
         </>}
       </div>

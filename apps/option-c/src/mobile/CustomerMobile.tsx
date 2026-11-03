@@ -9,7 +9,7 @@ import { ActionForm, localNow, opts, useLookups } from '@/admin/common';
 import { ICONS, MTabs, MTop, MobileLogin, PhoneStage, celebrate } from './kit';
 
 export const CM_SCREENS = [
-  { id: 'CM01', ar: 'الدخول والتحقق الثنائي', en: 'Sign-in & MFA' }, { id: 'CM02', ar: 'الرئيسية', en: 'Home' }, { id: 'CM03', ar: 'قائمة الشحنات', en: 'Shipments list' },
+  { id: 'CM01', ar: 'الدخول والتحقق بخطوتين', en: 'Sign-in & MFA' }, { id: 'CM02', ar: 'الرئيسية', en: 'Home' }, { id: 'CM03', ar: 'قائمة الشحنات', en: 'Shipments list' },
   { id: 'CM04', ar: 'طلب شحنة مع عرض السعر', en: 'New shipment with quote' }, { id: 'CM05', ar: 'تتبع الشحنة والخط الزمني', en: 'Tracking & timeline' }, { id: 'CM06', ar: 'تقرير الحرارة', en: 'Temperature report' },
   { id: 'CM07', ar: 'إعادة جدولة / إلغاء / إرجاع', en: 'Reschedule / cancel / return' }, { id: 'CM08', ar: 'الإشعارات', en: 'Notifications' }, { id: 'CM09', ar: 'الفواتير والدفع', en: 'Invoices & payment' },
   { id: 'CM10', ar: 'المطالبات', en: 'Claims' }, { id: 'CM11', ar: 'العناوين المحفوظة', en: 'Saved addresses' }, { id: 'CM12', ar: 'الحساب والإعدادات', en: 'Account & settings' },
@@ -98,7 +98,7 @@ function NewShipment() {
     setErr(null);
     if (step === 0) { if (!v.senderAddressId || !v.receiverAddressId) return setErr(lang === 'ar' ? 'اختر عنوان الاستلام والتسليم' : 'Choose pickup and delivery addresses'); if (v.senderAddressId === v.receiverAddressId) return setErr(lang === 'ar' ? 'العنوانان متطابقان' : 'Addresses are identical'); if (brs.length && !v.branchId && !me.roles.includes('individual') && !me.roles.includes('corp_admin')) return setErr(lang === 'ar' ? 'اختر الفرع' : 'Choose a branch'); }
     if (step === 1) { if (!(Number(v.qty) >= 1)) return setErr(lang === 'ar' ? 'الكمية 1 على الأقل' : 'Quantity ≥ 1'); if (!(Number(v.weightKg) > 0)) return setErr(lang === 'ar' ? 'الوزن مطلوب' : 'Weight required'); }
-    if (step === 2) { if (!v.start || !v.end || v.end <= v.start) return setErr(lang === 'ar' ? 'نافذة الاستلام غير صحيحة' : 'Invalid pickup window'); setBusy(true); try { setQuote(await run('shipment.quote', base(), { silent: true })); } catch (e: any) { setErr(e.message?.[lang]); setBusy(false); return; } setBusy(false); }
+    if (step === 2) { if (!v.start || !v.end || v.end <= v.start) return setErr(lang === 'ar' ? 'فترة الاستلام غير صحيحة' : 'Invalid pickup window'); setBusy(true); try { setQuote(await run('shipment.quote', base(), { silent: true })); } catch (e: any) { setErr(e.message?.[lang]); setBusy(false); return; } setBusy(false); }
     setStep(step + 1);
   };
   const submit = async () => { setBusy(true); try { const s: any = await run('shipment.create', { ...base(), branchId: v.branchId || null, receiverOrgId: (() => { const ra = L.addr(v.receiverAddressId); return ra?.organizationId && ra.organizationId !== orgId ? ra.organizationId : null; })(), pickupWindowStart: v.start, pickupWindowEnd: v.end, items: [{ descriptionCode: v.code, quantity: Number(v.qty), weightKg: Number(v.weightKg) }], submit: true }, { success: lang === 'ar' ? 'تم إنشاء الطلب' : 'Request created' }); celebrate(); go('/s/' + s.id); } catch (e: any) { setErr(e.message?.[lang]); } finally { setBusy(false); } };
@@ -120,7 +120,7 @@ function NewShipment() {
         <div className="row"><label className="field" style={{ flex: 1 }}><span>{lang === 'ar' ? 'العدد' : 'Qty'}</span><input type="number" min={1} value={v.qty} onChange={(e) => set('qty', e.target.value)} /></label><label className="field" style={{ flex: 1 }}><span>{lang === 'ar' ? 'الوزن كغ' : 'Weight kg'}</span><input type="number" min={0.1} step={0.1} value={v.weightKg} onChange={(e) => set('weightKg', e.target.value)} /></label></div>
       </>}
       {step === 2 && <>
-        <label className="field"><span>{lang === 'ar' ? 'بداية نافذة الاستلام' : 'Pickup window start'}</span><input type="datetime-local" value={v.start} onChange={(e) => set('start', e.target.value)} /></label>
+        <label className="field"><span>{lang === 'ar' ? 'بداية فترة الاستلام' : 'Pickup window start'}</span><input type="datetime-local" value={v.start} onChange={(e) => set('start', e.target.value)} /></label>
         <label className="field"><span>{lang === 'ar' ? 'نهاية النافذة' : 'Window end'}</span><input type="datetime-local" value={v.end} onChange={(e) => set('end', e.target.value)} /></label>
       </>}
       {step === 3 && quote && <div className="mcard">
@@ -217,7 +217,7 @@ function Account() {
       <div className="mcard"><b>{x(me.user.name)}</b><span className="mono">{me.user.email}</span><span className="muted">{me.roles.map((r: string) => t('roles.' + r)).join('، ')} · {me.organizations?.map((o: any) => x(o.legalName)).join('، ')}</span></div>
       <div className="mcard"><b>{lang === 'ar' ? 'اللغة' : 'Language'}</b><div className="seg"><button className={lang === 'ar' ? 'on' : ''} onClick={() => setLang('ar')}>العربية</button><button className={lang === 'en' ? 'on' : ''} onClick={() => setLang('en')}>English</button></div></div>
       <div className="mcard"><b>{lang === 'ar' ? 'الإشعارات' : 'Notifications'}</b>{['push', 'sms', 'email'].map((ch) => { const pr = (p.data?.items ?? []).find((y: any) => y.channel === ch); return <label key={ch} className="check"><input type="checkbox" checked={pr?.enabled ?? true} onChange={(e) => run('notification.setPref', { channel: ch, enabled: e.target.checked }, { silent: true })} /> {ch === 'push' ? (lang === 'ar' ? 'إشعارات التطبيق' : 'Push') : ch.toUpperCase()}</label>; })}</div>
-      <div className="mcard"><b>{lang === 'ar' ? 'التحقق الثنائي' : 'Two-factor'}</b><label className="check"><input type="checkbox" checked={!!me.user.mfaEnabled} onChange={(e) => run('me.setMfa', { enabled: e.target.checked })} /> MFA</label></div>
+      <div className="mcard"><b>{lang === 'ar' ? 'التحقق بخطوتين' : 'Two-factor'}</b><label className="check"><input type="checkbox" checked={!!me.user.mfaEnabled} onChange={(e) => run('me.setMfa', { enabled: e.target.checked })} /> MFA</label></div>
       <Btn kind="danger" className="bigbtn" onClick={signOut}>{t('common.signOut')}</Btn>
     </div></>;
 }

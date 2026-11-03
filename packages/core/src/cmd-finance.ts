@@ -305,7 +305,7 @@ defineCommand<{ fromPlanId: string; adjustments: Adj[]; effectiveFrom: string },
   },
 });
 defineCommand<{ id: string }, T.RatePlan>({
-  name: 'ratePlan.submit', guard: ['finance'], desc: L('رفع التعرفة للاعتماد', 'Submit tariff for approval'),
+  name: 'ratePlan.submit', guard: ['finance'], desc: L('رفع جدول الأسعار للاعتماد', 'Submit tariff for approval'),
   run(ctx, { id }) {
     const p = must(ctx, ctx.db.ratePlans.find((x) => x.id === id), 'rate plan'); if (p.status !== 'draft') ctx.fail('INVALID_STATE', 'المسودات فقط', 'Drafts only', 422);
     p.status = 'pending_approval';

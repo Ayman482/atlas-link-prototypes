@@ -105,7 +105,7 @@ defineCommand<Record<string, never>, { newBlocks: number; escalated: number; exp
       // الشحنات النشطة لا تُترك: تُصعَّد للعمليات
       const affected = ctx.db.shipments.filter((s) => ACTIVE.includes(s.status) && ctx.db.shipmentLegs.some((x) => x.shipmentId === s.id && ctx.db.legs.some((g) => g.id === x.legId && g.status !== 'arrived' && (g.partnerId === l.holderId || g.courierId === l.holderId || g.vehicleId === l.holderId))));
       for (const s of affected) {
-        if (!ctx.db.delayAlerts.some((d) => d.shipmentId === s.id && !d.resolvedAt && d.ruleVersion === 'CMP-ESC')) { ctx.db.delayAlerts.push({ id: ctx.id('dla'), shipmentId: s.id, ruleVersion: 'CMP-ESC', risk: 'high', reason: L(`طرف غير مؤهل في رجل نشطة (${l.licenseNo}) — تصعيد آمن`, `Unqualified party on active leg (${l.licenseNo}) — safe escalation`), raisedAt: ctx.nowIso, resolvedAt: null, escalated: true }); escalated++; }
+        if (!ctx.db.delayAlerts.some((d) => d.shipmentId === s.id && !d.resolvedAt && d.ruleVersion === 'CMP-ESC')) { ctx.db.delayAlerts.push({ id: ctx.id('dla'), shipmentId: s.id, ruleVersion: 'CMP-ESC', risk: 'high', reason: L(`طرف غير مؤهل في مرحلة نقل نشطة (${l.licenseNo}) — تصعيد آمن`, `Unqualified party on active leg (${l.licenseNo}) — safe escalation`), raisedAt: ctx.nowIso, resolvedAt: null, escalated: true }); escalated++; }
       }
       ctx.notify({ audience: 'staff', critical: true, title: L(`حظر تشغيلي: ${l.licenseNo}`, `Operational block: ${l.licenseNo}`), body: L(`${affected.length} شحنات نشطة صُعّدت`, `${affected.length} active shipments escalated`), link: '/compliance/blocks' });
     }
@@ -128,7 +128,7 @@ defineCommand<{ id: string; applicability: T.Requirement['applicability'] }, T.R
   run(ctx, { id, applicability }) { const r = must(ctx, ctx.db.requirements.find((x) => x.id === id), 'requirement'); r.applicability = applicability; r.reviewedAt = ctx.nowIso; ctx.audit('requirement.applicability', 'requirement', r.id, applicability); return r; },
 });
 
-// ---------------- الاحتفاظ والحجز القانوني (RETN / UAT-015) ----------------
+// ---------------- الاحتفاظ والتحفظ القانوني (RETN / UAT-015) ----------------
 defineCommand<{ subjectType: string; subjectId: string; reason: string }, T.LegalHold>({
   name: 'legalHold.apply', guard: ['compliance'], desc: L('فرض حجز قانوني', 'Apply legal hold'),
   run(ctx, i) {
@@ -139,7 +139,7 @@ defineCommand<{ subjectType: string; subjectId: string; reason: string }, T.Lega
   },
 });
 defineCommand<{ id: string; reason: string }, T.LegalHold>({
-  name: 'legalHold.release', guard: ['compliance'], desc: L('رفع الحجز القانوني', 'Release legal hold'),
+  name: 'legalHold.release', guard: ['compliance'], desc: L('رفع التحفظ القانوني', 'Release legal hold'),
   run(ctx, { id, reason }) { const h = must(ctx, ctx.db.legalHolds.find((x) => x.id === id), 'hold'); if (h.releasedAt) ctx.fail('ALREADY_RELEASED', 'مرفوع مسبقاً', 'Already released', 409); h.releasedAt = ctx.nowIso; ctx.audit('legal_hold.release', h.subjectType, h.subjectId, reason); return h; },
 });
 /** مهمة الأرشفة: تتخطى أي عنصر تحت حجز قانوني (DB-AT-008) — لا يُحذف شيء فعلياً في المحاكاة */
@@ -219,8 +219,8 @@ defineCommand<{ userId: string; status: 'active' | 'disabled' }, T.User>({
   run(ctx, { userId, status }) { const u = must(ctx, ctx.db.users.find((x) => x.id === userId), 'user'); if (u.id === ctx.actor.user.id) ctx.fail('FORBIDDEN', 'لا يمكنك تعطيل نفسك', 'Cannot disable yourself', 403); u.status = status; if (status === 'disabled') ctx.db.sessions.filter((s) => s.userId === u.id).forEach((s) => (s.revokedAt = s.revokedAt ?? ctx.nowIso)); ctx.audit('user.status', 'user', u.id, status); return u; },
 });
 defineCommand<{ enabled: boolean }, T.User>({
-  name: 'me.setMfa', guard: 'any', desc: L('تفعيل/إيقاف التحقق الثنائي', 'Toggle MFA'),
-  run(ctx, { enabled }) { if (!enabled && (isStaff(ctx.actor) || ctx.actor.roles.some((r) => ['corp_admin', 'corp_finance', 'receiving_lab'].includes(r)))) ctx.fail('MFA_REQUIRED', 'التحقق الثنائي إلزامي لدورك (SEC-001)', 'MFA is mandatory for your role (SEC-001)', 422); ctx.actor.user.mfaEnabled = enabled; ctx.audit('user.mfa', 'user', ctx.actor.user.id, String(enabled)); return ctx.actor.user; },
+  name: 'me.setMfa', guard: 'any', desc: L('تفعيل/إيقاف التحقق بخطوتين', 'Toggle MFA'),
+  run(ctx, { enabled }) { if (!enabled && (isStaff(ctx.actor) || ctx.actor.roles.some((r) => ['corp_admin', 'corp_finance', 'receiving_lab'].includes(r)))) ctx.fail('MFA_REQUIRED', 'التحقق بخطوتين إلزامي لدورك (SEC-001)', 'MFA is mandatory for your role (SEC-001)', 422); ctx.actor.user.mfaEnabled = enabled; ctx.audit('user.mfa', 'user', ctx.actor.user.id, String(enabled)); return ctx.actor.user; },
 });
 defineCommand<{ lang: T.Lang }, T.User>({ name: 'me.setLang', guard: 'any', desc: L('لغة الواجهة', 'UI language'), run(ctx, { lang }) { ctx.actor.user.lang = lang === 'en' ? 'en' : 'ar'; return ctx.actor.user; } });
 defineCommand<{ sessionId: string }, T.Session>({
@@ -342,7 +342,7 @@ defineCommand<Record<string, never>, { raised: number }>({
       let reason: T.L | null = null; let risk: T.DelayAlert['risk'] = 'medium';
       if (late < 0) { reason = L(`تجاوز موعد التسليم بـ ${Math.round(-late / MIN)} دقيقة`, `Past delivery deadline by ${Math.round(-late / MIN)} min`); risk = 'high'; }
       else if (late < 45 * MIN && s.status !== 'at_handover') reason = L('أقل من 45 دقيقة على الموعد والشحنة لم تصل نقطة التسليم', 'Under 45 min to deadline and not at handover');
-      else if (s.status === 'pickup_scheduled' && Date.parse(s.pickupWindowEnd) < ctx.now) { reason = L('انتهت نافذة الاستلام دون استلام', 'Pickup window ended without collection'); risk = 'high'; }
+      else if (s.status === 'pickup_scheduled' && Date.parse(s.pickupWindowEnd) < ctx.now) { reason = L('انتهت فترة الاستلام دون استلام', 'Pickup window ended without collection'); risk = 'high'; }
       else if (silentMin > 45 && s.status === 'in_transit' && !ctx.db.shipmentLegs.some((x) => x.shipmentId === s.id && ctx.db.legs.some((l) => l.id === x.legId && l.mode === 'air' && l.status === 'departed'))) reason = L(`لا قراءات منذ ${Math.round(silentMin)} دقيقة`, `No readings for ${Math.round(silentMin)} min`);
       if (reason) { ctx.db.delayAlerts.push({ id: ctx.id('dla'), shipmentId: s.id, ruleVersion: 'PDA-R1.2', risk, reason, raisedAt: ctx.nowIso, resolvedAt: null, escalated: false }); ctx.emit('sla.delay_risk_detected', 'shipment', s.id, s.organizationId, { risk }); raised++; }
     }

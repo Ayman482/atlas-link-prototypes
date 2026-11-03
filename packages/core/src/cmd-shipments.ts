@@ -56,7 +56,7 @@ defineCommand<CreateShipmentInput, T.Shipment>({
     if (from.organizationId !== org.id || !from.authorized) ctx.fail('VALIDATION', 'عنوان الاستلام غير معتمد لهذا العميل', 'Pickup address is not authorized for this customer', 422, 'senderAddressId');
     if (i.senderAddressId === i.receiverAddressId) ctx.fail('VALIDATION', 'عنوان الاستلام والتسليم متطابقان', 'Pickup and delivery addresses are identical', 422, 'receiverAddressId');
     const ps = Date.parse(i.pickupWindowStart), pe = Date.parse(i.pickupWindowEnd);
-    if (!(ps > 0 && pe > ps)) ctx.fail('VALIDATION', 'نافذة الاستلام غير صحيحة (النهاية قبل البداية)', 'Invalid pickup window (end before start)', 422, 'pickupWindowEnd');
+    if (!(ps > 0 && pe > ps)) ctx.fail('VALIDATION', 'فترة الاستلام غير صحيحة (النهاية قبل البداية)', 'Invalid pickup window (end before start)', 422, 'pickupWindowEnd');
     if (ps < ctx.now - 15 * MIN) ctx.fail('VALIDATION', 'لا يمكن جدولة الاستلام في الماضي', 'Pickup cannot be in the past', 422, 'pickupWindowStart');
     if (!i.items?.length) ctx.fail('VALIDATION', 'أضف عنصراً واحداً على الأقل', 'Add at least one item', 422, 'items');
     const weight = i.items.reduce((a, x) => a + (Number(x.weightKg) || 0), 0);
@@ -355,7 +355,7 @@ defineCommand<{ shipment: string; reasonCode: string; notes?: string; occurredAt
     ctx.db.deliveryAttempts.push({ id: ctx.id('att'), shipmentId: sh.id, attemptedAt: i.occurredAt ?? ctx.nowIso, outcome: 'failed', reasonCode: i.reasonCode, notes: i.notes ?? '', courierId: c?.id ?? null });
     transition(ctx, sh, 'failed', i.notes || i.reasonCode, c ? 'courier_app' : 'admin');
     ctx.emit('shipment.delivery_attempt_failed', 'shipment', sh.id, sh.organizationId, { reasonCode: i.reasonCode });
-    ctx.notify({ audience: 'staff', critical: true, title: L(`تسليم فاشل ${sh.trackingNo}`, `Delivery failed ${sh.trackingNo}`), body: L('مطلوب قرار مخوّل: إعادة محاولة / وجهة بديلة / حجز / إرجاع', 'Authorized decision needed: retry / alternate / hold / return'), link: `/returns?shipment=${sh.id}` });
+    ctx.notify({ audience: 'staff', critical: true, title: L(`تعذّر تسليم ${sh.trackingNo}`, `Delivery failed ${sh.trackingNo}`), body: L('مطلوب قرار مخوّل: إعادة محاولة / وجهة بديلة / حجز / إرجاع', 'Authorized decision needed: retry / alternate / hold / return'), link: `/returns?shipment=${sh.id}` });
     ctx.notify({ audience: 'customer', organizationId: sh.organizationId, title: L(`تعذّر تسليم ${sh.trackingNo}`, `Delivery failed ${sh.trackingNo}`), body: L('سنتواصل معكم لتحديد الإجراء.', 'We will contact you about next steps.'), link: `/shipments/${sh.id}` });
     return sh;
   },
@@ -565,7 +565,7 @@ defineCommand<{ id: string; resolution: 'accepted' | 'rejected'; note: string },
 
 // ---------------- النقل متعدد الوسائط (RTE-004 / MMT) ----------------
 defineCommand<{ legId: string; partnerId: string; flightNo?: string }, T.TransportLeg>({
-  name: 'leg.assignPartner', guard: ['ops_controller'], desc: L('إسناد شريك لرجل نقل مع فحص الأهلية', 'Assign partner to leg with eligibility'),
+  name: 'leg.assignPartner', guard: ['ops_controller'], desc: L('إسناد شريك لمرحلة نقل مع فحص الأهلية', 'Assign partner to leg with eligibility'),
   run(ctx, { legId, partnerId, flightNo }) {
     const leg = must(ctx, ctx.db.legs.find((l) => l.id === legId), 'leg'); const p = must(ctx, ctx.db.partners.find((x) => x.id === partnerId), 'partner');
     const e = partnerEligibility(ctx.db, p, ctx.now);

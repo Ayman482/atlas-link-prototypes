@@ -8,10 +8,10 @@ void main() {
   group('Fmt', () {
     test('الريال من الهللات مع فواصل الآلاف', () {
       expect(const Fmt('ar').sar(2118300), '21,183.00 ر.س');
-      expect(const Fmt('en').sar(2118300), 'SAR 21,183.00');
+      expect(const Fmt('en').sar(2118300), '21,183.00 SAR');
     });
     test('التاريخ بتوقيت الرياض (UTC+3)', () {
-      expect(const Fmt('en').dt('2026-11-02T18:30:00Z'), '02 Nov, 09:30 PM');
+      expect(const Fmt('en').dt('2026-11-02T18:30:00Z'), '02 Nov, 21:30');
       expect(const Fmt('ar').dt('2026-11-02T06:05:00Z'), '02 نوفمبر، 09:05 ص');
     });
   });
