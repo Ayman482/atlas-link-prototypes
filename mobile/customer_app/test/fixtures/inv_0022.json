@@ -1,0 +1,567 @@
+{
+ "invoice": {
+  "id": "inv_0022",
+  "invoiceNo": "INV-2026-00022",
+  "type": "standard",
+  "typeCode": "388",
+  "subtypeCode": "0100000",
+  "status": "issued",
+  "issueDate": "2026-11-02T23:59:59.000Z",
+  "supplyFrom": "2026-10-01T00:00:00.000Z",
+  "supplyTo": "2026-10-31T23:59:59.000Z",
+  "dueDate": "2026-12-02T23:59:59.000Z",
+  "currency": "SAR",
+  "contractNo": "CT-2025-006",
+  "branch": null
+ },
+ "seller": {
+  "legalName": {
+   "ar": "شركة أطلس لينك للخدمات اللوجستية الطبية",
+   "en": "Atlas Link Medical Logistics Company"
+  },
+  "vatNumber": "310987654300003",
+  "crNumber": "1010987654",
+  "address": {
+   "building": "2451",
+   "street": {
+    "ar": "طريق الملك فهد",
+    "en": "King Fahd Road"
+   },
+   "district": {
+    "ar": "حي العليا",
+    "en": "Al Olaya District"
+   },
+   "city": {
+    "ar": "الرياض",
+    "en": "Riyadh"
+   },
+   "postalCode": "12214",
+   "additionalNo": "7788",
+   "country": {
+    "ar": "المملكة العربية السعودية",
+    "en": "Kingdom of Saudi Arabia"
+   }
+  },
+  "phone": "+966 11 000 4455",
+  "email": "billing@atlaslink.example",
+  "bank": {
+   "name": {
+    "ar": "بنك تجريبي",
+    "en": "Demo Bank"
+   },
+   "iban": "SA03 8000 0000 6080 1016 7519"
+  },
+  "fictional": true
+ },
+ "buyer": {
+  "legalName": {
+   "ar": "مركز أبحاث الجينوم الطبي",
+   "en": "Medical Genomics Research Centre"
+  },
+  "vatNumber": "328665599600003",
+  "crNumber": "1028142729",
+  "customerType": "laboratory",
+  "address": {
+   "district": {
+    "ar": "مختبر التسلسل — جدة",
+    "en": "Sequencing Lab — Jeddah"
+   },
+   "city": {
+    "ar": "جدة",
+    "en": "Jeddah"
+   },
+   "country": {
+    "ar": "المملكة العربية السعودية",
+    "en": "Kingdom of Saudi Arabia"
+   },
+   "contact": "أ. فهد الدوسري",
+   "phone": "+966584245063"
+  }
+ },
+ "lines": [
+  {
+   "no": 1,
+   "description": {
+    "ar": "نقل عينات مبرّد — جدة ← الرياض (الأسبوع 1)",
+    "en": "Chilled sample transport — Jeddah → Riyadh (week 1)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 2,
+   "unitPrice": 64000,
+   "discount": 0,
+   "taxable": 128000,
+   "vatRate": 15,
+   "vat": 19200,
+   "total": 147200
+  },
+  {
+   "no": 2,
+   "description": {
+    "ar": "نقل عينات مجمّد — جدة ← مكة المكرمة (الأسبوع 2)",
+    "en": "Frozen sample transport — Jeddah → Makkah (week 2)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 9,
+   "unitPrice": 24300,
+   "discount": 21870,
+   "taxable": 196830,
+   "vatRate": 15,
+   "vat": 29525,
+   "total": 226355
+  },
+  {
+   "no": 3,
+   "description": {
+    "ar": "نقل عينات درجة حرارة الغرفة — جدة ← المدينة المنورة (الأسبوع 3)",
+    "en": "Room temperature sample transport — Jeddah → Madinah (week 3)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 7,
+   "unitPrice": 33600,
+   "discount": 0,
+   "taxable": 235200,
+   "vatRate": 15,
+   "vat": 35280,
+   "total": 270480
+  },
+  {
+   "no": 4,
+   "description": {
+    "ar": "نقل عينات مبرّد — جدة ← الدمام (الأسبوع 4)",
+    "en": "Chilled sample transport — Jeddah → Dammam (week 4)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 5,
+   "unitPrice": 76000,
+   "discount": 0,
+   "taxable": 380000,
+   "vatRate": 15,
+   "vat": 57000,
+   "total": 437000
+  },
+  {
+   "no": 5,
+   "description": {
+    "ar": "نقل عينات مجمّد — جدة ← أبها (الأسبوع 1)",
+    "en": "Frozen sample transport — Jeddah → Abha (week 1)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 3,
+   "unitPrice": 68850,
+   "discount": 0,
+   "taxable": 206550,
+   "vatRate": 15,
+   "vat": 30983,
+   "total": 237533
+  },
+  {
+   "no": 6,
+   "description": {
+    "ar": "نقل عينات درجة حرارة الغرفة — جدة ← الرياض (الأسبوع 2)",
+    "en": "Room temperature sample transport — Jeddah → Riyadh (week 2)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 10,
+   "unitPrice": 51200,
+   "discount": 51200,
+   "taxable": 460800,
+   "vatRate": 15,
+   "vat": 69120,
+   "total": 529920
+  },
+  {
+   "no": 7,
+   "description": {
+    "ar": "نقل عينات مبرّد — جدة ← مكة المكرمة (الأسبوع 3)",
+    "en": "Chilled sample transport — Jeddah → Makkah (week 3)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 8,
+   "unitPrice": 18000,
+   "discount": 14400,
+   "taxable": 129600,
+   "vatRate": 15,
+   "vat": 19440,
+   "total": 149040
+  },
+  {
+   "no": 8,
+   "description": {
+    "ar": "نقل عينات مجمّد — جدة ← المدينة المنورة (الأسبوع 4)",
+    "en": "Frozen sample transport — Jeddah → Madinah (week 4)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 6,
+   "unitPrice": 56700,
+   "discount": 0,
+   "taxable": 340200,
+   "vatRate": 15,
+   "vat": 51030,
+   "total": 391230
+  },
+  {
+   "no": 9,
+   "description": {
+    "ar": "نقل عينات درجة حرارة الغرفة — جدة ← الدمام (الأسبوع 1)",
+    "en": "Room temperature sample transport — Jeddah → Dammam (week 1)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 4,
+   "unitPrice": 60800,
+   "discount": 0,
+   "taxable": 243200,
+   "vatRate": 15,
+   "vat": 36480,
+   "total": 279680
+  },
+  {
+   "no": 10,
+   "description": {
+    "ar": "نقل عينات مبرّد — جدة ← أبها (الأسبوع 2)",
+    "en": "Chilled sample transport — Jeddah → Abha (week 2)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 2,
+   "unitPrice": 51000,
+   "discount": 0,
+   "taxable": 102000,
+   "vatRate": 15,
+   "vat": 15300,
+   "total": 117300
+  },
+  {
+   "no": 11,
+   "description": {
+    "ar": "نقل عينات مجمّد — جدة ← الرياض (الأسبوع 3)",
+    "en": "Frozen sample transport — Jeddah → Riyadh (week 3)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 9,
+   "unitPrice": 86400,
+   "discount": 77760,
+   "taxable": 699840,
+   "vatRate": 15,
+   "vat": 104976,
+   "total": 804816
+  },
+  {
+   "no": 12,
+   "description": {
+    "ar": "نقل عينات درجة حرارة الغرفة — جدة ← مكة المكرمة (الأسبوع 4)",
+    "en": "Room temperature sample transport — Jeddah → Makkah (week 4)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 7,
+   "unitPrice": 14400,
+   "discount": 0,
+   "taxable": 100800,
+   "vatRate": 15,
+   "vat": 15120,
+   "total": 115920
+  },
+  {
+   "no": 13,
+   "description": {
+    "ar": "نقل عينات مبرّد — جدة ← المدينة المنورة (الأسبوع 1)",
+    "en": "Chilled sample transport — Jeddah → Madinah (week 1)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 5,
+   "unitPrice": 42000,
+   "discount": 0,
+   "taxable": 210000,
+   "vatRate": 15,
+   "vat": 31500,
+   "total": 241500
+  },
+  {
+   "no": 14,
+   "description": {
+    "ar": "نقل عينات مجمّد — جدة ← الدمام (الأسبوع 2)",
+    "en": "Frozen sample transport — Jeddah → Dammam (week 2)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 3,
+   "unitPrice": 102600,
+   "discount": 0,
+   "taxable": 307800,
+   "vatRate": 15,
+   "vat": 46170,
+   "total": 353970
+  },
+  {
+   "no": 15,
+   "description": {
+    "ar": "نقل عينات درجة حرارة الغرفة — جدة ← أبها (الأسبوع 3)",
+    "en": "Room temperature sample transport — Jeddah → Abha (week 3)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 10,
+   "unitPrice": 40800,
+   "discount": 40800,
+   "taxable": 367200,
+   "vatRate": 15,
+   "vat": 55080,
+   "total": 422280
+  },
+  {
+   "no": 16,
+   "description": {
+    "ar": "نقل عينات مبرّد — جدة ← الرياض (الأسبوع 4)",
+    "en": "Chilled sample transport — Jeddah → Riyadh (week 4)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 8,
+   "unitPrice": 64000,
+   "discount": 51200,
+   "taxable": 460800,
+   "vatRate": 15,
+   "vat": 69120,
+   "total": 529920
+  },
+  {
+   "no": 17,
+   "description": {
+    "ar": "نقل عينات مجمّد — جدة ← مكة المكرمة (الأسبوع 1)",
+    "en": "Frozen sample transport — Jeddah → Makkah (week 1)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 6,
+   "unitPrice": 24300,
+   "discount": 0,
+   "taxable": 145800,
+   "vatRate": 15,
+   "vat": 21870,
+   "total": 167670
+  },
+  {
+   "no": 18,
+   "description": {
+    "ar": "نقل عينات درجة حرارة الغرفة — جدة ← المدينة المنورة (الأسبوع 2)",
+    "en": "Room temperature sample transport — Jeddah → Madinah (week 2)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 4,
+   "unitPrice": 33600,
+   "discount": 0,
+   "taxable": 134400,
+   "vatRate": 15,
+   "vat": 20160,
+   "total": 154560
+  },
+  {
+   "no": 19,
+   "description": {
+    "ar": "نقل عينات مبرّد — جدة ← الدمام (الأسبوع 3)",
+    "en": "Chilled sample transport — Jeddah → Dammam (week 3)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 2,
+   "unitPrice": 76000,
+   "discount": 0,
+   "taxable": 152000,
+   "vatRate": 15,
+   "vat": 22800,
+   "total": 174800
+  },
+  {
+   "no": 20,
+   "description": {
+    "ar": "نقل عينات مجمّد — جدة ← أبها (الأسبوع 4)",
+    "en": "Frozen sample transport — Jeddah → Abha (week 4)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 9,
+   "unitPrice": 68850,
+   "discount": 61965,
+   "taxable": 557685,
+   "vatRate": 15,
+   "vat": 83653,
+   "total": 641338
+  },
+  {
+   "no": 21,
+   "description": {
+    "ar": "نقل عينات درجة حرارة الغرفة — جدة ← الرياض (الأسبوع 1)",
+    "en": "Room temperature sample transport — Jeddah → Riyadh (week 1)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 7,
+   "unitPrice": 51200,
+   "discount": 0,
+   "taxable": 358400,
+   "vatRate": 15,
+   "vat": 53760,
+   "total": 412160
+  },
+  {
+   "no": 22,
+   "description": {
+    "ar": "نقل عينات مبرّد — جدة ← مكة المكرمة (الأسبوع 2)",
+    "en": "Chilled sample transport — Jeddah → Makkah (week 2)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 5,
+   "unitPrice": 18000,
+   "discount": 0,
+   "taxable": 90000,
+   "vatRate": 15,
+   "vat": 13500,
+   "total": 103500
+  },
+  {
+   "no": 23,
+   "description": {
+    "ar": "نقل عينات مجمّد — جدة ← المدينة المنورة (الأسبوع 3)",
+    "en": "Frozen sample transport — Jeddah → Madinah (week 3)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 3,
+   "unitPrice": 56700,
+   "discount": 0,
+   "taxable": 170100,
+   "vatRate": 15,
+   "vat": 25515,
+   "total": 195615
+  },
+  {
+   "no": 24,
+   "description": {
+    "ar": "نقل عينات درجة حرارة الغرفة — جدة ← الدمام (الأسبوع 4)",
+    "en": "Room temperature sample transport — Jeddah → Dammam (week 4)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 10,
+   "unitPrice": 60800,
+   "discount": 60800,
+   "taxable": 547200,
+   "vatRate": 15,
+   "vat": 82080,
+   "total": 629280
+  },
+  {
+   "no": 25,
+   "description": {
+    "ar": "تأجير صندوق مخصص بجهاز تتبع — أكتوبر 2026",
+    "en": "Dedicated tracked box rental — October 2026"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 1,
+   "unitPrice": 125000,
+   "discount": 0,
+   "taxable": 125000,
+   "vatRate": 15,
+   "vat": 18750,
+   "total": 143750
+  },
+  {
+   "no": 26,
+   "description": {
+    "ar": "تقرير أدلة حرارة معتمد (إصدار إضافي)",
+    "en": "Certified temperature evidence report (additional copy)"
+   },
+   "shipmentRef": null,
+   "serviceDate": null,
+   "qty": 1,
+   "unitPrice": 15000,
+   "discount": 0,
+   "taxable": 15000,
+   "vatRate": 15,
+   "vat": 2250,
+   "total": 17250
+  }
+ ],
+ "totals": {
+  "gross": 7244400,
+  "discount": 379995,
+  "taxable": 6864405,
+  "vat": 1029662,
+  "total": 7894067,
+  "vatRate": 15,
+  "paid": 0,
+  "credited": 0,
+  "balance": 7894067
+ },
+ "payments": [],
+ "creditNotes": [],
+ "zatca": {
+  "simulated": true,
+  "status": "simulated_cleared",
+  "uuid": "c3621a80-1a9c-4a3e-af39-4ef003f3571a",
+  "icv": 22,
+  "invoiceHash": "1e3cc28386584a15",
+  "previousHash": "44fdc04f89152c7d",
+  "qrBase64": "AUnYtNix2YPYqSDYo9i32YTYsyDZhNmK2YbZgyDZhNmE2K7Yr9mF2KfYqiDYp9mE2YTZiNis2LPYqtmK2Kkg2KfZhNi32KjZitipAg8zMTA5ODc2NTQzMDAwMDMDFDIwMjYtMTEtMDJUMjM6NTk6NTlaBAg3ODk0MC42NwUIMTAyOTYuNjI=",
+  "qrTags": [
+   {
+    "tag": 1,
+    "label": {
+     "ar": "اسم البائع",
+     "en": "Seller name"
+    },
+    "value": "شركة أطلس لينك للخدمات اللوجستية الطبية"
+   },
+   {
+    "tag": 2,
+    "label": {
+     "ar": "الرقم الضريبي للبائع",
+     "en": "Seller VAT number"
+    },
+    "value": "310987654300003"
+   },
+   {
+    "tag": 3,
+    "label": {
+     "ar": "تاريخ ووقت الفاتورة",
+     "en": "Invoice timestamp"
+    },
+    "value": "2026-11-02T23:59:59Z"
+   },
+   {
+    "tag": 4,
+    "label": {
+     "ar": "الإجمالي شامل الضريبة",
+     "en": "Total with VAT"
+    },
+    "value": "78940.67"
+   },
+   {
+    "tag": 5,
+    "label": {
+     "ar": "إجمالي ضريبة القيمة المضافة",
+     "en": "VAT total"
+    },
+    "value": "10296.62"
+   }
+  ],
+  "note": {
+   "ar": "بيانات الفوترة الإلكترونية محاكاة لأغراض العرض: لم تُرسل الفاتورة إلى هيئة الزكاة والضريبة والجمارك، ولا يوجد ختم تشفيري (CSID) ولا رمز تحقق صادر من الهيئة. لا تُعد هذه الفاتورة متوافقة نظامياً قبل التكامل الفعلي والتحقق.",
+   "en": "E-invoicing data is simulated for demonstration: the invoice was not submitted to ZATCA, there is no cryptographic stamp (CSID) and no authority-issued validation. This invoice is not claimed to be compliant before real integration and verification."
+  }
+ }
+}

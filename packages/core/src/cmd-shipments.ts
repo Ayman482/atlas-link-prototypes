@@ -3,7 +3,8 @@ import type * as T from './types';
 import { defineCommand, must, type Ctx } from './engine';
 import { activePlan, price } from './pricing';
 import { branchGrants, canReadShipment, canWriteShipmentFor, courierOf, customerOrgIds, has, isStaff } from './access';
-import { ACTIVE, ELIGIBILITY_TEXT, addCustody, activePackings, boxReadiness, courierEligibility, currentCustodian, packingOf, partnerEligibility, shipment, transition } from './domain';
+import { ACTIVE, ELIGIBILITY_TEXT, addCustody, activePackings, boxReadiness, courierEligibility, currentCustodian, packingOf, partnerEligibility, resolveProfile, shipment, transition } from './domain';
+import { label, configLabel } from '../../i18n/src/terms';
 import { DAY, HOUR, MIN, haversineKm, iso, sar } from './util';
 
 const L = (ar: string, en: string) => ({ ar, en });
@@ -66,7 +67,7 @@ defineCommand<CreateShipmentInput, T.Shipment>({
     const transitH = mode === 'road_air' ? 7 : from.cityCode === to.cityCode ? 1.5 : haversineKm(from, to) / 75 + 1;
     const sh: T.Shipment = {
       id: `shp_${n}`, trackingNo: `ML-2026-${n}`, qrToken: `qr_${n}_${ctx.now.toString(36)}`, organizationId: org.id, branchId: i.branchId ?? null,
-      serviceProfileId: ctx.db.serviceProfiles.find((p) => p.thermalClass === i.thermalClass && p.status === 'active')!.id, thermalClass: i.thermalClass, serviceLevel: i.serviceLevel,
+      serviceProfileId: resolveProfile(ctx.db, { thermalClass: i.thermalClass, organizationId: i.organizationId, sampleTypes: (i.items ?? []).map((x) => x.descriptionCode) }, ctx.now).id, thermalClass: i.thermalClass, serviceLevel: i.serviceLevel,
       requestType: i.requestType ?? 'on_demand', recurringId: i.recurringId ?? null, senderAddressId: from.id, receiverAddressId: to.id,
       receiverOrgId: i.receiverOrgId ?? to.organizationId ?? null, originCity: from.cityCode, destCity: to.cityCode,
       pickupWindowStart: iso(ps), pickupWindowEnd: iso(pe), deliverBy: iso(pe + (transitH + (i.serviceLevel === 'stat' ? 0.5 : 3)) * HOUR), status: 'draft', subStatus: null,
@@ -106,7 +107,7 @@ defineCommand<{ id: string; patch: Partial<Pick<T.Shipment, 'serviceLevel' | 'th
     if (sh.status !== 'draft') ctx.fail('SHIPMENT_NOT_DRAFT', 'يمكن تعديل المسودات فقط', 'Only drafts can be edited', 422);
     if (!canWriteShipmentFor(ctx.actor, sh.organizationId, sh.branchId)) ctx.fail('FORBIDDEN', 'لا صلاحية', 'Forbidden', 403);
     Object.assign(sh, patch); sh.updatedAt = ctx.nowIso; sh.version++;
-    if (patch.thermalClass) sh.serviceProfileId = ctx.db.serviceProfiles.find((p) => p.thermalClass === patch.thermalClass && p.status === 'active')!.id;
+    if (patch.thermalClass) sh.serviceProfileId = resolveProfile(ctx.db, { thermalClass: patch.thermalClass, organizationId: sh.organizationId, sampleTypes: ctx.db.shipmentItems.filter((x) => x.shipmentId === sh.id).map((x) => x.descriptionCode) }, ctx.now).id;
     ctx.audit('shipment.update_draft', 'shipment', sh.id, `تعديل مسودة ${sh.trackingNo}`);
     return sh;
   },
@@ -181,7 +182,7 @@ defineCommand<AssignInput, { shipment: T.Shipment; routeId: string }>({
     const seqN = ctx.db.routeStops.filter((s) => s.routeId === route!.id).length;
     ctx.db.routeStops.push({ id: ctx.id('stp'), routeId: route.id, seq: seqN + 1, addressId: sh.senderAddressId, stopType: 'pickup', shipmentIds: [sh.id], plannedAt: sh.pickupWindowStart, actualAt: null, status: 'pending' });
     if (sh.originCity === sh.destCity) ctx.db.routeStops.push({ id: ctx.id('stp'), routeId: route.id, seq: seqN + 2, addressId: sh.receiverAddressId, stopType: 'delivery', shipmentIds: [sh.id], plannedAt: sh.deliverBy, actualAt: null, status: 'pending' });
-    // أرجل الرحلة
+    // مراحل الرحلة
     if (!ctx.db.shipmentLegs.some((x) => x.shipmentId === sh.id)) {
       const leg = (l: Omit<T.TransportLeg, 'id'>) => { const x = { id: ctx.id('leg'), ...l }; ctx.db.legs.push(x); ctx.db.shipmentLegs.push({ id: ctx.id('shl'), shipmentId: sh.id, legId: x.id, seq: ctx.db.shipmentLegs.filter((y) => y.shipmentId === sh.id).length + 1, loadedAt: null, unloadedAt: null }); return x; };
       const ps = Date.parse(sh.pickupWindowStart);
@@ -205,7 +206,7 @@ defineCommand<AssignInput, { shipment: T.Shipment; routeId: string }>({
 });
 
 defineCommand<{ shipmentId: string; boxId: string; reason: string }, T.ApprovalRequest>({
-  name: 'dispatch.requestException', guard: ['ops_controller'], desc: L('طلب استثناء جاهزية مضبوط (DHC)', 'Request controlled readiness exception (DHC)'),
+  name: 'dispatch.requestException', guard: ['ops_controller'], desc: L('طلب استثناء جاهزية خاضع للضوابط (DHC)', 'Request controlled readiness exception (DHC)'),
   run(ctx, { shipmentId, boxId, reason }) {
     const sh = shipment(ctx, shipmentId); const box = must(ctx, ctx.db.boxes.find((b) => b.id === boxId), 'box');
     const rd = boxReadiness(ctx.db, box, ctx.now, sh.thermalClass);
@@ -273,7 +274,7 @@ defineCommand<CustodyInput, T.Shipment>({
     const leg1 = ctx.db.legs.find((l) => l.id === ctx.db.shipmentLegs.find((x) => x.shipmentId === sh.id && x.seq === 1)?.legId);
     if (leg1 && !leg1.actualDeparture) { leg1.actualDeparture = ctx.nowIso; leg1.status = 'departed'; }
     if (courier) courier.status = 'on_route';
-    ctx.notify({ audience: 'customer', organizationId: sh.organizationId, title: L(`تم استلام ${sh.trackingNo}`, `${sh.trackingNo} collected`), body: L('الشحنة الآن بعهدة المندوب.', 'Shipment is now in courier custody.'), link: `/shipments/${sh.id}` });
+    ctx.notify({ audience: 'customer', organizationId: sh.organizationId, title: L(`تم استلام ${sh.trackingNo}`, `${sh.trackingNo} collected`), body: L('الشحنة الآن في حيازة المندوب.', 'Shipment is now in courier custody.'), link: `/shipments/${sh.id}` });
     return sh;
   },
 });
@@ -290,7 +291,7 @@ defineCommand<{ shipment: string }, T.Shipment>({
 
 export interface HandoverInput extends CustodyInput { toType: 'partner' | 'air_carrier' | 'warehouse' | 'courier'; toId: string; legId?: string }
 defineCommand<HandoverInput, T.Shipment>({
-  name: 'custody.handover', guard: ['courier', 'ops_controller', 'warehouse'], desc: L('نقل حيازة ذرّي مع دليل (BR-005)', 'Atomic custody transfer with evidence (BR-005)'),
+  name: 'custody.handover', guard: ['courier', 'ops_controller', 'warehouse'], desc: L('نقل حيازة كعملية واحدة غير قابلة للتجزئة مع الدليل (BR-005)', 'Atomic custody transfer with evidence (BR-005)'),
   run(ctx, i) {
     const sh = shipment(ctx, i.shipment); courierGuard(ctx, sh);
     if (!['collected', 'in_transit', 'at_handover', 'return_pending'].includes(sh.status)) ctx.fail('HANDOVER_NOT_ALLOWED', 'الحالة الحالية لا تسمح بنقل الحيازة', 'Current status does not allow handover', 422);
@@ -397,7 +398,7 @@ defineCommand<{ returnId?: string; shipment?: string; decision: NonNullable<T.Re
     if (i.responsibleParty === 'customer') ctx.db.invoiceLines.push({ id: ctx.id('inl'), invoiceId: 'pending', shipmentId: sh.id, description: L(`رسم ${i.decision === 'retry' ? 'إعادة محاولة' : i.decision === 'return_to_sender' ? 'إرجاع' : i.decision === 'alternate_destination' ? 'تحويل وجهة' : 'حجز مؤقت'} ${sh.trackingNo}`, `${i.decision} fee ${sh.trackingNo}`), qty: 1, unitPrice: r.costHalala, vat: Math.round(r.costHalala * 0.15), lineTotal: r.costHalala + Math.round(r.costHalala * 0.15) });
     else ctx.db.costRecords.push({ id: ctx.id('cst'), costType: 'courier', sourceRef: `return:${r.id}:${i.responsibleParty}`, estimated: r.costHalala, actual: null, incurredAt: ctx.nowIso, allocated: false });
     ctx.audit('returns.authorize', 'shipment', sh.id, `${sh.trackingNo}: ${i.decision} — التكلفة على ${i.responsibleParty}`);
-    ctx.notify({ audience: 'customer', organizationId: sh.organizationId, title: L(`قرار بشأن ${sh.trackingNo}`, `Decision on ${sh.trackingNo}`), body: L(`القرار: ${i.decision}`, `Decision: ${i.decision}`), link: `/shipments/${sh.id}` });
+    ctx.notify({ audience: 'customer', organizationId: sh.organizationId, title: L(`قرار بشأن ${sh.trackingNo}`, `Decision on ${sh.trackingNo}`), body: L(`القرار: ${label('ar', i.decision)}`, `Decision: ${label('en', i.decision)}`), link: `/shipments/${sh.id}` });
     return r;
   },
 });
@@ -430,7 +431,7 @@ defineCommand<{ shipment: string; basis: ('custody_gap' | 'gps_silence' | 'partn
     sh.lostState = 'suspected'; sh.subStatus = 'suspected_lost';
     const inc: T.Incident = { id: ctx.id('inc'), code: `QI-2026-${ctx.seq('qi', 4)}`, shipmentId: sh.id, incidentType: 'suspected_lost', severity: 'critical', status: 'investigating', title: L(`اشتباه فقدان ${sh.trackingNo}`, `Suspected loss ${sh.trackingNo}`), findings: note, openedAt: ctx.nowIso, closedAt: null, ownerId: ctx.actor.user.id };
     ctx.db.incidents.push(inc);
-    ctx.db.approvalRequests.push({ id: ctx.id('apr'), kind: 'lost_declaration', subjectId: sh.id, title: L(`إعلان فقدان ${sh.trackingNo} — يتطلب العمليات والجودة`, `Declare ${sh.trackingNo} lost — needs operations and quality`), requestedBy: ctx.actor.user.id, requiredRole: 'quality', status: 'pending', decidedBy: null, decidedAt: null, note, createdAt: ctx.nowIso });
+    ctx.db.approvalRequests.push({ id: ctx.id('apr'), kind: 'lost_declaration', subjectId: sh.id, title: L(`إعلان فقدان ${sh.trackingNo} — يتطلب اعتماد العمليات والجودة`, `Declare ${sh.trackingNo} lost — needs operations and quality`), requestedBy: ctx.actor.user.id, requiredRole: 'quality', status: 'pending', decidedBy: null, decidedAt: null, note, createdAt: ctx.nowIso });
     ctx.emit('shipment.suspected_lost', 'shipment', sh.id, sh.organizationId);
     return sh;
   },
@@ -476,7 +477,7 @@ defineCommand<{ shipment: string; note: string; signedBy: string }, T.Shipment>(
 
 // ---------------- القرار السريري (TEMP-006 / QMS-002) ----------------
 defineCommand<{ shipment: string; decision: T.ClinicalDisposition['decision']; authorizedContact: string; note?: string; evidenceRef?: string }, T.ClinicalDisposition>({
-  name: 'disposition.record', guard: ['receiving_lab', 'quality', 'customer_service'], desc: L('تسجيل قرار المؤسسة المستلمة', 'Record receiving institution disposition'),
+  name: 'disposition.record', guard: ['receiving_lab', 'quality', 'customer_service'], desc: L('تسجيل قرار الجهة المستلمة', 'Record receiving institution disposition'),
   run(ctx, i) {
     const sh = readable(ctx, i.shipment);
     if (sh.status !== 'delivered') ctx.fail('NOT_DELIVERED', 'يُسجّل القرار بعد التسليم فقط', 'Disposition is recorded after delivery only', 422);
@@ -619,7 +620,7 @@ defineCommand<{ routeId: string; order: string[] }, T.Route>({
   },
 });
 defineCommand<{ routeId: string }, T.Route>({
-  name: 'route.dispatch', guard: ['ops_controller'], desc: L('إرسال المسار بعد فحص الامتثال', 'Dispatch route after compliance check'),
+  name: 'route.dispatch', guard: ['ops_controller'], desc: L('إطلاق المسار للمندوب بعد فحص الامتثال', 'Dispatch route after compliance check'),
   run(ctx, { routeId }) {
     const r = must(ctx, ctx.db.routes.find((x) => x.id === routeId), 'route');
     if (r.status !== 'planned') ctx.fail('ROUTE_NOT_PLANNED', 'المسار ليس في حالة التخطيط', 'Route is not planned', 422);

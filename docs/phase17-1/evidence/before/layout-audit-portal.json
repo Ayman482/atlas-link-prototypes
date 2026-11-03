@@ -1,0 +1,262 @@
+[
+ {
+  "app": "portal",
+  "route": "/",
+  "lang": "ar",
+  "w": 390,
+  "issues": [
+   "clipped:1",
+   "cell-bleed:1"
+  ],
+  "shot": "portal___ar_390_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "td. «مجموعة مستشفيات الرعاية الصح» 436>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": [
+   "span.pill «مجموعة مستشفيات الرعاية الصح»"
+  ]
+ },
+ {
+  "app": "portal",
+  "route": "/invoices",
+  "lang": "ar",
+  "w": 390,
+  "issues": [
+   "clipped:1",
+   "cell-bleed:1"
+  ],
+  "shot": "portal_invoices__ar_390_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "td. «مجموعة مستشفيات الرعاية الصح» 436>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": [
+   "span.pill «مجموعة مستشفيات الرعاية الصح»"
+  ]
+ },
+ {
+  "app": "portal",
+  "route": "/shipments",
+  "lang": "ar",
+  "w": 390,
+  "issues": [
+   "clipped:1"
+  ],
+  "shot": "portal_shipments__ar_390_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "td. «مجموعة مستشفيات الرعاية الصح» 457>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "portal",
+  "route": "/",
+  "lang": "ar",
+  "w": 1280,
+  "issues": [
+   "clipped:1",
+   "cell-bleed:1"
+  ],
+  "shot": "portal___ar_1280_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "td. «مجموعة مستشفيات الرعاية الصح» 436>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": [
+   "span.pill «مجموعة مستشفيات الرعاية الصح»"
+  ]
+ },
+ {
+  "app": "portal",
+  "route": "/invoices",
+  "lang": "ar",
+  "w": 1280,
+  "issues": [
+   "clipped:1",
+   "kpi:2",
+   "cell-bleed:1"
+  ],
+  "shot": "portal_invoices__ar_1280_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "td. «مجموعة مستشفيات الرعاية الصح» 436>320"
+  ],
+  "kpiOverflow": [
+   "12,345,678.90 ر.س (230px في 227px)",
+   "12,345,678.90 ر.س (230px في 227px)"
+  ],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": [
+   "span.pill «مجموعة مستشفيات الرعاية الصح»"
+  ]
+ },
+ {
+  "app": "portal",
+  "route": "/shipments",
+  "lang": "ar",
+  "w": 1280,
+  "issues": [
+   "clipped:1"
+  ],
+  "shot": "portal_shipments__ar_1280_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "td. «مجموعة مستشفيات الرعاية الصح» 457>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "portal",
+  "route": "/",
+  "lang": "en",
+  "w": 390,
+  "issues": [
+   "clipped:1",
+   "cell-bleed:1"
+  ],
+  "shot": "portal___en_390_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "td. «Advanced Specialized Healthc» 471>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": [
+   "span.pill «Advanced Specialized Healthc»"
+  ]
+ },
+ {
+  "app": "portal",
+  "route": "/invoices",
+  "lang": "en",
+  "w": 390,
+  "issues": [
+   "clipped:1",
+   "cell-bleed:1"
+  ],
+  "shot": "portal_invoices__en_390_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "td. «Advanced Specialized Healthc» 471>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": [
+   "span.pill «Advanced Specialized Healthc»"
+  ]
+ },
+ {
+  "app": "portal",
+  "route": "/shipments",
+  "lang": "en",
+  "w": 390,
+  "issues": [
+   "clipped:1"
+  ],
+  "shot": "portal_shipments__en_390_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "td. «Advanced Specialized Healthc» 494>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ },
+ {
+  "app": "portal",
+  "route": "/",
+  "lang": "en",
+  "w": 1280,
+  "issues": [
+   "clipped:1",
+   "cell-bleed:1"
+  ],
+  "shot": "portal___en_1280_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "td. «Advanced Specialized Healthc» 471>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": [
+   "span.pill «Advanced Specialized Healthc»"
+  ]
+ },
+ {
+  "app": "portal",
+  "route": "/invoices",
+  "lang": "en",
+  "w": 1280,
+  "issues": [
+   "clipped:1",
+   "kpi:2",
+   "cell-bleed:1"
+  ],
+  "shot": "portal_invoices__en_1280_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "td. «Advanced Specialized Healthc» 471>320"
+  ],
+  "kpiOverflow": [
+   "12,345,678.90 SAR (230px في 227px)",
+   "12,345,678.90 SAR (230px في 227px)"
+  ],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": [
+   "span.pill «Advanced Specialized Healthc»"
+  ]
+ },
+ {
+  "app": "portal",
+  "route": "/shipments",
+  "lang": "en",
+  "w": 1280,
+  "issues": [
+   "clipped:1"
+  ],
+  "shot": "portal_shipments__en_1280_stress.png",
+  "tablesNoScroll": [],
+  "clipped": [
+   "td. «Advanced Specialized Healthc» 494>320"
+  ],
+  "kpiOverflow": [],
+  "actionsOutside": [],
+  "selectArrow": [],
+  "pageOverflowX": 0,
+  "cellBleed": []
+ }
+]

@@ -64,7 +64,7 @@ class _TempChartState extends State<TempChart> with SingleTickerProviderStateMix
       const SizedBox(height: 8),
       Wrap(spacing: 14, runSpacing: 4, children: [
         _legend(c.successSoft, s.t('النطاق ${f.temp(minC)} إلى ${f.temp(maxC)} (غير معتمد بعد)', 'Range ${f.temp(minC)} to ${f.temp(maxC)} (not yet approved)'), c),
-        _legend(c.line, s.t('فجوة بيانات — لا تعني الالتزام', 'Data gap — does not imply compliance'), c),
+        _legend(c.line, s.t('فجوة بيانات — لا تعني الالتزام بالنطاق الحراري', 'Data gap — does not imply compliance'), c),
         _legend(c.critical, s.t('خارج النطاق', 'Out of range'), c),
       ]),
     ]);

@@ -1,0 +1,45 @@
+admin/shipments [ar 1440] «تصدير CSV» background-scrolls
+admin/shipments/shp_0004 [ar 1440] «تسجيل تعذّر التسليم» background-scrolls
+admin/shipments/shp_0004 [ar 1440] «تسليم نيابة عن المندوب» background-scrolls
+admin/shipments/shp_0004 [ar 1440] «اشتباه فقدان» background-scrolls
+admin/couriers [ar 1440] «إضافة» overlap:18 background-scrolls
+admin/boxes/box_002 [ar 1440] «استبدال الجهاز» background-scrolls
+admin/boxes/box_002 [ar 1440] «إيقاف نهائي» background-scrolls
+admin/devices/dev_004 [ar 1440] «حقن قراءة تجريبية» background-scrolls
+admin/devices/dev_004 [ar 1440] «تغيير الحالة» background-scrolls
+admin/devices/dev_004 [ar 1440] «طلب أمر» background-scrolls
+admin/incidents/inc_0002 [ar 1440] «نقل إلى: بانتظار القرار» background-scrolls
+admin/incidents/inc_0002 [ar 1440] «إضافة CAPA» background-scrolls
+admin/claims [ar 1440] «تسجيل مطالبة نيابة عن عميل» overlap:9
+admin/claims [ar 1440] «بدء التحقيق» overlap:27
+admin/claims [ar 1440] «تقييم» overlap:27
+admin/claims [ar 1440] «إغلاق» overlap:18
+admin/returns [ar 1440] «قرار» overlap:9 background-scrolls
+admin/returns [ar 1440] «إتمام الإرجاع» overlap:9 background-scrolls
+admin/warehouse/cleaning [ar 1440] «تسجيل التنظيف» overlap:35 background-scrolls
+admin/warehouse/cleaning [ar 1440] «تسجيل الفحص» overlap:26 background-scrolls
+admin/warehouse/consumables [ar 1440] «حركة» overlap:54 background-scrolls
+admin/customers/org_nkh [ar 1440] «فرع جديد» overlap:9 background-scrolls
+admin/customers/org_nkh [ar 1440] «دعوة مستخدم» background-scrolls
+admin/rate-plans [ar 1440] «مسودة إصدار جديد» overlap:9
+admin/quotes [ar 1440] «عرض سعر جديد» overlap:9 background-scrolls
+admin/invoices/inv_0001 [ar 1440] «إشعار دائن» background-scrolls
+admin/payments [ar 1440] «تسجيل دفعة واردة» overlap:9 background-scrolls
+admin/payments [ar 1440] «تصدير CSV» background-scrolls
+admin/payments [ar 1440] «مطابقة بنكية» overlap:27 background-scrolls
+admin/journals [ar 1440] «قيد يدوي» overlap:9 background-scrolls
+admin/costs [ar 1440] «تسجيل تكلفة» overlap:18 background-scrolls
+admin/costs [ar 1440] «تشغيل التوزيع (23)» overlap:18 background-scrolls
+admin/costs [ar 1440] «طلب تجاوز» overlap:36 background-scrolls
+admin/compliance/blocks [ar 1440] «رفع الحظر» overlap:36
+admin/compliance/legal-holds [ar 1440] «فرض حجز» overlap:9
+admin/compliance/legal-holds [ar 1440] «رفع» overlap:18
+admin/reports/finance [ar 1440] «تصدير CSV» background-scrolls
+admin/approvals [ar 1440] «اعتماد» overlap:18 background-scrolls
+admin/approvals [ar 1440] «رفض» overlap:27 background-scrolls
+admin/system/integrations [ar 1440] «إضافة» background-scrolls
+admin/system/integrations [ar 1440] «إلغاء» OK
+admin/system/users [ar 1440] «دعوة موظف» overlap:9 background-scrolls
+admin/system/users [ar 1440] «تصدير CSV» background-scrolls
+admin/system/users [ar 1440] «تعطيل» overlap:36 background-scrolls
+dialogs 44, with issues 43

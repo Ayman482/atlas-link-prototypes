@@ -39,7 +39,7 @@ export const TERM_OVERRIDES: Record<string, Entry> = {
   'auth.mfaTitle': E('التحقق بخطوتين', 'Two-step verification'),
   'common.empty': E('لا توجد بيانات بعد', 'Nothing to show yet'),
   'level.stat': E('طارئ (STAT)', 'STAT'),
-  'thermal.ambient': E('حرارة الغرفة', 'Ambient'),
+  'thermal.ambient': E('درجة حرارة الغرفة', 'Ambient'),
 };
 
 /** مفاتيح جديدة خاصة بالخيار C (لا توجد في القاموس الأساسي) */
@@ -64,12 +64,12 @@ export const LABELS: Record<string, Entry> = {
   // حالات الشحنة والصندوق والجهاز (تصحيحات)
   pickup_scheduled: E('الاستلام مجدول', 'Pickup scheduled'), exception: E('حالة استثنائية', 'Exception'), in_air_transit: E('في رحلة جوية', 'In air transit'),
   retired: E('خارج الخدمة', 'Retired'), returning: E('عائد إلى المستودع', 'Returning'), cleaning: E('قيد التنظيف', 'Cleaning'), inspection: E('قيد الفحص', 'Inspection'), maintenance: E('قيد الصيانة', 'Maintenance'), faulty: E('معطّل', 'Faulty'),
-  ambient: E('حرارة الغرفة', 'Ambient'), stale: E('بيانات قديمة', 'Stale'), stat: E('طارئ (STAT)', 'STAT'), major: E('جسيم', 'Major'), reconciled: E('تمت المطابقة', 'Reconciled'), disputed: E('متنازع عليها', 'Disputed'),
+  ambient: E('درجة حرارة الغرفة', 'Ambient'), stale: E('بيانات قديمة', 'Stale'), stat: E('طارئ (STAT)', 'STAT'), major: E('جسيم', 'Major'), reconciled: E('تمت المطابقة', 'Reconciled'), disputed: E('متنازع عليها', 'Disputed'),
   // أنواع المطالبات والمسؤولية والقرارات
   damage: E('تلف', 'Damage'), loss: E('فقد', 'Loss'), delay: E('تأخير', 'Delay'), temperature: E('انحراف حراري', 'Temperature'),
   company: E('الشركة', 'Company'), partner: E('الشريك الناقل', 'Partner'), customer: E('العميل', 'Customer'),
   accepted: E('مقبولة', 'Accepted'), accepted_with_note: E('مقبولة بملاحظة', 'Accepted with note'), approve: E('اعتماد', 'Approve'), reject: E('رفض', 'Reject'),
-  retry: E('إعادة المحاولة', 'Retry'), alternate_destination: E('وجهة بديلة معتمدة', 'Alternate destination'), qualified_hold: E('حجز مؤقت مؤهَّل', 'Qualified hold'), return_to_sender: E('إرجاع للمرسل', 'Return to sender'), authorized: E('معتمد', 'Authorized'),
+  retry: E('إعادة المحاولة', 'Retry'), alternate_destination: E('وجهة بديلة معتمدة', 'Alternate destination'), qualified_hold: E('حجز مؤقت في ظروف تخزين مؤهَّلة', 'Qualified hold'), return_to_sender: E('إرجاع للمرسل', 'Return to sender'), authorized: E('معتمد', 'Authorized'),
   // الدفع والتحقق
   bank_transfer: E('تحويل بنكي', 'Bank transfer'), card_simulated: E('بطاقة مدى/فيزا (محاكاة)', 'mada/Visa card (simulated)'), sadad_simulated: E('سداد (محاكاة)', 'SADAD (simulated)'),
   signature: E('توقيع', 'Signature'), qr: E('رمز QR', 'QR code'), pin: E('رمز تحقق', 'PIN'), in: E('وارد', 'Incoming'), out: E('صادر', 'Outgoing'),
@@ -104,25 +104,25 @@ export const LABELS: Record<string, Entry> = {
   corrective: E('تصحيحي', 'Corrective'), preventive: E('وقائي', 'Preventive'), info: E('معلومة', 'Info'), warning: E('تحذير', 'Warning'),
   // المحاسبة وتوزيع التكاليف
   asset: E('أصول', 'Asset'), liability: E('خصوم', 'Liability'), equity: E('حقوق ملكية', 'Equity'), revenue: E('إيرادات', 'Revenue'), expense: E('مصروفات', 'Expense'), posted: E('مرحّل', 'Posted'),
-  invoice: E('فاتورة', 'Invoice'), credit_note: E('إشعار دائن', 'Credit note'), settlement: E('تسوية شريك', 'Partner settlement'),
+  invoice: E('فاتورة', 'Invoice'), credit_note: E('إشعار دائن', 'Credit note'), service_profile: E('ملف حراري', 'Thermal profile'), settlement: E('تسوية شريك', 'Partner settlement'),
   per_shipment: E('لكل شحنة', 'Per shipment'), per_kg: E('لكل كيلوجرام', 'Per kg'), per_box_hour: E('لكل ساعة استخدام صندوق', 'Per box-hour'),
   // النسخ الاحتياطي والاحتفاظ
   snapshot: E('لقطة كاملة', 'Snapshot'), pitr: E('استعادة لنقطة زمنية', 'Point-in-time'), restore_drill: E('تمرين استعادة', 'Restore drill'),
   retain: E('احتفاظ', 'Retain'), delete: E('حذف', 'Delete'), anonymize: E('إخفاء الهوية', 'Anonymize'),
   // المزامنة دون اتصال
-  scanPack: E('مسح وتعبئة', 'Scan & pack'), failAttempt: E('محاولة فاشلة', 'Failed attempt'), deliver: E('تسليم', 'Deliver'), queued: E('في الطابور', 'Queued'),
+  scanPack: E('مسح وتعبئة', 'Scan & pack'), failAttempt: E('محاولة فاشلة', 'Failed attempt'), deliver: E('تسليم', 'Deliver'), queued: E('في قائمة الانتظار', 'Queued'),
   // أسباب التسليم الفاشل
   RECIPIENT_UNAVAILABLE: E('المستلم غير متاح', 'Recipient unavailable'), ADDRESS_ISSUE: E('مشكلة في العنوان', 'Address issue'), REFUSED: E('رفض الاستلام', 'Refused'), CUSTOMER_REQUEST: E('بطلب العميل', 'Customer request'), ACCESS_DENIED: E('تعذّر الدخول إلى الموقع', 'Site access denied'),
   // أنواع العينات
-  BLOOD_TUBES: E('أنابيب دم', 'Blood tubes'), TISSUE_BIOPSY: E('خزعة نسيجية', 'Tissue biopsy'), SWAB_PCR: E('مسحة PCR', 'PCR swab'), URINE_CULTURE: E('مزرعة بول', 'Urine culture'), CSF_SAMPLE: E('سائل نخاعي', 'CSF sample'), SERUM_ALIQUOT: E('عينة مصل', 'Serum aliquot'),
+  BLOOD_TUBES: E('أنابيب دم', 'Blood tubes'), TISSUE_BIOPSY: E('خزعة نسيجية', 'Tissue biopsy'), SWAB_PCR: E('مسحة PCR', 'PCR swab'), URINE_CULTURE: E('مزرعة بول', 'Urine culture'), CSF_SAMPLE: E('سائل دماغي شوكي (CSF)', 'CSF sample'), SERUM_ALIQUOT: E('عينة مصل', 'Serum aliquot'),
   // حالات عامة
   converted: E('تحوّل إلى شحنة', 'Converted'), on_demand: E('عند الطلب', 'On demand'), scheduled: E('مجدول', 'Scheduled'), recurring: E('متكرر', 'Recurring'),
-  pending: E('معلّق', 'Pending'), pending_approval: E('بانتظار الاعتماد', 'Pending approval'), active: E('نشط', 'Active'), published: E('منشور', 'Published'), superseded: E('مستبدل بإصدار أحدث', 'Superseded'), planned: E('مخطط', 'Planned'), dispatched: E('أُرسل للمندوب', 'Dispatched'), in_progress: E('جارٍ', 'In progress'), completed: E('مكتمل', 'Completed'), departed: E('غادر', 'Departed'), arrived: E('وصل', 'Arrived'),
-  parsed: E('محلَّلة', 'Parsed'), quarantined: E('معزولة للمراجعة', 'Quarantined'), dead_letter: E('رسائل متعذرة المعالجة', 'Dead-letter'), duplicate: E('مكررة', 'Duplicate'), acked: E('تم تأكيد الاستلام', 'Acknowledged'), sent: E('مرسل', 'Sent'), expired: E('منتهٍ', 'Expired'),
-  on_route: E('في مسار', 'On route'), off_shift: E('خارج المناوبة', 'Off shift'), done: E('منجز', 'Done'), simulated: E('محاكاة', 'Simulated'), not_configured: E('غير مهيأ', 'Not configured'), planned_phase_2: E('مرحلة لاحقة', 'Later phase'), blocked: E('محظور', 'Blocked'),
-  approved: E('معتمد', 'Approved'), rejected: E('مرفوض', 'Rejected'), draft: E('مسودة', 'Draft'), overdue: E('متأخر', 'Overdue'), inactive: E('غير نشط', 'Inactive'), revoked: E('ملغى', 'Revoked'), invited: E('مدعو', 'Invited'), disabled: E('معطل', 'Disabled'), skipped: E('تم تخطيه', 'Skipped'), requested: E('مطلوب', 'Requested'), under_review: E('قيد المراجعة', 'Under review'),
-  offline_expected_or_unknown: E('غير متصل (متوقع أثناء الطيران)', 'Offline (expected in flight)'), online: E('متصل', 'Online'), offline_or_delayed: E('غير متصل أو متأخر', 'Offline or delayed'), no_device: E('لا جهاز', 'No device'), unavailable: E('غير متاح', 'Unavailable'),
-  pickup: E('استلام', 'Pickup'), delivery: E('تسليم', 'Delivery'), handover: E('نقل حيازة', 'Handover'), return: E('إرجاع', 'Return'),
+  pending: E('معلّق', 'Pending'), pending_approval: E('بانتظار الاعتماد', 'Pending approval'), active: E('نشط', 'Active'), published: E('منشور', 'Published'), superseded: E('مستبدل بإصدار أحدث', 'Superseded'), planned: E('مخطط', 'Planned'), dispatched: E('أُرسل للمندوب', 'Dispatched'), in_progress: E('قيد التنفيذ', 'In progress'), completed: E('مكتمل', 'Completed'), departed: E('غادر', 'Departed'), arrived: E('وصل', 'Arrived'),
+  parsed: E('محلَّلة', 'Parsed'), quarantined: E('معزولة للمراجعة', 'Quarantined'), dead_letter: E('رسائل متعذرة المعالجة', 'Dead-letter'), duplicate: E('مكررة', 'Duplicate'), acked: E('تم تأكيد الاستلام', 'Acknowledged'), sent: E('تم الإرسال', 'Sent'), expired: E('منتهٍ', 'Expired'),
+  on_route: E('على المسار', 'On route'), off_shift: E('خارج المناوبة', 'Off shift'), done: E('منجز', 'Done'), simulated: E('محاكاة', 'Simulated'), not_configured: E('غير مهيأ', 'Not configured'), planned_phase_2: E('مرحلة لاحقة', 'Later phase'), blocked: E('خاضع لقيد تشغيلي', 'Blocked'),
+  approved: E('معتمد', 'Approved'), rejected: E('مرفوض', 'Rejected'), draft: E('مسودة', 'Draft'), overdue: E('متأخر', 'Overdue'), inactive: E('غير نشط', 'Inactive'), revoked: E('ملغى', 'Revoked'), invited: E('مدعو', 'Invited'), disabled: E('معطل', 'Disabled'), skipped: E('تم تخطيه', 'Skipped'), requested: E('تم الطلب', 'Requested'), under_review: E('قيد المراجعة', 'Under review'),
+  offline_expected_or_unknown: E('غير متصل (متوقع أثناء الطيران)', 'Offline (expected in flight)'), online: E('متصل', 'Online'), offline_or_delayed: E('غير متصل أو متأخر', 'Offline or delayed'), no_device: E('لا يوجد جهاز', 'No device'), unavailable: E('غير متاح', 'Unavailable'),
+  pickup: E('استلام', 'Pickup'), delivery: E('تسليم', 'Delivery'), handover: E('نقل الحيازة', 'Handover'), return: E('إرجاع', 'Return'),
   applicable: E('منطبق', 'Applicable'), not_applicable: E('غير منطبق', 'Not applicable'), pending_legal_review: E('بانتظار المراجعة القانونية', 'Pending legal review'), success: E('نجح', 'Success'),
   received: E('مستلمة', 'Received'), not_submitted: E('لم تُرسل', 'Not submitted'), paused: E('موقوف', 'Paused'), open: E('مفتوح', 'Open'), high_confidence: E('مرتفعة', 'High'), all: E('الكل', 'All'),
   udp: E('UDP', 'UDP'), tcp: E('TCP', 'TCP'),
@@ -226,6 +226,18 @@ export function allTerms(): Record<string, Entry> {
  * ويفشل إن ظهرت صيغة مرفوضة. التوثيق: docs/phase17/AR_EN_LOCALIZATION_AUDIT.md (مولّد من هنا). */
 export interface GlossaryEntry { id: string; domain: string; en: string; ar: string; avoidAr?: string[]; avoidEn?: string[]; note?: string }
 export const GLOSSARY: GlossaryEntry[] = [
+  // Phase 17.1 — قرارات المالك والمراجعة العربية السياقية
+  { id: 'control_tower', domain: 'العمليات', en: 'Control tower', ar: 'مركز مراقبة العمليات', avoidAr: ['برج التحكم', 'برج المراقبة', 'لبرج التحكم'], note: 'قرار المالك' },
+  { id: 'legs', domain: 'النقل', en: 'Transport legs', ar: 'مراحل النقل', avoidAr: ['أرجل النقل', 'الأرجل'], note: 'قرار المالك' },
+  { id: 'current_value', domain: 'النظام', en: 'Current value', ar: 'القيمة الحالية', avoidAr: ['القيمة السارية'], note: 'قرار المالك' },
+  { id: 'effective_from', domain: 'النظام', en: 'Effective from', ar: 'تاريخ بدء السريان', avoidAr: ['يسري من'], note: 'قرار المالك' },
+  { id: 'config_history', domain: 'النظام', en: 'Settings change history', ar: 'سجل تغييرات الإعدادات', avoidAr: ['سجل الإصدارات'], note: 'قرار المالك' },
+  { id: 'offline_queue', domain: 'المندوب', en: 'Offline queue', ar: 'قائمة الانتظار', avoidAr: ['الطابور', 'في الطابور'] },
+  { id: 'in_custody', domain: 'الحيازة', en: 'In custody', ar: 'في حيازة', avoidAr: ['بعهدتي', 'بعهدتك', 'بعهدة المندوب'] },
+  { id: 'receiving_party', domain: 'الجودة', en: 'Receiving institution', ar: 'الجهة المستلمة', avoidAr: ['المؤسسة المستلمة'] },
+  { id: 'cost_allocation', domain: 'المالية', en: 'Cost allocation', ar: 'توزيع التكاليف', avoidAr: ['قواعد التوزيع', 'تشغيل التوزيع'], note: '«التوزيع» وحده محجوز لتوزيع الشحنات (Dispatch)' },
+  { id: 'inspection_pass', domain: 'المستودع', en: 'Pass / Fail', ar: 'مجتاز / غير مجتاز', avoidAr: [] },
+  { id: 'demo_reading', domain: 'الأصول', en: 'Inject demo reading', ar: 'إدخال قراءة تجريبية', avoidAr: ['حقن قراءة'] },
   // الشحنة ودورتها
   { id: 'shipment', domain: 'الشحنة', en: 'Shipment', ar: 'شحنة', avoidAr: ['إرسالية', 'بوليصة', 'شحنه'], note: 'الشحنة = طلب نقل عينات واحد برقم تتبع' },
   { id: 'tracking_no', domain: 'الشحنة', en: 'Tracking no.', ar: 'رقم التتبع', avoidAr: ['رقم البوليصة'] },
@@ -264,12 +276,12 @@ export const GLOSSARY: GlossaryEntry[] = [
   // سلسلة التبريد والجودة
   { id: 'excursion', domain: 'الجودة', en: 'Temperature excursion', ar: 'انحراف حراري', avoidAr: ['انحراف حرارة', 'خارج النطاق الحراري'], avoidEn: ['Temperature deviation'] },
   { id: 'thermal_profile', domain: 'الجودة', en: 'Thermal profile', ar: 'الملف الحراري' },
-  { id: 'ambient', domain: 'الجودة', en: 'Ambient', ar: 'حرارة الغرفة', avoidAr: ['محيط'] },
+  { id: 'ambient', domain: 'الجودة', en: 'Ambient', ar: 'درجة حرارة الغرفة', avoidAr: ['محيط'], note: 'Phase 17.1: قرار المالك' },
   { id: 'chilled', domain: 'الجودة', en: 'Chilled', ar: 'مبرّد' },
   { id: 'frozen', domain: 'الجودة', en: 'Frozen', ar: 'مجمّد' },
   { id: 'acknowledge', domain: 'الجودة', en: 'Acknowledge', ar: 'إقرار' },
   { id: 'capa', domain: 'الجودة', en: 'CAPA', ar: 'الإجراءات التصحيحية والوقائية' },
-  { id: 'incident', domain: 'الجودة', en: 'Quality incident', ar: 'حادثة جودة' },
+  { id: 'incident', domain: 'الجودة', en: 'Quality incident', ar: 'حادثة جودة', avoidAr: ['حادث جودة', 'حادث جديد'] },
   { id: 'claim', domain: 'الجودة', en: 'Claim', ar: 'مطالبة' },
   { id: 'data_gap', domain: 'الجودة', en: 'Data gap', ar: 'فجوة بيانات', note: 'لا تعني الالتزام بالنطاق' },
   // المالية
@@ -347,3 +359,14 @@ export function sysText(lang: Lang, s: string | null | undefined): string {
   const m = s.match(/^([^\u0600-\u06FF:]+): (.+)$/); if (m) return `${m[1]}: ${sysText(lang, m[2])}`; // «partner blocked: <سبب>»
   return s; // نص أدخله المستخدم: يُعرض كما هو
 }
+
+/** أسماء مقروءة لمفاتيح الإعدادات المُصدَّرة (Phase 17.1): المفتاح التقني يظهر كبيان ثانوي فقط */
+export const CONFIG_LABELS: Record<string, { ar: string; en: string; unitAr?: string; unitEn?: string }> = {
+  'cities.active': { ar: 'المدن المفعّلة للخدمة', en: 'Cities enabled for service' },
+  'sla.pickup_window_minutes': { ar: 'مدة فترة الاستلام الافتراضية', en: 'Default pickup window length', unitAr: 'دقيقة', unitEn: 'min' },
+  'sla.stat_delivery_hours': { ar: 'مهلة التسليم للخدمة الطارئة (STAT)', en: 'STAT delivery deadline', unitAr: 'ساعة', unitEn: 'h' },
+  'device.offline_after_minutes': { ar: 'اعتبار الجهاز غير متصل بعد', en: 'Treat device as offline after', unitAr: 'دقيقة', unitEn: 'min' },
+  'device.low_battery_pct': { ar: 'حد تنبيه انخفاض بطارية الجهاز', en: 'Low device battery alert threshold', unitAr: '%', unitEn: '%' },
+  'approvals.credit_note_threshold_sar': { ar: 'حد الإشعار الدائن الذي يتطلب اعتماداً', en: 'Credit note amount requiring approval', unitAr: 'ر.س', unitEn: 'SAR' },
+};
+export function configLabel(lang: Lang, key: string): string { const c = CONFIG_LABELS[key]; return c ? c[lang] : key; }

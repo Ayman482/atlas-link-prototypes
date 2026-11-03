@@ -11,4 +11,6 @@ import './cmd-quality';
 import './cmd-finance';
 import './cmd-governance';
 import './queries';
+import './invoice-doc';
+export { SELLER, buildInvoiceDocument, zatcaTlvBase64, decodeTlvBase64, type InvoiceDocument, type InvoiceDocLine } from './invoice-doc';
 export { SCENARIOS, type Scenario, type Step, type ScenarioApi } from './scenarios';

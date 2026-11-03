@@ -14,6 +14,9 @@ dependencies:
   atlas_shared:
     path: ../atlas_shared
   shared_preferences: ^2.3.2
+  qr_flutter: ^4.1.0
+  pdf: ^3.13.1
+  printing: ^5.15.1
 
 dev_dependencies:
   flutter_test:
@@ -23,3 +26,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  # خط لاتيني احتياطي لملف PDF للفاتورة (DejaVu Sans، رخصة Bitstream Vera الحرة)؛ الخط العربي من atlas_shared
+  assets:
+    - assets/fonts/DejaVuSans.ttf
+    - assets/fonts/DejaVuSans-Bold.ttf

@@ -1,0 +1,15 @@
+node:internal/process/promises:394
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+
+page.goto: Page crashed
+Call log:
+[2m  - navigating to "http://127.0.0.1:5058/admin/#/", waiting until "load"[22m
+
+    at /home/claude/medlog/docs/phase17-1/tools/modal-audit.js:70:17 {
+  log: [
+    '  - navigating to "http://127.0.0.1:5058/admin/#/", waiting until "load"'
+  ]
+}
+
+Node.js v22.23.4

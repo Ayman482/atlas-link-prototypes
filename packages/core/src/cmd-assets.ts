@@ -1,7 +1,7 @@
 // الصناديق والأجهزة والقياس عن بُعد والبوابة والمستودع — M02/M03/M08/M10
 import type * as T from './types';
 import { defineCommand, must, type Ctx } from './engine';
-import { activePackings, activePairing, boxReadiness, deviceOfBox, evaluateReading } from './domain';
+import { activePackings, activePairing, boxReadiness, deviceOfBox, evaluateReading, resolveProfile } from './domain';
 import { DAY, MIN, fingerprint, iso } from './util';
 
 const L = (ar: string, en: string) => ({ ar, en });
@@ -61,7 +61,7 @@ defineCommand<{ box: string; checklist: Record<string, boolean>; result: 'pass' 
 });
 
 defineCommand<{ box: string; reason: string }, T.Box>({
-  name: 'box.retire', guard: ['warehouse', 'quality'], desc: L('إيقاف صندوق نهائياً', 'Retire box'),
+  name: 'box.retire', guard: ['warehouse', 'quality'], desc: L('إخراج صندوق من الخدمة نهائياً', 'Retire box'),
   run(ctx, { box: ref, reason }) {
     const b = box(ctx, ref); if (activePackings(ctx.db, b.id).length) ctx.fail('BOX_HAS_SHIPMENTS', 'الصندوق يحتوي شحنات', 'Box contains shipments', 422);
     b.status = 'retired'; const p = activePairing(ctx.db, b.id);
@@ -96,7 +96,7 @@ defineCommand<{ id: string; signedBy: string }, T.PartnerCustody>({
 
 // ---------------- الأجهزة (BOX-002/003, BR-002, E1) ----------------
 defineCommand<{ imei: string; firmware: string; simIccidLast4: string }, T.Device>({
-  name: 'device.register', guard: ['iot_engineer'], desc: L('تسجيل جهاز GPT45-M بالـ IMEI', 'Register GPT45-M by IMEI'),
+  name: 'device.register', guard: ['iot_engineer'], desc: L('تسجيل جهاز GPT45-M برقم IMEI', 'Register GPT45-M by IMEI'),
   run(ctx, i) {
     if (!/^\d{15}$/.test(i.imei ?? '')) ctx.fail('VALIDATION', 'IMEI يتكون من 15 رقماً', 'IMEI must be 15 digits', 422, 'imei');
     if (ctx.db.devices.some((d) => d.imei === i.imei)) ctx.fail('DUPLICATE', 'IMEI مسجّل مسبقاً', 'IMEI already registered', 409, 'imei');
@@ -153,7 +153,7 @@ defineCommand<{ device: string; commandType: T.DeviceCommand['commandType']; par
 
 /** محاكاة: يرسل الأمر المعتمد ويستقبل ACK تجريبياً — لا اتصال حقيقي بأي جهاز */
 defineCommand<{ id: string }, T.DeviceCommand>({
-  name: 'device.sendCommand', guard: ['iot_engineer'], desc: L('إرسال أمر معتمد (محاكاة ACK)', 'Send approved command (simulated ACK)'),
+  name: 'device.sendCommand', guard: ['iot_engineer'], desc: L('إرسال أمر معتمد (إقرار استلام محاكى ACK)', 'Send approved command (simulated ACK)'),
   run(ctx, { id }) {
     const c = must(ctx, ctx.db.deviceCommands.find((x) => x.id === id), 'command');
     if (c.status !== 'approved') ctx.fail('NOT_APPROVED', 'الأمر غير معتمد', 'Command not approved', 422);
@@ -166,7 +166,7 @@ defineCommand<{ id: string }, T.DeviceCommand>({
 // ---------------- القياس عن بُعد (محاكاة مُعلَّمة) ----------------
 /** يحقن قراءة تجريبية كما لو وصلت عبر البوابة — للعرض والاختبار فقط، مُعلَّمة demo */
 defineCommand<{ device: string; tempC: number | null; deviceTime?: string; lat?: number | null; lng?: number | null; batteryPct?: number | null; late?: boolean }, { reading: T.Reading | null; message: T.GatewayMessage }>({
-  name: 'telemetry.injectDemo', guard: ['iot_engineer', 'quality', 'ops_controller'], desc: L('حقن قراءة تجريبية عبر البوابة المحاكاة', 'Inject demo reading via simulated gateway'),
+  name: 'telemetry.injectDemo', guard: ['iot_engineer', 'quality', 'ops_controller'], desc: L('إدخال قراءة تجريبية عبر البوابة المحاكاة', 'Inject demo reading via simulated gateway'),
   run(ctx, i) {
     const d = device(ctx, i.device);
     const deviceTime = i.deviceTime ?? ctx.nowIso;
@@ -192,7 +192,7 @@ defineCommand<{ device: string; tempC: number | null; deviceTime?: string; lat?:
 
 /** نبضة محاكاة: تولّد قراءة لكل صندوق نشط متصل حتى الآن — بيانات عرض فقط */
 defineCommand<Record<string, never>, { generated: number }>({
-  name: 'telemetry.simulateTick', guard: ['iot_engineer', 'ops_controller', 'super_admin'], desc: L('توليد نبضة قراءات تجريبية', 'Generate a tick of demo readings'),
+  name: 'telemetry.simulateTick', guard: ['iot_engineer', 'ops_controller', 'super_admin'], desc: L('توليد دفعة قراءات تجريبية', 'Generate a tick of demo readings'),
   run(ctx) {
     let n = 0;
     const boxes = ctx.db.boxes.filter((b) => b.status === 'in_use');
@@ -200,7 +200,7 @@ defineCommand<Record<string, never>, { generated: number }>({
       const d = deviceOfBox(ctx.db, b.id); if (!d || ['offline', 'faulty'].includes(d.state)) continue;
       const inAir = activePackings(ctx.db, b.id).some((p) => ctx.db.shipmentLegs.some((x) => x.shipmentId === p.shipmentId && ctx.db.legs.find((l) => l.id === x.legId && l.mode === 'air' && l.status === 'departed')));
       if (inAir) continue; // لا قراءات أثناء الطيران ما لم يثبت دعم التخزين المؤقت
-      const prof = ctx.db.serviceProfiles.find((p) => p.thermalClass === b.thermalClass && p.status === 'active')!;
+      const prof = resolveProfile(ctx.db, { thermalClass: b.thermalClass }, ctx.now);
       const last = ctx.db.readings.filter((r) => r.deviceId === d.id).sort((a, z) => z.deviceTime.localeCompare(a.deviceTime))[0];
       const base = last?.tempC ?? (prof.minC + prof.maxC) / 2;
       const target = (prof.minC + prof.maxC) / 2;
@@ -215,7 +215,7 @@ defineCommand<Record<string, never>, { generated: number }>({
 
 // ---------------- كونسول البوابة (IOT-DIR / SEC-005) ----------------
 defineCommand<{ id: string; reason: string }, T.GatewayMessage>({
-  name: 'gateway.replay', guard: ['iot_engineer'], desc: L('إعادة تشغيل رسالة من الدليل الخام (dead-letter)', 'Replay message from raw evidence (dead-letter)'),
+  name: 'gateway.replay', guard: ['iot_engineer'], desc: L('إعادة معالجة رسالة من البيانات الخام (رسائل متعذرة المعالجة)', 'Replay message from raw evidence (dead-letter)'),
   run(ctx, { id, reason }) {
     const m = must(ctx, ctx.db.gatewayMessages.find((x) => x.id === id), 'message');
     if (!reason?.trim()) ctx.fail('VALIDATION', 'سبب إعادة التشغيل مطلوب (تدقيق)', 'Replay reason required (audit)', 422, 'reason');

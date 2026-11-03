@@ -1,0 +1,26 @@
+   Woah! You appear to be trying to run flutter as root.
+   We strongly recommend running the flutter tool without superuser privileges.
+  /
+📎
+Resolving dependencies...
+Downloading packages...
+  material_color_utilities 0.13.0 (0.13.1 available)
+  meta 1.18.3 (1.19.0 available)
+  petitparser 7.0.2 (7.1.0 available)
+  qr 3.0.3 (4.0.1 available)
+  shared_preferences_foundation 2.5.7 (2.6.1 available)
+  test_api 0.7.12 (0.7.15 available)
+  vector_math 2.4.0 (2.4.4 available)
+  xml 7.0.1 (7.1.0 available)
+Got dependencies!
+8 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+00:00 +0: loading /home/claude/medlog/mobile/customer_app/test/app_test.dart
+00:00 +0: /home/claude/medlog/mobile/customer_app/test/app_test.dart: CM01→CM02: دخول بحساب عرض يفتح الرئيسية بالعربية RTL مع المؤشرات الحقيقية
+00:01 +1: /home/claude/medlog/mobile/customer_app/test/app_test.dart: تبديل اللغة إلى الإنجليزية يقلب الاتجاه إلى LTR
+00:02 +2: /home/claude/medlog/mobile/customer_app/test/app_test.dart: تقليل الحركة: المحتوى يظهر فوراً دون انتظار الحركة
+00:02 +3: loading /home/claude/medlog/mobile/customer_app/test/invoice_document_test.dart
+00:02 +3: /home/claude/medlog/mobile/customer_app/test/invoice_document_test.dart: معاينة الفاتورة بالعربية: النوع والأرقام الضريبية والإجماليات وQR وتنبيه المحاكاة
+00:03 +4: /home/claude/medlog/mobile/customer_app/test/invoice_document_test.dart: تبديل لغة المستند إلى الإنجليزية يقلب الاتجاه إلى LTR دون أخطاء تخطيط
+00:04 +5: /home/claude/medlog/mobile/customer_app/test/invoice_document_test.dart: ملف PDF بحجم A4 بالعربية والإنجليزية (فاتورة من سطر واحد وفاتورة من 26 بنداً)
+00:05 +6: All tests passed!

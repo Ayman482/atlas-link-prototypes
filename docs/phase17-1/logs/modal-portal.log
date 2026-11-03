@@ -1,0 +1,73 @@
+portal/shipments [ar 1440] «تصدير CSV» OK
+portal/shipments/shp_0002 [ar 1440] «طلب إرجاع» OK
+portal/shipments/shp_0002 [ar 1440] «تقديم مطالبة» OK
+portal/recurring [ar 1440] «جدولة جديدة» OK
+portal/addresses [ar 1440] «عنوان جديد» OK
+portal/branches [ar 1440] «فرع جديد» OK
+portal/users [ar 1440] «دعوة مستخدم» OK
+portal/users [ar 1440] «إبطال» OK
+portal/invoices [ar 1440] «تصدير CSV» OK
+portal/reports [ar 1440] «تصدير CSV» OK
+portal/api [ar 1440] «إضافة» OK
+portal/api [ar 1440] «إبطال» OK
+portal/shipments [ar 768] «تصدير CSV» OK
+portal/shipments/shp_0002 [ar 768] «طلب إرجاع» OK
+portal/shipments/shp_0002 [ar 768] «تقديم مطالبة» OK
+portal/recurring [ar 768] «جدولة جديدة» OK
+portal/addresses [ar 768] «عنوان جديد» OK
+portal/branches [ar 768] «فرع جديد» OK
+portal/users [ar 768] «دعوة مستخدم» OK
+portal/users [ar 768] «إبطال» OK
+portal/invoices [ar 768] «تصدير CSV» OK
+portal/reports [ar 768] «تصدير CSV» OK
+portal/api [ar 768] «إضافة» OK
+portal/api [ar 768] «إبطال» OK
+portal/shipments [ar 390] «تصدير CSV» OK
+portal/shipments/shp_0002 [ar 390] «طلب إرجاع» OK
+portal/shipments/shp_0002 [ar 390] «تقديم مطالبة» OK
+portal/recurring [ar 390] «جدولة جديدة» OK
+portal/addresses [ar 390] «عنوان جديد» OK
+portal/branches [ar 390] «فرع جديد» OK
+portal/users [ar 390] «دعوة مستخدم» OK
+portal/users [ar 390] «إبطال» OK
+portal/invoices [ar 390] «تصدير CSV» OK
+portal/reports [ar 390] «تصدير CSV» OK
+portal/api [ar 390] «إضافة» OK
+portal/api [ar 390] «إبطال» OK
+portal/shipments [en 1440] «Export CSV» OK
+portal/shipments/shp_0002 [en 1440] «Request return» OK
+portal/shipments/shp_0002 [en 1440] «File claim» OK
+portal/recurring [en 1440] «New schedule» OK
+portal/addresses [en 1440] «New address» OK
+portal/branches [en 1440] «New branch» OK
+portal/users [en 1440] «Invite user» OK
+portal/users [en 1440] «Revoke» OK
+portal/invoices [en 1440] «Export CSV» OK
+portal/reports [en 1440] «Export CSV» OK
+portal/api [en 1440] «Add» OK
+portal/api [en 1440] «Revoke» OK
+portal/shipments [en 768] «Export CSV» OK
+portal/shipments/shp_0002 [en 768] «Request return» OK
+portal/shipments/shp_0002 [en 768] «File claim» OK
+portal/recurring [en 768] «New schedule» OK
+portal/addresses [en 768] «New address» OK
+portal/branches [en 768] «New branch» OK
+portal/users [en 768] «Invite user» OK
+portal/users [en 768] «Revoke» OK
+portal/invoices [en 768] «Export CSV» OK
+portal/reports [en 768] «Export CSV» OK
+portal/api [en 768] «Add» OK
+portal/api [en 768] «Revoke» OK
+portal/shipments [en 390] «Export CSV» OK
+portal/shipments/shp_0002 [en 390] «Request return» OK
+portal/shipments/shp_0002 [en 390] «File claim» OK
+portal/recurring [en 390] «New schedule» OK
+portal/addresses [en 390] «New address» OK
+portal/branches [en 390] «New branch» OK
+portal/users [en 390] «Invite user» OK
+portal/users [en 390] «Revoke» OK
+portal/invoices [en 390] «Export CSV» OK
+portal/reports [en 390] «Export CSV» OK
+portal/api [en 390] «Add» OK
+portal/api [en 390] «Revoke» OK
+dialogs 72, with issues 0

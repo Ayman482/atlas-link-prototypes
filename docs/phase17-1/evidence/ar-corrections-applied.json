@@ -1,0 +1,1976 @@
+[
+ {
+  "old": "العودة لبرج التحكم",
+  "new": "العودة إلى مركز مراقبة العمليات",
+  "category": "mandated",
+  "en": "Back to control tower",
+  "replaced": 1
+ },
+ {
+  "old": "يسري من",
+  "new": "تاريخ بدء السريان",
+  "category": "mandated",
+  "en": "Effective from",
+  "replaced": 2
+ },
+ {
+  "old": "${crit.length} انحراف حراري مفتوح يتطلب إقراراً",
+  "new": "انحرافات حرارية مفتوحة تتطلب الإقرار: ${crit.length}",
+  "category": "grammar",
+  "en": "${crit.length} open temperature excursion(s) need acknowledgement",
+  "replaced": 1
+ },
+ {
+  "old": "تم الإقرار — انتقل إلى مراجعة الجودة",
+  "new": "تم الإقرار — أُحيل إلى مراجعة الجودة",
+  "category": "context",
+  "en": "Acknowledged — moved to quality review",
+  "replaced": 1
+ },
+ {
+  "old": "غير المقروء",
+  "new": "غير المقروءة",
+  "category": "grammar",
+  "en": "Unread",
+  "replaced": 1
+ },
+ {
+  "old": "الحرج",
+  "new": "الحرجة",
+  "category": "grammar",
+  "en": "Critical",
+  "replaced": 1
+ },
+ {
+  "old": "سبب",
+  "new": "عوائق",
+  "category": "grammar",
+  "en": "issues",
+  "replaced": 1
+ },
+ {
+  "old": "مانع",
+  "new": "موانع",
+  "category": "grammar",
+  "en": "blockers",
+  "replaced": 1
+ },
+ {
+  "old": "سلّمه",
+  "new": "المُسلِّم",
+  "category": "grammar",
+  "en": "Handed over by",
+  "replaced": 2
+ },
+ {
+  "old": "اعتمده",
+  "new": "المعتمِد",
+  "category": "grammar",
+  "en": "Approved by",
+  "replaced": 3
+ },
+ {
+  "old": "طلبه",
+  "new": "مقدّم الطلب",
+  "category": "grammar",
+  "en": "Requested by",
+  "replaced": 1
+ },
+ {
+  "old": "خوّله",
+  "new": "المفوِّض",
+  "category": "grammar",
+  "en": "Authorized by",
+  "replaced": 1
+ },
+ {
+  "old": "تسليم لشريك",
+  "new": "نقل الحيازة إلى شريك",
+  "category": "consistency",
+  "en": "Partner custody",
+  "replaced": 1
+ },
+ {
+  "old": "إيقاف نهائي",
+  "new": "إخراج من الخدمة",
+  "category": "context",
+  "en": "Retire",
+  "replaced": 1
+ },
+ {
+  "old": "إيقاف الصندوق نهائياً",
+  "new": "إخراج الصندوق من الخدمة",
+  "category": "context",
+  "en": "Retire box",
+  "replaced": 1
+ },
+ {
+  "old": "قابل لاستثناء",
+  "new": "قابل للاستثناء",
+  "category": "grammar",
+  "en": "Overridable",
+  "replaced": 1
+ },
+ {
+  "old": "التعبئات",
+  "new": "سجل التعبئة",
+  "category": "literal",
+  "en": "Packing history",
+  "replaced": 1
+ },
+ {
+  "old": "البرنامج",
+  "new": "البرنامج الثابت",
+  "category": "consistency",
+  "en": "Firmware",
+  "replaced": 1
+ },
+ {
+  "old": "آخر حرارة",
+  "new": "آخر قراءة حرارة",
+  "category": "literal",
+  "en": "Last temp",
+  "replaced": 1
+ },
+ {
+  "old": "حقن قراءة تجريبية",
+  "new": "إدخال قراءة تجريبية",
+  "category": "literal",
+  "en": "Inject demo reading",
+  "replaced": 1
+ },
+ {
+  "old": "طلب أمر",
+  "new": "طلب أمر للجهاز",
+  "category": "context",
+  "en": "Request command",
+  "replaced": 1
+ },
+ {
+  "old": "المعاملات",
+  "new": "المعلمات",
+  "category": "context",
+  "en": "Params",
+  "replaced": 2
+ },
+ {
+  "old": "الصحة",
+  "new": "سلامة الجهاز",
+  "category": "literal",
+  "en": "Health",
+  "replaced": 1
+ },
+ {
+  "old": "لا أحداث صحة",
+  "new": "لا توجد أحداث تخص سلامة الجهاز",
+  "category": "literal",
+  "en": "No health events",
+  "replaced": 1
+ },
+ {
+  "old": "وقت الاستلام",
+  "new": "وقت الاستلام في النظام",
+  "category": "consistency",
+  "en": "Received",
+  "replaced": 3
+ },
+ {
+  "old": "النقل",
+  "new": "بروتوكول النقل",
+  "category": "context",
+  "en": "Transport",
+  "replaced": 3
+ },
+ {
+  "old": "فشل التحليل",
+  "new": "أخطاء قراءة الرسائل",
+  "category": "context",
+  "en": "Parse failures",
+  "replaced": 1
+ },
+ {
+  "old": "تأخر الطابور (ث)",
+  "new": "تأخر قائمة الانتظار (ث)",
+  "category": "literal",
+  "en": "Queue lag (s)",
+  "replaced": 1
+ },
+ {
+  "old": "عمر القياس P95 (ث)",
+  "new": "عمر القراءات P95 (ث)",
+  "category": "literal",
+  "en": "Telemetry age P95 (s)",
+  "replaced": 1
+ },
+ {
+  "old": "أعيد تشغيلها",
+  "new": "أُعيدت معالجتها",
+  "category": "literal",
+  "en": "Replayed",
+  "replaced": 1
+ },
+ {
+  "old": "إعادة تشغيل",
+  "new": "إعادة معالجة",
+  "category": "literal",
+  "en": "Replay",
+  "replaced": 1
+ },
+ {
+  "old": "إعادة تشغيل من الدليل الخام",
+  "new": "إعادة المعالجة من البيانات الخام",
+  "category": "literal",
+  "en": "Replay from raw evidence",
+  "replaced": 1
+ },
+ {
+  "old": "إيقاف",
+  "new": "تعطيل",
+  "category": "consistency",
+  "en": "Deactivate",
+  "replaced": 2
+ },
+ {
+  "old": "إلغاء",
+  "new": "إبطال",
+  "category": "context",
+  "en": "Revoke",
+  "replaced": 6
+ },
+ {
+  "old": "الدورة",
+  "new": "دورة الفوترة",
+  "category": "context",
+  "en": "Cycle",
+  "replaced": 3
+ },
+ {
+  "old": "تعليق",
+  "new": "إيقاف مؤقت",
+  "category": "context",
+  "en": "Suspend",
+  "replaced": 1
+ },
+ {
+  "old": "اكتملت المحاكاة — لم يتغير شيء حي",
+  "new": "اكتملت المحاكاة — لم تتغير أي بيانات فعلية",
+  "category": "literal",
+  "en": "Simulation done — nothing live changed",
+  "replaced": 1
+ },
+ {
+  "old": "بلا أثر حي",
+  "new": "بلا أثر على البيانات الفعلية",
+  "category": "literal",
+  "en": "No live effect",
+  "replaced": 1
+ },
+ {
+  "old": "رفع",
+  "new": "رفع للاعتماد",
+  "category": "context",
+  "en": "Submit",
+  "replaced": 1
+ },
+ {
+  "old": "تحويل لمسودة تعرفة",
+  "new": "تحويل إلى مسودة جدول أسعار",
+  "category": "consistency",
+  "en": "To tariff draft",
+  "replaced": 1
+ },
+ {
+  "old": "مسودة تعرفة من المحاكاة",
+  "new": "مسودة جدول أسعار من المحاكاة",
+  "category": "consistency",
+  "en": "Tariff draft from simulation",
+  "replaced": 1
+ },
+ {
+  "old": "كل عرض يحفظ لقطة الأسعار وإصدار جدول الأسعار كدليل",
+  "new": "كل عرض سعر يحفظ نسخة ثابتة من الأسعار وإصدار جدول الأسعار كدليل",
+  "category": "literal",
+  "en": "Every quote freezes the price snapshot and tariff version as evidence",
+  "replaced": 1
+ },
+ {
+  "old": "سجل الانطباق — لا يُفترض انطباق قانوني دون مراجعة مختصة (OD-003)",
+  "new": "سجل انطباق المتطلبات — لا يُفترض انطباق أي متطلب نظامي دون مراجعة مختصة (OD-003)",
+  "category": "context",
+  "en": "Applicability register — no legal applicability is assumed without specialist review (OD-003)",
+  "replaced": 1
+ },
+ {
+  "old": "الانطباق",
+  "new": "مدى الانطباق",
+  "category": "literal",
+  "en": "Applicability",
+  "replaced": 1
+ },
+ {
+  "old": "رُوجع",
+  "new": "تمت المراجعة",
+  "category": "grammar",
+  "en": "Reviewed",
+  "replaced": 1
+ },
+ {
+  "old": "سيُحدَّث وضع كل الترخيصات، ويُحظر المنتهي من الإسنادات الجديدة، وتُصعَّد الشحنات النشطة المتأثرة.",
+  "new": "ستُعاد مراجعة حالة جميع التراخيص، ويُمنع المنتهي منها من الإسنادات الجديدة، وتُصعَّد الشحنات النشطة المتأثرة.",
+  "category": "grammar",
+  "en": "Every license is re-evaluated; expired ones are blocked from new assignments and affected active shipments are escalated.",
+  "replaced": 1
+ },
+ {
+  "old": "الجهة",
+  "new": "نوع الجهة",
+  "category": "context",
+  "en": "Holder type",
+  "replaced": 2
+ },
+ {
+  "old": "الحامل",
+  "new": "صاحب الترخيص",
+  "category": "literal",
+  "en": "Holder",
+  "replaced": 2
+ },
+ {
+  "old": "ينتهي في",
+  "new": "تاريخ الانتهاء الجديد",
+  "category": "context",
+  "en": "New expiry",
+  "replaced": 1
+ },
+ {
+  "old": "الحظر يمنع الإسنادات الجديدة فقط؛ الشحنات النشطة تُصعَّد ولا تُترك (E9)",
+  "new": "القيد التشغيلي يمنع الإسنادات الجديدة فقط؛ الشحنات النشطة تُصعَّد ولا تُترك (E9)",
+  "category": "consistency",
+  "en": "Blocks prevent new assignments only; active shipments are escalated, never abandoned (E9)",
+  "replaced": 1
+ },
+ {
+  "old": "رفع الحظر",
+  "new": "رفع القيد",
+  "category": "consistency",
+  "en": "Lift",
+  "replaced": 1
+ },
+ {
+  "old": "رفع الحظر بعد التصحيح",
+  "new": "رفع القيد بعد المعالجة",
+  "category": "consistency",
+  "en": "Lift after remediation",
+  "replaced": 1
+ },
+ {
+  "old": "الفترات بانتظار المراجعة القانونية (OD-009). الأرشفة تتخطى العناصر المحجوزة. لا يُحذف شيء فعلياً في النموذج.",
+  "new": "فترات الاحتفاظ بانتظار المراجعة القانونية (OD-009). الأرشفة تتخطى العناصر الخاضعة للتحفظ القانوني. لا يُحذف شيء فعلياً في النموذج.",
+  "category": "consistency",
+  "en": "Periods await legal review (OD-009). Archiving skips held items. Nothing is actually deleted in the prototype.",
+  "replaced": 1
+ },
+ {
+  "old": "تشغيل الأرشفة لفئة ${r.category}؟ العناصر تحت حجز قانوني ستُتخطى.",
+  "new": "تشغيل الأرشفة لفئة ${r.category}؟ العناصر الخاضعة للتحفظ القانوني ستُتخطى.",
+  "category": "consistency",
+  "en": "Run archive for ${r.category}? Items under legal hold are skipped.",
+  "replaced": 1
+ },
+ {
+  "old": "تُخطي للحجز",
+  "new": "المتخطّى (تحفظ قانوني)",
+  "category": "consistency",
+  "en": "Skipped (hold)",
+  "replaced": 1
+ },
+ {
+  "old": "فرض حجز",
+  "new": "فرض تحفظ قانوني",
+  "category": "consistency",
+  "en": "Apply hold",
+  "replaced": 1
+ },
+ {
+  "old": "حجز قانوني على شحنة وأدلتها",
+  "new": "تحفظ قانوني على شحنة وأدلتها",
+  "category": "consistency",
+  "en": "Legal hold on a shipment and its evidence",
+  "replaced": 1
+ },
+ {
+  "old": "رفع الحجز",
+  "new": "رفع التحفظ القانوني",
+  "category": "consistency",
+  "en": "Release hold",
+  "replaced": 1
+ },
+ {
+  "old": "هذه الشحنة تحت حجز قانوني: ",
+  "new": "هذه الشحنة خاضعة لتحفظ قانوني: ",
+  "category": "consistency",
+  "en": "Under legal hold: ",
+  "replaced": 1
+ },
+ {
+  "old": "توليد فاتورة",
+  "new": "إنشاء فاتورة",
+  "category": "literal",
+  "en": "Generate invoice",
+  "replaced": 1
+ },
+ {
+  "old": "توليد مسودة من الشحنات المسلّمة غير المفوترة",
+  "new": "إنشاء مسودة من الشحنات المسلّمة غير المفوترة",
+  "category": "literal",
+  "en": "Draft from uninvoiced delivered shipments",
+  "replaced": 1
+ },
+ {
+  "old": "توليد تسوية",
+  "new": "إنشاء تسوية",
+  "category": "literal",
+  "en": "Generate settlement",
+  "replaced": 1
+ },
+ {
+  "old": "الإصدار",
+  "new": "تاريخ الإصدار",
+  "category": "context",
+  "en": "Issued",
+  "replaced": 3
+ },
+ {
+  "old": "سيُرحَّل قيد الذمم والإيراد والضريبة ولا يمكن تعديل الفاتورة بعدها إلا بإشعار دائن.",
+  "new": "سيُرحَّل قيد الذمم المدينة والإيرادات وضريبة القيمة المضافة، ولا يمكن تصحيح الفاتورة بعد ذلك إلا بإشعار دائن.",
+  "category": "context",
+  "en": "AR, revenue and VAT will be posted; afterwards only a credit note can correct the invoice.",
+  "replaced": 1
+ },
+ {
+  "old": "قبل الضريبة",
+  "new": "المجموع قبل الضريبة",
+  "category": "literal",
+  "en": "Subtotal",
+  "replaced": 1
+ },
+ {
+  "old": "الطرف",
+  "new": "الطرف المقابل",
+  "category": "literal",
+  "en": "Counterparty",
+  "replaced": 1
+ },
+ {
+  "old": "المخصص",
+  "new": "المبلغ المخصّص للفواتير",
+  "category": "context",
+  "en": "Allocated",
+  "replaced": 1
+ },
+ {
+  "old": "التوازن",
+  "new": "متوازن",
+  "category": "grammar",
+  "en": "Balanced",
+  "replaced": 1
+ },
+ {
+  "old": "قيد التسوية",
+  "new": "جارٍ تسويتها",
+  "category": "context",
+  "en": "In settlement",
+  "replaced": 1
+ },
+ {
+  "old": "التكاليف مستقلة عن فوترة العميل؛ التوزيع بقواعد معتمدة بإصدارات، والتجاوز يتطلب اعتماداً (COST)",
+  "new": "التكاليف مستقلة عن فوترة العميل؛ توزيع التكاليف وفق قواعد معتمدة ذات إصدارات، وأي تجاوز يتطلب اعتماداً (COST)",
+  "category": "literal",
+  "en": "Costs are separate from customer billing; allocation uses approved versioned rules; overrides need approval (COST)",
+  "replaced": 1
+ },
+ {
+  "old": "اكتمل التوزيع",
+  "new": "اكتمل توزيع التكاليف",
+  "category": "consistency",
+  "en": "Allocation complete",
+  "replaced": 1
+ },
+ {
+  "old": "تشغيل التوزيع",
+  "new": "تشغيل توزيع التكاليف",
+  "category": "consistency",
+  "en": "Run allocation",
+  "replaced": 1
+ },
+ {
+  "old": "قواعد التوزيع",
+  "new": "قواعد توزيع التكاليف",
+  "category": "consistency",
+  "en": "Allocation rules",
+  "replaced": 1
+ },
+ {
+  "old": "التوزيع",
+  "new": "توزيع التكلفة",
+  "category": "consistency",
+  "en": "Allocation",
+  "replaced": 1
+ },
+ {
+  "old": "تجاوز مدقق",
+  "new": "تجاوز خاضع للتدقيق",
+  "category": "literal",
+  "en": "Audited override",
+  "replaced": 1
+ },
+ {
+  "old": "صحة العمليات الآن",
+  "new": "الوضع التشغيلي الآن",
+  "category": "literal",
+  "en": "Operations health now",
+  "replaced": 1
+ },
+ {
+  "old": "استثناءات وفشل",
+  "new": "الاستثناءات وحالات التعذّر",
+  "category": "literal",
+  "en": "Exceptions",
+  "replaced": 1
+ },
+ {
+  "old": "البيانات",
+  "new": "حداثة البيانات",
+  "category": "context",
+  "en": "Data",
+  "replaced": 1
+ },
+ {
+  "old": "صمت GPS وحده لا يكفي (LDM).",
+  "new": "انقطاع إشارة GPS وحده لا يكفي (LDM).",
+  "category": "literal",
+  "en": "GPS silence alone is not sufficient (LDM).",
+  "replaced": 1
+ },
+ {
+  "old": "سير الفقدان",
+  "new": "مسار معالجة الفقدان",
+  "category": "literal",
+  "en": "Loss workflow",
+  "replaced": 1
+ },
+ {
+  "old": "إدخال قرار المختبر نيابة",
+  "new": "إدخال قرار المختبر نيابةً عنه",
+  "category": "grammar",
+  "en": "Enter lab decision on behalf",
+  "replaced": 1
+ },
+ {
+  "old": "يُسمح فقط بإرفاق دليل مكتوب من المؤسسة المستلمة (QMS-002).",
+  "new": "يُسمح فقط بإرفاق دليل مكتوب من الجهة المستلمة (QMS-002).",
+  "category": "consistency",
+  "en": "Allowed only with written evidence from the receiving institution (QMS-002).",
+  "replaced": 1
+ },
+ {
+  "old": "سجّل قرار النقل فقط. القرار السريري لصلاحية العينة يعود للمؤسسة المستلمة (TEMP-006).",
+  "new": "سجّل قرار النقل فقط. القرار السريري بشأن صلاحية العينة يعود للجهة المستلمة (TEMP-006).",
+  "category": "consistency",
+  "en": "Record the transport decision only. Clinical suitability belongs to the receiving institution (TEMP-006).",
+  "replaced": 1
+ },
+ {
+  "old": "الحيازة الحالية",
+  "new": "الحائز الحالي",
+  "category": "context",
+  "en": "Current custodian",
+  "replaced": 1
+ },
+ {
+  "old": "الخط الزمني الموحّد بالمصادر (MMT)",
+  "new": "سجل الأحداث الموحّد مع مصادره (MMT)",
+  "category": "consistency",
+  "en": "Unified sourced timeline (MMT)",
+  "replaced": 1
+ },
+ {
+  "old": "دقائق الفجوات",
+  "new": "دقائق فجوات البيانات",
+  "category": "consistency",
+  "en": "Gap minutes",
+  "replaced": 1
+ },
+ {
+  "old": "الوسيلة",
+  "new": "وسيلة النقل",
+  "category": "context",
+  "en": "Mode",
+  "replaced": 3
+ },
+ {
+  "old": "المنفذ",
+  "new": "الجهة المنفذة",
+  "category": "context",
+  "en": "Operator",
+  "replaced": 2
+ },
+ {
+  "old": "طلب استثناء مضبوط",
+  "new": "طلب استثناء خاضع للرقابة",
+  "category": "literal",
+  "en": "Request controlled exception",
+  "replaced": 1
+ },
+ {
+  "old": "التأهيل حتى",
+  "new": "مؤهل حتى",
+  "category": "grammar",
+  "en": "Qualified until",
+  "replaced": 3
+ },
+ {
+  "old": "في الوقت %",
+  "new": "الالتزام بالموعد %",
+  "category": "literal",
+  "en": "On-time %",
+  "replaced": 1
+ },
+ {
+  "old": "مسار: الإقرار من العمليات ← مراجعة الجودة (قرار نقل لا قرار سريري) ← حادث و CAPA عند الحاجة",
+  "new": "المسار: الإقرار من العمليات ← مراجعة الجودة (قرار نقل لا قرار سريري) ← حادثة جودة وإجراءات تصحيحية ووقائية (CAPA) عند الحاجة",
+  "category": "consistency",
+  "en": "Flow: operations acknowledge → quality review (transport decision, not clinical) → incident & CAPA if needed",
+  "replaced": 1
+ },
+ {
+  "old": "فتح حادث",
+  "new": "فتح حادثة جودة",
+  "category": "consistency",
+  "en": "Open incident",
+  "replaced": 1
+ },
+ {
+  "old": "فتح حادث جودة للتحقيق و CAPA",
+  "new": "فتح حادثة جودة للتحقيق والإجراءات التصحيحية والوقائية (CAPA)",
+  "category": "consistency",
+  "en": "Open a quality incident for investigation and CAPA",
+  "replaced": 1
+ },
+ {
+  "old": "إقرار المفتوح من المحدد",
+  "new": "إقرار الانحرافات المفتوحة المحددة",
+  "category": "literal",
+  "en": "Acknowledge selected open",
+  "replaced": 1
+ },
+ {
+  "old": "تم إقرار ${o.length} انحراف",
+  "new": "تم إقرار الانحرافات (${o.length})",
+  "category": "grammar",
+  "en": "${o.length} excursion(s) acknowledged",
+  "replaced": 1
+ },
+ {
+  "old": "السماح (ث)",
+  "new": "مهلة السماح (ث)",
+  "category": "literal",
+  "en": "Tolerance (s)",
+  "replaced": 1
+ },
+ {
+  "old": "حادث جديد",
+  "new": "حادثة جديدة",
+  "category": "consistency",
+  "en": "New incident",
+  "replaced": 1
+ },
+ {
+  "old": "فتح حادث جودة",
+  "new": "فتح حادثة جودة",
+  "category": "consistency",
+  "en": "Open quality incident",
+  "replaced": 1
+ },
+ {
+  "old": "نقل إلى: ${label(lang, next[i.status])}",
+  "new": "تغيير الحالة إلى: ${label(lang, next[i.status])}",
+  "category": "context",
+  "en": "Move to: ${label(lang, next[i.status])}",
+  "replaced": 1
+ },
+ {
+  "old": "الإغلاق يتطلب إجراء CAPA واحداً على الأقل لغير منخفض الشدة.",
+  "new": "يتطلب الإغلاق إجراءً تصحيحياً/وقائياً (CAPA) واحداً على الأقل للحوادث غير منخفضة الشدة.",
+  "category": "grammar",
+  "en": "Closing requires at least one CAPA for non-low severity.",
+  "replaced": 1
+ },
+ {
+  "old": "إضافة CAPA",
+  "new": "إضافة إجراء تصحيحي/وقائي (CAPA)",
+  "category": "consistency",
+  "en": "Add CAPA",
+  "replaced": 1
+ },
+ {
+  "old": "المسار: تقديم ← تحقيق ← تقييم المسؤولية (الجودة) ← اعتماد القرار (المعتمِد المالي) ← إغلاق",
+  "new": "سير العمل: تقديم ← تحقيق ← تقييم المسؤولية (الجودة) ← اعتماد القرار (المعتمِد المالي) ← إغلاق",
+  "category": "context",
+  "en": "Flow: submit → investigate → liability assessment (quality) → resolution approval (finance approver) → close",
+  "replaced": 1
+ },
+ {
+  "old": "المطالب",
+  "new": "المبلغ المطالب به",
+  "category": "grammar",
+  "en": "Claimed",
+  "replaced": 2
+ },
+ {
+  "old": "المبلغ المطالب: ${f.sar(r.claimedAmount)}",
+  "new": "المبلغ المطالب به: ${f.sar(r.claimedAmount)}",
+  "category": "grammar",
+  "en": "Claimed: ${f.sar(r.claimedAmount)}",
+  "replaced": 1
+ },
+ {
+  "old": "المسؤول",
+  "new": "الطرف المسؤول",
+  "category": "context",
+  "en": "Liable party",
+  "replaced": 1
+ },
+ {
+  "old": "قرار",
+  "new": "اتخاذ القرار",
+  "category": "literal",
+  "en": "Decide",
+  "replaced": 1
+ },
+ {
+  "old": "الوجهة البديلة (للخيار المعني)",
+  "new": "الوجهة البديلة (عند اختيارها)",
+  "category": "literal",
+  "en": "Alternate destination (if chosen)",
+  "replaced": 1
+ },
+ {
+  "old": "لا تسليمات فاشلة",
+  "new": "لا شحنات متعذّر تسليمها",
+  "category": "consistency",
+  "en": "No failed deliveries",
+  "replaced": 1
+ },
+ {
+  "old": "استغلال الصناديق %",
+  "new": "نسبة استخدام الصناديق %",
+  "category": "literal",
+  "en": "Box utilization %",
+  "replaced": 1
+ },
+ {
+  "old": "قواعد المرحلة 1 مفسّرة؛ التنبؤ بالتعلم الآلي مؤجل حتى تتوفر بيانات تشغيلية (PDA)",
+  "new": "قواعد المرحلة 1 قابلة للتفسير؛ التنبؤ بالتعلم الآلي مؤجل حتى تتوفر بيانات تشغيلية (PDA)",
+  "category": "literal",
+  "en": "Explained Phase-1 rules; ML prediction deferred until operating evidence exists (PDA)",
+  "replaced": 1
+ },
+ {
+  "old": "أُغلقت",
+  "new": "عولجت",
+  "category": "context",
+  "en": "Resolved",
+  "replaced": 1
+ },
+ {
+  "old": "مغلقة",
+  "new": "مُعالَجة",
+  "category": "context",
+  "en": "Resolved",
+  "replaced": 1
+ },
+ {
+  "old": "المخاطرة",
+  "new": "مستوى المخاطر",
+  "category": "literal",
+  "en": "Risk",
+  "replaced": 1
+ },
+ {
+  "old": "رحلاتي وتسوياتي",
+  "new": "مراحل نقلي وتسوياتي",
+  "category": "consistency",
+  "en": "My legs & settlements",
+  "replaced": 1
+ },
+ {
+  "old": "القنوات SMS والبريد والإشعارات الفورية محاكاة — لا يُرسل شيء فعلياً (INT-001)",
+  "new": "قنوات الرسائل النصية والبريد الإلكتروني والإشعارات الفورية محاكاة — لا يُرسل شيء فعلياً (INT-001)",
+  "category": "literal",
+  "en": "SMS, email and push are simulated — nothing is actually sent (INT-001)",
+  "replaced": 1
+ },
+ {
+  "old": "العنوان (عربي)",
+  "new": "الموضوع (عربي)",
+  "category": "context",
+  "en": "Subject (Arabic)",
+  "replaced": 1
+ },
+ {
+  "old": "العنوان (إنجليزي)",
+  "new": "الموضوع (إنجليزي)",
+  "category": "context",
+  "en": "Subject (English)",
+  "replaced": 1
+ },
+ {
+  "old": "قُرئ",
+  "new": "مقروء",
+  "category": "grammar",
+  "en": "Read",
+  "replaced": 1
+ },
+ {
+  "old": "السر",
+  "new": "المفتاح السري",
+  "category": "context",
+  "en": "Secret",
+  "replaced": 1
+ },
+ {
+  "old": "آخر توصيل",
+  "new": "آخر إرسال",
+  "category": "context",
+  "en": "Last delivery",
+  "replaced": 2
+ },
+ {
+  "old": "تدوير السر",
+  "new": "تدوير المفتاح السري",
+  "category": "context",
+  "en": "Rotate secret",
+  "replaced": 1
+ },
+ {
+  "old": "عملاء API",
+  "new": "تطبيقات API المتصلة",
+  "category": "context",
+  "en": "API clients",
+  "replaced": 1
+ },
+ {
+  "old": "النطاقات",
+  "new": "نطاقات الصلاحية",
+  "category": "context",
+  "en": "Scopes",
+  "replaced": 3
+ },
+ {
+  "old": "الإعدادات بإصدارات",
+  "new": "الإعدادات المُدارة بالإصدارات",
+  "category": "grammar",
+  "en": "Versioned settings",
+  "replaced": 1
+ },
+ {
+  "old": "أدوار الموظفين تفرض التحقق بخطوتين.",
+  "new": "التحقق بخطوتين إلزامي لأدوار الموظفين.",
+  "category": "literal",
+  "en": "Staff roles enforce MFA.",
+  "replaced": 1
+ },
+ {
+  "old": "سجل إلحاقي لا يُعدّل (NFR-008)",
+  "new": "سجل للإضافة فقط ولا يُعدَّل (NFR-008)",
+  "category": "literal",
+  "en": "Append-only, never edited (NFR-008)",
+  "replaced": 1
+ },
+ {
+  "old": "بدأت",
+  "new": "بدء الجلسة",
+  "category": "grammar",
+  "en": "Started",
+  "replaced": 1
+ },
+ {
+  "old": "المؤشرات الذهبية ونتائج النسخ — قيم محاكاة لا قياسات حقيقية",
+  "new": "مؤشرات صحة النظام الأساسية ونتائج النسخ الاحتياطي — قيم محاكاة لا قياسات حقيقية",
+  "category": "literal",
+  "en": "Golden signals and backup results — simulated values, not real measurements",
+  "replaced": 1
+ },
+ {
+  "old": "العمليات RPO/RTO",
+  "new": "RPO/RTO للعمليات",
+  "category": "grammar",
+  "en": "Operations RPO/RTO",
+  "replaced": 1
+ },
+ {
+  "old": "المالية RPO/RTO",
+  "new": "RPO/RTO للمالية",
+  "category": "grammar",
+  "en": "Finance RPO/RTO",
+  "replaced": 1
+ },
+ {
+  "old": "قاعدة البيانات والطابور",
+  "new": "قاعدة البيانات وطابور المهام",
+  "category": "literal",
+  "en": "Database and queue",
+  "replaced": 1
+ },
+ {
+  "old": "بوابة الشريك — رحلاتي وأحداث الناقل والتسويات (افتراض G04)",
+  "new": "بوابة الشريك — مراحل نقلي وأحداث الناقل والتسويات (افتراض G04)",
+  "category": "consistency",
+  "en": "Partner portal — my legs, carrier events and settlements (assumption G04)",
+  "replaced": 1
+ },
+ {
+  "old": "الحظر",
+  "new": "القيود التشغيلية",
+  "category": "consistency",
+  "en": "Blocks",
+  "replaced": 1
+ },
+ {
+  "old": "عائد ← تنظيف ← فحص ← متاح. الفشل يحيل للصيانة؛ التأهيل الحراري المنتهي يُجدد عند الفحص.",
+  "new": "عائد ← تنظيف ← فحص ← متاح. عدم اجتياز الفحص يحيل الصندوق إلى الصيانة؛ ويُجدَّد التأهيل الحراري المنتهي عند الفحص.",
+  "category": "literal",
+  "en": "Returning → cleaning → inspection → available. Failure sends to maintenance; expired thermal qualification is renewed at inspection.",
+  "replaced": 1
+ },
+ {
+  "old": "الطابور",
+  "new": "قائمة الانتظار",
+  "category": "literal",
+  "en": "Queue",
+  "replaced": 3
+ },
+ {
+  "old": "لا صناديق في الطابور",
+  "new": "لا صناديق في قائمة الانتظار",
+  "category": "literal",
+  "en": "Queue is empty",
+  "replaced": 1
+ },
+ {
+  "old": "النجاح يتطلب كل البنود.",
+  "new": "يتطلب اجتياز الفحص استيفاء جميع البنود.",
+  "category": "literal",
+  "en": "Pass requires every item.",
+  "replaced": 1
+ },
+ {
+  "old": "ناجح",
+  "new": "مجتاز",
+  "category": "literal",
+  "en": "Pass",
+  "replaced": 1
+ },
+ {
+  "old": "فاشل",
+  "new": "غير مجتاز",
+  "category": "literal",
+  "en": "Fail",
+  "replaced": 1
+ },
+ {
+  "old": "وقّع",
+  "new": "الموقِّع",
+  "category": "grammar",
+  "en": "Signed by",
+  "replaced": 1
+ },
+ {
+  "old": "حد الطلب",
+  "new": "حد إعادة الطلب",
+  "category": "context",
+  "en": "Reorder",
+  "replaced": 1
+ },
+ {
+  "old": "أقل من الحد",
+  "new": "دون حد إعادة الطلب",
+  "category": "context",
+  "en": "Below reorder",
+  "replaced": 1
+ },
+ {
+  "old": "رمز العرض",
+  "new": "رمز تجريبي للعرض",
+  "category": "context",
+  "en": "Demo code",
+  "replaced": 3
+ },
+ {
+  "old": "فجوة بيانات — لا تعني الالتزام",
+  "new": "فجوة بيانات — لا تعني الالتزام بالنطاق الحراري",
+  "category": "context",
+  "en": "Data gap — does not imply compliance",
+  "replaced": 2
+ },
+ {
+  "old": "مستنتج من أحداث الناقل (رحلة جوية بلا GPS)",
+  "new": "مستنتج من أحداث الناقل (مرحلة نقل جوي بلا GPS)",
+  "category": "consistency",
+  "en": "Inferred from carrier events (air leg, no GPS)",
+  "replaced": 1
+ },
+ {
+  "old": "عاد الاتصال — زُومنت ${r.results.length} إجراءات تلقائياً",
+  "new": "عاد الاتصال — تمت مزامنة ${r.results.length} إجراءات تلقائياً",
+  "category": "grammar",
+  "en": "Back online — ${r.results.length} actions synced automatically",
+  "replaced": 1
+ },
+ {
+  "old": "حُفظ في طابور دون اتصال",
+  "new": "حُفظ في قائمة انتظار المزامنة دون اتصال",
+  "category": "literal",
+  "en": "Saved to offline queue",
+  "replaced": 1
+ },
+ {
+  "old": "في الطابور",
+  "new": "في قائمة الانتظار",
+  "category": "literal",
+  "en": "queued",
+  "replaced": 1
+ },
+ {
+  "old": "الملاحة الفعلية تُفتح في تطبيق الخرائط على الجهاز؛ هنا ترتيب التوقفات المسند من الإرسال.",
+  "new": "الملاحة الفعلية تُفتح في تطبيق الخرائط على الجهاز؛ هنا ترتيب التوقفات المُسند من التوزيع.",
+  "category": "consistency",
+  "en": "Turn-by-turn navigation opens in the device maps app; this shows the stop order assigned by dispatch.",
+  "replaced": 1
+ },
+ {
+  "old": "اسم المستلم من الطرف الآخر",
+  "new": "اسم الشخص المستلم",
+  "category": "literal",
+  "en": "Receiving person",
+  "replaced": 2
+ },
+ {
+  "old": "نقل حيازة",
+  "new": "نقل الحيازة",
+  "category": "consistency",
+  "en": "Handover",
+  "replaced": 3
+ },
+ {
+  "old": "لا تُتلف أي عينة. القرار (إعادة محاولة / وجهة بديلة / حجز / إرجاع) للعمليات.",
+  "new": "لا تُتلف أي عينة. القرار (إعادة محاولة / وجهة بديلة / احتجاز / إرجاع) للعمليات.",
+  "category": "context",
+  "en": "Never destroy samples. Operations decides: retry / alternate / hold / return.",
+  "replaced": 2
+ },
+ {
+  "old": "الصناديق بعهدتي",
+  "new": "الصناديق في حيازتي",
+  "category": "consistency",
+  "en": "Boxes in my custody",
+  "replaced": 3
+ },
+ {
+  "old": "الكمية 1 على الأقل",
+  "new": "يجب ألا تقل الكمية عن 1",
+  "category": "grammar",
+  "en": "Quantity ≥ 1",
+  "replaced": 1
+ },
+ {
+  "old": "الوزن كغ",
+  "new": "الوزن (كغ)",
+  "category": "grammar",
+  "en": "Weight kg",
+  "replaced": 1
+ },
+ {
+  "old": "نهاية النافذة",
+  "new": "نهاية فترة الاستلام",
+  "category": "consistency",
+  "en": "Window end",
+  "replaced": 1
+ },
+ {
+  "old": "لا يمكن الإلغاء قبل أقل من ساعة من الاستلام.",
+  "new": "لا يمكن الإلغاء خلال الساعة السابقة لموعد الاستلام.",
+  "category": "grammar",
+  "en": "Cannot cancel within one hour of pickup.",
+  "replaced": 2
+ },
+ {
+  "old": "قراءة الكل",
+  "new": "تعليم الكل كمقروء",
+  "category": "literal",
+  "en": "Read all",
+  "replaced": 1
+ },
+ {
+  "old": "لتقديم مطالبة افتح الشحنة واختر \"تقديم مطالبة\".",
+  "new": "لتقديم مطالبة افتح الشحنة واختر «تقديم مطالبة».",
+  "category": "consistency",
+  "en": "To file a claim, open the shipment and choose “File claim”.",
+  "replaced": 1
+ },
+ {
+  "old": "انحرافات",
+  "new": "انحرافات حرارية",
+  "category": "context",
+  "en": "Excursions",
+  "replaced": 2
+ },
+ {
+  "old": "المستوى",
+  "new": "مستوى الخدمة",
+  "category": "context",
+  "en": "Level",
+  "replaced": 1
+ },
+ {
+  "old": "توليد الطلب التالي الآن",
+  "new": "إنشاء الطلب التالي الآن",
+  "category": "literal",
+  "en": "Generate next now",
+  "replaced": 1
+ },
+ {
+  "old": "متوقع",
+  "new": "الوصول المتوقع",
+  "category": "context",
+  "en": "Expected",
+  "replaced": 1
+ },
+ {
+  "old": "التصدير مدقق ويُظهر بيانات فروعك فقط",
+  "new": "عمليات التصدير مسجلة في سجل التدقيق ولا تشمل إلا بيانات فروعك",
+  "category": "literal",
+  "en": "Exports are audited and include only your branches",
+  "replaced": 1
+ },
+ {
+  "old": "للربط مع نظام المختبر LIS — توصيل الأحداث محاكاة",
+  "new": "للربط مع نظام المختبر LIS — إرسال الأحداث محاكاة",
+  "category": "context",
+  "en": "For LIS integration — event delivery is simulated",
+  "replaced": 1
+ },
+ {
+  "old": "الوزن بين 0.1 و25 كجم",
+  "new": "الوزن بين 0.1 و25 كغ",
+  "category": "consistency",
+  "en": "Weight between 0.1 and 25 kg",
+  "replaced": 1
+ },
+ {
+  "old": "مدة الفترة",
+  "new": "مدة فترة الاستلام",
+  "category": "context",
+  "en": "Window length",
+  "replaced": 1
+ },
+ {
+  "old": "طلب",
+  "new": "طلب استلام",
+  "category": "context",
+  "en": "Request",
+  "replaced": 2
+ },
+ {
+  "old": "وضع دون اتصال (محاكاة) — ${q.items.length} في الطابور",
+  "new": "وضع دون اتصال (محاكاة) — ${q.items.length} في قائمة الانتظار",
+  "category": "literal",
+  "en": "Offline mode (simulated) — ${q.items.length} queued",
+  "replaced": 1
+ },
+ {
+  "old": "لا اتصال بالخادم — ${q.items.length} في الطابور؛ المزامنة تلقائية عند العودة",
+  "new": "لا اتصال بالخادم — ${q.items.length} في قائمة الانتظار؛ المزامنة تلقائية عند عودة الاتصال",
+  "category": "literal",
+  "en": "Server unreachable — ${q.items.length} queued; syncs automatically on reconnect",
+  "replaced": 1
+ },
+ {
+  "old": "${q.items.length} إجراء بانتظار المزامنة",
+  "new": "إجراءات بانتظار المزامنة: ${q.items.length}",
+  "category": "grammar",
+  "en": "${q.items.length} action(s) awaiting sync",
+  "replaced": 1
+ },
+ {
+  "old": "حُفظ في الطابور وسيُزامن تلقائياً عند عودة الاتصال",
+  "new": "حُفظ في قائمة الانتظار وسيُزامن تلقائياً عند عودة الاتصال",
+  "category": "literal",
+  "en": "Saved to queue — will sync automatically when back online",
+  "replaced": 1
+ },
+ {
+  "old": "صندوق بعهدتك",
+  "new": "صندوق في حيازتك",
+  "category": "consistency",
+  "en": "Box in your custody",
+  "replaced": 1
+ },
+ {
+  "old": "لديك $conflicts تعارض مزامنة بانتظار العمليات",
+  "new": "تعارضات مزامنة بانتظار العمليات: $conflicts",
+  "category": "grammar",
+  "en": "You have $conflicts sync conflict(s) awaiting operations",
+  "replaced": 1
+ },
+ {
+  "old": "إيقاف صندوق نهائياً",
+  "new": "إخراج صندوق من الخدمة نهائياً",
+  "category": "literal",
+  "en": "Retire box",
+  "replaced": 1
+ },
+ {
+  "old": "تسجيل جهاز GPT45-M بالـ IMEI",
+  "new": "تسجيل جهاز GPT45-M برقم IMEI",
+  "category": "grammar",
+  "en": "Register GPT45-M by IMEI",
+  "replaced": 1
+ },
+ {
+  "old": "إرسال أمر معتمد (محاكاة ACK)",
+  "new": "إرسال أمر معتمد (إقرار استلام محاكى ACK)",
+  "category": "raw-key",
+  "en": "Send approved command (simulated ACK)",
+  "replaced": 1
+ },
+ {
+  "old": "توليد نبضة قراءات تجريبية",
+  "new": "توليد دفعة قراءات تجريبية",
+  "category": "literal",
+  "en": "Generate a tick of demo readings",
+  "replaced": 1
+ },
+ {
+  "old": "إعادة تشغيل رسالة من الدليل الخام (dead-letter)",
+  "new": "إعادة معالجة رسالة من البيانات الخام (رسائل متعذرة المعالجة)",
+  "category": "consistency",
+  "en": "Replay message from raw evidence (dead-letter)",
+  "replaced": 1
+ },
+ {
+  "old": "رسم العقد ${contract.contractNo}",
+  "new": "رسوم العقد ${contract.contractNo}",
+  "category": "grammar",
+  "en": "Contract fee ${contract.contractNo}",
+  "replaced": 1
+ },
+ {
+  "old": "إصدار الفاتورة وترحيل القيد (ZATCA محاكاة)",
+  "new": "إصدار الفاتورة وترحيل القيد (ربط ZATCA محاكى)",
+  "category": "grammar",
+  "en": "Issue invoice and post journal (ZATCA simulated)",
+  "replaced": 1
+ },
+ {
+  "old": "طلب إشعار دائن (تصحيح مضبوط)",
+  "new": "طلب إشعار دائن (تصحيح خاضع للرقابة)",
+  "category": "literal",
+  "en": "Request credit note (controlled correction)",
+  "replaced": 1
+ },
+ {
+  "old": "طلب تجاوز توزيع معتمد",
+  "new": "طلب تجاوز موثّق لتوزيع التكاليف",
+  "category": "context",
+  "en": "Request audited allocation override",
+  "replaced": 1
+ },
+ {
+  "old": "مطابقة فاتورة الشريك مع المستحقات",
+  "new": "مطابقة فاتورة الشريك مع الذمم الدائنة",
+  "category": "context",
+  "en": "Reconcile partner invoice with payables",
+  "replaced": 1
+ },
+ {
+  "old": "مسودة إصدار تعرفة جديد",
+  "new": "مسودة إصدار جديد من جدول الأسعار",
+  "category": "consistency",
+  "en": "Draft new tariff version",
+  "replaced": 1
+ },
+ {
+  "old": "نشر تعرفة معتمدة بتاريخ سريان",
+  "new": "نشر جدول أسعار معتمد بتاريخ بدء السريان",
+  "category": "consistency",
+  "en": "Publish approved tariff with effective date",
+  "replaced": 1
+ },
+ {
+  "old": "تحويل المحاكاة إلى مسودة تعرفة",
+  "new": "تحويل المحاكاة إلى مسودة جدول أسعار",
+  "category": "consistency",
+  "en": "Turn simulation into tariff draft",
+  "replaced": 1
+ },
+ {
+  "old": "فحص انتهاء التراخيص وتطبيق الحظر",
+  "new": "فحص انتهاء التراخيص وتطبيق القيود التشغيلية",
+  "category": "consistency",
+  "en": "Check expiries and apply blocks",
+  "replaced": 1
+ },
+ {
+  "old": "حظر تشغيلي: ${l.licenseNo}",
+  "new": "قيد تشغيلي: ${l.licenseNo}",
+  "category": "consistency",
+  "en": "Operational block: ${l.licenseNo}",
+  "replaced": 1
+ },
+ {
+  "old": "${affected.length} شحنات نشطة صُعّدت",
+  "new": "تم تصعيد الشحنات النشطة المتأثرة: ${affected.length}",
+  "category": "grammar",
+  "en": "${affected.length} active shipments escalated",
+  "replaced": 1
+ },
+ {
+  "old": "رفع حظر بعد تصحيح السبب",
+  "new": "رفع القيد التشغيلي بعد معالجة السبب",
+  "category": "consistency",
+  "en": "Lift block after remediation",
+  "replaced": 1
+ },
+ {
+  "old": "تحديث سجل الانطباق",
+  "new": "تحديث سجل انطباق المتطلبات النظامية",
+  "category": "literal",
+  "en": "Update applicability register",
+  "replaced": 1
+ },
+ {
+  "old": "فرض حجز قانوني",
+  "new": "فرض تحفظ قانوني",
+  "category": "consistency",
+  "en": "Apply legal hold",
+  "replaced": 1
+ },
+ {
+  "old": "تشغيل الأرشفة مع احترام الحجز",
+  "new": "تشغيل الأرشفة مع مراعاة التحفظات القانونية",
+  "category": "consistency",
+  "en": "Run archive respecting holds",
+  "replaced": 1
+ },
+ {
+  "old": "تغيير ${key} إلى ${JSON.stringify(value)}",
+  "new": "تغيير ${configLabel('ar', key)} إلى ${JSON.stringify(value)}",
+  "category": "raw-key",
+  "en": "Change ${key} to ${JSON.stringify(value)}",
+  "replaced": 1
+ },
+ {
+  "old": "${i.nameAr} — استلام العينات",
+  "new": "${i.nameAr} — مكتب استلام العينات",
+  "category": "context",
+  "en": "${i.nameEn || i.nameAr} — Sample desk",
+  "replaced": 1
+ },
+ {
+  "old": "تصعيد تأخير",
+  "new": "تم تصعيد التأخير",
+  "category": "grammar",
+  "en": "Delay escalated",
+  "replaced": 1
+ },
+ {
+  "old": "تشغيل نسخة أو تمرين استعادة (محاكاة)",
+  "new": "تشغيل نسخ احتياطي أو تمرين استعادة (محاكاة)",
+  "category": "literal",
+  "en": "Run backup or restore drill (simulated)",
+  "replaced": 1
+ },
+ {
+  "old": "فتح حادث جودة (QMS-001)",
+  "new": "فتح حادثة جودة (QMS-001)",
+  "category": "consistency",
+  "en": "Open quality incident (QMS-001)",
+  "replaced": 1
+ },
+ {
+  "old": "حادث جديد ${x.code}",
+  "new": "حادثة جديدة ${x.code}",
+  "category": "consistency",
+  "en": "New incident ${x.code}",
+  "replaced": 1
+ },
+ {
+  "old": "إكمال إجراء CAPA",
+  "new": "إكمال إجراء تصحيحي ووقائي (CAPA)",
+  "category": "consistency",
+  "en": "Complete CAPA action",
+  "replaced": 1
+ },
+ {
+  "old": "طلب استثناء جاهزية مضبوط (DHC)",
+  "new": "طلب استثناء جاهزية خاضع للضوابط (DHC)",
+  "category": "literal",
+  "en": "Request controlled readiness exception (DHC)",
+  "replaced": 1
+ },
+ {
+  "old": "الشحنة الآن بعهدة المندوب.",
+  "new": "الشحنة الآن في حيازة المندوب.",
+  "category": "consistency",
+  "en": "Shipment is now in courier custody.",
+  "replaced": 1
+ },
+ {
+  "old": "نقل حيازة ذرّي مع دليل (BR-005)",
+  "new": "نقل حيازة كعملية واحدة غير قابلة للتجزئة مع الدليل (BR-005)",
+  "category": "literal",
+  "en": "Atomic custody transfer with evidence (BR-005)",
+  "replaced": 1
+ },
+ {
+  "old": "القرار: ${i.decision}",
+  "new": "القرار: ${label('ar', i.decision)}",
+  "category": "raw-key",
+  "en": "Decision: ${i.decision}",
+  "replaced": 1
+ },
+ {
+  "old": "إعلان فقدان ${sh.trackingNo} — يتطلب العمليات والجودة",
+  "new": "إعلان فقدان ${sh.trackingNo} — يتطلب اعتماد العمليات والجودة",
+  "category": "grammar",
+  "en": "Declare ${sh.trackingNo} lost — needs operations and quality",
+  "replaced": 1
+ },
+ {
+  "old": "تسجيل قرار المؤسسة المستلمة",
+  "new": "تسجيل قرار الجهة المستلمة",
+  "category": "consistency",
+  "en": "Record receiving institution disposition",
+  "replaced": 1
+ },
+ {
+  "old": "إرسال المسار بعد فحص الامتثال",
+  "new": "إطلاق المسار للمندوب بعد فحص الامتثال",
+  "category": "context",
+  "en": "Dispatch route after compliance check",
+  "replaced": 1
+ },
+ {
+  "old": "المندوب محظور تشغيلياً",
+  "new": "المندوب خاضع لقيد تشغيلي",
+  "category": "consistency",
+  "en": "Courier is blocked",
+  "replaced": 1
+ },
+ {
+  "old": "الشريك محظور أو غير نشط",
+  "new": "الشريك خاضع لقيد تشغيلي أو غير نشط",
+  "category": "consistency",
+  "en": "Partner blocked or inactive",
+  "replaced": 1
+ },
+ {
+  "old": "نفس مفتاح Idempotency استُخدم بطلب مختلف",
+  "new": "مفتاح منع التكرار (Idempotency) مستخدم مسبقاً لطلب ببيانات مختلفة",
+  "category": "literal",
+  "en": "Idempotency key reused with a different payload",
+  "replaced": 1
+ },
+ {
+  "old": "جُدول الاستلام",
+  "new": "الاستلام مجدول",
+  "category": "consistency",
+  "en": "Pickup scheduled",
+  "replaced": 2
+ },
+ {
+  "old": "نقل حيازة: ${c.fromType} ← ${c.toType}",
+  "new": "نقل حيازة: ${label('ar', c.fromType, 'custodian')} ← ${label('ar', c.toType, 'custodian')}",
+  "category": "raw-key",
+  "en": "Custody: ${c.fromType} → ${c.toType}",
+  "replaced": 1
+ },
+ {
+  "old": "الناقل: ${c.eventType}",
+  "new": "الناقل: ${label('ar', c.eventType)}",
+  "category": "raw-key",
+  "en": "Carrier: ${c.eventType}",
+  "replaced": 1
+ },
+ {
+  "old": "الجهاز: ${h.eventType}",
+  "new": "الجهاز: ${label('ar', h.eventType)}",
+  "category": "raw-key",
+  "en": "Device: ${h.eventType}",
+  "replaced": 1
+ },
+ {
+  "old": "رحلة جوية — لا بيانات (لم يثبت دعم التخزين المؤقت)",
+  "new": "رحلة جوية — لا بيانات (لم يُتحقق من دعم الجهاز لتخزين القراءات)",
+  "category": "literal",
+  "en": "Air leg — no data (buffering not verified)",
+  "replaced": 1
+ },
+ {
+  "old": "بيانات عرض تجريبية — ليست قراءات أجهزة حقيقية. الفجوات لا تعني الالتزام. القرار السريري للمؤسسة المستلمة فقط.",
+  "new": "بيانات عرض تجريبية — ليست قراءات أجهزة حقيقية. فجوات البيانات لا تعني الالتزام بالنطاق الحراري. القرار السريري للجهة المستلمة فقط.",
+  "category": "context",
+  "en": "Demo data — not real device readings. Gaps do not imply compliance. Clinical decisions belong to the receiving institution only.",
+  "replaced": 1
+ },
+ {
+  "old": "حظر ${({ partner: 'شريك', vehicle: 'مركبة', courier: 'مندوب', route: 'مسار', box: 'صندوق', device: 'جهاز' } as Record<string, string>)[b.scopeType]}: ${b.reason}",
+  "new": "قيد تشغيلي على ${({ partner: 'شريك', vehicle: 'مركبة', courier: 'مندوب', route: 'مسار', box: 'صندوق', device: 'جهاز' } as Record<string, string>)[b.scopeType]}: ${b.reason}",
+  "category": "consistency",
+  "en": "${b.scopeType} blocked: ${b.reason}",
+  "replaced": 1
+ },
+ {
+  "old": "انحراف حراري من الإنذار إلى CAPA",
+  "new": "انحراف حراري من الإنذار إلى الإجراء التصحيحي والوقائي (CAPA)",
+  "category": "consistency",
+  "en": "Temperature excursion from alert to CAPA",
+  "replaced": 1
+ },
+ {
+  "old": "القراءة خارج النطاق تفتح انحرافاً يظهر في البرج وسير الجودة",
+  "new": "القراءة خارج النطاق تفتح انحرافاً حرارياً يظهر في مركز مراقبة العمليات وسير عمل الجودة",
+  "category": "mandated",
+  "en": "An out-of-range reading opens an excursion seen by the tower and quality",
+  "replaced": 1
+ },
+ {
+  "old": "يظهر في برج التحكم والعمليات تُقر",
+  "new": "يظهر في مركز مراقبة العمليات والعمليات تُقرّ به",
+  "category": "mandated",
+  "en": "Appears in the tower; operations acknowledge",
+  "replaced": 1
+ },
+ {
+  "old": "الجودة تراجع وتفتح حادثاً",
+  "new": "الجودة تراجع وتفتح حادثة جودة",
+  "category": "consistency",
+  "en": "Quality reviews and opens an incident",
+  "replaced": 1
+ },
+ {
+  "old": "إضافة إجراء CAPA",
+  "new": "إضافة إجراء تصحيحي ووقائي (CAPA)",
+  "category": "consistency",
+  "en": "Add a CAPA action",
+  "replaced": 1
+ },
+ {
+  "old": "صندوق غير جاهز واستثناء مضبوط",
+  "new": "صندوق غير جاهز واستثناء خاضع للضوابط",
+  "category": "literal",
+  "en": "Box not ready and a controlled exception",
+  "replaced": 1
+ },
+ {
+  "old": "الحظر التلقائي والاستثناء باعتماد الجودة، ورفض تجاوز الضوابط الإلزامية",
+  "new": "المنع التلقائي للإسناد، والاستثناء باعتماد الجودة، مع بقاء الضوابط الإلزامية",
+  "category": "context",
+  "en": "Automatic block, quality-approved exception, mandatory safeguards stay",
+  "replaced": 1
+ },
+ {
+  "old": "الجودة تعتمد ← معلنة مفقودة",
+  "new": "الجودة تعتمد ← أُعلن فقدان الشحنة",
+  "category": "grammar",
+  "en": "Quality approves → declared lost",
+  "replaced": 1
+ },
+ {
+  "old": "إصدار (ZATCA محاكاة) وترحيل القيد",
+  "new": "إصدار الفاتورة (ربط ZATCA محاكى) وترحيل القيد",
+  "category": "grammar",
+  "en": "Issue (ZATCA simulated) and post",
+  "replaced": 1
+ },
+ {
+  "old": "ميزان المراجعة متوازن والذمم مطابقة",
+  "new": "ميزان المراجعة متوازن وأرصدة الذمم المدينة مطابقة",
+  "category": "context",
+  "en": "Trial balance balanced, AR reconciled",
+  "replaced": 1
+ },
+ {
+  "old": "لا أثر على الأسعار أو الفواتير الحية",
+  "new": "لا أثر على الأسعار أو الفواتير الفعلية",
+  "category": "literal",
+  "en": "No effect on live prices or invoices",
+  "replaced": 1
+ },
+ {
+  "old": "التحقق: الحالة الحية لم تتغير",
+  "new": "التحقق: البيانات الفعلية لم تتغير",
+  "category": "literal",
+  "en": "Check: live state unchanged",
+  "replaced": 1
+ },
+ {
+  "old": "التحقق الثنائي",
+  "new": "التحقق بخطوتين",
+  "category": "consistency",
+  "en": "Two-factor verification",
+  "replaced": 1
+ },
+ {
+  "old": "ناقل شريك",
+  "new": "الشريك الناقل",
+  "category": "consistency",
+  "en": "Carrier partner",
+  "replaced": 1
+ },
+ {
+  "old": "مشاهد الفرع",
+  "new": "مستخدم الفرع (عرض فقط)",
+  "category": "literal",
+  "en": "Branch viewer",
+  "replaced": 1
+ },
+ {
+  "old": "مالية المؤسسة",
+  "new": "المسؤول المالي للمؤسسة",
+  "category": "context",
+  "en": "Corporate finance",
+  "replaced": 1
+ },
+ {
+  "old": "على متن رحلة",
+  "new": "في رحلة جوية",
+  "category": "consistency",
+  "en": "In air transit",
+  "replaced": 1
+ },
+ {
+  "old": "محيط",
+  "new": "درجة حرارة الغرفة",
+  "category": "mandated",
+  "en": "Ambient",
+  "replaced": 1
+ },
+ {
+  "old": "عاجل STAT",
+  "new": "طارئ (STAT)",
+  "category": "consistency",
+  "en": "STAT",
+  "replaced": 1
+ },
+ {
+  "old": "عائد للمستودع",
+  "new": "عائد إلى المستودع",
+  "category": "consistency",
+  "en": "Returning",
+  "replaced": 1
+ },
+ {
+  "old": "تنظيف",
+  "new": "قيد التنظيف",
+  "category": "context",
+  "en": "Cleaning",
+  "replaced": 1
+ },
+ {
+  "old": "فحص",
+  "new": "قيد الفحص",
+  "category": "context",
+  "en": "Inspection",
+  "replaced": 1
+ },
+ {
+  "old": "صيانة",
+  "new": "قيد الصيانة",
+  "category": "context",
+  "en": "Maintenance",
+  "replaced": 2
+ },
+ {
+  "old": "متقاعد",
+  "new": "خارج الخدمة",
+  "category": "literal",
+  "en": "Retired",
+  "replaced": 2
+ },
+ {
+  "old": "قديم",
+  "new": "بيانات قديمة",
+  "category": "consistency",
+  "en": "Stale",
+  "replaced": 1
+ },
+ {
+  "old": "يدوي",
+  "new": "إدخال يدوي",
+  "category": "consistency",
+  "en": "Manual",
+  "replaced": 1
+ },
+ {
+  "old": "شريك",
+  "new": "الشريك الناقل",
+  "category": "consistency",
+  "en": "Partner",
+  "replaced": 2
+ },
+ {
+  "old": "رئيسي",
+  "new": "جسيم",
+  "category": "context",
+  "en": "Major",
+  "replaced": 1
+ },
+ {
+  "old": "مطابَقة",
+  "new": "تمت المطابقة",
+  "category": "consistency",
+  "en": "Reconciled",
+  "replaced": 1
+ },
+ {
+  "old": "محل خلاف",
+  "new": "متنازع عليها",
+  "category": "consistency",
+  "en": "Disputed",
+  "replaced": 1
+ },
+ {
+  "old": "ساري",
+  "new": "سارٍ",
+  "category": "grammar",
+  "en": "Valid",
+  "replaced": 1
+ },
+ {
+  "old": "تعرفة",
+  "new": "جدول أسعار",
+  "category": "consistency",
+  "en": "Tariff",
+  "replaced": 1
+ },
+ {
+  "old": "تجاوز توزيع تكلفة",
+  "new": "تعديل استثنائي لتوزيع التكلفة",
+  "category": "literal",
+  "en": "Cost override",
+  "replaced": 1
+ },
+ {
+  "old": "برج التحكم",
+  "new": "مركز مراقبة العمليات",
+  "category": "mandated",
+  "en": "Control tower",
+  "replaced": 1
+ },
+ {
+  "old": "أرجل النقل",
+  "new": "مراحل النقل",
+  "category": "mandated",
+  "en": "Transport legs",
+  "replaced": 1
+ },
+ {
+  "old": "أجهزة GPT45-M",
+  "new": "أجهزة التتبع GPT45-M",
+  "category": "consistency",
+  "en": "GPT45-M devices",
+  "replaced": 1
+ },
+ {
+  "old": "كونسول البوابة",
+  "new": "لوحة بوابة الأجهزة",
+  "category": "consistency",
+  "en": "Gateway console",
+  "replaced": 1
+ },
+ {
+  "old": "CAPA",
+  "new": "الإجراءات التصحيحية والوقائية",
+  "category": "raw-key",
+  "en": "CAPA",
+  "replaced": 1
+ },
+ {
+  "old": "المخزون والحركات",
+  "new": "المخزون وحركاته",
+  "category": "consistency",
+  "en": "Inventory",
+  "replaced": 1
+ },
+ {
+  "old": "التعرفة",
+  "new": "جداول الأسعار",
+  "category": "consistency",
+  "en": "Tariffs",
+  "replaced": 1
+ },
+ {
+  "old": "الذمم والأعمار",
+  "new": "الذمم وأعمار الديون",
+  "category": "literal",
+  "en": "AR/AP & aging",
+  "replaced": 1
+ },
+ {
+  "old": "الحظر التشغيلي",
+  "new": "القيود التشغيلية",
+  "category": "consistency",
+  "en": "Operational blocks",
+  "replaced": 1
+ },
+ {
+  "old": "الحجز القانوني",
+  "new": "التحفظ القانوني على السجلات",
+  "category": "consistency",
+  "en": "Legal holds",
+  "replaced": 1
+ },
+ {
+  "old": "صحة النظام والنسخ",
+  "new": "سلامة النظام والنسخ الاحتياطي",
+  "category": "literal",
+  "en": "System health & backup",
+  "replaced": 1
+ },
+ {
+  "old": "الأصول وIoT",
+  "new": "الأصول والأجهزة",
+  "category": "consistency",
+  "en": "Assets & IoT",
+  "replaced": 1
+ },
+ {
+  "old": "العملاء والتجاري",
+  "new": "العملاء والعقود",
+  "category": "grammar",
+  "en": "Customers & commercial",
+  "replaced": 1
+ },
+ {
+  "old": "تكامل API",
+  "new": "تكامل الأنظمة (API)",
+  "category": "consistency",
+  "en": "API & webhooks",
+  "replaced": 2
+ },
+ {
+  "old": "نافذة الاستلام",
+  "new": "فترة الاستلام",
+  "category": "consistency",
+  "en": "Pickup window",
+  "replaced": 1
+ },
+ {
+  "old": "العناصر",
+  "new": "محتويات الشحنة",
+  "category": "context",
+  "en": "Items",
+  "replaced": 1
+ },
+ {
+  "old": "الأرجل",
+  "new": "مراحل النقل",
+  "category": "mandated",
+  "en": "Legs",
+  "replaced": 1
+ },
+ {
+  "old": "لا يُعرض موقع حي أثناء الطيران",
+  "new": "لا يُعرض موقع مباشر أثناء الطيران",
+  "category": "consistency",
+  "en": "No live position is shown during flight",
+  "replaced": 1
+ },
+ {
+  "old": "الثقة",
+  "new": "درجة الثقة",
+  "category": "consistency",
+  "en": "Confidence",
+  "replaced": 1
+ },
+ {
+  "old": "الفجوة لا تعني الالتزام",
+  "new": "الفجوة في البيانات لا تعني الالتزام بالنطاق",
+  "category": "context",
+  "en": "A gap does not imply compliance",
+  "replaced": 1
+ },
+ {
+  "old": "القرار السريري للمؤسسة المستلمة فقط",
+  "new": "القرار السريري للجهة المستلمة فقط",
+  "category": "consistency",
+  "en": "Clinical decision belongs to the receiving institution only",
+  "replaced": 1
+ },
+ {
+  "old": "قرار المؤسسة المستلمة",
+  "new": "قرار الجهة المستلمة",
+  "category": "consistency",
+  "en": "Receiving institution decision",
+  "replaced": 1
+ },
+ {
+  "old": "حجز مؤقت مؤهَّل",
+  "new": "حجز مؤقت في ظروف تخزين مؤهَّلة",
+  "category": "literal",
+  "en": "Qualified hold",
+  "replaced": 1
+ },
+ {
+  "old": "سائل نخاعي",
+  "new": "سائل دماغي شوكي (CSF)",
+  "category": "context",
+  "en": "CSF sample",
+  "replaced": 1
+ },
+ {
+  "old": "جارٍ",
+  "new": "قيد التنفيذ",
+  "category": "grammar",
+  "en": "In progress",
+  "replaced": 1
+ },
+ {
+  "old": "مرسل",
+  "new": "تم الإرسال",
+  "category": "context",
+  "en": "Sent",
+  "replaced": 1
+ },
+ {
+  "old": "في مسار",
+  "new": "على المسار",
+  "category": "literal",
+  "en": "On route",
+  "replaced": 1
+ },
+ {
+  "old": "محظور",
+  "new": "خاضع لقيد تشغيلي",
+  "category": "consistency",
+  "en": "Blocked",
+  "replaced": 1
+ },
+ {
+  "old": "مطلوب",
+  "new": "تم الطلب",
+  "category": "context",
+  "en": "Requested",
+  "replaced": 1
+ },
+ {
+  "old": "لا جهاز",
+  "new": "لا يوجد جهاز",
+  "category": "grammar",
+  "en": "No device",
+  "replaced": 1
+ }
+]

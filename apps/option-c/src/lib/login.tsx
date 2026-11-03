@@ -49,7 +49,7 @@ export function Login({ title, subtitle, accounts, allowed }: { title: string; s
           </form>
         ) : (
           <form onSubmit={verify} noValidate className="page">
-            <h2>{t('auth.mfaTitle')}</h2><p className="muted">{t('auth.mfaHint')}{IS_DEMO && <> — {lang === 'ar' ? 'رمز العرض' : 'Demo code'} <span className="mono">{DEMO_MFA}</span></>}</p>
+            <h2>{t('auth.mfaTitle')}</h2><p className="muted">{t('auth.mfaHint')}{IS_DEMO && <> — {lang === 'ar' ? 'رمز تجريبي للعرض' : 'Demo code'} <span className="mono">{DEMO_MFA}</span></>}</p>
             {err && <div className="state err" role="alert">{err}</div>}
             <input id="mfa" inputMode="numeric" autoComplete="one-time-code" dir="ltr" maxLength={6} value={code} onChange={(e) => setCode(e.target.value.replace(/\D/g, ''))} aria-label={t('auth.mfaHint')} style={{ fontSize: '1.4rem', letterSpacing: '.4em', textAlign: 'center' }} />
             <div className="row"><Btn kind="primary" onClick={() => verify()} disabled={busy}>{t('auth.verify')}</Btn><Btn kind="ghost" onClick={() => { setChallenge(null); setCode(''); }}>{t('common.back')}</Btn></div>

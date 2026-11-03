@@ -3,6 +3,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { dict, fmtDate, fmtDateTime, fmtRelative, fmtNumber, fmtSAR, fmtTemp, ltr } from '@medlog/i18n';
 import { useApp } from './store';
+import { Layer, useBackgroundLock } from './overlay';
 import { label as tlabel, timelineTitle, timelineDetail, sysText } from './l10n'; import { comma } from './l10n';
 import { AnimatePresence, Collapse, DUR, EASE, Tip, fadeUp, motion, staggerParent } from './motion';
 
@@ -73,10 +74,19 @@ export function CountUp({ value }: { value: React.ReactNode }) {
   return <>{txt.slice(0, m.index)}{m[0].includes(',') || Math.abs(target) >= 1000 ? shown : shown.replace(/,/g, '')}{txt.slice((m.index ?? 0) + m[0].length)}</>;
 }
 /** مؤشرات: الرقم حقيقي ويعدّ تصاعدياً (900ms، يُعطَّل مع تقليل الحركة). الحالات الحرجة تظهر فوراً بلا تأخير دخول. */
+/** قيمة المؤشر (Phase 17.1): العملة منفصلة عن الرقم، والرقم لا يلتف ولا يُقص — حجم الخط يتكيّف مع عرض البطاقة وطول الرقم
+ *  (container query units) دون إخفاء أي منزلة. */
+function KpiValue({ value }: { value: React.ReactNode }) {
+  const txt = typeof value === 'string' ? value : typeof value === 'number' ? String(value) : null;
+  const m = txt?.match(/^(.*?)\s*(ر\.س|SAR)$/);
+  const amount = m ? m[1] : txt; const cur = m ? m[2] : null;
+  const len = Math.max(4, (amount ?? '').length + (cur ? 2 : 0));
+  return <b className="kv" style={{ '--k': (150 / len).toFixed(2) } as React.CSSProperties}><span className="amt"><CountUp value={amount ?? value} /></span>{cur && <small className="cur">{cur}</small>}</b>;
+}
 export const Kpis = ({ items }: { items: { label: string; value: React.ReactNode; tone?: 'warn' | 'crit' | 'good'; href?: string; hint?: React.ReactNode }[] }) => (
   <motion.div className="kpis" variants={staggerParent}>{items.map((k, i) => {
     const style = (k.tone ? {} : { '--h': HUES[i % HUES.length] }) as React.CSSProperties;
-    const body = <><span className="ki" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={KICONS[i % KICONS.length]} /></svg></span><span>{k.label}</span><b><CountUp value={k.value} /></b>{k.tone === 'crit' && <span className="sr-only">!</span>}</>;
+    const body = <><span className="ki" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={KICONS[i % KICONS.length]} /></svg></span><span>{k.label}</span><KpiValue value={k.value} />{k.tone === 'crit' && <span className="sr-only">!</span>}</>;
     const variants = k.tone === 'crit' ? undefined : fadeUp;
     return k.href ? <motion.a key={i} variants={variants} whileHover={{ y: -3 }} whileTap={{ scale: 0.98 }} href={k.href} className={cx('kpi', k.tone)} style={style} title={typeof k.hint === 'string' ? k.hint : undefined}>{body}</motion.a> : <motion.div key={i} variants={variants} className={cx('kpi', k.tone)} style={style}>{body}</motion.div>;
   })}</motion.div>
@@ -109,29 +119,31 @@ export function Btn({ kind = 'default', onClick, disabled, ...p }: React.ButtonH
 // ---------- الحوار ----------
 /** حوار بدخول وخروج متحركين (220ms)، حبس للتركيز، Esc للإغلاق، وإعادة التركيز لعنصر الفتح */
 export function Modal({ title, onClose, children, footer, wide }: { title: React.ReactNode; onClose(): void; children: React.ReactNode; footer?: React.ReactNode; wide?: boolean }) {
-  const [shown, setShown] = useState(true); const ref = useRef<HTMLDivElement>(null);
+  const [shown, setShown] = useState(true); const ref = useRef<HTMLDivElement>(null); const { lang } = useApp(); const labelId = React.useId();
   const close = () => setShown(false);
   useEffect(() => {
     const back = document.activeElement as HTMLElement | null;
-    setTimeout(() => ref.current?.querySelector<HTMLElement>('input, select, textarea, button:not(.x)')?.focus(), 40);
+    const focusFirst = (n = 0) => { const el = ref.current?.querySelector<HTMLElement>('input, select, textarea, button:not(.x)'); if (el) el.focus(); else if (n < 10) setTimeout(() => focusFirst(n + 1), 30); };
+    setTimeout(() => focusFirst(), 40);
     const k = (e: KeyboardEvent) => {
       if (e.key === 'Escape') close();
       if (e.key === 'Tab' && ref.current) { const f = [...ref.current.querySelectorAll<HTMLElement>('button:not([disabled]), a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])')]; if (!f.length) return; const a = f[0], z = f[f.length - 1]; if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); } else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); } }
     };
     window.addEventListener('keydown', k); return () => { window.removeEventListener('keydown', k); back?.focus?.(); };
   }, []);
-  return (
+  useBackgroundLock(shown);
+  return (<Layer>
     <AnimatePresence onExitComplete={onClose}>{shown && (
       <motion.div className="overlay" onMouseDown={(e) => e.target === e.currentTarget && close()} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: DUR.fast }}>
-        <motion.div ref={ref} className={cx('modal', wide && 'wide')} role="dialog" aria-modal="true" aria-label={typeof title === 'string' ? title : undefined}
+        <motion.div ref={ref} className={cx('modal', wide && 'wide')} role="dialog" aria-modal="true" aria-labelledby={labelId}
           initial={{ opacity: 0, y: 16, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 10, scale: 0.98 }} transition={{ duration: DUR.base, ease: EASE.emphasized }}>
-          <header><h2>{title}</h2><button className="x" onClick={close} aria-label="close">×</button></header>
+          <header><h2 id={labelId}>{title}</h2><button className="x" onClick={close} aria-label={lang === 'ar' ? 'إغلاق' : 'Close'}>×</button></header>
           <div className="mbody">{children}</div>
           {footer && <footer>{footer}</footer>}
         </motion.div>
       </motion.div>)}
     </AnimatePresence>
-  );
+  </Layer>);
 }
 // ---------- النماذج ----------
 export type FieldDef = { name: string; label: string; type?: 'text' | 'number' | 'select' | 'date' | 'datetime' | 'textarea' | 'checkbox' | 'multi' | 'email' | 'tel'; options?: { value: string; label: string }[]; required?: boolean; placeholder?: string; hint?: string; dir?: 'ltr' | 'rtl'; min?: number; max?: number; step?: number; pattern?: RegExp; patternMsg?: string; full?: boolean };
@@ -250,7 +262,7 @@ export function DataTable<R extends { id?: string }>({ rows, cols, filters = [],
         <Btn kind="ghost" onClick={() => setSel(new Set())}>{lang === 'ar' ? 'إلغاء التحديد' : 'Clear selection'}</Btn>
       </motion.div>}</AnimatePresence>
       {filtered.length === 0 ? <Empty text={rows.length ? t('common.noResults') : empty} /> : <>
-        <div className="tablewrap"><table>
+        <div className="tablewrap" tabIndex={0} role="region" aria-label={lang === 'ar' ? 'جدول قابل للتمرير' : 'Scrollable table'}><table>
           <thead><tr>
             {bulk && <th className="selcol"><input type="checkbox" checked={allOnPage} onChange={toggleAll} aria-label={lang === 'ar' ? 'تحديد كل صفوف الصفحة' : 'Select all rows on page'} /></th>}
             {expand && <th className="expcol"><span className="sr-only">{lang === 'ar' ? 'توسيع' : 'Expand'}</span></th>}
@@ -348,7 +360,7 @@ export function TempChart({ report, height = 240 }: { report: any; height?: numb
       </svg></div>
       <figcaption className="legend">
         {report.profile.observedOnly ? <span className="muted">{lang === 'ar' ? 'لا يوجد ملف حراري مرتبط بالجهاز الآن — لا تُعرض حدود مسموحة' : 'No thermal profile linked to this device now — no allowed limits shown'}</span> : <span><i className="sw band" />{lang === 'ar' ? `النطاق ${f.num(report.profile.minC, 1)} إلى ${f.num(report.profile.maxC, 1)} °م (غير معتمد بعد)` : `Range ${f.num(report.profile.minC, 1)} to ${f.num(report.profile.maxC, 1)} °C (not yet approved)`}</span>}
-        <span><i className="sw gap" />{lang === 'ar' ? 'فجوة بيانات — لا تعني الالتزام' : 'Data gap — does not imply compliance'}</span>
+        <span><i className="sw gap" />{lang === 'ar' ? 'فجوة بيانات — لا تعني الالتزام بالنطاق الحراري' : 'Data gap — does not imply compliance'}</span>
         <span><i className="sw exc" />{lang === 'ar' ? 'انحراف' : 'Excursion'}</span>
         <span className="muted">{lang === 'ar' ? 'آخر قراءة' : 'Last reading'}: {f.temp(all[all.length - 1].c)} · {f.dt(all[all.length - 1].t)}</span>
       </figcaption>
@@ -360,7 +372,7 @@ export function TempChart({ report, height = 240 }: { report: any; height?: numb
 const KSA = 'M200,40 L262,30 L330,62 L392,58 L440,96 L470,150 L520,170 L560,210 L600,236 L640,300 L612,330 L560,350 L510,420 L470,470 L410,500 L350,530 L300,560 L262,590 L226,560 L200,500 L170,440 L140,380 L118,330 L92,290 L60,250 L50,200 L90,150 L130,110 L170,70 Z';
 export const project = (lat: number, lng: number) => ({ x: 40 + ((lng - 34.5) / (56 - 34.5)) * 600, y: 30 + ((32.2 - lat) / (32.2 - 16)) * 560 });
 type MapPt = { id: string; lat: number; lng: number; kind: string; label: string; alert?: boolean; meta?: { trackingNo?: string; status?: string; at?: string; origin?: string; dest?: string; source?: string; thermalClass?: string } };
-const FRESH: Record<string, { ar: string; en: string }> = { live: { ar: 'مباشر: آخر قراءة خلال 15 دقيقة', en: 'Live: last reading within 15 min' }, delayed: { ar: 'متأخر: آخر قراءة قبل 15–60 دقيقة', en: 'Delayed: last reading 15–60 min ago' }, stale: { ar: 'بيانات قديمة أو جهاز غير متصل: لا قراءة منذ أكثر من ساعة', en: 'Stale/offline: no reading for over an hour' }, inferred: { ar: 'مستنتج من أحداث الناقل (رحلة جوية بلا GPS)', en: 'Inferred from carrier events (air leg, no GPS)' }, planned: { ar: 'مخطط: موقع الاستلام، لا يوجد موقع مؤكد بعد', en: 'Planned: pickup address, no confirmed fix yet' }, pickup: { ar: 'عنوان استلام مسند (ليس موقعاً لحظياً)', en: 'Assigned pickup address (not a live position)' }, delivery: { ar: 'عنوان تسليم مسند (ليس موقعاً لحظياً)', en: 'Assigned delivery address (not a live position)' } };
+const FRESH: Record<string, { ar: string; en: string }> = { live: { ar: 'مباشر: آخر قراءة خلال 15 دقيقة', en: 'Live: last reading within 15 min' }, delayed: { ar: 'متأخر: آخر قراءة قبل 15–60 دقيقة', en: 'Delayed: last reading 15–60 min ago' }, stale: { ar: 'بيانات قديمة أو جهاز غير متصل: لا قراءة منذ أكثر من ساعة', en: 'Stale/offline: no reading for over an hour' }, inferred: { ar: 'مستنتج من أحداث الناقل (مرحلة نقل جوي بلا GPS)', en: 'Inferred from carrier events (air leg, no GPS)' }, planned: { ar: 'مخطط: موقع الاستلام، لا يوجد موقع مؤكد بعد', en: 'Planned: pickup address, no confirmed fix yet' }, pickup: { ar: 'عنوان استلام مسند (ليس موقعاً لحظياً)', en: 'Assigned pickup address (not a live position)' }, delivery: { ar: 'عنوان تسليم مسند (ليس موقعاً لحظياً)', en: 'Assigned delivery address (not a live position)' } };
 /** خريطة: العلامة تُظهر آخر موقع مؤكد ووقته ومصدره — لا تحريك لموقع محاكى. الضغط يفتح بطاقة التفاصيل ومسار المدينتين */
 export function KsaMap({ points, cities, onPick, height = 380 }: { points: MapPt[]; cities: { code: string; name: { ar: string; en: string }; lat: number; lng: number }[]; onPick?(id: string): void; height?: number }) {
   const { lang } = useApp(); const f = useFmt();

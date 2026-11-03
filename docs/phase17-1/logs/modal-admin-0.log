@@ -1,0 +1,235 @@
+admin/profiles [ar 1440] «اقتراح ملف حراري» field-overlap:2
+admin/shipments [ar 1440] «تصدير CSV» OK
+admin/shipments/shp_0004 [ar 1440] «تسجيل تعذّر التسليم» OK
+admin/shipments/shp_0004 [ar 1440] «تسليم نيابة عن المندوب» OK
+admin/shipments/shp_0004 [ar 1440] «اشتباه فقدان» OK
+admin/couriers [ar 1440] «إضافة» OK
+admin/boxes/box_002 [ar 1440] «استبدال الجهاز» OK
+admin/boxes/box_002 [ar 1440] «إخراج من الخدمة» OK
+admin/devices/dev_004 [ar 1440] «إدخال قراءة تجريبية» OK
+admin/devices/dev_004 [ar 1440] «تغيير الحالة» OK
+admin/devices/dev_004 [ar 1440] «طلب أمر للجهاز» OK
+admin/incidents/inc_0002 [ar 1440] «تغيير الحالة إلى: بانتظار القرار» OK
+admin/incidents/inc_0002 [ar 1440] «إضافة إجراء تصحيحي/وقائي (CAPA)» OK
+admin/claims [ar 1440] «تسجيل مطالبة نيابة عن عميل» OK
+admin/claims [ar 1440] «بدء التحقيق» OK
+admin/claims [ar 1440] «تقييم» OK
+admin/claims [ar 1440] «إغلاق» OK
+admin/returns [ar 1440] «اتخاذ القرار» OK
+admin/returns [ar 1440] «إتمام الإرجاع» OK
+admin/warehouse/cleaning [ar 1440] «تسجيل التنظيف» OK
+admin/warehouse/cleaning [ar 1440] «تسجيل الفحص» OK
+admin/warehouse/consumables [ar 1440] «حركة» OK
+admin/customers/org_nkh [ar 1440] «فرع جديد» OK
+admin/customers/org_nkh [ar 1440] «دعوة مستخدم» OK
+admin/rate-plans [ar 1440] «مسودة إصدار جديد» OK
+admin/quotes [ar 1440] «عرض سعر جديد» OK
+admin/invoices/inv_0001 [ar 1440] «عرض الفاتورة الضريبية» footer-hidden
+admin/invoices/inv_0001 [ar 1440] «إشعار دائن» OK
+admin/payments [ar 1440] «تسجيل دفعة واردة» OK
+admin/payments [ar 1440] «تصدير CSV» OK
+admin/payments [ar 1440] «مطابقة بنكية» OK
+admin/journals [ar 1440] «قيد يدوي» OK
+admin/costs [ar 1440] «تسجيل تكلفة» OK
+admin/costs [ar 1440] «تشغيل توزيع التكاليف (23)» OK
+admin/costs [ar 1440] «طلب تجاوز» OK
+admin/compliance/blocks [ar 1440] «رفع القيد» OK
+admin/compliance/legal-holds [ar 1440] «فرض تحفظ قانوني» OK
+admin/compliance/legal-holds [ar 1440] «رفع» OK
+admin/reports/finance [ar 1440] «تصدير CSV» OK
+admin/profiles [ar 768] «اقتراح ملف حراري» OK
+admin/shipments [ar 768] «تصدير CSV» OK
+admin/shipments/shp_0004 [ar 768] «تسجيل تعذّر التسليم» OK
+admin/shipments/shp_0004 [ar 768] «تسليم نيابة عن المندوب» OK
+admin/shipments/shp_0004 [ar 768] «اشتباه فقدان» OK
+admin/couriers [ar 768] «إضافة» OK
+admin/boxes/box_002 [ar 768] «استبدال الجهاز» OK
+admin/boxes/box_002 [ar 768] «إخراج من الخدمة» OK
+admin/devices/dev_004 [ar 768] «إدخال قراءة تجريبية» OK
+admin/devices/dev_004 [ar 768] «تغيير الحالة» OK
+admin/devices/dev_004 [ar 768] «طلب أمر للجهاز» OK
+admin/incidents/inc_0002 [ar 768] «تغيير الحالة إلى: بانتظار القرار» OK
+admin/incidents/inc_0002 [ar 768] «إضافة إجراء تصحيحي/وقائي (CAPA)» OK
+admin/claims [ar 768] «تسجيل مطالبة نيابة عن عميل» OK
+admin/claims [ar 768] «بدء التحقيق» OK
+admin/claims [ar 768] «تقييم» OK
+admin/claims [ar 768] «إغلاق» OK
+admin/returns [ar 768] «اتخاذ القرار» OK
+admin/returns [ar 768] «إتمام الإرجاع» OK
+admin/warehouse/cleaning [ar 768] «تسجيل التنظيف» OK
+admin/warehouse/cleaning [ar 768] «تسجيل الفحص» OK
+admin/warehouse/consumables [ar 768] «حركة» OK
+admin/customers/org_nkh [ar 768] «فرع جديد» OK
+admin/customers/org_nkh [ar 768] «دعوة مستخدم» OK
+admin/rate-plans [ar 768] «مسودة إصدار جديد» OK
+admin/quotes [ar 768] «عرض سعر جديد» OK
+admin/invoices/inv_0001 [ar 768] «عرض الفاتورة الضريبية» footer-hidden
+admin/invoices/inv_0001 [ar 768] «إشعار دائن» OK
+admin/payments [ar 768] «تسجيل دفعة واردة» OK
+admin/payments [ar 768] «تصدير CSV» OK
+admin/payments [ar 768] «مطابقة بنكية» OK
+admin/journals [ar 768] «قيد يدوي» OK
+admin/costs [ar 768] «تسجيل تكلفة» OK
+admin/costs [ar 768] «تشغيل توزيع التكاليف (23)» OK
+admin/costs [ar 768] «طلب تجاوز» OK
+admin/compliance/blocks [ar 768] «رفع القيد» OK
+admin/compliance/legal-holds [ar 768] «فرض تحفظ قانوني» OK
+admin/compliance/legal-holds [ar 768] «رفع» OK
+admin/reports/finance [ar 768] «تصدير CSV» OK
+admin/profiles [ar 390] «اقتراح ملف حراري» field-overlap:3
+admin/shipments [ar 390] «تصدير CSV» OK
+admin/shipments/shp_0004 [ar 390] «تسجيل تعذّر التسليم» OK
+admin/shipments/shp_0004 [ar 390] «تسليم نيابة عن المندوب» OK
+admin/shipments/shp_0004 [ar 390] «اشتباه فقدان» OK
+admin/couriers [ar 390] «إضافة» OK
+admin/boxes/box_002 [ar 390] «استبدال الجهاز» OK
+admin/boxes/box_002 [ar 390] «إخراج من الخدمة» OK
+admin/devices/dev_004 [ar 390] «إدخال قراءة تجريبية» OK
+admin/devices/dev_004 [ar 390] «تغيير الحالة» OK
+admin/devices/dev_004 [ar 390] «طلب أمر للجهاز» OK
+admin/incidents/inc_0002 [ar 390] «تغيير الحالة إلى: بانتظار القرار» OK
+admin/incidents/inc_0002 [ar 390] «إضافة إجراء تصحيحي/وقائي (CAPA)» OK
+admin/claims [ar 390] «تسجيل مطالبة نيابة عن عميل» OK
+admin/claims [ar 390] «بدء التحقيق» OK
+admin/claims [ar 390] «تقييم» OK
+admin/claims [ar 390] «إغلاق» OK
+admin/returns [ar 390] «اتخاذ القرار» OK
+admin/returns [ar 390] «إتمام الإرجاع» OK
+admin/warehouse/cleaning [ar 390] «تسجيل التنظيف» OK
+admin/warehouse/cleaning [ar 390] «تسجيل الفحص» OK
+admin/warehouse/consumables [ar 390] «حركة» OK
+admin/customers/org_nkh [ar 390] «فرع جديد» OK
+admin/customers/org_nkh [ar 390] «دعوة مستخدم» OK
+admin/rate-plans [ar 390] «مسودة إصدار جديد» OK
+admin/quotes [ar 390] «عرض سعر جديد» OK
+admin/invoices/inv_0001 [ar 390] «عرض الفاتورة الضريبية» OK
+admin/invoices/inv_0001 [ar 390] «إشعار دائن» OK
+admin/payments [ar 390] «تسجيل دفعة واردة» OK
+admin/payments [ar 390] «تصدير CSV» OK
+admin/payments [ar 390] «مطابقة بنكية» OK
+admin/journals [ar 390] «قيد يدوي» OK
+admin/costs [ar 390] «تسجيل تكلفة» OK
+admin/costs [ar 390] «تشغيل توزيع التكاليف (23)» OK
+admin/costs [ar 390] «طلب تجاوز» OK
+admin/compliance/blocks [ar 390] «رفع القيد» OK
+admin/compliance/legal-holds [ar 390] «فرض تحفظ قانوني» OK
+admin/compliance/legal-holds [ar 390] «رفع» OK
+admin/reports/finance [ar 390] «تصدير CSV» OK
+admin/profiles [en 1440] «Propose thermal profile» field-overlap:2
+admin/shipments [en 1440] «Export CSV» OK
+admin/shipments/shp_0004 [en 1440] «Record failed delivery» OK
+admin/shipments/shp_0004 [en 1440] «Deliver on courier’s behalf» OK
+admin/shipments/shp_0004 [en 1440] «Suspect loss» OK
+admin/couriers [en 1440] «Add» OK
+admin/boxes/box_002 [en 1440] «Replace tracker» OK
+admin/boxes/box_002 [en 1440] «Retire» OK
+admin/devices/dev_004 [en 1440] «Inject demo reading» OK
+admin/devices/dev_004 [en 1440] «Change state» OK
+admin/devices/dev_004 [en 1440] «Request command» OK
+admin/incidents/inc_0002 [en 1440] «Move to: Decision» OK
+admin/incidents/inc_0002 [en 1440] «Add CAPA» OK
+admin/claims [en 1440] «Log claim on behalf of customer» OK
+admin/claims [en 1440] «Investigate» OK
+admin/claims [en 1440] «Assess» OK
+admin/claims [en 1440] «Close» OK
+admin/returns [en 1440] «Decide» OK
+admin/returns [en 1440] «Complete return» OK
+admin/warehouse/cleaning [en 1440] «Record cleaning» OK
+admin/warehouse/cleaning [en 1440] «Record inspection» OK
+admin/warehouse/consumables [en 1440] «Movement» OK
+admin/customers/org_nkh [en 1440] «New branch» OK
+admin/customers/org_nkh [en 1440] «Invite user» OK
+admin/rate-plans [en 1440] «Draft new version» OK
+admin/quotes [en 1440] «New quote» OK
+admin/invoices/inv_0001 [en 1440] «View tax invoice» footer-hidden
+admin/invoices/inv_0001 [en 1440] «Credit note» OK
+admin/payments [en 1440] «Record incoming payment» OK
+admin/payments [en 1440] «Export CSV» OK
+admin/payments [en 1440] «Reconcile» OK
+admin/journals [en 1440] «Manual journal» OK
+admin/costs [en 1440] «Record cost» OK
+admin/costs [en 1440] «Run allocation (23)» OK
+admin/costs [en 1440] «Request override» OK
+admin/compliance/blocks [en 1440] «Lift» OK
+admin/compliance/legal-holds [en 1440] «Apply hold» OK
+admin/compliance/legal-holds [en 1440] «Release» OK
+admin/reports/finance [en 1440] «Export CSV» OK
+admin/profiles [en 768] «Propose thermal profile» OK
+admin/shipments [en 768] «Export CSV» OK
+admin/shipments/shp_0004 [en 768] «Record failed delivery» OK
+admin/shipments/shp_0004 [en 768] «Deliver on courier’s behalf» OK
+admin/shipments/shp_0004 [en 768] «Suspect loss» OK
+admin/couriers [en 768] «Add» OK
+admin/boxes/box_002 [en 768] «Replace tracker» OK
+admin/boxes/box_002 [en 768] «Retire» OK
+admin/devices/dev_004 [en 768] «Inject demo reading» OK
+admin/devices/dev_004 [en 768] «Change state» OK
+admin/devices/dev_004 [en 768] «Request command» OK
+admin/incidents/inc_0002 [en 768] «Move to: Decision» OK
+admin/incidents/inc_0002 [en 768] «Add CAPA» OK
+admin/claims [en 768] «Log claim on behalf of customer» OK
+admin/claims [en 768] «Investigate» OK
+admin/claims [en 768] «Assess» OK
+admin/claims [en 768] «Close» OK
+admin/returns [en 768] «Decide» OK
+admin/returns [en 768] «Complete return» OK
+admin/warehouse/cleaning [en 768] «Record cleaning» OK
+admin/warehouse/cleaning [en 768] «Record inspection» OK
+admin/warehouse/consumables [en 768] «Movement» OK
+admin/customers/org_nkh [en 768] «New branch» OK
+admin/customers/org_nkh [en 768] «Invite user» OK
+admin/rate-plans [en 768] «Draft new version» OK
+admin/quotes [en 768] «New quote» OK
+admin/invoices/inv_0001 [en 768] «View tax invoice» footer-hidden
+admin/invoices/inv_0001 [en 768] «Credit note» OK
+admin/payments [en 768] «Record incoming payment» OK
+admin/payments [en 768] «Export CSV» OK
+admin/payments [en 768] «Reconcile» OK
+admin/journals [en 768] «Manual journal» OK
+admin/costs [en 768] «Record cost» OK
+admin/costs [en 768] «Run allocation (23)» OK
+admin/costs [en 768] «Request override» OK
+admin/compliance/blocks [en 768] «Lift» OK
+admin/compliance/legal-holds [en 768] «Apply hold» OK
+admin/compliance/legal-holds [en 768] «Release» OK
+admin/reports/finance [en 768] «Export CSV» OK
+admin/profiles [en 390] «Propose thermal profile» field-overlap:2
+admin/shipments [en 390] «Export CSV» OK
+admin/shipments/shp_0004 [en 390] «Record failed delivery» OK
+admin/shipments/shp_0004 [en 390] «Deliver on courier’s behalf» OK
+admin/shipments/shp_0004 [en 390] «Suspect loss» OK
+admin/couriers [en 390] «Add» OK
+admin/boxes/box_002 [en 390] «Replace tracker» OK
+admin/boxes/box_002 [en 390] «Retire» OK
+admin/devices/dev_004 [en 390] «Inject demo reading» OK
+admin/devices/dev_004 [en 390] «Change state» OK
+admin/devices/dev_004 [en 390] «Request command» OK
+admin/incidents/inc_0002 [en 390] «Move to: Decision» OK
+admin/incidents/inc_0002 [en 390] «Add CAPA» OK
+admin/claims [en 390] «Log claim on behalf of customer» OK
+admin/claims [en 390] «Investigate» OK
+admin/claims [en 390] «Assess» OK
+admin/claims [en 390] «Close» OK
+admin/returns [en 390] «Decide» OK
+admin/returns [en 390] «Complete return» OK
+admin/warehouse/cleaning [en 390] «Record cleaning» OK
+admin/warehouse/cleaning [en 390] «Record inspection» OK
+admin/warehouse/consumables [en 390] «Movement» OK
+admin/customers/org_nkh [en 390] «New branch» OK
+admin/customers/org_nkh [en 390] «Invite user» OK
+admin/rate-plans [en 390] «Draft new version» OK
+admin/quotes [en 390] «New quote» OK
+admin/invoices/inv_0001 [en 390] «View tax invoice» OK
+admin/invoices/inv_0001 [en 390] «Credit note» OK
+admin/payments [en 390] «Record incoming payment» OK
+admin/payments [en 390] «Export CSV» OK
+admin/payments [en 390] «Reconcile» OK
+admin/journals [en 390] «Manual journal» OK
+admin/costs [en 390] «Record cost» OK
+admin/costs [en 390] «Run allocation (23)» OK
+admin/costs [en 390] «Request override» OK
+admin/compliance/blocks [en 390] «Lift» OK
+admin/compliance/legal-holds [en 390] «Apply hold» OK
+admin/compliance/legal-holds [en 390] «Release» OK
+admin/reports/finance [en 390] «Export CSV» OK
+dialogs 234, with issues 8

@@ -1,5 +1,5 @@
 {
- "executedAt": "2026-11-03T03:06:35.979Z",
+ "executedAt": "2026-11-03T13:45:50.045Z",
  "engineClock": "2026-11-02T06:00:00.000Z",
  "steps": [
   {
@@ -205,7 +205,7 @@
   {
    "id": "E2E-05.1",
    "ref": "TEMP-003, UAT-004",
-   "step": "قراءة 11.6 °م خارج نطاق المبرّد (2–8)",
+   "step": "قراءة 11.6 °م خارج نطاق المبرّد المعتمد (+4 إلى +8 °م)",
    "expected": "انحراف مفتوح + إشعار حرج للموظفين",
    "actual": {
     "created": true,
@@ -257,7 +257,7 @@
    "expected": "الانحراف ظاهر + نص «القرار السريري للمؤسسة المستلمة»",
    "actual": {
     "excursions": 1,
-    "disclaimer": "بيانات عرض تجريبية — ليست قراءات أجهزة حقيقية. الفجوات لا تعني الالتزام. القرار السريري للمؤسسة المستلمة فقط."
+    "disclaimer": "بيانات عرض تجريبية — ليست قراءات أجهزة حقيقية. فجوات البيانات لا تعني الالتزام بالنطاق الحراري. القرار السريري للجهة المستلمة فقط."
    },
    "status": "PASS"
   },
@@ -496,8 +496,8 @@
    "step": "توليد فاتورة لمستشفى النخبة للفترة",
    "expected": "مسودة؛ الشحنة المسلّمة بند مستقل بسعرها، أو مشمولة برسم العقد إن كان سعرها صفراً ضمن الحصة",
    "actual": {
-    "id": "inv_00022",
-    "invoiceNo": "INV-2026-00022",
+    "id": "inv_00023",
+    "invoiceNo": "INV-2026-00023",
     "organizationId": "org_nkh",
     "branchId": null,
     "issueDate": null,
@@ -577,9 +577,9 @@
       "type": "asset",
       "parentId": "gl_1000",
       "active": true,
-      "debit": 11819211,
+      "debit": 19713278,
       "credit": 4082065,
-      "balance": 7737146
+      "balance": 15631213
      },
      {
       "id": "gl_1300",
@@ -648,8 +648,8 @@
       "parentId": "gl_2000",
       "active": true,
       "debit": 23478,
-      "credit": 1541636,
-      "balance": 1518158
+      "credit": 2571298,
+      "balance": 2547820
      },
      {
       "id": "gl_2300",
@@ -718,8 +718,8 @@
       "parentId": "gl_4000",
       "active": true,
       "debit": 0,
-      "credit": 10277575,
-      "balance": 10277575
+      "credit": 17141980,
+      "balance": 17141980
      },
      {
       "id": "gl_4200",
@@ -848,12 +848,12 @@
       "balance": 0
      }
     ],
-    "totalDebit": 316021950,
-    "totalCredit": 316021950,
+    "totalDebit": 323916017,
+    "totalCredit": 323916017,
     "balanced": true,
     "unbalancedJournals": [],
-    "arControl": 7737146,
-    "arSubledger": 7737146,
+    "arControl": 15631213,
+    "arSubledger": 15631213,
     "arReconciled": true
    },
    "status": "PASS"

@@ -1,0 +1,13 @@
+portal/shipments [ar 1440] «تصدير CSV» background-scrolls
+portal/shipments/shp_0002 [ar 1440] «طلب إرجاع» background-scrolls
+portal/shipments/shp_0002 [ar 1440] «تقديم مطالبة» background-scrolls
+portal/recurring [ar 1440] «جدولة جديدة» overlap:9
+portal/addresses [ar 1440] «عنوان جديد» OK
+portal/branches [ar 1440] «فرع جديد» OK
+portal/users [ar 1440] «دعوة مستخدم» OK
+portal/users [ar 1440] «إلغاء» overlap:54
+portal/invoices [ar 1440] «تصدير CSV» OK
+portal/reports [ar 1440] «تصدير CSV» background-scrolls
+portal/api [ar 1440] «إضافة» OK
+portal/api [ar 1440] «إلغاء» background-scrolls
+dialogs 12, with issues 7

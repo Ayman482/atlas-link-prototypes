@@ -1,0 +1,32 @@
+   Woah! You appear to be trying to run flutter as root.
+   We strongly recommend running the flutter tool without superuser privileges.
+  /
+📎
+Resolving dependencies...
+Downloading packages...
+  material_color_utilities 0.13.0 (0.13.1 available)
+  meta 1.18.3 (1.19.0 available)
+  shared_preferences_foundation 2.5.7 (2.6.1 available)
+  test_api 0.7.12 (0.7.15 available)
+  vector_math 2.4.0 (2.4.4 available)
+Got dependencies!
+5 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+00:00 +0: loading /home/claude/medlog/mobile/courier_app/test/offline_queue_test.dart
+00:00 +0: /home/claude/medlog/mobile/courier_app/test/offline_queue_test.dart: الطابور مربوط بالمندوب: مندوب آخر على نفس الجهاز لا يرى ولا يزامن إجراءات غيره
+00:00 +1: /home/claude/medlog/mobile/courier_app/test/offline_queue_test.dart: انقطاع فعلي للشبكة أثناء إجراء مباشر يحفظه في الطابور بنفس المعرّف
+00:00 +2: /home/claude/medlog/mobile/courier_app/test/offline_queue_test.dart: مزامنة منقطعة تُبقي الطابور كاملاً، وإعادة الإرسال آمنة
+00:00 +3: /home/claude/medlog/mobile/courier_app/test/offline_queue_test.dart: لا مزامنتان متزامنتان، وإجراء أُضيف أثناء المزامنة لا يضيع
+00:00 +4: /home/claude/medlog/mobile/courier_app/test/offline_queue_test.dart: انتهاء الجلسة أثناء المزامنة: يعود لشاشة الدخول ويُحفظ الطابور لنفس المندوب
+00:00 +5: /home/claude/medlog/mobile/courier_app/test/offline_queue_test.dart: فتح التطبيق دون شبكة يُبقي المندوب داخل التطبيق بآخر ملف محفوظ؛ و401 عند الفتح يخرجه
+00:00 +6: /home/claude/medlog/mobile/courier_app/test/offline_queue_test.dart: مراقبة الاتصال: الانقطاع الفعلي يُكتشف بالنبض، والعودة تطلق مزامنة تلقائية مرة واحدة
+00:00 +7: /home/claude/medlog/mobile/courier_app/test/offline_queue_test.dart: خطأ شبكة أثناء إجراء مباشر يحوّل المراقب فوراً لوضع الانقطاع دون انتظار الدورة
+00:00 +8: /home/claude/medlog/mobile/courier_app/test/offline_queue_test.dart: منع التكرار: تسليم أو استلام نفس الشحنة مرتين دون اتصال يُحفظ مرة واحدة
+00:00 +9: /home/claude/medlog/mobile/courier_app/test/offline_queue_test.dart: ضغط مزدوج أثناء إجراء مباشر يرسل طلباً واحداً فقط
+00:00 +10: loading /home/claude/medlog/mobile/courier_app/test/app_test.dart
+00:01 +10: /home/claude/medlog/mobile/courier_app/test/app_test.dart: K01→K02→K05: المهام ثم مسح رمز خاطئ يعرض الفشل وإعادة المحاولة
+00:03 +11: /home/claude/medlog/mobile/courier_app/test/app_test.dart: الطابور دون اتصال يحتفظ بمعرّف فريد ويُرسل للمزامنة ثم يُفرّغ
+00:03 +12: loading /home/claude/medlog/mobile/courier_app/test/live_api_test.dart
+00:04 +12: /home/claude/medlog/mobile/courier_app/test/live_api_test.dart: رحلة مندوب كاملة عبر الخادم
+  Skip: عيّن LIVE_API لتشغيل اختبار العقد الحي
+00:04 +12 ~1: All tests passed!

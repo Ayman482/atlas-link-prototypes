@@ -16,7 +16,7 @@ class MePage extends StatelessWidget {
           final d = r[0] as Map; final cou = d['courier'] as Map; final veh = d['vehicle'] as Map?;
           final hist = (r[1] as List).cast<Map>().where((e) => e['toId'] == cou['id'] || e['fromId'] == cou['id']).take(15).toList();
           return ListView(padding: const EdgeInsets.all(16), children: [
-            Card(child: ListTile(title: Text('${(u['name'] as Map?)?[st.lang] ?? ''}'), subtitle: Text('${u['email']}\n${s.label(cou['employmentType'])} · ${s.t('التأهيل حتى', 'Qualified until')} ${f.dt(cou['qualificationExpiry'])}${veh != null ? ' · ${veh['plate']}' : ''}'), isThreeLine: true)),
+            Card(child: ListTile(title: Text('${(u['name'] as Map?)?[st.lang] ?? ''}'), subtitle: Text('${u['email']}\n${s.label(cou['employmentType'])} · ${s.t('مؤهل حتى', 'Qualified until')} ${f.dt(cou['qualificationExpiry'])}${veh != null ? ' · ${veh['plate']}' : ''}'), isThreeLine: true)),
             const SizedBox(height: 10),
             Card(child: ListTile(title: Text(s.t('المناوبة', 'Shift')), trailing: StatusPill('${cou['status']}'), subtitle: Padding(padding: const EdgeInsets.only(top: 8), child: Align(alignment: AlignmentDirectional.centerStart, child: cou['status'] == 'off_shift'
                 ? FilledButton(onPressed: () => st.run('courier.setStatus', {'courierId': cou['id'], 'status': 'available'}).catchError((e) { if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e is ApiException ? e.message(st.lang) : '$e'))); }), child: Text(s.d('courier.startShift')))

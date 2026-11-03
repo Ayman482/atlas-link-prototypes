@@ -36,14 +36,14 @@ defineCommand<{ id: string; decision: string; openIncident: boolean; severity?: 
 });
 
 defineCommand<{ shipmentId?: string | null; incidentType: T.Incident['incidentType']; severity: T.Incident['severity']; titleAr: string; titleEn?: string; findings?: string }, T.Incident>({
-  name: 'incident.open', guard: ['quality', 'ops_controller', 'courier'], desc: L('فتح حادث جودة (QMS-001)', 'Open quality incident (QMS-001)'),
+  name: 'incident.open', guard: ['quality', 'ops_controller', 'courier'], desc: L('فتح حادثة جودة (QMS-001)', 'Open quality incident (QMS-001)'),
   run(ctx, i) {
     if (!i.titleAr?.trim()) ctx.fail('VALIDATION', 'العنوان مطلوب', 'Title required', 422, 'titleAr');
     if (i.shipmentId) { const sh = must(ctx, ctx.db.shipments.find((s) => s.id === i.shipmentId), 'shipment'); if (!canReadShipment(ctx.db, ctx.actor, sh)) ctx.fail('NOT_FOUND', 'الشحنة غير موجودة', 'Not found', 404); }
     const x: T.Incident = { id: ctx.id('inc'), code: `QI-2026-${ctx.seq('qi', 4)}`, shipmentId: i.shipmentId ?? null, incidentType: i.incidentType, severity: i.severity, status: 'open', title: L(i.titleAr, i.titleEn || i.titleAr), findings: i.findings ?? '', openedAt: ctx.nowIso, closedAt: null, ownerId: ctx.actor.user.id };
     ctx.db.incidents.push(x);
     ctx.emit('quality.incident_opened', 'incident', x.id, null);
-    ctx.notify({ audience: 'staff', critical: ['high', 'critical'].includes(x.severity), title: L(`حادث جديد ${x.code}`, `New incident ${x.code}`), body: x.title, link: `/quality/incidents/${x.id}` });
+    ctx.notify({ audience: 'staff', critical: ['high', 'critical'].includes(x.severity), title: L(`حادثة جديدة ${x.code}`, `New incident ${x.code}`), body: x.title, link: `/quality/incidents/${x.id}` });
     return x;
   },
 });
@@ -73,7 +73,7 @@ defineCommand<{ incidentId: string; actionType: T.Capa['actionType']; descriptio
   },
 });
 defineCommand<{ id: string; note: string }, T.Capa>({
-  name: 'capa.complete', guard: ['quality', 'ops_controller', 'iot_engineer', 'super_admin'], desc: L('إكمال إجراء CAPA', 'Complete CAPA action'),
+  name: 'capa.complete', guard: ['quality', 'ops_controller', 'iot_engineer', 'super_admin'], desc: L('إكمال إجراء تصحيحي ووقائي (CAPA)', 'Complete CAPA action'),
   run(ctx, { id, note }) { const c = must(ctx, ctx.db.capas.find((x) => x.id === id), 'capa'); if (c.status === 'done') ctx.fail('ALREADY_DONE', 'مكتمل مسبقاً', 'Already completed', 409); c.status = 'done'; c.completedAt = ctx.nowIso; ctx.audit('capa.complete', 'capa', c.id, note); return c; },
 });
 
@@ -113,3 +113,35 @@ defineCommand<{ id: string; note: string }, T.Claim>({
   name: 'claim.close', guard: ['quality', 'finance'], desc: L('إغلاق المطالبة', 'Close claim'),
   run(ctx, { id, note }) { const c = must(ctx, ctx.db.claims.find((x) => x.id === id), 'claim'); if (!['approved', 'rejected'].includes(c.status)) ctx.fail('INVALID_STATE', 'يجب البت في المطالبة قبل الإغلاق', 'Claim must be decided before closing', 422); c.status = 'closed'; ctx.audit('claim.close', 'claim', c.id, note); return c; },
 });
+
+// ---------------- Phase 17.1 — ملفات حرارية معتمدة حسب نوع العينة واتفاقية الخدمة (TEMP-001، ADM-002) ----------------
+// الجودة تقترح، والامتثال يعتمد (فصل مهام). لا يسري الملف على أي شحنة قبل الاعتماد، ولا يُعدَّل ملف معتمد بل يُستبدل بإصدار جديد.
+const sameScope = (a: T.ServiceProfile, b: { thermalClass: T.ThermalClass; scope?: T.ServiceProfile['scope'] }) =>
+  a.thermalClass === b.thermalClass && (a.scope?.contractId ?? null) === (b.scope?.contractId ?? null) && [...(a.scope?.sampleTypes ?? [])].sort().join(',') === [...(b.scope?.sampleTypes ?? [])].sort().join(',');
+defineCommand<{ thermalClass: T.ThermalClass; nameAr: string; nameEn: string; minC: number; maxC: number; toleranceMinutes: number; sampleTypes?: string[]; contractId?: string | null; effectiveFrom: string; basis: string }, T.ServiceProfile>({
+  name: 'profile.propose', guard: ['quality'], desc: L('اقتراح ملف حراري (يتطلب اعتماد الامتثال)', 'Propose a temperature profile (requires compliance approval)'),
+  run(ctx, i) {
+    if (!['chilled', 'frozen', 'ambient'].includes(i.thermalClass)) ctx.fail('VALIDATION', 'فئة حرارية غير صالحة', 'Invalid thermal class', 422, 'thermalClass');
+    if (!(Number(i.minC) < Number(i.maxC))) ctx.fail('VALIDATION', 'الحد الأدنى يجب أن يكون أقل من الحد الأعلى', 'Minimum must be below maximum', 422, 'minC');
+    if (!(Number(i.toleranceMinutes) >= 0 && Number(i.toleranceMinutes) <= 120)) ctx.fail('VALIDATION', 'مهلة السماح بين 0 و120 دقيقة', 'Tolerance must be 0–120 minutes', 422, 'toleranceMinutes');
+    if (!i.basis?.trim()) ctx.fail('VALIDATION', 'المرجع المعتمد مطلوب (متطلب العميل أو قرار الجودة)', 'Approved basis required (customer requirement or quality decision)', 422, 'basis');
+    if (i.contractId && !ctx.db.contracts.some((c) => c.id === i.contractId)) ctx.fail('VALIDATION', 'العقد غير موجود', 'Unknown contract', 422, 'contractId');
+    const scope = { sampleTypes: (i.sampleTypes ?? []).filter(Boolean), contractId: i.contractId || null };
+    const prev = ctx.db.serviceProfiles.filter((p) => sameScope(p, { thermalClass: i.thermalClass, scope }));
+    if (prev.some((p) => p.status === 'pending_approval')) ctx.fail('PENDING_EXISTS', 'يوجد اقتراح بانتظار الاعتماد لنفس النطاق', 'A proposal for the same scope is already pending', 409);
+    const code = i.thermalClass.toUpperCase() + (scope.contractId ? '-' + scope.contractId.toUpperCase() : '') + (scope.sampleTypes.length ? '-' + scope.sampleTypes.join('+') : '');
+    const p: T.ServiceProfile = { id: ctx.id('svc'), code, thermalClass: i.thermalClass, name: L(i.nameAr, i.nameEn), minC: Number(i.minC), maxC: Number(i.maxC), toleranceSeconds: Number(i.toleranceMinutes) * 60, version: Math.max(0, ...prev.map((x) => x.version)) + 1, effectiveFrom: iso(Date.parse(i.effectiveFrom)), effectiveTo: null, approved: false, status: 'pending_approval', scope, proposedBy: ctx.actor.user.id, approvedBy: null, basis: i.basis };
+    ctx.db.serviceProfiles.push(p);
+    ctx.db.approvalRequests.push({ id: ctx.id('apr'), kind: 'service_profile', subjectId: p.id, title: L(`اعتماد ملف حراري: ${i.nameAr} (${p.minC} إلى ${p.maxC} °م)`, `Approve temperature profile: ${i.nameEn} (${p.minC} to ${p.maxC} °C)`), requestedBy: ctx.actor.user.id, requiredRole: 'compliance', status: 'pending', decidedBy: null, decidedAt: null, note: i.basis, createdAt: ctx.nowIso });
+    ctx.audit('profile.propose', 'serviceProfile', p.id, `${p.code} v${p.version} ${p.minC}..${p.maxC}`);
+    return p;
+  },
+});
+/** يُستدعى من approval.decide عند اعتماد/رفض ملف حراري */
+export function decideProfile(ctx: Ctx, id: string, ok: boolean) {
+  const p = must(ctx, ctx.db.serviceProfiles.find((x) => x.id === id), 'service profile');
+  if (!ok) { p.status = 'rejected'; ctx.audit('profile.reject', 'serviceProfile', p.id, p.code); return; }
+  for (const o of ctx.db.serviceProfiles.filter((x) => x.id !== p.id && x.status === 'active' && sameScope(x, p))) { o.status = 'retired'; o.effectiveTo = p.effectiveFrom; }
+  p.status = 'active'; p.approved = true; p.approvedBy = ctx.actor.user.id;
+  ctx.audit('profile.approve', 'serviceProfile', p.id, `${p.code} v${p.version} ${p.minC}..${p.maxC}`);
+}

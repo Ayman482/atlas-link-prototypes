@@ -1,0 +1,13 @@
+[
+ {"id":"UI-01_bank-reconciliation-modal_ar_1440","before":"before/modals/admin_payments__مطابقة_بنكية__ar_1440.png","after":"after/modals-full/admin_payments__مطابقة_بنكية__ar_1440.png"},
+ {"id":"UI-02_generate-invoice-modal_ar_1440","before":"before/modals/admin_invoices__توليد_فاتورة__ar_1440.png","after":"after/modals-full/admin_invoices__إنشاء_فاتورة__ar_1440.png"},
+ {"id":"UI-03_config-change-modal_ar_1440","before":"before/modals/admin_system_settings__اقتراح_تغيير__ar_1440.png","after":"after/modals-full/admin_system_settings__اقتراح_تغيير__ar_1440.png"},
+ {"id":"UI-06_shipments-table_ar_390","before":"before/layout/admin_shipments__ar_390_stress.png","after":"after/layout/admin_shipments__ar_390_stress.png","crop":1800},
+ {"id":"UI-06_customers-table_en_768","before":"before/layout/admin_customers__en_768_stress.png","after":"after/layout/admin_customers__en_768_stress.png","crop":1400},
+ {"id":"UI-07_kpi-large-amounts_aging_ar_768","before":"before/layout/admin_aging__ar_768_stress.png","after":"after/layout/admin_aging__ar_768_stress.png","crop":900},
+ {"id":"UI-07_kpi-large-amounts_invoices_en_1280","before":"before/layout/admin_invoices__en_1280_stress.png","after":"after/layout/admin_invoices__en_1280_stress.png","crop":900},
+ {"id":"UI-07_kpi-portal-invoices_ar_390","before":"before/layout/portal_invoices__ar_390_stress.png","after":"after/layout/portal_invoices__ar_390_stress.png","crop":1500},
+ {"id":"UI-10_select-arrows-filters_ar_1280","before":"before/layout/admin_shipments__ar_1280_stress.png","after":"after/layout/admin_shipments__ar_1280_stress.png","crop":700},
+ {"id":"UI-16_dashboard-alerts_ar_390","before":"before/layout/admin___ar_390_stress.png","after":"after/layout/admin___ar_390_stress.png","crop":2600},
+ {"id":"UI-03b_settings-readable-labels_ar_1280","before":"before/layout/admin_system_settings__ar_1280_stress.png","after":"after/layout/admin_system_settings__ar_1280_stress.png","crop":1100}
+]

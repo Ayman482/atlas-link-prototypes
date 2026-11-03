@@ -1,0 +1,13 @@
+portal/ [ar 390] clipped:1 cell-bleed:1
+portal/invoices [ar 390] clipped:1 cell-bleed:1
+portal/shipments [ar 390] clipped:1
+portal/ [ar 1280] clipped:1 cell-bleed:1
+portal/invoices [ar 1280] clipped:1 kpi:2 cell-bleed:1
+portal/shipments [ar 1280] clipped:1
+portal/ [en 390] clipped:1 cell-bleed:1
+portal/invoices [en 390] clipped:1 cell-bleed:1
+portal/shipments [en 390] clipped:1
+portal/ [en 1280] clipped:1 cell-bleed:1
+portal/invoices [en 1280] clipped:1 kpi:2 cell-bleed:1
+portal/shipments [en 1280] clipped:1
+runs 12, with issues 12

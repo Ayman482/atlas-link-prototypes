@@ -77,7 +77,7 @@ test('الفوترة: الفاتورة الصادرة تولّد قيداً مت
   assert.equal(e.query<any>('list', 'usr_branch_op', { collection: 'invoices' }).total, 0, 'مشغّل الفرع لا يرى الفواتير');
 });
 
-test('التنبيه الحرج: انحراف مفتوح يظهر في ملخص برج التحكم وإشعار حرج للموظفين حتى الإقرار', () => {
+test('التنبيه الحرج: انحراف مفتوح يظهر في ملخص مركز مراقبة العمليات وإشعار حرج للموظفين حتى الإقرار', () => {
   const e = fresh();
   const open = e.db.excursions.find((x) => x.status === 'open')!;
   assert.ok(open);

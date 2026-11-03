@@ -13,7 +13,7 @@ export const K_SCREENS = [
   { id: 'K04', ar: 'تفاصيل المهمة', en: 'Task detail' }, { id: 'K05', ar: 'مسح رمز الشحنة', en: 'Scan shipment QR' }, { id: 'K06', ar: 'مسح الصندوق والتعبئة', en: 'Scan box & pack' },
   { id: 'K07', ar: 'الاستلام مع التوقيع', en: 'Pickup with signature' }, { id: 'K08', ar: 'بدء النقل والوصول', en: 'Start transit & arrive' }, { id: 'K09', ar: 'نقل الحيازة (شريك/جوي/مستودع/مندوب)', en: 'Custody handover (partner/air/warehouse/courier)' },
   { id: 'K10', ar: 'التسليم مع إثبات', en: 'Delivery with POD' }, { id: 'K11', ar: 'محاولة فاشلة', en: 'Failed attempt' }, { id: 'K12', ar: 'العمل دون اتصال والمزامنة', en: 'Offline queue & sync' },
-  { id: 'K13', ar: 'الصناديق بعهدتي', en: 'Boxes in my custody' }, { id: 'K14', ar: 'المناوبة والسجل والحساب', en: 'Shift, history & account' },
+  { id: 'K13', ar: 'الصناديق في حيازتي', en: 'Boxes in my custody' }, { id: 'K14', ar: 'المناوبة والسجل والحساب', en: 'Shift, history & account' },
 ];
 
 export default function CourierMobileRoot() { return <AppProvider app="courier"><Stage /></AppProvider>; }
@@ -50,7 +50,7 @@ function useAutoSync(o: ReturnType<typeof useOffline>) {
     if (o.off || !o.q.length || busy.current) return;
     busy.current = true; const batch = o.q;
     run<any>('courier.sync', { actions: batch.map(({ label: _l, ...a }) => a) }, { silent: true })
-      .then((r) => { o.clear(r.results.map((y: any) => y.clientActionId)); toast(lang === 'ar' ? `عاد الاتصال — زُومنت ${r.results.length} إجراءات تلقائياً` : `Back online — ${r.results.length} actions synced automatically`, 'info'); })
+      .then((r) => { o.clear(r.results.map((y: any) => y.clientActionId)); toast(lang === 'ar' ? `عاد الاتصال — تمت مزامنة ${r.results.length} إجراءات تلقائياً` : `Back online — ${r.results.length} actions synced automatically`, 'info'); })
       .catch(() => { /* يبقى الطابور؛ تُعاد المحاولة عند التغيير التالي */ })
       .finally(() => { busy.current = false; });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -60,7 +60,7 @@ function useAutoSync(o: ReturnType<typeof useOffline>) {
 function useAct() {
   const { run, lang, toast } = useApp(); const o = useOffline();
   return async (type: QAction['type'], cmd: string, shipment: string, payload: Record<string, unknown>, lbl: string, success?: string) => {
-    if (o.off) { o.push({ type, shipment, payload, label: lbl }); toast(lang === 'ar' ? 'حُفظ في طابور دون اتصال' : 'Saved to offline queue', 'info'); return 'queued'; }
+    if (o.off) { o.push({ type, shipment, payload, label: lbl }); toast(lang === 'ar' ? 'حُفظ في قائمة انتظار المزامنة دون اتصال' : 'Saved to offline queue', 'info'); return 'queued'; }
     return run(cmd, { shipment, ...payload }, { success });
   };
 }
@@ -76,7 +76,7 @@ function App() {
   else if (path === '/me') s = <Me />;
   else s = <Tasks />;
   return <>
-    {o.off && <div className="offbar" role="status">{o.src === 'network' ? (lang === 'ar' ? 'لا يوجد اتصال بالشبكة — ' : 'No network connection — ') : (lang === 'ar' ? 'وضع دون اتصال (محاكاة) — ' : 'Offline mode (simulated) — ')}{o.q.length} {lang === 'ar' ? 'في الطابور' : 'queued'}</div>}
+    {o.off && <div className="offbar" role="status">{o.src === 'network' ? (lang === 'ar' ? 'لا يوجد اتصال بالشبكة — ' : 'No network connection — ') : (lang === 'ar' ? 'وضع دون اتصال (محاكاة) — ' : 'Offline mode (simulated) — ')}{o.q.length} {lang === 'ar' ? 'في قائمة الانتظار' : 'queued'}</div>}
     {s}
     <MTabs items={[{ path: '/', ar: 'المهام', en: 'Tasks', icon: ICONS.list }, { path: '/map', ar: 'المسار', en: 'Route', icon: ICONS.map }, { path: '/boxes', ar: 'الصناديق', en: 'Boxes', icon: ICONS.box }, { path: '/sync', ar: 'المزامنة', en: 'Sync', icon: ICONS.sync, badge: o.q.length }, { path: '/me', ar: 'حسابي', en: 'Me', icon: ICONS.user }]} />
   </>;
@@ -120,7 +120,7 @@ function RouteMap() {
   return <><MTop title={lang === 'ar' ? 'خريطة المسار' : 'Route map'} right={<Sim />} />
     <div className="mbodyx" tabIndex={0}>
       <KsaMap points={pts as any} cities={L.cities} onPick={(id) => go('/t/' + id)} height={300} />
-      <p className="muted">{lang === 'ar' ? 'الملاحة الفعلية تُفتح في تطبيق الخرائط على الجهاز؛ هنا ترتيب التوقفات المسند من الإرسال.' : 'Turn-by-turn navigation opens in the device maps app; this shows the stop order assigned by dispatch.'}</p>
+      <p className="muted">{lang === 'ar' ? 'الملاحة الفعلية تُفتح في تطبيق الخرائط على الجهاز؛ هنا ترتيب التوقفات المُسند من التوزيع.' : 'Turn-by-turn navigation opens in the device maps app; this shows the stop order assigned by dispatch.'}</p>
       <ol className="mtimeline">{open.map((t: any) => { const a = t.kind === 'pickup' ? t.sender : t.receiver; return <li key={t.shipmentId}><a href={'#/t/' + t.shipmentId}><b>{t.seq === 99 ? '—' : t.seq}. {x(a?.label)}</b></a><span className="muted">{KIND[t.kind][lang === 'ar' ? 0 : 1]} · {L.city(a?.cityCode)}</span></li>; })}</ol>
     </div></>;
 }
@@ -175,8 +175,8 @@ function Task({ id }: { id: string }) {
         <b>{tt('courier.handover')}</b>
         <div className="seg">{[['air_carrier', 'ناقل جوي', 'Air'], ['partner', 'شريك بري', 'Partner'], ['warehouse', 'مستودع', 'Warehouse'], ['courier', 'مندوب', 'Courier']].map(([k, ar, en]) => <button key={k} className={hv.toType === k ? 'on' : ''} onClick={() => setHv({ toType: k, toId: '' })}>{lang === 'ar' ? ar : en}</button>)}</div>
         <select value={hv.toId} onChange={(e) => setHv({ ...hv, toId: e.target.value })} aria-label="to"><option value="">—</option>{targets.map((p: any) => <option key={p.id} value={p.id}>{x(p.name)}</option>)}</select>
-        <label className="field"><span>{lang === 'ar' ? 'اسم المستلم من الطرف الآخر' : 'Receiving person'}</span><input value={name} onChange={(e) => setName(e.target.value)} /></label>
-        <ScanSim label={lang === 'ar' ? 'امسح رمز الطرف المستلم لتأكيد الحيازة' : 'Scan the receiving party QR to confirm custody'} suggestions={hv.toId ? [{ value: 'HO-' + hv.toId.slice(-6).toUpperCase(), hint: lang === 'ar' ? 'رمز الطرف المستلم' : 'Receiver code' }] : []} onScan={async () => { if (!hv.toId || !name.trim()) return lang === 'ar' ? 'اختر الطرف المستلم واكتب اسم المستلم أولاً' : 'Choose the receiving party and enter the receiver name first'; await act('handover', 'custody.handover', t.shipmentId, { toType: hv.toType, toId: hv.toId, signedBy: name.trim(), method: 'qr' }, lang === 'ar' ? 'نقل حيازة' : 'Handover', lang === 'ar' ? 'نُقلت الحيازة' : 'Custody transferred'); await new Promise((r) => setTimeout(r, 700)); reset(); return null; }} />
+        <label className="field"><span>{lang === 'ar' ? 'اسم الشخص المستلم' : 'Receiving person'}</span><input value={name} onChange={(e) => setName(e.target.value)} /></label>
+        <ScanSim label={lang === 'ar' ? 'امسح رمز الطرف المستلم لتأكيد الحيازة' : 'Scan the receiving party QR to confirm custody'} suggestions={hv.toId ? [{ value: 'HO-' + hv.toId.slice(-6).toUpperCase(), hint: lang === 'ar' ? 'رمز الطرف المستلم' : 'Receiver code' }] : []} onScan={async () => { if (!hv.toId || !name.trim()) return lang === 'ar' ? 'اختر الطرف المستلم واكتب اسم المستلم أولاً' : 'Choose the receiving party and enter the receiver name first'; await act('handover', 'custody.handover', t.shipmentId, { toType: hv.toType, toId: hv.toId, signedBy: name.trim(), method: 'qr' }, lang === 'ar' ? 'نقل الحيازة' : 'Handover', lang === 'ar' ? 'نُقلت الحيازة' : 'Custody transferred'); await new Promise((r) => setTimeout(r, 700)); reset(); return null; }} />
         {stage && <Btn kind="ghost" onClick={reset}>{tt('common.cancel')}</Btn>}
       </div>}
 
@@ -195,7 +195,7 @@ function Task({ id }: { id: string }) {
         <b>{tt('courier.failAttempt')}</b>
         <select value={reason} onChange={(e) => setReason(e.target.value)} aria-label="reason">{reasons.map(([v, ar, en]) => <option key={v} value={v}>{lang === 'ar' ? ar : en}</option>)}</select>
         <label className="field"><span>{tt('common.note')}</span><textarea value={note} onChange={(e) => setNote(e.target.value)} /></label>
-        <p className="muted">{lang === 'ar' ? 'لا تُتلف أي عينة. القرار (إعادة محاولة / وجهة بديلة / حجز / إرجاع) للعمليات.' : 'Never destroy samples. Operations decides: retry / alternate / hold / return.'}</p>
+        <p className="muted">{lang === 'ar' ? 'لا تُتلف أي عينة. القرار (إعادة محاولة / وجهة بديلة / احتجاز / إرجاع) للعمليات.' : 'Never destroy samples. Operations decides: retry / alternate / hold / return.'}</p>
         <Btn kind="danger" className="bigbtn" onClick={() => safe(() => act('failAttempt', 'courier.failAttempt', t.shipmentId, { reasonCode: reason, notes: note }, lang === 'ar' ? 'محاولة فاشلة' : 'Failed attempt', lang === 'ar' ? 'سُجلت المحاولة وأُبلغت العمليات' : 'Attempt recorded; operations notified'))}>{lang === 'ar' ? 'تسجيل' : 'Record'}</Btn>
         <Btn kind="ghost" onClick={reset}>{tt('common.cancel')}</Btn>
       </div>}
@@ -227,7 +227,7 @@ function Sync() {
   return <><MTop title={lang === 'ar' ? 'دون اتصال والمزامنة' : 'Offline & sync'} />
     <div className="mbodyx" tabIndex={0}>
       <div className="mcard"><b>{lang === 'ar' ? 'حالة الشبكة' : 'Network'}: {o.off ? (lang === 'ar' ? 'دون اتصال' : 'Offline') : (lang === 'ar' ? 'متصل' : 'Online')} {o.off && o.src === 'network' ? <span className="pill warn">{lang === 'ar' ? 'انقطاع فعلي' : 'Real outage'}</span> : <Sim />}</b><span className="muted">{lang === 'ar' ? 'محاكاة انقطاع الشبكة لاختبار العمل الميداني. تُخزّن الإجراءات محلياً بمعرف فريد وتُزامن دون تكرار.' : 'Simulates network loss for field testing. Actions are stored locally with unique IDs and synced idempotently.'}</span><Btn onClick={o.toggle}>{o.off ? (lang === 'ar' ? 'استعادة الاتصال' : 'Go online') : (lang === 'ar' ? 'قطع الاتصال' : 'Go offline')}</Btn></div>
-      <b>{lang === 'ar' ? 'الطابور' : 'Queue'} ({o.q.length})</b>
+      <b>{lang === 'ar' ? 'قائمة الانتظار' : 'Queue'} ({o.q.length})</b>
       {o.q.length ? o.q.map((q) => <div key={q.clientActionId} className="mcard"><b>{q.label} · <Mono>{(d.data?.tasks ?? []).find((t: any) => t.shipmentId === q.shipment || t.trackingNo === q.shipment)?.trackingNo ?? q.shipment}</Mono></b><span className="muted"><Mono>{q.clientActionId}</Mono> · {f.dt(q.occurredAt)}</span></div>) : <Empty text={lang === 'ar' ? 'لا إجراءات معلّقة' : 'Nothing pending'} />}
       <Btn kind="primary" className="bigbtn" disabled={!o.q.length || o.off || busy} aria-busy={busy} onClick={sync}>{lang === 'ar' ? 'مزامنة الآن' : 'Sync now'}</Btn>
       {res && res.map((r) => <div key={r.clientActionId} className="mcard"><div className="row" style={{ justifyContent: 'space-between' }}><b>{r.label}</b><Pill tone={r.status === 'accepted' ? 'good' : r.status === 'duplicate' ? 'mute' : 'crit'}>{({ accepted: ['مقبول', 'Accepted'], duplicate: ['مكرر — سبق تنفيذه', 'Duplicate — already applied'], conflict: ['تعارض — بانتظار العمليات', 'Conflict — awaiting ops'], rejected: ['مرفوض', 'Rejected'] } as Record<string, string[]>)[r.status]?.[lang === 'ar' ? 0 : 1] ?? r.status}</Pill></div><span>{x(r.message)}</span></div>)}
@@ -239,7 +239,7 @@ function Sync() {
 function Boxes() {
   const { lang } = useApp(); const d = useQ<any>('courier.tasks', {}); const f = useFmt();
   if (!d.data) return <Loading />;
-  return <><MTop title={lang === 'ar' ? 'الصناديق بعهدتي' : 'Boxes in my custody'} />
+  return <><MTop title={lang === 'ar' ? 'الصناديق في حيازتي' : 'Boxes in my custody'} />
     <div className="mbodyx" tabIndex={0}>{d.data.boxesInCustody.length ? d.data.boxesInCustody.map((b: any) => <div key={b.id} className="mcard"><div className="row" style={{ justifyContent: 'space-between' }}><Mono>{b.code}</Mono><Pill v={b.status} /></div><span>{label(lang, b.thermalClass)} · {b.size}</span>{b.device ? <span className="muted">GPT45-M <Mono>{b.device.imei}</Mono> · {lang === 'ar' ? 'بطارية' : 'battery'} {b.device.batteryPct ?? '—'}% · {f.dt(b.device.lastSeenAt)} <Sim /></span> : <Pill tone="warn">{lang === 'ar' ? 'لا جهاز مقترن' : 'No paired device'}</Pill>}</div>) : <Empty />}</div></>;
 }
 
@@ -249,7 +249,7 @@ function Me() {
   const c = d.data?.courier;
   return <><MTop title={lang === 'ar' ? 'حسابي' : 'Me'} />
     <div className="mbodyx" tabIndex={0}>
-      <div className="mcard"><b>{x(me.user.name)}</b><span className="mono">{me.user.email}</span>{c && <span>{label(lang, c.employmentType)} · {lang === 'ar' ? 'التأهيل حتى' : 'Qualified until'} {f.dt(c.qualificationExpiry)}</span>}{d.data?.vehicle && <span className="muted">{d.data.vehicle.plate} · {d.data.vehicle.vehicleType ?? ''}</span>}</div>
+      <div className="mcard"><b>{x(me.user.name)}</b><span className="mono">{me.user.email}</span>{c && <span>{label(lang, c.employmentType)} · {lang === 'ar' ? 'مؤهل حتى' : 'Qualified until'} {f.dt(c.qualificationExpiry)}</span>}{d.data?.vehicle && <span className="muted">{d.data.vehicle.plate} · {d.data.vehicle.vehicleType ?? ''}</span>}</div>
       {c && <div className="mcard"><b>{lang === 'ar' ? 'المناوبة' : 'Shift'}: <Pill v={c.status} /></b>{c.status === 'off_shift' ? <Btn kind="primary" onClick={() => run('courier.setStatus', { courierId: c.id, status: 'available' })}>{t('courier.startShift')}</Btn> : <Btn onClick={() => run('courier.setStatus', { courierId: c.id, status: 'off_shift' })}>{t('courier.endShift')}</Btn>}</div>}
       <div className="mcard"><b>{lang === 'ar' ? 'اللغة' : 'Language'}</b><div className="seg"><button className={lang === 'ar' ? 'on' : ''} onClick={() => setLang('ar')}>العربية</button><button className={lang === 'en' ? 'on' : ''} onClick={() => setLang('en')}>English</button></div></div>
       <b>{lang === 'ar' ? 'سجل الحيازة' : 'Custody history'}</b>

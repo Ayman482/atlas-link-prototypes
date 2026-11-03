@@ -1,0 +1,67 @@
+[
+ {
+  "app": "mobile/customer",
+  "route": "/s/shp_0002",
+  "button": "طلب إرجاع",
+  "lang": "ar",
+  "w": 302,
+  "shot": "mobile-customer_s_shp_0002__طلب_إرجاع__ar_1440.png",
+  "issues": [],
+  "inertBackground": false,
+  "h": 2,
+  "inViewport": true,
+  "overlapPoints": [],
+  "fieldOverlaps": [],
+  "narrowFields": [],
+  "headerVisible": true,
+  "footerVisible": true,
+  "bodyScrollable": "auto",
+  "footerCoversFields": [],
+  "errs": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/s/shp_0002",
+  "button": "تقديم مطالبة",
+  "lang": "ar",
+  "w": 302,
+  "shot": "mobile-customer_s_shp_0002__تقديم_مطالبة__ar_1440.png",
+  "issues": [
+   "field-overlap:2"
+  ],
+  "inertBackground": false,
+  "h": 2,
+  "inViewport": true,
+  "overlapPoints": [],
+  "fieldOverlaps": [
+   "input«» × button«إلغاء»",
+   "input«» × button«حفظ»"
+  ],
+  "narrowFields": [],
+  "headerVisible": true,
+  "footerVisible": true,
+  "bodyScrollable": "auto",
+  "footerCoversFields": [],
+  "errs": []
+ },
+ {
+  "app": "mobile/customer",
+  "route": "/addresses",
+  "button": "+",
+  "lang": "ar",
+  "w": 334,
+  "shot": "mobile-customer_addresses_____ar_1440.png",
+  "issues": [],
+  "inertBackground": false,
+  "h": 600,
+  "inViewport": true,
+  "overlapPoints": [],
+  "fieldOverlaps": [],
+  "narrowFields": [],
+  "headerVisible": true,
+  "footerVisible": true,
+  "bodyScrollable": "fits",
+  "footerCoversFields": [],
+  "errs": []
+ }
+]
