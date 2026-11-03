@@ -66,7 +66,7 @@ test('API: إنشاء شحنة من العميل تظهر للعمليات عب�
   assert.ok(board.body.data.unassigned.some((s: any) => s.id === created.body.data.id));
   // خطأ موحّد بالعربية
   const err = await cust.post('/shipments', { ...payload, pickupWindowEnd: payload.pickupWindowStart });
-  assert.equal(err.status, 422); assert.match(err.body.error.message, /نافذة/);
+  assert.equal(err.status, 422); assert.match(err.body.error.message, /فترة الاستلام/); // المصطلح المعتمد في المسرد (كان «نافذة»)
   // الاستمرارية
   await new Promise((r) => setTimeout(r, 400));
   await stop(); await start(false);
