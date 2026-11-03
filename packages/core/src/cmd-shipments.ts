@@ -4,7 +4,7 @@ import { defineCommand, must, type Ctx } from './engine';
 import { activePlan, price } from './pricing';
 import { branchGrants, canReadShipment, canWriteShipmentFor, courierOf, customerOrgIds, has, isStaff } from './access';
 import { ACTIVE, ELIGIBILITY_TEXT, addCustody, activePackings, boxReadiness, courierEligibility, currentCustodian, packingOf, partnerEligibility, shipment, transition } from './domain';
-import { DAY, HOUR, MIN, clone, haversineKm, iso, sar } from './util';
+import { DAY, HOUR, MIN, haversineKm, iso, sar } from './util';
 
 const L = (ar: string, en: string) => ({ ar, en });
 const STAFF_OPS: T.RoleCode[] = ['ops_controller', 'customer_service'];
@@ -124,7 +124,7 @@ defineCommand<{ id: string; reason: string; version?: number }, T.Shipment>({
     for (const b of ctx.db.boxes.filter((b) => b.status === 'assigned' && ctx.db.routeStops.some((s) => s.shipmentIds.includes(sh.id)))) if (!activePackings(ctx.db, b.id).length) b.status = 'available';
     ctx.db.routeStops.filter((s) => s.shipmentIds.includes(sh.id) && s.status === 'pending').forEach((s) => (s.status = 'skipped'));
     if (sh.contractId) { const c = ctx.db.contracts.find((x) => x.id === sh.contractId); if (c && c.usedShipments > 0) c.usedShipments--; }
-    ctx.emit('shipment.cancelled', 'shipment', sh.id, sh.organizationId, { reason });
+    // لا emit هنا: transition() تبث shipment.cancelled مرة واحدة (كان الحدث يُبث مرتين)
     return sh;
   },
 });
@@ -537,7 +537,7 @@ defineCommand<{ actions: OfflineAction[] }, { results: { clientActionId: string;
         continue;
       }
       // لقطة لكل إجراء: إن فشل الإجراء يُستعاد كل ما عدّله جزئياً قبل الفشل (لا سجل محاولة أو حيازة وهمي)
-      const snap = clone(ctx.db);
+      const restore = ctx.savepoint();
       try {
         if (!map[a.type as OfflineAction['type']]) ctx.fail('UNKNOWN_ACTION', `نوع إجراء غير معروف: ${a.type}`, `Unknown action type: ${a.type}`, 422);
         ctx.exec(map[a.type], { ...a.payload, shipment: a.shipment, occurredAt: a.occurredAt, offline: true });
@@ -545,7 +545,7 @@ defineCommand<{ actions: OfflineAction[] }, { results: { clientActionId: string;
         seen.add(a.clientActionId);
         results.push({ clientActionId: a.clientActionId, status: 'accepted' as const, message: L('تمت المزامنة', 'Synced') });
       } catch (e: any) {
-        for (const k of Object.keys(snap) as (keyof T.Db)[]) (ctx.db as any)[k] = (snap as any)[k];
+        restore(); // يستعيد البيانات ويحذف أحداث الإجراء المتراجع فلا تُبث كأنها اكتملت
         const msg = e?.detail ?? L(String(e?.message ?? e), String(e?.message ?? e));
         const sh = ctx.db.shipments.find((s) => s.id === a.shipment || s.trackingNo === a.shipment);
         const conflict = { id: ctx.id('ofc'), clientActionId: a.clientActionId, courierId: c!.id, shipmentId: sh?.id ?? a.shipment, action: a.type, reason: msg.ar, reasonEn: msg.en, occurredAt: a.occurredAt, receivedAt: ctx.nowIso, resolution: 'pending' as const };

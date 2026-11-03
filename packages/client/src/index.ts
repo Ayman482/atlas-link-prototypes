@@ -91,7 +91,22 @@ export class HttpTransport implements Transport {
   async logout() { try { await this.req('POST', '/auth/logout'); } catch { /* */ } this.token = null; this.es?.close(); try { sessionStorage.removeItem('medlog-token'); } catch { /* */ } }
   async exec<R>(command: string, input: unknown = {}, key?: string): Promise<R> { return (await this.req('POST', `/commands/${command}`, input, key)).data; }
   async query<R>(name: string, params: unknown = {}): Promise<R> { return (await this.req('GET', `/queries/${name}?p=${encodeURIComponent(JSON.stringify(params))}`)).data; }
-  private connect() { if (!this.token || typeof EventSource === 'undefined') return; this.es?.close(); this.es = new EventSource(`${this.base}/events?access_token=${encodeURIComponent(this.token)}`); this.es.addEventListener('change', (m: MessageEvent) => { const d = JSON.parse(m.data); this.listeners.forEach((l) => l(d)); }); }
+  private opened = false;
+  private seen = new Set<string>();
+  private connect() {
+    if (!this.token || typeof EventSource === 'undefined') return;
+    this.es?.close(); this.opened = false;
+    this.es = new EventSource(`${this.base}/events?access_token=${encodeURIComponent(this.token)}`);
+    // إعادة الاتصال: المتصفح يرسل Last-Event-ID فيُستكمل ما فات؛ ومع ذلك نطلب تحديثاً كاملاً للشاشات احتياطاً
+    this.es.addEventListener('open', () => { if (this.opened) this.listeners.forEach((l) => l({ command: 'reconnect', at: new Date().toISOString(), events: [] })); this.opened = true; });
+    this.es.addEventListener('change', (m: MessageEvent) => {
+      const d = JSON.parse(m.data);
+      // منع التكرار: حدث وصل مرتين (بث مباشر ثم استكمال) لا يُمرر مرتين
+      d.events = (d.events ?? []).filter((e: any) => !e.id || (this.seen.has(e.id) ? false : (this.seen.add(e.id), true)));
+      if (this.seen.size > 5000) this.seen = new Set([...this.seen].slice(-2000));
+      if (d.events.length || d.command === 'replay' || d.command === 'system.reset') this.listeners.forEach((l) => l(d));
+    });
+  }
   subscribe(fn: (e: ChangeEvent) => void) { this.listeners.add(fn); if (!this.es) this.connect(); return () => { this.listeners.delete(fn); }; }
   async reset() { await this.req('POST', '/admin/reset'); }
 }

@@ -47,7 +47,14 @@ function load(): Db | null {
   if (RESET || !fs.existsSync(DB_FILE)) return null;
   try { return JSON.parse(fs.readFileSync(DB_FILE, 'utf8')); } catch { console.warn('⚠ تعذّر قراءة قاعدة البيانات؛ سيُعاد التوليد'); return null; }
 }
-const engine = new Engine(load(), { persist: (db) => persist(db) });
+/** الحفظ المتزامن للأوامر: الكتابة الذرّية جزء من المعاملة — إن فشلت يتراجع المحرك ولا يُبث أي حدث (commit-then-emit) */
+function persistNow(db: Db) {
+  if (writeTimer) { clearTimeout(writeTimer); writeTimer = null; }
+  const tmp = DB_FILE + '.tmp';
+  fs.writeFileSync(tmp, JSON.stringify(db));
+  fs.renameSync(tmp, DB_FILE);
+}
+const engine = new Engine(load(), { persist: (db) => persistNow(db) });
 if (RESET || !fs.existsSync(DB_FILE)) persist(engine.db);
 
 // ---------- الرموز (Tokens) — HMAC بلا حالة فوق سجل الجلسات ----------
@@ -79,6 +86,14 @@ function newSession(userId: string, ua: string, ip: string) {
 const challenges = new Map<string, { userId: string; exp: number; attempts: number }>();
 
 // ---------- SSE ----------
+const evSeq = (id: string) => Number(String(id).replace(/\D/g, '')) || 0;
+const lastSeq = () => engine.db.outbox.reduce((m, e) => Math.max(m, evSeq(e.id)), 0);
+/** الأحداث المرئية للمستخدم بعد رقم تسلسلي (لاستكمال ما فات عند إعادة الاتصال) */
+function visibleSince(userId: string, after: number) {
+  const a = actorFor(engine.db, userId); if (!a) return [];
+  const orgs = new Set(a.memberships.map((m) => m.organizationId).filter(Boolean));
+  return engine.db.outbox.filter((e) => evSeq(e.id) > after && (isStaff(a) || (e.organizationId && orgs.has(e.organizationId))));
+}
 const clients = new Set<{ res: http.ServerResponse; userId: string }>();
 engine.subscribe(({ command, events, at }) => {
   for (const c of clients) {
@@ -88,7 +103,9 @@ engine.subscribe(({ command, events, at }) => {
     // لا يُرسل للعميل إلا ما يخص مؤسسته (API-SEC-01 على قنوات WebSocket/SSE)
     const visible = isStaff(a) ? events : events.filter((e: OutboxEvent) => e.organizationId && orgs.has(e.organizationId));
     if (!isStaff(a) && !visible.length && command !== 'system.reset') continue;
-    c.res.write(`event: change\ndata: ${JSON.stringify({ command: isStaff(a) ? command : undefined, at, events: visible.map((e) => ({ type: e.eventType, aggregateType: e.aggregateType, aggregateId: e.aggregateId })) })}\n\n`);
+    // id = أعلى رقم تسلسلي لحدث outbox في الرسالة؛ المتصفح يرسله في Last-Event-ID عند إعادة الاتصال لاستكمال ما فاته
+    const seq = Math.max(lastSeq(), ...events.map((e) => evSeq(e.id)));
+    c.res.write(`id: ${seq}\nevent: change\ndata: ${JSON.stringify({ command: isStaff(a) ? command : undefined, at, events: visible.map((e) => ({ id: e.id, type: e.eventType, aggregateType: e.aggregateType, aggregateId: e.aggregateId })) })}\n\n`);
   }
 });
 setInterval(() => clients.forEach((c) => c.res.write(`: ping\n\n`)), 25_000);
@@ -183,7 +200,14 @@ const server = http.createServer(async (req, res) => {
     if (p === '/api/v1/auth/logout' && req.method === 'POST') { session.revokedAt = new Date().toISOString(); persist(engine.db); return send(res, 204, undefined); }
     if (p === '/api/v1/events') {
       res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache', Connection: 'keep-alive', ...corsFor(req.headers.origin) });
-      res.write(`event: hello\ndata: {"ok":true}\n\n`);
+      res.write(`retry: 3000\nevent: hello\ndata: {"ok":true,"lastEventId":${lastSeq()}}\n\n`);
+      // استكمال بعد إعادة الاتصال: Last-Event-ID (من المتصفح تلقائياً) أو ?lastEventId=
+      const since = Number(req.headers['last-event-id'] ?? url.searchParams.get('lastEventId') ?? NaN);
+      if (Number.isFinite(since)) {
+        const missed = visibleSince(userId, since);
+        const oldest = engine.db.outbox.length ? Math.min(...engine.db.outbox.map((e) => evSeq(e.id))) : 0;
+        res.write(`id: ${lastSeq()}\nevent: change\ndata: ${JSON.stringify({ command: 'replay', at: new Date().toISOString(), replay: true, gap: since < oldest - 1, events: missed.map((e) => ({ id: e.id, type: e.eventType, aggregateType: e.aggregateType, aggregateId: e.aggregateId })) })}\n\n`);
+      }
       const c = { res, userId }; clients.add(c); req.on('close', () => clients.delete(c)); return;
     }
     if (p === '/api/v1/admin/reset' && req.method === 'POST') {
