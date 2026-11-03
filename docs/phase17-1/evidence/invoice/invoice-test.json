@@ -1,5 +1,5 @@
 {
- "executedAt": "2026-11-03T12:31:56.702Z",
+ "executedAt": "2026-11-03T13:45:42.735Z",
  "steps": [
   {
    "id": "INV-ADM-ar-1440",
@@ -35,7 +35,7 @@
    "expected": "ملف PDF صالح بصفحة A4 واحدة على الأقل",
    "actual": {
     "file": "INV-2026-00001_ar-ui.pdf",
-    "bytes": 546257,
+    "bytes": 546721,
     "header": "%PDF-",
     "pages": 1,
     "mediaBoxA4": false
@@ -220,7 +220,7 @@
     "outside": [],
     "overlaps": [],
     "clippedNums": [],
-    "pdfBytes": 760552,
+    "pdfBytes": 761092,
     "pdf": "%PDF-",
     "errs": []
    },
