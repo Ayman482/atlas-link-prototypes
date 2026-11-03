@@ -133,3 +133,7 @@ admin/boxes [en 1440] «Export CSV» OK
 admin/devices [en 1440] «Register device» OK
 admin/devices [en 1440] «Export CSV» OK
 admin/devices [en 1440] «Pair» OK
+admin/gateway [en 1440] «Simulate unknown device» OK
+admin/gateway [en 1440] «Export CSV» OK
+admin/incidents [en 1440] «New incident» OK
+admin/capa [en 1440] «Complete» OK

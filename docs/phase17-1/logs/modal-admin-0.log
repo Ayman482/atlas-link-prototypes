@@ -52,3 +52,7 @@ admin/incidents/inc_0002 [ar 768] «تغيير الحالة إلى: بانتظا
 admin/incidents/inc_0002 [ar 768] «إضافة إجراء تصحيحي/وقائي (CAPA)» OK
 admin/claims [ar 768] «تسجيل مطالبة نيابة عن عميل» OK
 admin/claims [ar 768] «بدء التحقيق» OK
+admin/claims [ar 768] «تقييم» OK
+admin/claims [ar 768] «إغلاق» OK
+admin/returns [ar 768] «اتخاذ القرار» OK
+admin/returns [ar 768] «إتمام الإرجاع» OK
