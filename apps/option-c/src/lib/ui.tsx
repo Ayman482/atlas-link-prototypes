@@ -1,7 +1,7 @@
 'use client';
 // مكتبة مكوّنات الخيار C (Emerald Health): حركة Motion، جداول بتوسيع وإجراءات جماعية، خط زمني قابل للتوسيع، منحنى حرارة تفاعلي، خريطة بعلامات قابلة للنقر
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { dict, fmtDateTime, fmtRelative, fmtNumber, fmtSAR, fmtTemp, ltr } from '@medlog/i18n';
+import { dict, fmtDate, fmtDateTime, fmtRelative, fmtNumber, fmtSAR, fmtTemp, ltr } from '@medlog/i18n';
 import { useApp } from './store';
 import { label as tlabel, timelineTitle, timelineDetail, sysText } from './l10n'; import { comma } from './l10n';
 import { AnimatePresence, Collapse, DUR, EASE, Tip, fadeUp, motion, staggerParent } from './motion';
@@ -35,7 +35,7 @@ export function Demo() { const { lang } = useApp(); return <span className="sim"
 // ---------- تنسيق ----------
 export function useFmt() {
   const { lang } = useApp();
-  return { rel: (s?: string | null) => fmtRelative(lang, s), dt: (s?: string | null) => fmtDateTime(lang, s), sar: (h?: number | null) => fmtSAR(lang, h), num: (n?: number | null, d = 0) => fmtNumber(lang, n, d), temp: (c?: number | null) => fmtTemp(lang, c), id: (s: string) => ltr(s) };
+  return { rel: (s?: string | null) => fmtRelative(lang, s), dt: (s?: string | null) => fmtDateTime(lang, s), d: (s?: string | null) => fmtDate(lang, s), sar: (h?: number | null) => fmtSAR(lang, h), num: (n?: number | null, d = 0) => fmtNumber(lang, n, d), temp: (c?: number | null) => fmtTemp(lang, c), id: (s: string) => ltr(s) };
 }
 
 // ---------- هيكل الصفحات ----------

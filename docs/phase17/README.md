@@ -5,7 +5,7 @@
 2. [UI_UX_ACCEPTANCE_MATRIX.md](UI_UX_ACCEPTANCE_MATRIX.md) — حكم لكل شاشة من الـ94 مولّد من الأدلة.
 3. [AR_EN_LOCALIZATION_AUDIT.md](AR_EN_LOCALIZATION_AUDIT.md) — التدقيق والمسرد الموحد (63 مصطلحاً).
 4. [SECURITY_AND_OFFLINE_TEST_REPORT.md](SECURITY_AND_OFFLINE_TEST_REPORT.md)
-5. [BUG_FIX_REGISTER.md](BUG_FIX_REGISTER.md) — 25 عيباً مُصلحاً + عيب أداة، المخاطر، غير المختبر.
+5. [BUG_FIX_REGISTER.md](BUG_FIX_REGISTER.md) — 27 عيباً مُصلحاً + عيب أداة، المخاطر، غير المختبر.
 6. [DESIGN_SYSTEM_V1.0.md](DESIGN_SYSTEM_V1.0.md)
 7. [REQUIREMENTS_TRACEABILITY_MATRIX.md](REQUIREMENTS_TRACEABILITY_MATRIX.md)
 8. [PRODUCTION_DEVELOPMENT_READINESS.md](PRODUCTION_DEVELOPMENT_READINESS.md)
@@ -15,7 +15,7 @@
 
 ## إعادة تشغيل الأدلة
 ```bash
-npm test                                   # 100 اختبار، منها tests/business-scenarios.test.ts → evidence/business-scenarios.json
+npm test                                   # 101 اختبار، منها tests/business-scenarios.test.ts → evidence/business-scenarios.json
 cd apps/option-c && npx next build && npx serve out -l 5057   # أو أي خادم ملفات ثابتة
 export BASE=http://127.0.0.1:5057
 node docs/option-c-enhancement/audit.js evidence/axe.json       # يتطلب axe-core@4.14

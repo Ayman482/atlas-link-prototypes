@@ -56,7 +56,7 @@ function ShipCard({ s }: { s: any }) {
 // CM02
 function Home() {
   const { lang, x, me } = useApp(); const d = useQ<any>('customer.dashboard', {});
-  return <><MTop title={lang === 'ar' ? `أهلاً ${x(me.user.name).split(' ')[0]}` : `Hi ${x(me.user.name).split(' ')[0]}`} right={<Sim />} />
+  return <><MTop title={lang === 'ar' ? `أهلاً ${shortName(x(me.user.name))}` : `Hi ${shortName(x(me.user.name))}`} right={<Sim />} />
     <div className="mbodyx" tabIndex={0}>
       {d.error && <ErrorBox error={d.error} />}{!d.data && !d.error && <Loading />}
       {d.data && <>
@@ -223,3 +223,6 @@ function Account() {
     </div></>;
 }
 void useMemo;
+
+/** الاسم الأول للتحية بعد حذف اللقب («أهلاً أحمد») — مطابق لتطبيق Flutter (home.dart) */
+function shortName(n: string) { return n.replace(/^(د\.|م\.|أ\.|Dr\.|Eng\.)\s*/, '').split(' ')[0]; }

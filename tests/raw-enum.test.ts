@@ -44,3 +44,8 @@ test('النصوص السردية التي يولّدها النظام تُتر�
   for (const [ar, en] of cases) { assert.equal(sysText('en', ar), en); assert.equal(sysText('ar', ar), ar); }
   assert.equal(sysText('en', 'تدريب المندوبين'), 'تدريب المندوبين', 'نص المستخدم يبقى كما أُدخل');
 });
+
+test('نطاقات التاريخ تُعرض بتاريخ كامل لا بأول جزء من نص التاريخ والوقت', () => {
+  const bad = files.filter((f) => /f\.dt\([^()]*\)\.split\(' '\)\[0\]/.test(fs.readFileSync(f, 'utf8')));
+  assert.deepEqual(bad, []);
+});

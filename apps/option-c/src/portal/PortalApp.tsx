@@ -165,7 +165,7 @@ function Users() {
 
 function Contract() {
   const { lang } = useApp(); const f = useFmt(); const c = useList('contracts');
-  return <Page title={lang === 'ar' ? 'العقد والاستهلاك' : 'Contract & usage'}>{(c.data?.items ?? []).map((y: any) => <Section key={y.id} title={<><Mono>{y.contractNo}</Mono> <Pill v={y.status} /></>}><DL items={[[lang === 'ar' ? 'الدورة' : 'Cycle', label(lang, y.billingCycle)], [lang === 'ar' ? 'السريان' : 'Valid', `${f.dt(y.validFrom).split(' ')[0]} – ${f.dt(y.validTo).split(' ')[0]}`], [lang === 'ar' ? 'الرسم الشهري' : 'Monthly fee', f.sar(y.monthlyFee)], [lang === 'ar' ? 'الاستهلاك' : 'Usage', `${y.usedShipments} / ${y.includedShipments}`]]} />{y.includedShipments > 0 && <meter min={0} max={y.includedShipments} value={y.usedShipments} style={{ width: '100%' }} />}</Section>)}{c.data && !c.data.items.length && <Empty />}</Page>;
+  return <Page title={lang === 'ar' ? 'العقد والاستهلاك' : 'Contract & usage'}>{(c.data?.items ?? []).map((y: any) => <Section key={y.id} title={<><Mono>{y.contractNo}</Mono> <Pill v={y.status} /></>}><DL items={[[lang === 'ar' ? 'الدورة' : 'Cycle', label(lang, y.billingCycle)], [lang === 'ar' ? 'السريان' : 'Valid', `${f.d(y.validFrom)} – ${f.d(y.validTo)}`], [lang === 'ar' ? 'الرسم الشهري' : 'Monthly fee', f.sar(y.monthlyFee)], [lang === 'ar' ? 'الاستهلاك' : 'Usage', `${y.usedShipments} / ${y.includedShipments}`]]} />{y.includedShipments > 0 && <meter min={0} max={y.includedShipments} value={y.usedShipments} style={{ width: '100%' }} />}</Section>)}{c.data && !c.data.items.length && <Empty />}</Page>;
 }
 
 function Invoices() {
